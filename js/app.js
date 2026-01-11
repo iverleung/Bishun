@@ -1,9 +1,8 @@
 class HanziStrokeApp {
     constructor() {
         this.writers = new Map();
-        this.currentFont = localStorage.getItem('hanzi-font') || 'sans-serif';
         this.isPlaying = false;
-        this.isRendering = false;  // 添加渲染标志
+        this.isRendering = false;
 
         this.init();
     }
@@ -20,7 +19,6 @@ class HanziStrokeApp {
         }
 
         this.bindEvents();
-        this.loadFont();
 
         console.log('✅ HanziStrokeApp 初始化完成');
     }
@@ -30,7 +28,6 @@ class HanziStrokeApp {
             input: document.getElementById('charInput'),
             clearBtn: document.getElementById('clearBtn'),
             playBtn: document.getElementById('playBtn'),
-            fontSelect: document.getElementById('fontSelect'),
             grid: document.getElementById('characterGrid')
         };
 
@@ -38,7 +35,6 @@ class HanziStrokeApp {
             input: !!this.dom.input,
             clearBtn: !!this.dom.clearBtn,
             playBtn: !!this.dom.playBtn,
-            fontSelect: !!this.dom.fontSelect,
             grid: !!this.dom.grid
         });
     }
@@ -69,29 +65,7 @@ class HanziStrokeApp {
             this.handleRender();
         });
 
-        this.dom.fontSelect.addEventListener('change', (e) => {
-            console.log('字体改变：', e.target.value);
-            this.changeFont(e);
-        });
-
         console.log('✅ 事件绑定完成');
-    }
-
-    loadFont() {
-        console.log('加载字体：', this.currentFont);
-        this.dom.fontSelect.value = this.currentFont;
-        this.applyFont();
-    }
-
-    applyFont() {
-        document.body.style.fontFamily = `-apple-system, BlinkMacSystemFont, "${this.currentFont}", sans-serif`;
-        console.log('已应用字体：', this.currentFont);
-    }
-
-    changeFont(e) {
-        this.currentFont = e.target.value;
-        localStorage.setItem('hanzi-font', this.currentFont);
-        this.applyFont();
     }
 
     async handleRender() {
@@ -180,28 +154,8 @@ class HanziStrokeApp {
         tianziDiv.appendChild(charDisplay);
 
         card.appendChild(tianziDiv);
-
-        const label = document.createElement('div');
-        label.className = 'character-label';
-        label.textContent = char;
-        card.appendChild(label);
-
-        const controls = document.createElement('div');
-        controls.className = 'card-controls';
-
-        const playBtn = document.createElement('button');
-        playBtn.className = 'card-btn';
-        playBtn.textContent = '播放';
-        playBtn.onclick = () => this.animateSingle(uniqueId);
-        controls.appendChild(playBtn);
-
-        const resetBtn = document.createElement('button');
-        resetBtn.className = 'card-btn';
-        resetBtn.textContent = '重置';
-        resetBtn.onclick = () => this.resetSingle(uniqueId);
-        controls.appendChild(resetBtn);
-
-        card.appendChild(controls);
+        tianziDiv.style.cursor = 'pointer';
+        tianziDiv.onclick = () => this.animateSingle(uniqueId);
 
         this.dom.grid.appendChild(card);
 
@@ -252,14 +206,14 @@ class HanziStrokeApp {
             });
 
             const writer = HanziWriter.create(targetId, char, {
-                width: 120,
-                height: 120,
-                padding: 10,
+                width: 110,
+                height: 110,
+                padding: 0,
                 strokeColor: '#333',
                 outlineColor: '#DDD',
                 delayBetweenStrokes: 800,
                 strokeAnimationSpeed: 1,
-                showOutline: true,
+                showOutline: false,
                 showCharacter: true
             });
 
@@ -400,12 +354,11 @@ window.addEventListener('DOMContentLoaded', () => {
     console.log('✅ DOMContentLoaded 事件触发');
     console.log('document.readyState：', document.readyState);
 
-    setTimeout(() => {
+    if (!window.app) {
         console.log('初始化应用...');
         window.app = new HanziStrokeApp();
-        window.app = window.app;
         console.log('✅ 应用初始化完成');
-    }, 100);
+    }
 });
 
 window.addEventListener('load', () => {

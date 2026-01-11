@@ -165,69 +165,14 @@ header h1 {
 .character-card {
     background: white;
     border-radius: 20px;
-    padding: 20px;
+    padding: 25px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
+    gap: 15px;
     transition: all 0.3s;
     border: 3px solid transparent;
-}
-
-@media (max-width: 768px) {
-    .character-card {
-        flex-direction: row !important;
-        justify-content: center !important;
-        padding: 15px !important;
-        gap: 20px !important;
-    }
-
-    .tian-zi-ge {
-        width: 80px !important;
-        height: 80px !important;
-        flex-shrink: 0 !important;
-    }
-
-    .character-display svg {
-        width: 70px !important;
-        height: 70px !important;
-    }
-
-    .controls {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 20px;
-    }
-
-    .input-section {
-        min-width: 100%;
-        flex-direction: column;
-    }
-
-    .btn {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .character-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 15px;
-    }
-
-    header h1 {
-        font-size: 1.5rem;
-    }
-
-    .placeholder {
-        padding: 50px 20px;
-        font-size: 16px;
-    }
-
-    .loading {
-        font-size: 12px;
-    }
 }
 
 .character-card:hover {
@@ -252,8 +197,8 @@ header h1 {
 }
 
 .tian-zi-ge {
-    width: 120px !important;
-    height: 120px !important;
+    width: 80px !important;
+    height: 80px !important;
     position: relative;
     background: white;
     border: 3px solid #ffe66d;
@@ -264,17 +209,6 @@ header h1 {
     flex-shrink: 0;
     display: grid !important;
     place-items: center !important;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.tian-zi-ge:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-}
-
-.tian-zi-ge:active {
-    transform: scale(0.95);
 }
 
 .tian-zi-ge .loading {
@@ -295,12 +229,45 @@ header h1 {
 
 .character-display svg {
     display: block;
-    width: 110px !important;
-    height: 110px !important;
+    width: 60px !important;
+    height: 60px !important;
     margin: 0 !important;
     padding: 0 !important;
     position: static !important;
     transform: none !important;
+}
+
+@media (min-width: 768px) {
+    .input-section {
+        min-width: 320px;
+    }
+
+    .tian-zi-ge {
+        width: 120px !important;
+        height: 120px !important;
+    }
+
+    .character-display svg {
+        width: 110px !important;
+        height: 110px !important;
+    }
+
+    .character-right {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+
+    .tian-zi-ge .loading {
+        font-size: 12px !important;
+    }
+}
+
+.character-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
 }
 
 .tian-zi-ge::before,
@@ -354,6 +321,53 @@ header h1 {
     opacity: 0.6;
 }
 
+.character-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ff6b6b;
+    text-align: center;
+    background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+    padding: 8px 15px;
+    border-radius: 12px;
+    border: 2px solid #ffe66d;
+}
+
+.card-controls {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+}
+
+.card-btn {
+    padding: 8px 15px;
+    font-size: 12px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+    color: #333;
+    font-weight: 600;
+}
+
+.card-btn:hover {
+    background: linear-gradient(135deg, #ffe66d 0%, #ffed85 100%);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(255, 230, 109, 0.5);
+}
+
+.card-btn.primary {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+}
+
+.card-btn.primary:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+}
+
 .loading {
     display: flex;
     align-items: center;
@@ -399,4 +413,111 @@ footer {
     background: white;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px;
+    }
+
+    .input-section {
+        min-width: 100%;
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .character-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .placeholder {
+        padding: 50px 20px;
+        font-size: 16px;
+    }
+
+    .loading {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .character-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    body {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 1.3rem;
+    }
+
+    .controls {
+        padding: 15px;
+    }
+
+    .character-card {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding: 15px !important;
+        gap: 15px !important;
+    }
+
+    .tian-zi-ge {
+        width: 80px !important;
+        height: 80px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .character-display svg {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .character-right {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .input-section {
+        min-width: 320px;
+    }
+
+    .tian-zi-ge {
+        width: 120px !important;
+        height: 120px !important;
+    }
+
+    .character-display svg {
+        width: 110px !important;
+        height: 110px !important;
+    }
+
+    .character-right {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+
+    .tian-zi-ge .loading {
+        font-size: 12px !important;
+    }
 }
