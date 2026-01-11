@@ -54,7 +54,7 @@ header h1 {
     flex: 1;
     padding: 15px 20px;
     font-size: 18px;
-    border: 3px solid #ffe66d;
+    border: 3px solid #ff6b6b;
     border-radius: 15px;
     outline: none;
     transition: all 0.3s;
@@ -256,7 +256,7 @@ header h1 {
     height: 120px !important;
     position: relative;
     background: white;
-    border: 3px solid #ffe66d;
+    border: 3px solid #ff6b6b;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     overflow: hidden;
@@ -307,50 +307,63 @@ header h1 {
 .tian-zi-ge::after {
     content: '';
     position: absolute;
-    background: #ffe66d;
+    background: #ff6b6b;
 }
 
 .tian-zi-ge::before {
     width: 3px;
     height: 80%;
     left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: repeating-linear-gradient(
+        to bottom,
+        #ff6b6b,
+        #ff6b6b 8px,
+        transparent 8px,
+        transparent 12px
+    );
 }
 
 .tian-zi-ge::after {
     width: 80%;
     height: 3px;
     top: 50%;
-    transform: translateY(-50%);
-    border-radius: 2px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: repeating-linear-gradient(
+        to right,
+        #ff6b6b,
+        #ff6b6b 8px,
+        transparent 8px,
+        transparent 12px
+    );
 }
 
 .diagonal-1 {
     position: absolute;
-    width: 3px;
-    height: 113%;
-    background: #ffe66d;
+    width: 113%;
+    height: 2px;
+    background: transparent;
+    border: 1px dashed #ff6b6b;
     transform: rotate(45deg);
     left: 50%;
     top: 50%;
-    margin-left: -1.5px;
-    margin-top: -56.5%;
-    border-radius: 2px;
-    opacity: 0.6;
+    margin-left: -56.5%;
+    margin-top: -1px;
 }
 
 .diagonal-2 {
     position: absolute;
-    width: 3px;
-    height: 113%;
-    background: #ffe66d;
+    width: 113%;
+    height: 2px;
+    background: transparent;
+    border: 1px dashed #ff6b6b;
     transform: rotate(-45deg);
     left: 50%;
     top: 50%;
-    margin-left: -1.5px;
-    margin-top: -56.5%;
-    border-radius: 2px;
+    margin-left: -56.5%;
+    margin-top: -1px;
     opacity: 0.6;
 }
 
