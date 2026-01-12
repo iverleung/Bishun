@@ -30,8 +30,15 @@ npx http-server -p 8000
 # Example: ./deploy.sh user@server.com /opt/app
 ```
 
-### No automated testing
-- Manual testing required: open in browser, verify character rendering and playback
+### Automated testing:
+```bash
+# 运行笔画识别测试（需要 Node.js 18+）
+node test/run-tests.js
+```
+
+### Manual testing:
+- Open in browser, verify character rendering and playback
+- Use test.html for interactive stroke recognition testing
 
 ### No linting/formatting tools
 - No ESLint, Prettier, or similar configured
@@ -105,7 +112,7 @@ Static site - deploy by copying files:
 
 ## Key Dependencies
 
-- HanziWriter 3.5 CDN: `https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js`
+- HanziWriter 3.5 CDN: `https://unpkg.com/hanzi-writer@3.5/dist/hanzi-writer.min.js`
 - No npm packages or build tools
 
 ## Browser Support
