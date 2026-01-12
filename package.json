@@ -6,11 +6,12 @@
   "directories": {
     "test": "test"
   },
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node test/run-tests-v2.js"
+    "test": "node test/run-v2.test.js"
   },
   "keywords": [],
   "author": "",
