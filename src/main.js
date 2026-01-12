@@ -21,6 +21,7 @@ class HanziStrokeApp {
             return;
         }
         this.bindEvents();
+        this.updateBuildInfo();
         console.log('✅ HanziStrokeApp 初始化完成');
     }
 
@@ -117,6 +118,13 @@ class HanziStrokeApp {
 
         this.dom.grid.appendChild(card);
         this.loadCharacterData(char, index, uniqueId);
+    }
+
+    updateBuildInfo() {
+        const infoEl = document.getElementById('buildInfo');
+        if (infoEl && typeof __BUILD_INFO__ !== 'undefined') {
+            infoEl.textContent = `v${__BUILD_INFO__}`;
+        }
     }
 
     async loadCharacterData(char, index, uniqueId) {
