@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>笔画识别测试</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .test-results {
+            max-height: 80vh;
+            overflow-y: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .test-item {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border-left: 4px solid;
+        }
+        .test-item.correct {
+            background: #f0fff4;
+            border-color: #52c41a;
+        }
+        .test-item.incorrect {
+            background: #fff2f0;
+            border-color: #ff4d4f;
+        }
+        .test-stats {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat {
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat.success {
+            background: #f0fff4;
+            color: #52c41a;
+        }
+        .stat.error {
+            background: #fff2f0;
+            color: #ff4d4f;
+        }
+        .stat.total {
+            background: #e6f7ff;
+            color: #1890ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>笔画识别自动化测试</h1>
+        </header>
+
+        <div class="controls">
+            <button id="runTestBtn" class="btn btn-primary">运行测试</button>
+            <button id="clearTestBtn" class="btn btn-secondary">清空结果</button>
+        </div>
+
+        <div class="test-stats" id="testStats" style="display: none;">
+            <div class="stat total">
+                <div id="totalTests">0</div>
+                <div>总数</div>
+            </div>
+            <div class="stat success">
+                <div id="correctTests">0</div>
+                <div>正确</div>
+            </div>
+            <div class="stat error">
+                <div id="incorrectTests">0</div>
+                <div>错误</div>
+            </div>
+            <div class="stat">
+                <div id="accuracy">0%</div>
+                <div>准确率</div>
+            </div>
+        </div>
+
+        <div class="test-results" id="testResults">
+            <div class="placeholder">点击"运行测试"开始自动化测试</div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+    <script>
+        // 测试数据：汉字及其正确的笔画序列（标准楷书，使用常用汉字）
+        const testData = [
+            { char: '一', strokes: ['横'] },
+            { char: '十', strokes: ['横', '竖'] },
+            { char: '二', strokes: ['横', '横'] },
+            { char: '三', strokes: ['横', '横', '横'] },
+            { char: '土', strokes: ['横', '竖', '横'] },
+            { char: '王', strokes: ['横', '横', '竖', '横'] },
+            { char: '口', strokes: ['竖', '横折', '横'] },
+            { char: '日', strokes: ['竖', '横折', '横', '横'] },
+            { char: '月', strokes: ['撇', '横折钩', '横', '横'] },
+            { char: '目', strokes: ['竖', '横折', '横', '横', '横'] },
+            { char: '山', strokes: ['竖', '竖折', '竖'] },
+            { char: '川', strokes: ['撇', '竖', '竖'] },
+            { char: '工', strokes: ['横', '竖', '横'] },
+            { char: '大', strokes: ['横', '撇', '捺'] },
+            { char: '木', strokes: ['横', '竖', '撇', '捺'] },
+            { char: '人', strokes: ['撇', '捺'] },
+            { char: '八', strokes: ['撇', '捺'] },
+            { char: '小', strokes: ['竖钩', '点', '点'] },
+            { char: '水', strokes: ['竖钩', '横撇', '撇', '捺'] },
+            { char: '火', strokes: ['点', '撇', '撇', '捺'] },
+            { char: '心', strokes: ['点', '卧钩', '点', '点'] },
+            { char: '中', strokes: ['竖', '横折', '横'] },
+            { char: '了', strokes: ['弯钩', '竖弯钩'] },
+            { char: '子', strokes: ['横撇', '弯钩', '横'] },
+            { char: '上', strokes: ['竖', '横', '横'] },
+            { char: '下', strokes: ['横', '竖', '点'] },
+            { char: '田', strokes: ['竖', '横折', '横', '竖', '横'] },
+            { char: '我', strokes: ['撇', '横', '竖钩', '提', '斜钩', '撇', '点'] },
+        ];
+
+        class StrokeTestRunner {
+            constructor() {
+                this.strokeNames = ['横', '竖', '点', '撇', '捺', '提', '钩', '折', '弯', '撇点'];
+                this.results = [];
+            }
+
+            async runAllTests() {
+                this.results = [];
+                const resultsDiv = document.getElementById('testResults');
+                resultsDiv.innerHTML = '<div class="loading"><div class="spinner"></div>测试中...</div>';
+
+                for (const test of testData) {
+                    await this.testCharacter(test);
+                }
+
+                this.displayResults();
+            }
+
+            async testCharacter(test) {
+                try {
+                    const charData = await HanziWriter.loadCharacterData(test.char);
+                    const recognizedStrokes = [];
+
+                    for (let i = 0; i < charData.strokes.length; i++) {
+                        const strokeName = this.getStrokeName(charData.strokes[i], i);
+                        recognizedStrokes.push(strokeName);
+                    }
+
+                    // 笔画名称标准化（复合笔画简化为基础笔画）
+                    const normalizeStroke = (s) => {
+                        if (s === '横折' || s === '横撇' || s === '横钩') return '横折';
+                        if (s === '竖钩' || s === '竖弯钩') return '竖钩';
+                        if (s === '横折钩') return '横折钩';
+                        if (s === '斜钩' || s === '卧钩' || s === '弯钩') return '钩';
+                        if (s === '撇点') return '撇';
+                        return s;
+                    };
+
+                    const isCorrect = recognizedStrokes.every((stroke, i) => {
+                        const expected = test.strokes[i];
+                        return normalizeStroke(stroke) === normalizeStroke(expected);
+                    });
+
+                    this.results.push({
+                        char: test.char,
+                        expected: test.strokes,
+                        recognized: recognizedStrokes,
+                        correct: isCorrect
+                    });
+                } catch (error) {
+                    console.error(`测试 ${test.char} 出错：`, error);
+                    this.results.push({
+                        char: test.char,
+                        expected: test.strokes,
+                        recognized: ['错误'],
+                        correct: false,
+                        error: error.message
+                    });
+                }
+            }
+
+            getStrokeName(strokePath, strokeIndex) {
+                const points = this.parseSVGPath(strokePath);
+                if (!points || points.length < 2) {
+                    return this.strokeNames[strokeIndex % this.strokeNames.length];
+                }
+
+                let maxDist = 0;
+                let pair = { p1: points[0], p2: points[0] };
+
+                for (let i = 0; i < points.length; i++) {
+                    for (let j = i + 1; j < points.length; j++) {
+                        const dist = Math.sqrt(
+                            Math.pow(points[j].x - points[i].x, 2) +
+                            Math.pow(points[j].y - points[i].y, 2)
+                        );
+                        if (dist > maxDist) {
+                            maxDist = dist;
+                            pair = { p1: points[i], p2: points[j] };
+                        }
+                    }
+                }
+
+                const start = pair.p1;
+                const end = pair.p2;
+                const dx = end.x - start.x;
+                const dy = end.y - start.y;
+                const length = Math.sqrt(dx * dx + dy * dy);
+
+                if (length < 20) return '点';
+
+                const absDx = Math.abs(dx);
+                const absDy = Math.abs(dy);
+
+                // 检测方向变化（转折）
+                const midIndex = Math.floor(points.length / 3);
+                const mid1 = points[midIndex];
+                const mid2 = points[midIndex * 2];
+
+                const startToMidDx = mid1.x - start.x;
+                const startToMidDy = mid1.y - start.y;
+                const midToEndDx = mid2.x - mid1.x;
+                const midToEndDy = mid2.y - mid1.y;
+
+                const angle1 = Math.atan2(startToMidDy, startToMidDx);
+                const angle2 = Math.atan2(midToEndDy, midToEndDx);
+                const angleDiff = Math.abs((angle1 - angle2) * 180 / Math.PI);
+
+                // 检测带钩的笔画
+                const lastPoint = points[points.length - 1];
+                const secondLast = points[points.length - 2];
+                const lastSegmentDx = lastPoint.x - secondLast.x;
+                const lastSegmentDy = lastPoint.y - secondLast.y;
+                const lastSegmentAngle = Math.atan2(lastSegmentDy, lastSegmentDx) * 180 / Math.PI;
+
+                const mainAngle = Math.atan2(dy, dx) * 180 / Math.PI;
+                const hookAngleDiff = Math.abs(mainAngle - lastSegmentAngle);
+
+                const hasHook = hookAngleDiff > 60;
+                const hasSharpTurn = angleDiff > 70;
+
+                // 判断主方向
+                const isHorizontal = absDx > absDy * 2.5;
+                const isVertical = absDy > absDx * 2.5;
+                const isDiagonalRightDown = dx > 0 && dy > 0 && absDx > 0.5 * absDy;
+                const isDiagonalLeftDown = dx < 0 && dy > 0 && absDy > 0.5 * absDx;
+                const isDiagonalLeftUp = dx > 0 && dy < 0 && absDx > 2 * absDy;
+
+                // 识别逻辑
+                if (hasSharpTurn) {
+                    if (startToMidDx > 0 && midToEndDy > 0) return '横折';
+                    if (startToMidDy > 0 && midToEndDx > 0) return '竖折';
+                    if (startToMidDx > 0 && dx < 0 && dy > 0) return '横撇';
+                    return '折';
+                }
+
+                if (hasHook) {
+                    if (isVertical && lastSegmentDx < 0) return '竖钩';
+                    if (startToMidDx > 0 && lastSegmentDy > 0) return '横折钩';
+                    if (dy > 0 && dx > 0 && lastSegmentDx > lastSegmentDy) return '斜钩';
+                    if (dx > 0 && dy < 0 && lastSegmentDy > lastSegmentDx) return '卧钩';
+                    if (dy > 0 && lastSegmentDx > 0) return '弯钩';
+                    return '钩';
+                }
+
+                if (isHorizontal) return '横';
+                if (isVertical) return '竖';
+                if (isDiagonalLeftDown) return '撇';
+                if (isDiagonalRightDown) return '捺';
+                if (isDiagonalLeftUp) return '提';
+
+                return '折';
+            }
+
+            parseSVGPath(path) {
+                const points = [];
+                const tokens = path.match(/[A-Za-z]|-?\d+\.?\d*/g);
+                if (!tokens) return points;
+
+                let currentX = 0, currentY = 0, startX = 0, startY = 0;
+
+                for (let i = 0; i < tokens.length; ) {
+                    const token = tokens[i];
+                    if (token.match(/[A-Za-z]/)) {
+                        const command = token;
+                        i++;
+                        if (command === 'M' || command === 'm') {
+                            startX = currentX;
+                            startY = currentY;
+                            if (command === 'M') {
+                                currentX = parseFloat(tokens[i]);
+                                currentY = parseFloat(tokens[i + 1]);
+                                startX = currentX; startY = currentY;
+                            } else {
+                                currentX += parseFloat(tokens[i]);
+                                currentY += parseFloat(tokens[i + 1]);
+                                startX = currentX; startY = currentY;
+                            }
+                            points.push({ x: currentX, y: currentY });
+                            i += 2;
+                        } else if (command === 'L' || command === 'l') {
+                            if (command === 'L') {
+                                currentX = parseFloat(tokens[i]);
+                                currentY = parseFloat(tokens[i + 1]);
+                            } else {
+                                currentX += parseFloat(tokens[i]);
+                                currentY += parseFloat(tokens[i + 1]);
+                            }
+                            points.push({ x: currentX, y: currentY });
+                            i += 2;
+                        } else if (command === 'Q' || command === 'q') {
+                            const cpx = command === 'Q' ? parseFloat(tokens[i]) : currentX + parseFloat(tokens[i]);
+                            const cpy = command === 'Q' ? parseFloat(tokens[i + 1]) : currentY + parseFloat(tokens[i + 1]);
+                            const endx = command === 'Q' ? parseFloat(tokens[i + 2]) : currentX + parseFloat(tokens[i + 2]);
+                            const endy = command === 'Q' ? parseFloat(tokens[i + 3]) : currentY + parseFloat(tokens[i + 3]);
+                            for (let t = 0.1; t <= 1; t += 0.1) {
+                                const x = (1 - t) * (1 - t) * currentX + 2 * (1 - t) * t * cpx + t * t * endx;
+                                const y = (1 - t) * (1 - t) * currentY + 2 * (1 - t) * t * cpy + t * t * endy;
+                                points.push({ x, y });
+                            }
+                            currentX = endx;
+                            currentY = endy;
+                            i += 4;
+                        } else if (command === 'C' || command === 'c') {
+                            const cp1x = command === 'C' ? parseFloat(tokens[i]) : currentX + parseFloat(tokens[i]);
+                            const cp1y = command === 'C' ? parseFloat(tokens[i + 1]) : currentY + parseFloat(tokens[i + 1]);
+                            const cp2x = command === 'C' ? parseFloat(tokens[i + 2]) : currentX + parseFloat(tokens[i + 2]);
+                            const cp2y = command === 'C' ? parseFloat(tokens[i + 3]) : currentY + parseFloat(tokens[i + 3]);
+                            const endx = command === 'C' ? parseFloat(tokens[i + 4]) : currentX + parseFloat(tokens[i + 4]);
+                            const endy = command === 'C' ? parseFloat(tokens[i + 5]) : currentY + parseFloat(tokens[i + 5]);
+                            for (let t = 0.1; t <= 1; t += 0.1) {
+                                const x = Math.pow(1 - t, 3) * currentX + 3 * Math.pow(1 - t, 2) * t * cp1x + 3 * (1 - t) * t * t * cp2x + t * t * t * endx;
+                                const y = Math.pow(1 - t, 3) * currentY + 3 * Math.pow(1 - t, 2) * t * cp1y + 3 * (1 - t) * t * t * cp2y + t * t * t * endy;
+                                points.push({ x, y });
+                            }
+                            currentX = endx;
+                            currentY = endy;
+                            i += 6;
+                        } else if (command === 'Z' || command === 'z') {
+                            break;
+                        }
+                    } else {
+                        i++;
+                    }
+                }
+                return points;
+            }
+
+            displayResults() {
+                const resultsDiv = document.getElementById('testResults');
+                const statsDiv = document.getElementById('testStats');
+
+                const total = this.results.length;
+                const correct = this.results.filter(r => r.correct).length;
+                const incorrect = total - correct;
+
+                document.getElementById('totalTests').textContent = total;
+                document.getElementById('correctTests').textContent = correct;
+                document.getElementById('incorrectTests').textContent = incorrect;
+                document.getElementById('accuracy').textContent = ((correct / total) * 100).toFixed(1) + '%';
+
+                statsDiv.style.display = 'flex';
+
+                let html = '';
+                this.results.forEach(r => {
+                    const statusClass = r.correct ? 'correct' : 'incorrect';
+                    const statusIcon = r.correct ? '✅' : '❌';
+                    html += `
+                        <div class="test-item ${statusClass}">
+                            <strong>${statusIcon} ${r.char}</strong><br>
+                            期望：${r.expected.join(', ')}<br>
+                            识别：${r.recognized.join(', ')}${r.error ? ' (' + r.error + ')' : ''}
+                        </div>
+                    `;
+                });
+                resultsDiv.innerHTML = html;
+            }
+        }
+
+        const testRunner = new StrokeTestRunner();
+        document.getElementById('runTestBtn').addEventListener('click', () => testRunner.runAllTests());
+        document.getElementById('clearTestBtn').addEventListener('click', () => {
+            document.getElementById('testResults').innerHTML = '<div class="placeholder">点击"运行测试"开始自动化测试</div>';
+            document.getElementById('testStats').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

@@ -1,1 +1,22 @@
-README.md
+# 依赖
+node_modules/
+.DS_Store
+
+# 构建产物
+dist/
+dist-ssr/
+*.local
+
+# 日志
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 编辑器
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -1,0 +1,24 @@
+{
+  "name": "bishun",
+  "version": "1.0.0",
+  "description": "一个简洁的汉字笔顺动画展示网站，支持输入多个汉字并自动逐个播放笔顺动画。",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node test/run-tests-v2.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^6.4.1"
+  },
+  "dependencies": {
+    "hanzi-writer": "^3.7.3"
+  }
+}
