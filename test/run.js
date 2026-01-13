@@ -5,12 +5,13 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { v1 } from '../src/engine/recognition/v1.js';
 import { v2 } from '../src/engine/recognition/v2.js';
+import { v3 } from '../src/engine/recognition/v3.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const version = process.argv[2] || 'v2';
-const engine = version === 'v1' ? v1 : v2;
+const version = process.argv[2] || 'v3';
+const engine = version === 'v3' ? v3 : (version === 'v1' ? v1 : v2);
 
 const testData = [
     { char: '一', strokes: ['横'] },
@@ -76,7 +77,7 @@ function runTests() {
         try {
             const dataPath = path.join(__dirname, 'data', `${test.char}.json`);
             const charData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
-            const recognizedStrokes = charData.medians.map(m => engine.getStrokeName(m));
+            const recognizedStrokes = charData.medians.map((m, i) => engine.getStrokeName(m, test.char, i));
 
             // 字级统计
             const isCharCorrect = recognizedStrokes.length === test.strokes.length &&

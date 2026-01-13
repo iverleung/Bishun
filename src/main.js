@@ -1,6 +1,7 @@
 import HanziWriter from 'hanzi-writer';
 import './style.css';
 import { v2 } from './engine/recognition/v2.js';
+import { v3 } from './engine/recognition/v3.js';
 import { SpeechEngine } from './engine/speech.js';
 
 class HanziStrokeApp {
@@ -278,7 +279,7 @@ class HanziStrokeApp {
             const strokeCount = charData.strokes.length;
 
             for (let i = 0; i < strokeCount; i++) {
-                const strokeName = this.getStrokeName(charData.medians[i]);
+                const strokeName = this.getStrokeName(charData.medians[i], targetChar, i);
 
                 // 显示名称
                 const nameEl = document.getElementById(`name-${uniqueId}`);
@@ -385,7 +386,7 @@ class HanziStrokeApp {
             for (let i = 0; i < strokeCount; i++) {
                 if (!this.isPlaying) break;
 
-                const strokeName = this.getStrokeName(charData.medians[i]);
+                const strokeName = this.getStrokeName(charData.medians[i], targetChar, i);
 
                 // 显示名称
                 const nameEl = document.getElementById(`name-${uniqueId}`);
@@ -419,8 +420,8 @@ class HanziStrokeApp {
         setTimeout(() => card.classList.remove('completed'), 2000);
     }
 
-    getStrokeName(points) {
-        return v2.getStrokeName(points);
+    getStrokeName(points, char, index) {
+        return v3.getStrokeName(points, char, index);
     }
 
     stopAnimation() {

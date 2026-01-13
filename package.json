@@ -21,6 +21,8 @@
     "vite": "^6.4.1"
   },
   "dependencies": {
+    "cnchar": "^3.2.6",
+    "cnchar-order": "^3.2.6",
     "hanzi-writer": "^3.7.3"
   }
 }
