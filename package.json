@@ -11,7 +11,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node test/run-v2.test.js"
+    "test": "node test/run.js v2",
+    "test:v1": "node test/run.js v1"
   },
   "keywords": [],
   "author": "",
