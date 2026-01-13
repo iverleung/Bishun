@@ -27,7 +27,7 @@ function getDirHash(dir) {
 
 export default defineConfig(() => {
     const srcHash = getDirHash(path.resolve(__dirname, 'src'));
-    const buildTime = new Date().toLocaleString('zh-CN');
+    const buildTime = new Date().toLocaleString('zh-CN', { timeZoneName: 'short' });
     const buildInfo = `${srcHash} (${buildTime})`;
 
     return {
