@@ -11,7 +11,9 @@ class HanziStrokeApp {
         this.isRendering = false;
         this.playingIndex = -1;
         this.currentUniqueIds = [];
+        this.renderedValue = '';
         this.speech = new SpeechEngine();
+        this.speechEnabled = localStorage.getItem('bishun-speech-enabled') !== 'false';
 
         // 从本地存储加载速度设置，默认为级别 3
         const savedSpeed = localStorage.getItem('bishun-speed-level');
@@ -48,7 +50,10 @@ class HanziStrokeApp {
             playBtn: document.getElementById('playBtn'),
             grid: document.getElementById('characterGrid'),
             speedSlider: document.getElementById('speedSlider'),
-            speedValue: document.getElementById('speedValue')
+            speedValue: document.getElementById('speedValue'),
+            speechToggle: document.getElementById('speechToggle'),
+            statusMessage: document.getElementById('statusMessage'),
+            progressMessage: document.getElementById('progressMessage')
         };
     }
 
@@ -57,7 +62,7 @@ class HanziStrokeApp {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 this.speech.unlock();
-                this.handleRender();
+                this.handlePlay();
             }
         });
 
@@ -67,14 +72,7 @@ class HanziStrokeApp {
 
         this.dom.playBtn.addEventListener('click', this.debounce(() => {
             this.speech.unlock(); // 关键：立即激活语音上下文
-            if (this.isPlaying) {
-                this.stopAnimation();
-            } else if (this.currentUniqueIds.length > 0 && !this.isRendering) {
-                const resumeIndex = this.playingIndex === -1 ? 0 : this.playingIndex;
-                this.playAll(resumeIndex);
-            } else {
-                this.handleRender();
-            }
+            this.handlePlay();
         }, 300));
 
         this.dom.speedSlider.addEventListener('input', (e) => {
@@ -83,6 +81,35 @@ class HanziStrokeApp {
             // 保存至本地存储
             localStorage.setItem('bishun-speed-level', this.currentSpeedLevel);
         });
+
+        this.dom.speechToggle.checked = this.speechEnabled;
+        this.speech.setEnabled(this.speechEnabled);
+        this.dom.speechToggle.addEventListener('change', (e) => {
+            this.speechEnabled = e.target.checked;
+            this.speech.setEnabled(this.speechEnabled);
+            localStorage.setItem('bishun-speech-enabled', String(this.speechEnabled));
+            this.setStatus(this.speechEnabled ? '已开启笔画名称播报' : '已关闭笔画名称播报');
+        });
+
+        this.updatePlaybackUI();
+    }
+
+    async handlePlay() {
+        if (this.isPlaying) {
+            this.stopAnimation();
+            return;
+        }
+
+        if (this.isRendering) return;
+
+        if (this.currentUniqueIds.length > 0 && this.renderedValue === this.dom.input.value) {
+            const resumeIndex = this.playingIndex === -1 ? 0 : this.playingIndex;
+            this.playAll(resumeIndex);
+            return;
+        }
+
+        const rendered = await this.handleRender();
+        if (rendered) this.playAll();
     }
 
     updateSpeedUI(isInit = false) {
@@ -94,7 +121,7 @@ class HanziStrokeApp {
     }
 
     async handleRender() {
-        if (this.isRendering) return;
+        if (this.isRendering) return false;
 
         let value = this.dom.input.value.trim();
         value = value.replace(/[^\u4e00-\u9fa5]/g, '');
@@ -106,15 +133,24 @@ class HanziStrokeApp {
 
         if (value.length > 0) {
             this.isRendering = true;
+            this.stopAnimation();
+            this.dom.playBtn.disabled = true;
+            this.setProgress('');
+            this.setStatus(`正在加载 ${value.length} 个汉字...`);
             try {
                 await this.renderCharacters(value);
             } finally {
                 this.isRendering = false;
             }
-            // 渲染完成后自动开始播放，此时 isRendering 已为 false，允许后续点击停止
-            await this.playAll();
+            this.dom.playBtn.disabled = this.currentUniqueIds.length === 0;
+            this.playingIndex = -1;
+            this.renderedValue = value;
+            this.updatePlaybackUI();
+            return true;
         } else {
             this.showPlaceholder();
+            this.setStatus('请输入至少一个汉字');
+            return false;
         }
     }
 
@@ -132,7 +168,7 @@ class HanziStrokeApp {
             // 改为直接收集 loadCharacterData 返回的 Promise
             promises.push(this.loadCharacterData(char, index, uniqueId));
         }
-        await Promise.all(promises);
+        await Promise.allSettled(promises);
     }
 
     createCharacterCard(char, index, uniqueId) {
@@ -215,7 +251,10 @@ class HanziStrokeApp {
                         target.querySelector('.loading')?.remove();
                         resolve();
                     } else {
-                        target.innerHTML = '<div class="loading">加载失败</div>';
+                                        target.innerHTML = '<div class="loading error-loading"><span>加载失败</span><button class="retry-btn" type="button">重试</button></div>';
+                                        target.querySelector('.retry-btn')?.addEventListener('click', () => {
+                                            this.loadCharacterData(char, index, uniqueId);
+                                        });
                         reject(new Error(`All CDNs failed for ${c}`));
                     }
                 },
@@ -288,7 +327,9 @@ class HanziStrokeApp {
                     nameEl.classList.add('show');
                 }
 
-                await this.speech.speak(strokeName);
+                if (this.speechEnabled) {
+                    await this.speech.speak(strokeName);
+                }
 
                 const currentSetting = this.speedSettings[this.currentSpeedLevel];
                 await writer.animateStroke(i, {
@@ -318,9 +359,8 @@ class HanziStrokeApp {
         if (!chars || this.writers.size === 0) return;
 
         this.isPlaying = true;
-        this.dom.playBtn.textContent = '停止';
-        this.dom.playBtn.classList.add('btn-secondary');
-        this.dom.playBtn.classList.remove('btn-primary');
+        this.setStatus('正在播放');
+        this.updatePlaybackUI();
 
         const uniqueIds = this.currentUniqueIds;
 
@@ -328,6 +368,7 @@ class HanziStrokeApp {
             if (!this.isPlaying) break;
 
             this.playingIndex = i;
+            this.setProgress(`${i + 1} / ${uniqueIds.length}`);
             const uniqueId = uniqueIds[i];
             const writer = this.writers.get(uniqueId);
             if (!writer) {
@@ -345,6 +386,8 @@ class HanziStrokeApp {
         if (this.isPlaying) {
             this.stopAnimation();
             this.playingIndex = 0; // 全部播放完，重置回 0
+            this.setStatus('全部播放完成');
+            this.setProgress(`${uniqueIds.length} / ${uniqueIds.length}`);
         }
     }
 
@@ -435,9 +478,10 @@ class HanziStrokeApp {
             }
         });
 
-        this.dom.playBtn.textContent = '播放';
-        this.dom.playBtn.classList.remove('btn-secondary');
-        this.dom.playBtn.classList.add('btn-primary');
+        this.updatePlaybackUI();
+        if (this.playingIndex >= 0 && this.currentUniqueIds.length > 0) {
+            this.setStatus('播放已暂停，可以继续');
+        }
     }
 
     clearAll() {
@@ -448,10 +492,42 @@ class HanziStrokeApp {
         this.dom.input.value = '';
         this.showPlaceholder();
         this.stopAnimation();
+        this.playingIndex = -1;
+        this.renderedValue = '';
+        this.dom.playBtn.disabled = true;
+        this.setProgress('');
+        this.setStatus('输入汉字后开始学习');
     }
 
     showPlaceholder() {
-        this.dom.grid.innerHTML = '<div class="placeholder">请输入汉字后按回车键或点击播放</div>';
+        this.dom.grid.innerHTML = '<div class="placeholder">输入汉字后点击“播放”</div>';
+    }
+
+    setStatus(message) {
+        if (this.dom.statusMessage) this.dom.statusMessage.textContent = message;
+    }
+
+    setProgress(message) {
+        if (this.dom.progressMessage) this.dom.progressMessage.textContent = message;
+    }
+
+    updatePlaybackUI() {
+        if (!this.dom.playBtn) return;
+        if (this.isPlaying) {
+            this.dom.playBtn.textContent = '暂停';
+            this.dom.playBtn.classList.add('btn-warning');
+            this.dom.playBtn.classList.remove('btn-secondary');
+        } else if (this.playingIndex >= 0 && this.playingIndex < this.currentUniqueIds.length) {
+            this.dom.playBtn.textContent = '继续';
+            this.dom.playBtn.classList.add('btn-primary');
+            this.dom.playBtn.classList.remove('btn-secondary');
+            this.dom.playBtn.classList.remove('btn-warning');
+        } else {
+            this.dom.playBtn.textContent = '播放';
+            this.dom.playBtn.classList.add('btn-primary');
+            this.dom.playBtn.classList.remove('btn-secondary');
+            this.dom.playBtn.classList.remove('btn-warning');
+        }
     }
 
     delay(ms) {

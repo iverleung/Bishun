@@ -6,7 +6,15 @@ export class SpeechEngine {
     constructor() {
         this.speechSynthesis = window.speechSynthesis;
         this.currentUtterance = null;
+        this.enabled = true;
         this.init();
+    }
+
+    setEnabled(enabled) {
+        this.enabled = enabled;
+        if (!enabled) {
+            this.cancel();
+        }
     }
 
     init() {
@@ -29,7 +37,7 @@ export class SpeechEngine {
     }
 
     async speak(text) {
-        if (!this.speechSynthesis) return;
+        if (!this.speechSynthesis || !this.enabled) return;
 
         // Chrome 容易卡死在 paused 状态
         if (this.speechSynthesis.paused) {
