@@ -20,15 +20,27 @@
                 <button id="playBtn" class="btn btn-primary">播放</button>
                 <button id="clearBtn" class="btn btn-secondary">清空</button>
             </div>
-            <div class="speed-control">
-                <label for="speedSlider">播放速度：</label>
-                <input type="range" id="speedSlider" min="1" max="5" value="3" step="1">
-                <span id="speedValue">正常</span>
+            <div class="play-settings" aria-label="播放设置">
+                <div class="speed-control">
+                    <label for="speedSlider">速度</label>
+                    <input type="range" id="speedSlider" min="1" max="5" value="3" step="1">
+                    <span id="speedValue">正常</span>
+                </div>
+                <label class="speech-control" for="speechToggle">
+                    <span>语音</span>
+                    <input type="checkbox" id="speechToggle" checked>
+                    <span class="toggle-track" aria-hidden="true"></span>
+                </label>
             </div>
         </div>
 
+        <div class="learning-status" role="status" aria-live="polite">
+            <span id="statusMessage">输入汉字后开始学习</span>
+            <span id="progressMessage" class="progress-message"></span>
+        </div>
+
         <div id="characterGrid" class="character-grid">
-            <div class="placeholder">请输入汉字后按回车键或点击播放</div>
+            <div class="placeholder">输入汉字后点击“播放”</div>
         </div>
 
         <footer>
