@@ -34,14 +34,15 @@ npm run preview
 ## 测试与检查
 
 ```bash
-npm test                # 默认测试 v2
-npm run test:v1          # 测试 v1
-node test/run.js v3      # 测试当前页面使用的 v3
+npm test                # 仅测试当前页面使用的 v3
+node test/run.js v3      # 等价的直接入口
 ```
 
 测试读取 `test/data/` 中的字形 fixture。该目录在 `.gitignore` 中，但部分 fixture 已被 Git 跟踪；运行前需确认测试数据是否齐全。`test/download_data.js` 是需要网络的下载辅助脚本。
 
-**测试局限：** 默认测试与页面实际使用的引擎不同；当前 runner 仅在 v2 字符断言失败时返回非零，v1/v3 不能只凭退出码判断通过，还需检查完整结果和缺失数据。有限样本结果也不能代表全部字库准确率。
+回归入口仅运行 v3；任一字不符合预期、fixture 缺失或笔画数量不一致都会返回非零。测试所需的 48 份 fixture 已纳入版本管理。
+
+**当前基线：** v3 与既有预期匹配 38/48 字、220/233 笔，`npm test` 会失败。差异和预期本身均需内容核验，详见 [Web 现状基线](docs/Web现状基线.md)；不能通过放宽断言或修改期望来掩盖问题，也不能将有限样本结果视为全字库准确率。
 
 没有配置 lint、TypeScript 或类型检查脚本。可运行基础语法检查：
 

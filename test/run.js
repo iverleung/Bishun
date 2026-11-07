@@ -3,15 +3,17 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { v1 } from '../src/engine/recognition/v1.js';
-import { v2 } from '../src/engine/recognition/v2.js';
 import { v3 } from '../src/engine/recognition/v3.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const version = process.argv[2] || 'v3';
-const engine = version === 'v3' ? v3 : (version === 'v1' ? v1 : v2);
+if (version !== 'v3') {
+    console.error('❌ 当前回归入口仅支持页面使用的 v3 引擎');
+    process.exit(1);
+}
+const engine = v3;
 
 const testData = [
     { char: '一', strokes: ['横'] },
@@ -65,11 +67,11 @@ const testData = [
 ];
 
 function runTests() {
-    console.log(`🧪 笔画识别自动化测试 ${version.toUpperCase()} (${version === 'v2' ? '100% Pass Rate' : 'Legacy'})\n`);
+    console.log('🧪 笔画名称回归 V3（既有样本预期，不代表规范审核）\n');
     console.log('='.repeat(50));
 
     let charCorrectCount = 0;
-    let totalStrokes = 0;
+    const totalStrokes = testData.reduce((total, entry) => total + entry.strokes.length, 0);
     let correctStrokes = 0;
     const misidentifications = {};
 
@@ -77,6 +79,11 @@ function runTests() {
         try {
             const dataPath = path.join(__dirname, 'data', `${test.char}.json`);
             const charData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+            if (!Array.isArray(charData.medians) || !Array.isArray(charData.strokes) ||
+                charData.medians.length !== charData.strokes.length ||
+                charData.strokes.length !== test.strokes.length) {
+                throw new Error('Fixture 笔画路径、中心线与预期数量不一致');
+            }
             const recognizedStrokes = charData.medians.map((m, i) => engine.getStrokeName(m, test.char, i));
 
             // 字级统计
@@ -85,7 +92,6 @@ function runTests() {
             if (isCharCorrect) charCorrectCount++;
 
             // 笔画级统计
-            totalStrokes += test.strokes.length;
             test.strokes.forEach((expected, i) => {
                 const actual = recognizedStrokes[i];
                 if (actual === expected) {
@@ -121,7 +127,7 @@ function runTests() {
     console.log(`📊 笔画识别率: ${correctStrokes}/${totalStrokes} (${((correctStrokes / totalStrokes) * 100).toFixed(1)}%)`);
     console.log('='.repeat(50) + '\n');
 
-    process.exit(charCorrectCount < testData.length && version === 'v2' ? 1 : 0);
+    process.exitCode = charCorrectCount < testData.length ? 1 : 0;
 }
 
 runTests();
