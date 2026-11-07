@@ -23,3 +23,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Generated from the pinned hanzi-writer-data dependency
+public/characters/

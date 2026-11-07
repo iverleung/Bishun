@@ -29,7 +29,7 @@ npm run build
 npm run preview
 ```
 
-构建输出为 `dist/`，可部署到静态托管服务。`public/` 中的字形资源会复制到构建输出。预览命令需要先构建；未构建的源代码依赖 Vite 解析 npm 导入，不能直接用普通静态文件服务器运行。目前根目录没有 `deploy.sh`。
+`predev`／`prebuild` 会从锁定的 `hanzi-writer-data@2.0.1` 开发依赖生成全量候选字形，需安装开发依赖后启动或构建。构建输出为 `dist/`，可部署到静态托管服务。`public/` 中的字形资源会复制到构建输出。预览命令需要先构建；未构建的源代码依赖 Vite 解析 npm 导入，不能直接用普通静态文件服务器运行。目前根目录没有 `deploy.sh`。
 
 ## 新版 Web 交互预览（W1）
 
@@ -42,8 +42,8 @@ npm run preview
 ## 测试与检查
 
 ```bash
-npm test                # 仅测试当前页面使用的 v3
-node test/run.js v3      # 等价的直接入口
+npm test                # v3 样本、名称边界及资源加载回归
+node test/run.js v3      # 只运行 v3 字符样本
 npm run test:preview    # W1 原型交互状态回归
 ```
 
@@ -88,6 +88,9 @@ Bishun/
 ```
 
 ## 汉字数据与内容
+
+W2 新增 `/characters/2.0.1/` 自托管候选字库：9,574 字，原始约 32.2 MB，按字请求。对规范表 8,105 字实测覆盖 6,866 字，仍缺 1,239 字，不能宣称全覆盖。`src/data/character-store.js` 已实现同源加载、缓存、去重、超时与结构校验，尚未接入旧首页或六字原型。使用 `npm run resources:check` 核对生成资源；完整审计见 [资源与内容核验](docs/Web资源与内容核验.md)。
+
 
 字形数据优先从 `public/hanzi-writer-data/` 加载，目前包含一批测试集常用字。未收录的字会依次尝试国内镜像和海外 CDN。新增字形时可在该目录加入兼容 HanziWriter 格式的 JSON，但还应校验路径、笔画数、顺序及名称对应关系。
 

@@ -31,3 +31,27 @@ W0 的 10 字差异同时包含旧预期问题和查询处理问题。此次没�
 - 全包静态部署、浏览器按字请求在体积上可行；目标托管服务的文件数和缓存策略尚未实机验证。资源许可与代码 MIT/ISC 声明独立，来源见 [HanziWriter 数据许可说明](https://hanziwriter.org/license.html)。
 
 后续使用固定开发依赖与构建脚本生成资源，避免手工提交上万个数据副本。自托管不等于离线包或内容全审核，名称未知必须有可见的降级。
+
+## 自托管资源与加载入口
+
+- `hanzi-writer-data` 以精确版本开发依赖锁定。`npm run dev`／`npm run build` 的前置脚本生成 `public/characters/2.0.1/`，不需要运行时访问 npm 或公共 CDN。
+- `resources:prepare` 逐文件检查路径、中心线、部首索引，原样复制 9,574 个 JSON，并生成 54,610 字节的轻量索引、独立 checksums、完整原许可和来源说明。索引不携带全部字形；检查明细按需用于离线校验。
+- `resources:check` 重新核对全部生成文件、清单及许可。生成目录已忽略；部署使用构建后的 `dist/`，必须安装开发依赖后构建，不能直接部署未生成资源的 public 目录。
+- `CharacterStore` 提供同源加载、共享 manifest、逐字缓存／去重、3 秒请求超时、调用方取消、HTTP 与 JSON 类型检查、笔数／中心线校验。取消一个调用方不影响其他调用方的共享请求。
+- 名称完全缺失或存在未消歧项时保留 null，并标记 partial；名称有值但数量与字形不一致时拒绝返回就绪记录，不按索引强行拼接。目前发现棻（12/11）、濛（17/16）、皙（13/12）、脩（11/10）四个数量冲突，仍待专项核验。
+- 通过实际 Vite HTTP 路径读取木、学、學，4 个请求（含一次 manifest）全部为本站地址。未收录字不会回落到外部 CDN。新版 UI 尚未接入此入口，仍使用六字原型数据。
+
+生成器当前 Node/zlib 的逐字 gzip 计数为 14,421,146 字节；上文初次 Python gzip 计数采用另一压缩实现／参数，32 字节差异不影响原始文件哈希与覆盖统计。两者都不是已测量的 HTTP 传输量。
+
+### 可复现命令
+
+```bash
+npm ci
+npm run resources:prepare
+npm run resources:check
+npm test
+npm run test:preview
+npm run build
+```
+
+覆盖审计另用 `python3 tools/audit-character-data.py`，需要 PyMuPDF，仅用于核对本地规范 PDF；结果在 `resources/character-audit.json`，不属于网站运行时依赖。网站构建不需要 Python。
