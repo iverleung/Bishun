@@ -1,151 +1,36 @@
 # AGENTS.md
 
-This file provides guidelines for agentic coding agents working in this repository.
+Instructions for coding agents working in Bishun.
 
-## Project Overview
+## Working rules
 
-A static website for displaying Chinese character stroke order animations using HanziWriter.
-- Pure HTML/CSS/JavaScript with no build system
-- Uses HanziWriter 3.5 via CDN
-- Supports up to 10 characters per session with sequential playback
-- Responsive design with mobile support
-- Kid-friendly UI with playful colors and animations
+- Inspect current source before editing. Prefer the smallest correct change and existing conventions.
+- Preserve user changes; avoid unrelated refactoring and unnecessary dependencies.
+- Commit each completed, verified change promptly. Stage only files or hunks belonging to that change; leave unrelated user changes untouched. Report the commit and any blocked verification.
+- Publish deployments only when requested or otherwise authorized in the session.
+- Never read credential/secret files (`.env`, `credentials.env`, `*.pem`, `*.key`, SSH private keys, or cloud credentials). Verify credential state only through a project health/doctor command if one exists.
+- Planning does not authorize implementation. Distinguish planned features from shipped behavior and verified results.
 
-## Build/Test/Lint Commands
+## Project references
 
-This project has no build system, package.json, tests, or linting configured.
+- Read [README.md](README.md) for setup, commands, repository structure, current behavior, and test limitations. Verify against source when relevant to the task.
+- Use the [Web refactoring plan](docs/Web重构计划.md) for current Web scope and acceptance criteria. The [K12 exploration](docs/K12产品设计与Web重构规划.md) is a long-term option pool, not an implementation backlog.
+- Keep project facts and usage documentation in README; keep these instructions focused on agent behavior. Update the owning plan when an authorized scope change affects it.
 
-### Running locally:
-```bash
-# Python
-python3 -m http.server 8000
+## Implementation conventions
 
-# Node.js
-npx http-server -p 8000
-```
+- Use ES modules, camelCase methods/variables, PascalCase classes, and async/await with explicit cleanup.
+- Reuse existing engines and data before adding replacements. Verify HanziWriter options against the resolved dependency version.
+- Keep input, character data, playback state, and view updates separate. All playback entries must share cancellation rules; stale callbacks must not mutate a superseded session.
+- Cancel animation, audio, timers, and pending work before clearing instance references.
+- Validate animation paths, stroke counts, order, and names before claiming teaching accuracy; do not treat ambiguous or default names as verified content.
+- Keep Chinese UI text and `lang="zh-CN"`; provide labels, keyboard actions, visible focus, and accessible status messages.
+- Use kebab-case CSS classes, mobile-first layout, Grid/Flexbox, and scoped rules. Avoid additional `!important` overrides. Existing colors, bounce effects, and auto-scroll are not redesign requirements.
+- Keep useful diagnostics without exposing user content or secrets.
 
-### Deployment:
-```bash
-./deploy.sh <server> <remote_dir>
-# Example: ./deploy.sh user@server.com /opt/app
-```
+## Verification
 
-### Automated testing:
-```bash
-# 运行笔画识别测试（需要 Node.js 18+）
-node test/run-tests.js
-```
-
-### Manual testing:
-- Open in browser, verify character rendering and playback
-- Use test.html for interactive stroke recognition testing
-
-### No linting/formatting tools
-- No ESLint, Prettier, or similar configured
-- Follow the existing code style in js/app.js and css/style.css
-
-## Code Style Guidelines
-
-### JavaScript (js/app.js)
-
-- Use ES6+ classes for main application logic (`HanziStrokeApp`)
-- Store writers in `Map`, not plain objects
-- Naming: PascalCase for classes, camelCase for methods/variables
-- DOM elements: Store in `this.dom` object with descriptive names
-- Event handlers: Prefix with `handle` or keep descriptive
-- Function order: `constructor()`, `init()`, `cacheDOM()`, `bindEvents()`, `handle*()`, `render*()`, helpers
-- Always use `async/await` for promises, add `finally` blocks to cleanup state
-- Error handling: Use `console.error()` with emoji prefixes (❌ error, ⚠️ warning)
-- DOM: Use `document.getElementById()`/`createElement()`, dynamic IDs with `${type}-${uniqueId}`
-- State: Use `isPlaying`, `isRendering` flags to prevent concurrent operations
-- Logging: Use emoji prefixes (✅ success, ❌ error, ⚠️ warning), include context
-
-### CSS (css/style.css)
-
-- Organization: Global reset, base styles, sections, components, utilities, media queries
-- Naming: kebab-case for classes (`.character-card`), camelCase for IDs (`#charInput`)
-- Styling: CSS Grid for layouts, Flexbox for internals, transitions (`0.3s`)
-- Mobile-first: default styles for mobile, `@media (min-width)` for desktop
-- Units: `rem` for typography, `px` for fixed sizes, `%` for responsive widths
-- Kid-friendly: Use rounded corners (15-20px), gradients, bright colors (#ff6b6b, #ffe66d), and playful animations
-- Animations: `bounce` for active cards, `pulse` for placeholder, hover effects with scale/rotate transforms
-
-### HTML (index.html)
-
-- Semantic HTML5: `<header>`, `<main>`/`.container`, `<footer>`
-- Load scripts at end of `<body>`, CSS in `<head>`
-- Set `lang="zh-CN"`, Chinese UI text, English code comments
-- Accessibility: `for` attributes on labels, `aria` attributes where needed, keyboard navigation
-- Title: "给小朋友用的笔顺工具" (Stroke order tool for kids)
-
-## Project-Specific Patterns
-
-### Chinese Character Handling
-- Filter: `value.replace(/[^\u4e00-\u9fa5]/g, '')`
-- Limit: `value.slice(0, 10)`
-- Handle loading failures gracefully
-
-### HanziWriter Integration
-- Load before creating: `await HanziWriter.loadCharacterData(char)`
-- Create with config: `{ width: 120, height: 120, strokeColor: '#333' }`
-- Store writers in Map
-
-### Color Scheme (Kid-Friendly)
-- Primary red: #ff6b6b
-- Primary yellow: #ffe66d
-- Background gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)
-- Card hover: Scale (1.05) with rotate(1deg)
-- Active cards: Bounce animation, red border
-- Grid lines: Yellow (#ffe66d) with 3px width, rounded
-
-### Animation Sequencing
-- Sync loading: `await this.waitForWriter(uniqueId)`
-- Delay: `await this.delay(1000)`
-- Smooth scroll: `card.scrollIntoView({ behavior: 'smooth', block: 'center' })`
-
-## Deployment
-
-Static site - deploy by copying files:
-- Vercel/Netlify: Drag and drop folder
-- Custom server: Use `deploy.sh` script
-- GitHub Pages: Push to `gh-pages` branch
-
-## Key Dependencies
-
-- HanziWriter 3.5 CDN: `https://unpkg.com/hanzi-writer@3.5/dist/hanzi-writer.min.js`
-- No npm packages or build tools
-
-## Browser Support
-
-- Chrome 60+, Firefox 60+, Safari 12+, Edge 79+
-- Mobile: iOS Safari, Chrome Mobile
-- No polyfills
-
-## Common Tasks
-
-### Adding a new feature
-1. Check if HanziWriter supports it
-2. Add method to `HanziStrokeApp` class
-3. Add UI in `index.html`
-4. Style in `css/style.css`
-5. Test manually in browser
-
-### Fixing a bug
-1. Add `console.log()` with context
-2. Check browser DevTools console
-3. Verify HanziWriter API usage
-4. Test with multiple characters
-
-### Modifying styles
-1. Check existing CSS classes
-2. Update in `css/style.css`
-3. Test mobile responsiveness
-4. Ensure no layout breaks
-
-## Notes
-
-- No automated tests - manual verification required
-- No linting - follow existing style patterns
-- Chinese comments encouraged
-- Console logging is extensive and intentional
-- State flags prevent race conditions
+- Inspect the diff and run relevant checks using README's commands; account for the documented test-runner limitations. Do not claim success from an unreliable exit code or missing fixtures.
+- For implementation changes, run relevant regressions, syntax checks, and build as appropriate. Verify affected desktop/mobile UI; playback changes also need interruption, rapid input, media/resource failure, and background/resume coverage.
+- Do not silently download fixtures to hide missing data. Report blocked checks and distinguish automated results from browser/device observations.
+- For documentation-only changes, verify source-backed claims, links, consistency, and whitespace. Avoid dependency installation or unrelated runtime checks.
