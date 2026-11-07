@@ -139,3 +139,12 @@ input[type="radio"], input[type="checkbox"] { width: 18px; height: 18px; }
 .focus-mode .site-header, .focus-mode .search-panel, .focus-mode .site-footer { display: none; }
 .focus-mode .workspace { padding-top: 72px; }
 .focus-exit { position: fixed; top: max(12px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); z-index: 11; font-size: 13px; }
+.saved-queries { margin-top: 10px; color: var(--muted); }
+.saved-queries summary { text-align: left; }
+.saved-queries summary span { margin-left: 6px; font-variant-numeric: tabular-nums; }
+#savedList { max-height: 240px; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; background: #fff; }
+.saved-query { display: flex; align-items: center; border-bottom: 1px solid var(--border); }
+.saved-query:last-child { border-bottom: 0; }
+.saved-query > button:first-child { flex: 1; min-width: 0; text-align: left; font-size: 13px; overflow-wrap: anywhere; }
+.remove-saved-query { flex-shrink: 0; width: 44px; color: var(--muted); font-size: 18px; }
+.save-actions { display: flex; flex-wrap: wrap; }

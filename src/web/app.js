@@ -4,6 +4,7 @@ import { HanziAnimation } from '../playback/hanzi-animation.js';
 import { StrokeAudio } from '../playback/stroke-audio.js';
 import { QueryHistory } from './history.js';
 import { defaultPreferences, loadPreferences, savePreferences } from './preferences.js';
+import { SavedQueries } from './saved-queries.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
 const svgNamespace = 'http://www.w3.org/2000/svg';
@@ -17,6 +18,7 @@ let queueAnimations = [];
 let historyStorage = null;
 try { historyStorage = window.localStorage; } catch { /* Private/restricted storage may throw. */ }
 const history = new QueryHistory(historyStorage);
+const savedQueries = new SavedQueries(historyStorage);
 
 const store = new CharacterStore();
 const audio = new StrokeAudio();
@@ -194,6 +196,53 @@ function renderHistory() {
     dom.historyList.scrollLeft = 0;
 }
 
+function savedFeedback(message, visible = false, target = dom.savedFeedback) {
+    target.textContent = message;
+    target.className = visible ? 'notice' : 'sr-only';
+}
+
+function renderSavedQueries() {
+    dom.savedQueries.hidden = savedQueries.items.length === 0;
+    dom.savedCount.textContent = savedQueries.items.length;
+    dom.savedList.replaceChildren(...savedQueries.items.map(item => {
+        const row = document.createElement('div');
+        row.className = 'saved-query';
+        const open = button(item, () => {
+            dom.query.value = item;
+            query(item);
+            dom.savedQueries.open = false;
+            dom.query.focus({ preventScroll: true });
+        });
+        open.title = item;
+        const remove = button('×', () => {
+            const index = savedQueries.items.indexOf(item);
+            const persisted = savedQueries.remove(item);
+            renderSavedQueries();
+            savedFeedback(persisted ? '已移除字单' : '已移除，本次无法保存更改', !persisted);
+            savedFeedback('', false, dom.saveActionFeedback);
+            const remaining = Array.from(dom.savedList.querySelectorAll('.remove-saved-query'));
+            if (remaining.length) remaining[Math.min(index, remaining.length - 1)].focus({ preventScroll: true });
+            else dom.query.focus({ preventScroll: true });
+            player.notify();
+        });
+        remove.className = 'remove-saved-query';
+        remove.setAttribute('aria-label', `删除字单 ${item}`);
+        row.append(open, remove);
+        return row;
+    }));
+}
+
+function saveQuery(value) {
+    const result = savedQueries.save(value);
+    if (result.status === 'saved') {
+        renderSavedQueries();
+        savedFeedback(result.persisted ? '已收藏' : '已收藏，仅本次打开有效', !result.persisted, dom.saveActionFeedback);
+        player.notify();
+        // The save button is now disabled; retain a visible keyboard target.
+        dom.settings.querySelector('summary').focus({ preventScroll: true });
+    } else if (result.status === 'full') savedFeedback('字单已满（30 条），请先删除一条', true, dom.saveActionFeedback);
+}
+
 function render(state) {
     const data = state.data;
     const available = Boolean(data) && !['empty', 'loading', 'error'].includes(state.status);
@@ -258,6 +307,13 @@ function render(state) {
     dom.restartGroupBtn.disabled = !state.entries.length;
     dom.groupMode.checked = state.group;
     dom.speechToggle.checked = state.speechEnabled;
+    const savedCharacter = savedQueries.items.includes(state.entry);
+    const savedQuery = savedQueries.items.includes(state.entries.join(''));
+    dom.saveCharacterBtn.disabled = !available || savedCharacter;
+    dom.saveCharacterBtn.textContent = savedCharacter ? '当前字已收藏' : '收藏当前字';
+    dom.saveQueryBtn.hidden = state.entries.length < 2;
+    dom.saveQueryBtn.disabled = !state.entries.length || savedQuery;
+    dom.saveQueryBtn.textContent = savedQuery ? '这组字已收藏' : '收藏这组字';
     updateQueue(state);
     const statuses = {
         empty: '请输入汉字', ready: `${state.entry}，${count} 笔`,
@@ -271,6 +327,8 @@ function render(state) {
 }
 
 function query(value) {
+    savedFeedback('');
+    savedFeedback('', false, dom.saveActionFeedback);
     const result = player.query(value);
     const notes = [];
     if (result.filtered) notes.push('已忽略非汉字内容。');
@@ -336,6 +394,8 @@ dom.speechToggle.addEventListener('change', () => { player.setSpeech(dom.speechT
 dom.gridToggle.addEventListener('change', () => dom.writingGrid.classList.toggle('no-grid', !dom.gridToggle.checked));
 dom.outlineToggle.addEventListener('change', () => dom.writingGrid.classList.toggle('no-outline', !dom.outlineToggle.checked));
 dom.retryBtn.addEventListener('click', () => player.select(player.index));
+dom.saveCharacterBtn.addEventListener('click', () => saveQuery(player.entry));
+dom.saveQueryBtn.addEventListener('click', () => saveQuery(player.entries.join('')));
 dom.settings.addEventListener('change', rememberPreferences);
 dom.resetSettingsBtn.addEventListener('click', () => {
     applyPreferences(defaultPreferences);
@@ -364,4 +424,5 @@ document.addEventListener('visibilitychange', () => { if (document.hidden) playe
 window.addEventListener('pagehide', () => player.pause());
 window.addEventListener('resize', updateQueueTabStops);
 applyPreferences(loadPreferences(historyStorage));
+renderSavedQueries();
 query('');

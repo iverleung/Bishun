@@ -2,6 +2,46 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { QueryHistory } from '../src/web/history.js';
 import { defaultPreferences, loadPreferences, savePreferences } from '../src/web/preferences.js';
+import { SavedQueries } from '../src/web/saved-queries.js';
+
+test('saved queries preserve order and duplicates within a query, survive reload and stay separate from history', () => {
+    const values = new Map();
+    const storage = { getItem: key => values.get(key), setItem: (key, value) => values.set(key, value), removeItem: key => values.delete(key) };
+    const history = new QueryHistory(storage);
+    const saved = new SavedQueries(storage);
+    history.remember('木木水');
+    assert.deepEqual(saved.save('木木水'), { status: 'saved', persisted: true });
+    saved.save('𠮷');
+    assert.equal(saved.save('木木水').status, 'exists');
+    history.clear();
+    assert.deepEqual(new SavedQueries(storage).items, ['𠮷', '木木水']);
+    saved.remove('𠮷');
+    assert.deepEqual(new SavedQueries(storage).items, ['木木水']);
+    assert.deepEqual(saved.items, ['木木水']);
+});
+
+test('saved query capacity never silently evicts an existing item', () => {
+    const saved = new SavedQueries(null);
+    for (let index = 1; index <= 30; index++) saved.save(String.fromCodePoint(0x4e00 + index));
+    assert.equal(saved.items.length, 30);
+    const before = [...saved.items];
+    assert.equal(saved.save('木水心').status, 'full');
+    assert.deepEqual(saved.items, before);
+    saved.remove(before[0]);
+    assert.equal(saved.save('木水心').status, 'saved');
+    assert.equal(saved.items[0], '木水心');
+});
+
+test('saved queries ignore invalid stored entries and report in-memory fallback', () => {
+    const saved = new SavedQueries({ getItem: () => '["木",null,1,"abc","木","𠮷"]' });
+    assert.deepEqual(saved.items, ['木', '𠮷']);
+    for (const value of ['', '<script>', '木'.repeat(21), null]) assert.equal(saved.save(value).status, 'invalid');
+    assert.deepEqual(new SavedQueries({ getItem: () => '{' }).items, []);
+    const blocked = new SavedQueries({ getItem() { throw new Error(); }, setItem() { throw new Error(); } });
+    assert.deepEqual(blocked.save('心'), { status: 'saved', persisted: false });
+    assert.equal(blocked.remove('心'), false);
+    assert.deepEqual(blocked.items, []);
+});
 
 test('preferences persist only validated settings and reset without changing history', () => {
     const values = new Map();

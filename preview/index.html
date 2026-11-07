@@ -20,6 +20,8 @@
                 <div class="input-footnote"><span id="inputHint">最多 20 字</span><button type="button" data-query="木水心">试试「木水心」</button></div>
             </form>
             <p id="queryNotice" class="notice" hidden></p>
+            <details id="savedQueries" class="saved-queries" hidden><summary>我的字单 <span id="savedCount"></span></summary><nav id="savedList" aria-label="我的字单"></nav></details>
+            <p id="savedFeedback" class="sr-only" role="status" aria-live="polite"></p>
         </section>
 
         <section id="lesson" class="lesson-panel" aria-label="单字笔顺" hidden>
@@ -47,6 +49,8 @@
                         <button id="restartBtn" type="button" class="text-button">重播这个字</button>
                         <div id="strokeList" class="stroke-list" aria-label="按笔画定位"></div>
                         <button id="replayStrokeBtn" type="button" class="text-button" disabled>重播本笔</button>
+                        <div class="save-actions"><button id="saveCharacterBtn" type="button" class="text-button">收藏当前字</button><button id="saveQueryBtn" type="button" class="text-button">收藏这组字</button></div>
+                        <p id="saveActionFeedback" class="sr-only" role="status" aria-live="polite"></p>
                         <fieldset class="mode-options"><legend>播放节奏</legend><label><input type="radio" name="mode" value="quick" checked>快速看</label><label><input type="radio" name="mode" value="explain">听讲解</label><label><input type="radio" name="mode" value="follow">跟着写</label></fieldset>
                         <label class="toggle-setting" for="groupMode">整组播放<input id="groupMode" type="checkbox"></label>
                         <label class="toggle-setting" for="speechToggle">语音<input id="speechToggle" type="checkbox"></label>
