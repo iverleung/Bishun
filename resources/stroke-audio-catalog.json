@@ -1,0 +1,110 @@
+{
+  "version": "v1",
+  "source": "Resolved stroke names; unresolved alternatives excluded",
+  "items": [
+    {
+      "id": "stroke-68d536dce75d",
+      "text": "卧钩"
+    },
+    {
+      "id": "stroke-35a9db278ad3",
+      "text": "弯钩"
+    },
+    {
+      "id": "stroke-e44c1d0bddc1",
+      "text": "捺"
+    },
+    {
+      "id": "stroke-bfc4aff8a00d",
+      "text": "提"
+    },
+    {
+      "id": "stroke-8fddd7cdb49f",
+      "text": "撇"
+    },
+    {
+      "id": "stroke-2d7a6a8d82fd",
+      "text": "撇折"
+    },
+    {
+      "id": "stroke-15ddeafbfd5c",
+      "text": "撇点"
+    },
+    {
+      "id": "stroke-8d9f7a9d2c62",
+      "text": "斜钩"
+    },
+    {
+      "id": "stroke-f8c6e3e86baa",
+      "text": "横"
+    },
+    {
+      "id": "stroke-999eeceff4ed",
+      "text": "横折"
+    },
+    {
+      "id": "stroke-7918e80a097a",
+      "text": "横折弯钩"
+    },
+    {
+      "id": "stroke-46af3459c747",
+      "text": "横折折折"
+    },
+    {
+      "id": "stroke-b9bdb52db5d1",
+      "text": "横折折撇"
+    },
+    {
+      "id": "stroke-90318bd11d95",
+      "text": "横折提"
+    },
+    {
+      "id": "stroke-dc4a29407aee",
+      "text": "横折钩"
+    },
+    {
+      "id": "stroke-59965e2093f7",
+      "text": "横撇"
+    },
+    {
+      "id": "stroke-d521db950c15",
+      "text": "横斜钩"
+    },
+    {
+      "id": "stroke-2abbef3287b3",
+      "text": "横钩"
+    },
+    {
+      "id": "stroke-08dddeac1319",
+      "text": "点"
+    },
+    {
+      "id": "stroke-b86568089d7c",
+      "text": "竖"
+    },
+    {
+      "id": "stroke-3a75e5ce265a",
+      "text": "竖弯"
+    },
+    {
+      "id": "stroke-1691d4b364c1",
+      "text": "竖弯钩"
+    },
+    {
+      "id": "stroke-fc60cfd821df",
+      "text": "竖折"
+    },
+    {
+      "id": "stroke-141e431009ad",
+      "text": "竖折折钩"
+    },
+    {
+      "id": "stroke-91326dfb2a71",
+      "text": "竖提"
+    },
+    {
+      "id": "stroke-7eba1915dccd",
+      "text": "竖钩"
+    }
+  ]
+}

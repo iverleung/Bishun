@@ -55,3 +55,33 @@ npm run build
 ```
 
 覆盖审计另用 `python3 tools/audit-character-data.py`，需要 PyMuPDF，仅用于核对本地规范 PDF；结果在 `resources/character-audit.json`，不属于网站运行时依赖。网站构建不需要 Python。
+
+## 预生成笔画录音
+
+已从当前查询结果中明确可解析的笔画名生成 26 项稳定 ID 清单；未消歧的候选不生成确定读音。清单不是“全部官方笔形种类”的宣称。
+
+- 制作工具锁定 edge-tts 7.3.1，普通话音色 `zh-CN-XiaoxiaoNeural`、语速 `-10%`。合成阶段需要网络，用户播放不需要请求该服务。
+- 26 份 MP3 共 131,704 字节，处理后时长 429—1,183ms。采用保守首尾静音裁剪，不删除中间停顿；ffmpeg 全量解码、ffprobe 时长、文件长度与 SHA-256 校验通过。
+- 成品和 `manifest.json` 位于 `public/audio/strokes/v1/`，清单记录 URL、文字、音色、语速、时长、字节数、哈希和 `pending-listening` 状态。**尚未完成人工逐条试听**，不能标为读音审核通过。
+- 生成器有请求超时、两路有界并发；全批成功后才发布清单。重跑会校验并复用同参数成品，不强制重调在线服务；切换音色／语速应使用新版本目录。
+- 普通网站构建只运行 `audio:check` 检查已提交成品，不调用合成服务、不要求安装 edge-tts／ffmpeg；生成与解码验证才需要这些工具。
+
+### 制作与复核
+
+```bash
+npm run resources:prepare
+npm run audio:catalog
+# 在独立 Python 虚拟环境内安装制作依赖，再运行生成器。
+python3 -m pip install -r tools/audio-requirements.txt
+python3 tools/generate-stroke-audio.py
+npm run audio:check
+```
+
+制作环境还需 ffmpeg 和 ffprobe。仓库默认成品可直接构建，无需重新生成；Python 工具不进入浏览器依赖。完整来源：[edge-tts README](https://github.com/rany2/edge-tts)。
+
+## 阶段验证与下一步
+
+- 48 字／233 笔名称回归通过；3 项名称边界与 8 项资源加载测试通过；13 项原型状态／历史测试保持通过。
+- 全量资源结构与复制校验、26 份录音技术校验、生产构建通过。旧的原型测试与内容准确性证据仍分开报告。
+- UI 已确认，此阶段没有改原型布局或替换首页。下一阶段 W3 才将自托管字库、HanziWriter 真实轨迹动画和录音接入已确认界面，统一取消、逐笔位置和音画时序。
+- 尚未关闭的范围：全字库内容审核、1,239 个规范字缺口、4 个名称数量冲突、录音逐条试听、真实设备音画同步与部署限制验证。它们不会被“样本回归通过”或“文件可解码”替代。
