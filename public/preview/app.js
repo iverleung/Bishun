@@ -1,5 +1,6 @@
 import { samples } from './samples.js';
 import { PreviewPlayer } from './player.js';
+import { QueryHistory } from './history.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
 const svgNamespace = 'http://www.w3.org/2000/svg';
@@ -9,6 +10,9 @@ let canvasKey = '';
 let audioNotice = false;
 let arrivalAnimation = null;
 let queueAnimations = [];
+let historyStorage = null;
+try { historyStorage = window.localStorage; } catch { /* Private/restricted storage may throw. */ }
+const history = new QueryHistory(historyStorage);
 
 const player = new PreviewPlayer(samples, render);
 
@@ -55,17 +59,21 @@ function updateQueue(state) {
     const key = `${JSON.stringify(state.entries)}:${state.index}`;
     if (key === queueKey) return;
     const sameQuery = queueKey.split(':')[0] === JSON.stringify(state.entries);
-    const previousRects = new Map(Array.from(dom.characterList.children, el => [el.dataset.index, el.getBoundingClientRect()]));
-    const incoming = sameQuery ? dom.characterList.querySelector(`[data-index="${state.index}"]`) : null;
+    const queues = [dom.previousCharacterList, dom.characterList];
+    const oldButtons = queues.flatMap(queue => Array.from(queue.children));
+    const previousRects = new Map(oldButtons.map(el => [el.dataset.index, el.getBoundingClientRect()]));
+    const incoming = sameQuery ? oldButtons.find(el => el.dataset.index === String(state.index)) : null;
     const source = incoming?.querySelector('svg') || incoming;
-    const sourceRect = source?.getBoundingClientRect();
-    const queueHadFocus = dom.characterList.contains(document.activeElement);
+    const rect = source?.getBoundingClientRect();
+    const sourceRect = rect && rect.right > 0 && rect.left < document.documentElement.clientWidth ? rect : null;
+    const queueHadFocus = queues.some(queue => queue.contains(document.activeElement));
     queueKey = key;
     arrivalAnimation?.cancel();
     queueAnimations.forEach(animation => animation.cancel());
     queueAnimations = [];
+    dom.previousCharacterList.replaceChildren(...state.entries.slice(0, state.index).map(createQueuedCharacter));
     dom.characterList.replaceChildren(...state.entries.slice(state.index + 1).map((char, offset) => createQueuedCharacter(char, state.index + offset + 1)));
-    dom.characterList.scrollLeft = 0;
+    updateQueueTabStops();
     // View-only transitions never delay playback or update its state.
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
         typeof dom.characterInk.animate === 'function' && state.entries.length) {
@@ -79,7 +87,7 @@ function updateQueue(state) {
                 { transform: 'translate(0, 0) scale(1)', opacity: 1 }
             ], { duration: 300, easing: 'cubic-bezier(.2,.75,.25,1)' });
         }
-        for (const el of dom.characterList.children) {
+        for (const el of queues.flatMap(queue => Array.from(queue.children))) {
             const before = sameQuery ? previousRects.get(el.dataset.index) : null;
             const after = el.getBoundingClientRect();
             if (before) {
@@ -91,6 +99,31 @@ function updateQueue(state) {
         }
     }
     if (queueHadFocus && !dom.playBtn.disabled) dom.playBtn.focus({ preventScroll: true });
+}
+
+function updateQueueTabStops() {
+    for (const queue of [dom.previousCharacterList, dom.characterList]) {
+        const bounds = queue.getBoundingClientRect();
+        for (const el of queue.children) {
+            const rect = el.getBoundingClientRect();
+            // Offscreen entries remain reachable through the centered previous/next controls.
+            el.tabIndex = rect.right > bounds.left && rect.left < bounds.right ? 0 : -1;
+        }
+    }
+}
+
+function renderHistory() {
+    dom.historyRow.hidden = history.items.length === 0;
+    dom.historyList.replaceChildren(...history.items.map(item => {
+        const el = button(item, () => {
+            dom.query.value = item;
+            query(item);
+            if (!dom.playBtn.disabled) dom.playBtn.focus({ preventScroll: true });
+        });
+        el.title = item;
+        return el;
+    }));
+    dom.historyList.scrollLeft = 0;
 }
 
 function render(state) {
@@ -176,6 +209,8 @@ function query(value) {
     dom.queryNotice.textContent = notes.join(' ');
     dom.queryNotice.hidden = notes.length === 0;
     if (!player.entries.length) dom.settings.open = false;
+    if (player.entries.length) history.remember(player.entries.join(''));
+    renderHistory();
 }
 
 let composing = false;
@@ -199,6 +234,11 @@ document.querySelectorAll('[data-query]').forEach(el => el.addEventListener('cli
 dom.clearBtn.addEventListener('click', () => {
     dom.query.value = '';
     query('');
+    dom.query.focus();
+});
+dom.clearHistoryBtn.addEventListener('click', () => {
+    history.clear();
+    renderHistory();
     dom.query.focus();
 });
 dom.playBtn.addEventListener('click', () => {
@@ -238,4 +278,5 @@ dom.audioScenario.addEventListener('click', () => { audioNotice = true; render(p
 dom.retryBtn.addEventListener('click', () => player.select(player.index));
 document.addEventListener('visibilitychange', () => { if (document.hidden) player.pause(); });
 window.addEventListener('pagehide', () => player.pause());
+window.addEventListener('resize', updateQueueTabStops);
 query('');

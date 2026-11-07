@@ -1,0 +1,27 @@
+const storageKey = 'bishun-preview-query-history';
+const limit = 10;
+const isQuery = value => typeof value === 'string' && /^[\u4e00-\u9fa5]{1,20}$/.test(value);
+
+export class QueryHistory {
+    constructor(storage) {
+        this.storage = storage;
+        this.items = [];
+        try {
+            const saved = JSON.parse(storage?.getItem(storageKey) || '[]');
+            if (Array.isArray(saved)) this.items = [...new Set(saved.filter(isQuery))].slice(0, limit);
+        } catch { /* Storage may be unavailable or contain invalid JSON. */ }
+    }
+
+    remember(query) {
+        if (!isQuery(query)) return;
+        this.items = [query, ...this.items.filter(item => item !== query)].slice(0, limit);
+        try { this.storage?.setItem(storageKey, JSON.stringify(this.items)); }
+        catch { /* Keep history in memory when persistence is unavailable. */ }
+    }
+
+    clear() {
+        this.items = [];
+        try { this.storage?.removeItem(storageKey); }
+        catch { /* Clearing the in-memory list must still work. */ }
+    }
+}

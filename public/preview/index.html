@@ -15,6 +15,7 @@
             <form id="searchForm">
                 <label class="sr-only" for="query">输入汉字或词语</label>
                 <div class="search-field"><input id="query" name="query" placeholder="输入汉字或词语" aria-describedby="inputHint" autocomplete="off" autofocus><button id="clearBtn" class="clear-button" type="button" aria-label="清空" title="清空" hidden>×</button><button class="primary" type="submit">查询 <span aria-hidden="true">↗</span></button></div>
+                <div id="historyRow" class="query-history" hidden><nav id="historyList" class="history-list" aria-label="查询历史"></nav><button id="clearHistoryBtn" type="button" aria-label="清空查询历史" title="清空查询历史">×</button></div>
                 <div class="input-footnote"><span id="inputHint">最多 20 字</span><button type="button" data-query="木水心">试试「木水心」</button></div>
             </form>
             <p id="queryNotice" class="notice" hidden></p>
@@ -22,6 +23,7 @@
 
         <section id="lesson" class="lesson-panel" aria-label="单字笔顺" hidden>
             <div class="character-lane">
+                <nav id="previousCharacterList" class="character-queue previous-queue" aria-label="之前的字"></nav>
                 <div class="stage" id="stage">
                     <div class="writing-grid" id="writingGrid">
                         <svg id="characterCanvas" viewBox="0 0 1024 1024" role="img" aria-label="汉字字形">
