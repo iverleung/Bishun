@@ -3,10 +3,12 @@ import { PreviewPlayer } from './player.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
 const svgNamespace = 'http://www.w3.org/2000/svg';
-let characterListKey = '';
+let queueKey = '';
 let strokeListKey = '';
 let canvasKey = '';
 let audioNotice = false;
+let arrivalAnimation = null;
+let queueAnimations = [];
 
 const player = new PreviewPlayer(samples, render);
 
@@ -24,46 +26,95 @@ function path(d) {
     return el;
 }
 
+function createQueuedCharacter(char, index) {
+    const el = button('', () => {
+        player.select(index);
+        if (!dom.playBtn.disabled) dom.playBtn.focus({ preventScroll: true });
+        else if (!dom.nextCharBtn.disabled) dom.nextCharBtn.focus({ preventScroll: true });
+        else dom.previousCharBtn.focus({ preventScroll: true });
+    });
+    el.dataset.index = String(index);
+    el.setAttribute('aria-label', `${char}，第 ${index + 1} 字${samples[char] ? '' : '，无预览数据'}`);
+    if (samples[char]) {
+        const svg = document.createElementNS(svgNamespace, 'svg');
+        svg.setAttribute('viewBox', '0 0 1024 1024');
+        svg.setAttribute('aria-hidden', 'true');
+        const group = document.createElementNS(svgNamespace, 'g');
+        group.setAttribute('transform', 'translate(0, 900) scale(1,-1)');
+        group.append(...samples[char].strokes.map(path));
+        svg.append(group);
+        el.append(svg);
+    } else {
+        el.textContent = char;
+        el.className = 'fallback-character failed';
+    }
+    return el;
+}
+
+function updateQueue(state) {
+    const key = `${JSON.stringify(state.entries)}:${state.index}`;
+    if (key === queueKey) return;
+    const sameQuery = queueKey.split(':')[0] === JSON.stringify(state.entries);
+    const previousRects = new Map(Array.from(dom.characterList.children, el => [el.dataset.index, el.getBoundingClientRect()]));
+    const incoming = sameQuery ? dom.characterList.querySelector(`[data-index="${state.index}"]`) : null;
+    const source = incoming?.querySelector('svg') || incoming;
+    const sourceRect = source?.getBoundingClientRect();
+    const queueHadFocus = dom.characterList.contains(document.activeElement);
+    queueKey = key;
+    arrivalAnimation?.cancel();
+    queueAnimations.forEach(animation => animation.cancel());
+    queueAnimations = [];
+    dom.characterList.replaceChildren(...state.entries.slice(state.index + 1).map((char, offset) => createQueuedCharacter(char, state.index + offset + 1)));
+    dom.characterList.scrollLeft = 0;
+    // View-only transitions never delay playback or update its state.
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+        typeof dom.characterInk.animate === 'function' && state.entries.length) {
+        const target = dom.writingGrid.getBoundingClientRect();
+        if (target.width && state.data) {
+            const dx = sourceRect ? (sourceRect.x + sourceRect.width / 2 - target.x - target.width / 2) * 1024 / target.width : 70;
+            const dy = sourceRect ? (sourceRect.y + sourceRect.height / 2 - target.y - target.height / 2) * 1024 / target.height : 0;
+            const scale = sourceRect ? sourceRect.width / target.width : 0.96;
+            arrivalAnimation = dom.characterInk.animate([
+                { transform: `translate(${dx}px, ${dy}px) scale(${scale})`, opacity: 0.4 },
+                { transform: 'translate(0, 0) scale(1)', opacity: 1 }
+            ], { duration: 300, easing: 'cubic-bezier(.2,.75,.25,1)' });
+        }
+        for (const el of dom.characterList.children) {
+            const before = sameQuery ? previousRects.get(el.dataset.index) : null;
+            const after = el.getBoundingClientRect();
+            if (before) {
+                queueAnimations.push(el.animate([
+                    { transform: `translateX(${before.x - after.x}px)` },
+                    { transform: 'translateX(0)' }
+                ], { duration: 300, easing: 'cubic-bezier(.2,.75,.25,1)' }));
+            }
+        }
+    }
+    if (queueHadFocus && !dom.playBtn.disabled) dom.playBtn.focus({ preventScroll: true });
+}
+
 function render(state) {
     const data = state.data;
     const available = Boolean(data) && !['empty', 'loading', 'error'].includes(state.status);
     const count = available ? data.strokes.length : 0;
     const focused = state.active ?? state.completed - 1;
-    const listKey = JSON.stringify(state.entries);
-    if (listKey !== characterListKey) {
-        characterListKey = listKey;
-        dom.characterList.replaceChildren(...state.entries.map((char, index) => {
-            const el = button(char, () => state.select(index));
-            el.classList.toggle('failed', !samples[char]);
-            el.setAttribute('aria-label', `${char}，第 ${index + 1} 字${samples[char] ? '' : '，无预览数据'}`);
-            return el;
-        }));
-    }
-    Array.from(dom.characterList.children).forEach((el, index) => el.setAttribute('aria-pressed', String(index === state.index)));
-    const unsupported = state.entries.filter(char => !samples[char]).length;
-    dom.listSummary.textContent = state.entries.length ? `${state.entries.length} 个字${unsupported ? ` · ${unsupported} 个字无预览数据` : ' · 点选切换'}` : '查询后，字会出现在这里。';
-    dom.clearBtn.disabled = state.entries.length === 0;
-    // Keep the heading's metadata span intact.
-    dom.characterTitle.firstChild.textContent = state.entry || '字';
-    dom.strokeTotal.textContent = available ? `${count} 画` : '';
-    dom.wordPosition.textContent = state.entries.length ? `第 ${state.index + 1} / ${state.entries.length} 字` : '等待查询';
-    dom.stepCount.textContent = available ? `共 ${count} 笔` : '暂无笔画';
-
+    document.body.dataset.phase = state.entries.length ? 'lesson' : 'search';
+    dom.lesson.hidden = state.entries.length === 0;
+    dom.clearBtn.hidden = !dom.query.value && !state.entries.length;
+    dom.wordPosition.textContent = state.entries.length ? `${state.index + 1} / ${state.entries.length}` : '';
     dom.writingGrid.hidden = !available;
     dom.stageMessage.hidden = available;
-    dom.stageCaption.hidden = !available;
-    dom.retryBtn.hidden = state.status !== 'error';
+    dom.retryBtn.hidden = state.status !== 'error' || !data;
     if (!available) {
         const messages = {
-            empty: ['从一个字开始', '输入汉字，或点左侧示例字单，看看每一笔怎么写。'],
-            loading: ['正在准备这个字', '字形准备好后就能开始。你也可以切换到其他字。'],
-            error: ['这个字暂时看不了', samples[state.entry] ? '模拟加载失败。可以重试，或先查看其他字。' : '交互预览仅收录木、水、心、我、山、田。可先查看其他示例字。']
+            empty: ['', ''],
+            loading: ['加载中…', ''],
+            error: [data ? '加载失败' : '暂未收录', data ? '' : '可试木、水、心、我、山、田']
         };
         const [title, description] = messages[state.status] || messages.empty;
         dom.stageMessageTitle.textContent = title;
         dom.stageMessageText.textContent = description;
     }
-
     const listStrokeKey = available ? state.entry : '';
     if (listStrokeKey !== strokeListKey) {
         strokeListKey = listStrokeKey;
@@ -76,11 +127,8 @@ function render(state) {
             return el;
         }) : []));
     }
-    Array.from(dom.strokeList.children).forEach((el, index) => {
-        el.setAttribute('aria-pressed', String(!state.showFull && index === focused));
-    });
-
-    const paintKey = [state.entry, available, state.showFull, state.completed, state.active].join(':');
+    Array.from(dom.strokeList.children).forEach((el, index) => el.setAttribute('aria-pressed', String(!state.showFull && index === focused)));
+    const paintKey = [state.index, state.entry, available, state.showFull, state.completed, state.active].join(':');
     if (paintKey !== canvasKey) {
         canvasKey = paintKey;
         dom.outlinePaths.replaceChildren(...(available ? data.strokes.map(path) : []));
@@ -94,12 +142,10 @@ function render(state) {
         dom.characterCanvas.style.setProperty('--stroke-duration', `${state.duration}ms`);
         dom.characterCanvas.setAttribute('aria-label', available ? `${state.entry}，${state.showFull ? '完整字形' : `展示到第 ${displayed} 笔`}` : '等待查询');
     }
-
-    dom.strokePosition.textContent = !available ? '等待字形' : state.showFull ? '完整字形' : focused >= 0 ? `第 ${focused + 1} / ${count} 笔` : `0 / ${count} 笔`;
-    dom.strokeName.textContent = !available ? '—' : state.showFull ? '准备好了吗？' : data.names[focused] || '准备落笔';
-    dom.stageCaption.textContent = state.showFull ? '先看完整字形，再开始示范' : state.status === 'playing' ? '留意绿色的这一笔' : '按自己的节奏，一笔一画来';
-    const labels = { ready: '开始示范', playing: '暂停', paused: '继续', complete: '重播' };
-    dom.playBtn.textContent = labels[state.status] || '开始示范';
+    dom.strokePosition.textContent = !available ? '' : state.showFull ? `${count} 笔` : `${Math.max(0, focused + 1)} / ${count} 笔`;
+    dom.strokeName.textContent = !available || state.showFull ? '' : data.names[focused] || '';
+    const labels = { ready: '播放', playing: '暂停', paused: '继续', complete: '重播' };
+    dom.playBtn.textContent = labels[state.status] || '播放';
     dom.playBtn.disabled = !available;
     dom.restartBtn.disabled = !available;
     dom.replayStrokeBtn.disabled = !available || state.showFull || focused < 0;
@@ -109,30 +155,31 @@ function render(state) {
     dom.nextCharBtn.disabled = state.entries.length === 0 || state.index >= state.entries.length - 1;
     dom.restartGroupBtn.disabled = !state.entries.some(char => samples[char]);
     dom.groupMode.checked = state.group;
-
+    updateQueue(state);
     const statuses = {
-        empty: '选一个字，开始看笔顺。',
-        ready: '字形已准备好。点击“开始示范”，从第一笔看起。',
-        playing: state.mode === 'follow' ? '示范这一笔，接着就轮到你。' : state.group ? '正在按字单顺序示范。' : '正在示范，随时可以暂停。',
-        paused: state.mode === 'follow' ? '写好了吗？点击“继续”，看下一笔。' : '已暂停。可以继续，或点选任意一笔。',
-        complete: state.groupComplete ? state.skipped ? `可用字已完成，跳过 ${state.skipped} 个无预览数据的字。` : '整组示范完成。你可以重播这个字，或整组从头播放。' : '这个字示范完成。再看一遍，或试着自己写。',
-        loading: '正在加载；可随时切字或清空。',
-        error: '这个字暂不可用，其他示例字仍可查看。'
+        empty: '请输入汉字', ready: `${state.entry}，${count} 笔`,
+        playing: `正在播放${state.entry}，第 ${focused + 1} 笔`,
+        paused: '已暂停', complete: state.groupComplete && state.skipped ? `播放完成，跳过 ${state.skipped} 个未收录字` : '播放完成',
+        loading: '加载中', error: '当前字不可用'
     };
-    dom.status.textContent = audioNotice ? '声音暂不可用，示范可静音继续。此交互预览尚未接入录音。' : statuses[state.status];
+    const showNotice = audioNotice || (state.groupComplete && state.skipped > 0);
+    dom.status.classList.toggle('sr-only', !showNotice);
+    dom.status.textContent = audioNotice ? '此预览暂无声音，可静音播放。' : statuses[state.status];
 }
 
 function query(value) {
     audioNotice = false;
     const result = player.query(value);
     const notes = [];
-    if (result.filtered) notes.push('已忽略非汉字内容，原始输入仍保留。');
-    if (result.truncated) notes.push('仅查询前 20 个汉字，其余内容仍保留在输入框。');
+    if (result.filtered) notes.push('已忽略非汉字内容。');
+    if (result.truncated) notes.push('仅查询前 20 个汉字。');
     dom.queryNotice.textContent = notes.join(' ');
     dom.queryNotice.hidden = notes.length === 0;
+    if (!player.entries.length) dom.settings.open = false;
 }
 
 let composing = false;
+dom.query.addEventListener('input', () => { dom.clearBtn.hidden = !dom.query.value && !player.entries.length; });
 dom.query.addEventListener('compositionstart', () => { composing = true; });
 dom.query.addEventListener('compositionend', () => { composing = false; });
 dom.query.addEventListener('keydown', event => {
@@ -140,7 +187,10 @@ dom.query.addEventListener('keydown', event => {
 });
 dom.searchForm.addEventListener('submit', event => {
     event.preventDefault();
-    if (!composing) query(dom.query.value);
+    if (!composing) {
+        query(dom.query.value);
+        if (!dom.playBtn.disabled && player.entries.length) dom.playBtn.focus({ preventScroll: true });
+    }
 });
 document.querySelectorAll('[data-query]').forEach(el => el.addEventListener('click', () => {
     dom.query.value = el.dataset.query;
@@ -172,24 +222,20 @@ dom.speedSlider.addEventListener('input', () => {
     player.speed = Number(dom.speedSlider.value);
     dom.speedValue.textContent = ['极慢', '较慢', '正常', '较快', '极快'][player.speed - 1];
 });
-dom.speechToggle.addEventListener('change', () => {
-    audioNotice = dom.speechToggle.checked;
-    render(player);
-});
+dom.speechToggle.addEventListener('change', () => { audioNotice = dom.speechToggle.checked; render(player); });
 dom.gridToggle.addEventListener('change', () => dom.writingGrid.classList.toggle('no-grid', !dom.gridToggle.checked));
 dom.outlineToggle.addEventListener('change', () => dom.writingGrid.classList.toggle('no-outline', !dom.outlineToggle.checked));
 dom.emptyScenario.addEventListener('click', () => { dom.query.value = ''; query(''); });
 dom.loadingScenario.addEventListener('click', () => {
-    if (!player.entries.length) query('木');
+    if (!player.entries.length) { dom.query.value = '木'; query('木'); }
     player.scenario('loading');
 });
 dom.errorScenario.addEventListener('click', () => {
-    if (!player.entries.length) query('木');
+    if (!player.entries.length) { dom.query.value = '木'; query('木'); }
     player.scenario('error');
 });
 dom.audioScenario.addEventListener('click', () => { audioNotice = true; render(player); });
 dom.retryBtn.addEventListener('click', () => player.select(player.index));
 document.addEventListener('visibilitychange', () => { if (document.hidden) player.pause(); });
 window.addEventListener('pagehide', () => player.pause());
-
-query(dom.query.value);
+query('');
