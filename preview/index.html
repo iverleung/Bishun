@@ -10,6 +10,7 @@
 <body data-phase="search">
     <header class="site-header"><a class="brand" href="./index.html"><span class="brand-mark" aria-hidden="true">永</span>笔顺</a><a class="original-link" href="/">现有工具 ↗</a></header>
     <main class="workspace">
+        <button id="exitFocusBtn" class="focus-exit secondary" type="button" hidden>退出专注</button>
         <h1 class="sr-only">汉字笔顺查询</h1>
         <section class="search-panel" aria-label="查字">
             <form id="searchForm">
@@ -53,6 +54,8 @@
                         <label class="toggle-setting" for="gridToggle">米字格<input id="gridToggle" type="checkbox" checked></label>
                         <label class="toggle-setting" for="outlineToggle">字形轮廓<input id="outlineToggle" type="checkbox" checked></label>
                         <button id="restartGroupBtn" type="button" class="secondary">整组从头播放</button>
+                        <button id="fullscreenBtn" type="button" class="secondary">全屏书写</button>
+                        <button id="resetSettingsBtn" type="button" class="text-button">恢复默认设置</button>
                     </div>
                 </details></div>
             </div>

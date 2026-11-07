@@ -1,6 +1,33 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { QueryHistory } from '../src/web/history.js';
+import { defaultPreferences, loadPreferences, savePreferences } from '../src/web/preferences.js';
+
+test('preferences persist only validated settings and reset without changing history', () => {
+    const values = new Map();
+    const storage = { getItem: key => values.get(key), setItem: (key, value) => values.set(key, value) };
+    const history = new QueryHistory(storage);
+    history.remember('木水');
+    const settings = { mode: 'follow', speed: 5, group: true, speechEnabled: true, grid: false, outline: false };
+    savePreferences(storage, { ...settings, autoplay: true });
+    assert.deepEqual(loadPreferences(storage), settings);
+    savePreferences(storage, defaultPreferences);
+    assert.deepEqual(loadPreferences(storage), defaultPreferences);
+    assert.deepEqual(new QueryHistory(storage).items, ['木水']);
+});
+
+test('invalid or inaccessible preference storage falls back safely', () => {
+    const broken = { getItem: () => '{' };
+    assert.deepEqual(loadPreferences(broken), defaultPreferences);
+    const invalid = { getItem: () => JSON.stringify({ mode: 'other', speed: '5', speechEnabled: 'yes', group: false, grid: false, outline: null }) };
+    assert.deepEqual(loadPreferences(invalid), { ...defaultPreferences, grid: false });
+    const blocked = { getItem() { throw new Error(); }, setItem() { throw new Error(); } };
+    assert.deepEqual(loadPreferences(blocked), defaultPreferences);
+    assert.doesNotThrow(() => savePreferences(blocked, defaultPreferences));
+    const changed = loadPreferences(null);
+    changed.speed = 5;
+    assert.equal(loadPreferences(null).speed, 3);
+});
 
 test('history persists newest first, deduplicates, and limits its size', () => {
     const saved = new Map();

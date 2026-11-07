@@ -3,6 +3,7 @@ import { PlaybackController } from '../playback/controller.js';
 import { HanziAnimation } from '../playback/hanzi-animation.js';
 import { StrokeAudio } from '../playback/stroke-audio.js';
 import { QueryHistory } from './history.js';
+import { defaultPreferences, loadPreferences, savePreferences } from './preferences.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
 const svgNamespace = 'http://www.w3.org/2000/svg';
@@ -21,6 +22,49 @@ const store = new CharacterStore();
 const audio = new StrokeAudio();
 const animation = new HanziAnimation(dom.animationLayer);
 const player = new PlaybackController({ store, audio, animation, onChange: render });
+let focusMode = false;
+let ownsFullscreen = false;
+let focusSettingsOpen = false;
+
+function applyPreferences(preferences) {
+    player.pause();
+    Object.assign(player, { mode: preferences.mode, speed: preferences.speed, group: preferences.group });
+    player.setSpeech(preferences.speechEnabled);
+    for (const el of document.querySelectorAll('[name="mode"]')) el.checked = el.value === preferences.mode;
+    dom.speedSlider.value = preferences.speed;
+    dom.speedValue.textContent = ['极慢', '较慢', '正常', '较快', '极快'][preferences.speed - 1];
+    dom.gridToggle.checked = preferences.grid;
+    dom.outlineToggle.checked = preferences.outline;
+    dom.writingGrid.classList.toggle('no-grid', !preferences.grid);
+    dom.writingGrid.classList.toggle('no-outline', !preferences.outline);
+}
+
+function rememberPreferences() {
+    savePreferences(historyStorage, {
+        mode: player.mode, speed: player.speed, group: player.group, speechEnabled: player.speechEnabled,
+        grid: dom.gridToggle.checked, outline: dom.outlineToggle.checked
+    });
+}
+
+function setFocusMode(enabled) {
+    if (focusMode === enabled) return;
+    if (enabled) { focusSettingsOpen = dom.settings.open; dom.settings.open = false; }
+    else dom.settings.open = focusSettingsOpen;
+    focusMode = enabled;
+    document.body.classList.toggle('focus-mode', enabled);
+    dom.exitFocusBtn.hidden = !enabled;
+    if (enabled) dom.exitFocusBtn.focus({ preventScroll: true });
+    else if (player.entries.length) dom.fullscreenBtn.focus({ preventScroll: true });
+    updateQueueTabStops();
+}
+
+async function exitFocusMode() {
+    setFocusMode(false);
+    if (ownsFullscreen && document.fullscreenElement) {
+        try { await document.exitFullscreen(); } catch { /* The browser may have already exited. */ }
+    }
+    ownsFullscreen = false;
+}
 
 function unlockAudio() {
     const revision = player.revision;
@@ -257,6 +301,7 @@ document.querySelectorAll('[data-query]').forEach(el => el.addEventListener('cli
     query(el.dataset.query);
 }));
 dom.clearBtn.addEventListener('click', () => {
+    if (focusMode) void exitFocusMode();
     dom.query.value = '';
     query('');
     dom.query.focus();
@@ -291,7 +336,32 @@ dom.speechToggle.addEventListener('change', () => { player.setSpeech(dom.speechT
 dom.gridToggle.addEventListener('change', () => dom.writingGrid.classList.toggle('no-grid', !dom.gridToggle.checked));
 dom.outlineToggle.addEventListener('change', () => dom.writingGrid.classList.toggle('no-outline', !dom.outlineToggle.checked));
 dom.retryBtn.addEventListener('click', () => player.select(player.index));
+dom.settings.addEventListener('change', rememberPreferences);
+dom.resetSettingsBtn.addEventListener('click', () => {
+    applyPreferences(defaultPreferences);
+    rememberPreferences();
+});
+dom.fullscreenBtn.addEventListener('click', async () => {
+    setFocusMode(true);
+    if (!document.fullscreenElement && document.fullscreenEnabled && document.documentElement.requestFullscreen) {
+        try {
+            await document.documentElement.requestFullscreen();
+            ownsFullscreen = true;
+            // Exit may have been requested while the browser was entering fullscreen.
+            if (!focusMode) await exitFocusMode();
+        } catch { /* Keep the same usable focus layout when native fullscreen is unavailable. */ }
+    }
+});
+dom.exitFocusBtn.addEventListener('click', () => void exitFocusMode());
+document.addEventListener('fullscreenchange', () => {
+    if (ownsFullscreen && !document.fullscreenElement) { ownsFullscreen = false; setFocusMode(false); }
+    updateQueueTabStops();
+});
+document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && focusMode) { event.preventDefault(); void exitFocusMode(); }
+});
 document.addEventListener('visibilitychange', () => { if (document.hidden) player.pause(); });
 window.addEventListener('pagehide', () => player.pause());
 window.addEventListener('resize', updateQueueTabStops);
+applyPreferences(loadPreferences(historyStorage));
 query('');
