@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node tools/build.mjs",
     "preview": "vite preview",
     "test": "node test/run.js && node --test test/names.test.js test/resources.test.js test/playback.test.js test/audio.test.js test/preview.test.js",
     "test:preview": "node --test test/playback.test.js test/audio.test.js test/preview.test.js",

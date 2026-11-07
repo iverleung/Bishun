@@ -26,8 +26,8 @@ function unlockAudio() {
     const revision = player.revision;
     void audio.unlock().then(() => {
         if (revision === player.revision && player.speechEnabled) return audio.preload(player.names, { signal: player.queryTask.signal });
-    }).catch(error => {
-        if (revision === player.revision && player.speechEnabled) { player.audioWarning = error.message; player.notify(); }
+    }).catch(() => {
+        if (revision === player.revision && player.speechEnabled) { player.audioWarning = '声音未能启用，可静音继续'; player.notify(); }
     });
 }
 

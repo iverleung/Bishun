@@ -67,7 +67,9 @@ export class StrokeAudio {
             const context = this.context;
             this.buffers.set(name, this.bounded(this.fetch(item.url, { cache: 'force-cache' }).then(async response => {
                 if (!response.ok) throw new Error('录音加载失败，可静音继续');
-                return context.decodeAudioData(await response.arrayBuffer());
+                const bytes = await response.arrayBuffer();
+                try { return await context.decodeAudioData(bytes); }
+                catch { throw new Error('录音无法播放，已静音继续'); }
             })).catch(error => { this.buffers.delete(name); throw error; }));
         }
         const buffer = await cancellable(this.buffers.get(name), signal);
@@ -110,7 +112,7 @@ export class StrokeAudio {
             this.stop = stop;
             signal.addEventListener('abort', stop, { once: true });
             source.onended = () => finish();
-            try { source.start(); } catch (error) { finish(error); }
+            try { source.start(); } catch { finish(new Error('录音无法播放，已静音继续')); }
         });
     }
 

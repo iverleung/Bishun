@@ -79,7 +79,7 @@ test('invalid catalogs, decoding failures and a suspended context are explicit f
     await assert.rejects(audio.prepare('横'), /版本/);
     audio.fetch = async url => url.endsWith('.json') ? json(manifest) : new Response(new Uint8Array([0]));
     context.decodeAudioData = async () => { throw new Error('bad decode'); };
-    await assert.rejects(audio.prepare('横'), /decode/);
+    await assert.rejects(audio.prepare('横'), /录音无法播放/);
     context.state = 'suspended';
     await assert.rejects(audio.prepare('横'), /声音未启用/);
 });

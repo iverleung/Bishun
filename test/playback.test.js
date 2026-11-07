@@ -114,6 +114,28 @@ test('an entirely failed group remains a visible error', async () => {
     assert.equal(player.skipped, 2);
 });
 
+test('prefetch preserves the selected failure until an explicit retry', async () => {
+    let attempts = 0;
+    const { player } = setup({ store: { async load(character) {
+        attempts++;
+        if (attempts === 1) throw new Error('HTTP 404');
+        return { character, data: { strokes: ['path'] }, strokeNames: ['横'] };
+    } } });
+    // setup starts 木水; use a new single-character query to isolate prefetch.
+    await player.ready;
+    await flush();
+    attempts = 0;
+    player.query('木');
+    await player.ready;
+    await flush();
+    assert.equal(attempts, 1);
+    assert.equal(player.status, 'error');
+    assert.equal(player.errors.get('木')?.message, 'HTTP 404');
+    await player.select(0);
+    assert.equal(player.status, 'ready');
+    assert.equal(attempts, 2);
+});
+
 test('pausing while a group loads its next character prevents automatic restart', async () => {
     const water = deferred();
     const record = character => ({ character, data: { strokes: ['path'] }, strokeNames: ['横'] });
@@ -149,6 +171,23 @@ test('follow mode waits at every stroke and character boundary', async () => {
     assert.equal(player.status, 'paused');
     await player.play();
     assert.equal(player.status, 'complete');
+});
+
+test('seeking after pausing a group load replaces its saved resume position', async () => {
+    const water = deferred();
+    const record = character => ({ character, data: { strokes: Array(4).fill('path') }, strokeNames: Array(4).fill('横') });
+    const { player, calls } = setup({ store: { load: char => char === '水' ? water.promise : Promise.resolve(record(char)) } });
+    await player.ready;
+    const run = player.restartGroup();
+    await flush();
+    player.pause();
+    water.resolve(record('水'));
+    await run;
+    await flush();
+    player.seek(2);
+    calls.length = 0;
+    await player.play();
+    assert.deepEqual(calls.map(call => call.index), [2, 3]);
 });
 
 test('audio failure degrades to silence without blocking animation', async () => {

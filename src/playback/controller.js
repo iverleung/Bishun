@@ -93,7 +93,7 @@ export class PlaybackController {
 
     async prefetch(revision) {
         const signal = this.queryTask.signal;
-        const chars = [...new Set(this.entries)].filter(char => !this.records.has(char));
+        const chars = [...new Set(this.entries)].filter(char => !this.records.has(char) && !this.errors.has(char));
         const worker = async () => {
             while (revision === this.revision && !signal.aborted && chars.length) {
                 const char = chars.shift();
@@ -137,6 +137,7 @@ export class PlaybackController {
     seek(count) {
         if (!this.data || this.status === 'loading') return;
         this.cancel();
+        this.resumeIndex = null;
         this.showFull = false;
         this.completed = Math.max(0, Math.min(this.data.strokes.length, count));
         this.status = this.completed === this.data.strokes.length ? 'complete' : 'paused';
@@ -182,7 +183,7 @@ export class PlaybackController {
     }
 
     async play({ restart = false, oneStroke = false, fromGroupStart = false } = {}) {
-        const resumeIndex = this.status === 'paused' ? this.resumeIndex : null;
+        const resumeIndex = !restart && !oneStroke && this.status === 'paused' ? this.resumeIndex : null;
         if (!this.entries.length || (!fromGroupStart && resumeIndex === null && (!this.data || ['loading', 'error'].includes(this.status)))) return;
         const selected = this.active ?? this.completed - 1;
         const continueGroup = !restart && !oneStroke && this.group && this.status === 'paused' && this.completed === this.data?.strokes.length;
