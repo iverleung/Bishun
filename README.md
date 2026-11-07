@@ -69,7 +69,7 @@ node --check src/engine/speech.js
 node --check src/engine/recognition/v3.js
 ```
 
-尚未配置浏览器自动化测试或经过验证的浏览器版本支持矩阵。布局和媒体播放需要在实际浏览器与代表性移动设备上检查。
+尚未配置浏览器自动化测试或经过验证的浏览器版本支持矩阵。布局和媒体播放需要在实际浏览器与代表性移动设备上检查。iPhone／iPad Safari 优先的具体步骤与当前授权限制见 [浏览器与真机验收](docs/Web浏览器与真机验收.md)。
 
 ## 项目结构
 
