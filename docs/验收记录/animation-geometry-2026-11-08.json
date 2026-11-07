@@ -1,0 +1,35 @@
+{
+  "browser": "Chrome/156.0.8078.81",
+  "checks": [
+    {
+      "viewport": [
+        1024,
+        820
+      ],
+      "viewBox": "0 0 1024 1024",
+      "difference": 0,
+      "missingViewBoxDifference": 585.3515625,
+      "label": "木，正在书写第 1 笔"
+    },
+    {
+      "viewport": [
+        768,
+        1024
+      ],
+      "viewBox": "0 0 1024 1024",
+      "difference": 0,
+      "missingViewBoxDifference": 585.3515625,
+      "label": "木，正在书写第 1 笔"
+    },
+    {
+      "viewport": [
+        320,
+        820
+      ],
+      "viewBox": "0 0 1024 1024",
+      "difference": 0,
+      "missingViewBoxDifference": 733.0078125,
+      "label": "木，正在书写第 1 笔"
+    }
+  ]
+}

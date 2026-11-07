@@ -8,7 +8,10 @@ export class HanziAnimation {
     animate(record, index, { signal, speed }) {
         this.cancel();
         if (signal.aborted) return Promise.reject(new DOMException('已取消', 'AbortError'));
-        const host = document.createElement('div');
+        // Keep the writer's 1024-unit coordinates in the same responsive viewport as the static ink.
+        const host = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        host.setAttribute('viewBox', '0 0 1024 1024');
+        host.setAttribute('preserveAspectRatio', 'xMidYMid meet');
         this.layer.append(host);
         const writer = HanziWriter.create(host, record.character, {
             width: 1024, height: 1024, padding: 0, showCharacter: false, showOutline: false,

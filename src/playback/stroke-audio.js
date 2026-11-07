@@ -10,9 +10,10 @@ function cancellable(promise, signal) {
 
 // One audio context, versioned local recordings, no browser speech synthesis.
 export class StrokeAudio {
-    constructor({ fetchImpl = (...args) => globalThis.fetch(...args), createContext = () => new (window.AudioContext || window.webkitAudioContext)() } = {}) {
+    constructor({ fetchImpl = (...args) => globalThis.fetch(...args), createContext = () => new (window.AudioContext || window.webkitAudioContext)(), getAudioSession = () => globalThis.navigator?.audioSession } = {}) {
         this.fetch = fetchImpl;
         this.createContext = createContext;
+        this.getAudioSession = getAudioSession;
         this.context = null;
         this.catalog = null;
         this.buffers = new Map();
@@ -20,6 +21,11 @@ export class StrokeAudio {
     }
 
     async unlock() {
+        // Spoken instruction is user-requested media, rather than ambient sound effects.
+        try {
+            const session = this.getAudioSession();
+            if (session) session.type = 'playback';
+        } catch { /* Optional API: unsupported session settings must not block playback. */ }
         this.context ||= this.createContext();
         if (this.context.state === 'running') return;
         this.unlocking ||= this.bounded(this.context.resume());

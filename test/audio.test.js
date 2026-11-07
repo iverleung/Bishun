@@ -45,6 +45,27 @@ test('preparation waits for user-triggered asynchronous audio resume and remains
     assert.equal((await prepared).duration, 0.4);
 });
 
+test('playback session is selected before context creation and user-triggered resume', async () => {
+    const { context } = setup();
+    const events = [];
+    context.state = 'suspended';
+    context.resume = async () => { events.push('resume'); context.state = 'running'; };
+    const session = { set type(value) { events.push(value); } };
+    const audio = new StrokeAudio({ createContext: () => { events.push('context'); return context; }, getAudioSession: () => session });
+    const unlock = audio.unlock();
+    assert.deepEqual(events, ['playback', 'context', 'resume']);
+    await unlock;
+    await audio.unlock();
+    assert.deepEqual(events, ['playback', 'context', 'resume', 'playback']);
+});
+
+test('an unsupported audio session API does not prevent enabling sound', async () => {
+    const { context } = setup();
+    const audio = new StrokeAudio({ createContext: () => context, getAudioSession() { throw new Error('unsupported'); } });
+    await audio.unlock();
+    assert.equal(audio.context.state, 'running');
+});
+
 test('a new recording cancels the previous source and cancellation settles waits', async () => {
     const { audio, sources } = setup();
     await audio.unlock();

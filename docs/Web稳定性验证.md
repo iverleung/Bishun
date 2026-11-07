@@ -69,6 +69,28 @@ node test/serve-fault-preview.mjs       # 默认 5187；可追加其他端口
 
 详见 [真实浏览器结果表](Web浏览器与真机验收.md#chromecdp-实测结果)及 [逐笔序列](验收记录/Chrome-CDP-2026-11-08.json)。Chrome 原生全屏已实测，iOS 的原生全屏、手机键盘、App 后台／锁屏与声音实听仍待验收；没有把 Chrome 或标签切换结果平移成手机通过。本轮只更新验收证据，没有新增功能或替换首页。
 
+## 第六批：iPad 动画偏移与 iPhone 静音模式无声
+
+用户真机反馈：iPadOS 26.7.2 播放时动画不在米字格内；iOS 27.0.1 已启用语音，但打开系统静音时无声，关闭静音后声音恢复。以上版本来自用户提供，设备型号仍未记录。
+
+**动画根因与修复：** HanziWriter 使用 1024 单位的坐标，旧适配器只通过 CSS 改 SVG 显示宽高，生成的 SVG 没有 `viewBox`，路径未按显示区域正确缩放。这是通用的坐标缺陷，不只影响 Safari。现在直接提供 `viewBox="0 0 1024 1024"` 的 SVG 容器，保留相同的坐标原点与纵轴变换；画布缩放时由 SVG 映射静态字形与当前笔。
+
+先前 Chrome 的 80／119 笔记录只证明状态顺序及最终字形，遗漏了播放中的几何检查，不能用来证明动画位置正确。新增可复现的实际浏览器回归（Node 22+，不进入普通 npm test）：
+
+```bash
+node test/browser-geometry.mjs http://127.0.0.1:9223 http://192.168.6.169:5188/preview/index.html
+```
+
+该脚本创建独立 CDP 会话，以真实输入触发动画，比较静态笔画组与动画笔画组的屏幕坐标矩阵；结束后关闭自建会话。三种视口 1024×820、768×1024、320×820 的最大矩阵差为 0；临时移除 viewBox 的反例产生约 585／733 的差值，确认测试确实能检出旧问题。[矩阵记录](验收记录/animation-geometry-2026-11-08.json)是 Chrome 结果，不冒充 iPad 修复复测。
+
+**声音根因与修复：** 用户明确确认了静音开关这一触发条件，与 [WebKit 的 Web Audio 记录及 playback 会话处理说明](https://bugs.webkit.org/show_bug.cgi?id=237322)一致。语音启用时，在创建／恢复 AudioContext 前显式设置可用的 `navigator.audioSession.type = 'playback'`，表达主动播放媒体的用途；继续由用户点击触发，不改变默认快速看的静音设置，也不播放循环静音文件。API 缺失或不支持设置时，保留原有播放流程。接口性质见 [W3C Audio Session 工作草案](https://www.w3.org/TR/audio-session/)，不能据此宣称所有旧版 iOS 都支持。
+
+`npm test`：48 字／233 笔样本、**41 项 Node 回归**通过；新增会话类型先于上下文创建／恢复、可选 API 失败不阻塞声音的覆盖。生产构建及语法／diff 检查通过。最终构建在 Chrome 中播放木完成 4/4、动画层归零、无页面媒体失败提示；该 Chrome 未提供 audioSession API，验证了不支持该 API 的兼容路径。
+
+**待真机复测：** iPad 刷新后看实际起笔与静态轮廓是否重合，并验证横竖屏／全屏；iPhone 保持系统静音，开启听讲解检查录音，同时验证网站关闭语音仍立即停声。测试页已更新，可通过 `/preview/index.html?v=ios-fix-1` 避免继续使用旧 HTML 缓存。两项修复均不能在用户复测前标记为真机通过。
+
+![Chrome 中播放起笔与轮廓对齐](assets/animation-aligned-2026-11-08.png)
+
 ## 尚未完成
 
 - Firefox／Edge 和代表性 iPhone、iPad、Android 真机，软键盘、横竖屏与后台／恢复。用户已将桌面 Safari 移出本轮验收。
