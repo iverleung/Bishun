@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f6f7f3">
+    <title>笔顺 · 新版交互预览</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="preview-note">新版交互预览 <span>使用 6 个示例字体验；播放节奏为模拟，暂不播放声音。</span><a href="/">返回现有工具 ↗</a></div>
+    <header class="site-header">
+        <a class="brand" href="./index.html"><span class="brand-mark" aria-hidden="true">永</span><span>笔顺<small>一笔一画，慢慢学会。</small></span></a>
+        <span class="header-note">给每一个认真写字的你</span>
+    </header>
+    <main class="workspace">
+        <aside class="search-panel" aria-label="查字与字单">
+            <div class="eyebrow">汉字书写小助手</div>
+            <h1>这个字，<br>怎么写？</h1>
+            <p class="intro">先看清，再跟着一笔一画写。</p>
+            <form id="searchForm">
+                <label for="query">查一个字，或一组字</label>
+                <div class="search-field"><input id="query" name="query" value="木水心我山田" placeholder="输入汉字或词语" aria-describedby="inputHint" autocomplete="off"><button class="primary" type="submit">查询</button></div>
+                <p id="inputHint" class="hint">最多 20 字，保留输入顺序与重复字。</p>
+            </form>
+            <p id="queryNotice" class="notice" hidden></p>
+            <div class="section-heading"><h2>这次要学的字</h2><button id="clearBtn" class="text-button" type="button">清空</button></div>
+            <div id="characterList" class="character-list" aria-label="查询结果"></div>
+            <p id="listSummary" class="hint"></p>
+            <div class="try-section"><h2>试试看</h2><div class="suggestions"><button type="button" data-query="木水心">木水心</button><button type="button" data-query="我山田">我山田</button><button type="button" data-query="木未水">部分字失败</button></div></div>
+            <details class="preview-scenarios"><summary>预览状态</summary><div class="scenario-buttons"><button id="emptyScenario" type="button">空白页</button><button id="loadingScenario" type="button">加载状态</button><button id="errorScenario" type="button">加载失败</button><button id="audioScenario" type="button">声音不可用</button></div></details>
+        </aside>
+
+        <section class="lesson-panel" aria-label="单字笔顺">
+            <header class="lesson-header"><div><span class="eyebrow">看一遍，写一遍</span><h2 id="characterTitle">木<span id="strokeTotal">4 画</span></h2></div><span id="wordPosition" class="position-badge">第 1 / 6 字</span></header>
+            <div class="stage" id="stage">
+                <div class="writing-grid" id="writingGrid">
+                    <svg id="characterCanvas" viewBox="0 0 1024 1024" role="img" aria-label="木的完整字形">
+                        <g class="grid-lines" aria-hidden="true"><path d="M512 0V1024M0 512H1024"/><path class="diagonals" d="M0 0L1024 1024M1024 0L0 1024"/></g>
+                        <g id="outlinePaths" class="outline-paths" transform="translate(0, 900) scale(1,-1)"></g>
+                        <g id="strokePaths" transform="translate(0, 900) scale(1,-1)"></g>
+                    </svg>
+                </div>
+                <div class="stage-message" id="stageMessage" hidden><div class="message-symbol" aria-hidden="true">字</div><h3 id="stageMessageTitle"></h3><p id="stageMessageText"></p><button id="retryBtn" type="button" class="secondary" hidden>重试</button></div>
+                <span class="stage-caption" id="stageCaption">先看完整字形，再开始示范</span>
+            </div>
+            <div class="stroke-status"><span id="strokePosition">完整字形</span><strong id="strokeName">准备好了吗？</strong><button id="replayStrokeBtn" type="button" class="text-button" disabled>重播本笔 ↺</button></div>
+            <div class="transport" aria-label="播放控制"><button id="previousStrokeBtn" class="secondary" type="button">← 上一笔</button><button id="playBtn" class="primary play-button" type="button">开始示范</button><button id="nextStrokeBtn" class="secondary" type="button">下一笔 →</button></div>
+            <div class="session-controls"><button id="previousCharBtn" type="button" class="text-button">← 上一字</button><button id="restartBtn" type="button" class="text-button">重播这个字</button><button id="nextCharBtn" type="button" class="text-button">下一字 →</button></div>
+            <p id="status" class="live-status" role="status" aria-live="polite">选一个字，开始看笔顺。</p>
+        </section>
+
+        <aside class="detail-panel" aria-label="笔顺与播放设置">
+            <div class="section-heading"><h2>一笔一画</h2><span id="stepCount" class="hint">共 4 笔</span></div>
+            <p class="hint">点选任意一笔，查看写到这里的样子。</p>
+            <div id="strokeList" class="stroke-list" aria-label="按笔画定位"></div>
+            <fieldset class="mode-options"><legend>按你的节奏</legend>
+                <label><input type="radio" name="mode" value="quick" checked><span><strong>快速看</strong><small>连贯地看完整个字</small></span></label>
+                <label><input type="radio" name="mode" value="explain"><span><strong>听讲解</strong><small>留一点时间，认识每一笔</small></span></label>
+                <label><input type="radio" name="mode" value="follow"><span><strong>跟着写</strong><small>一笔一停，写好了再继续</small></span></label>
+            </fieldset>
+            <label class="toggle-setting" for="groupMode"><span>整组连续播放</span><input id="groupMode" type="checkbox"></label>
+            <label class="toggle-setting" for="speechToggle"><span>笔画名称语音 <small>预览暂未接入</small></span><input id="speechToggle" type="checkbox"></label>
+            <label class="speed-setting" for="speedSlider"><span>示范速度 <output id="speedValue" for="speedSlider">正常</output></span><input id="speedSlider" type="range" min="1" max="5" value="3"></label>
+            <details class="more-settings"><summary>画布与更多设置</summary><label class="toggle-setting" for="gridToggle">显示米字格<input id="gridToggle" type="checkbox" checked></label><label class="toggle-setting" for="outlineToggle">显示字形轮廓<input id="outlineToggle" type="checkbox" checked></label><button id="restartGroupBtn" type="button" class="secondary">整组从头播放</button></details>
+        </aside>
+    </main>
+    <footer class="site-footer"><span>每次学会一点点，就是进步。</span><span>笔顺 · 文明奇迹</span></footer>
+    <script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -31,11 +31,20 @@ npm run preview
 
 构建输出为 `dist/`，可部署到静态托管服务。`public/` 中的字形资源会复制到构建输出。预览命令需要先构建；未构建的源代码依赖 Vite 解析 npm 导入，不能直接用普通静态文件服务器运行。目前根目录没有 `deploy.sh`。
 
+## 新版 Web 交互预览（W1）
+
+运行 `npm run dev` 后，使用终端显示的地址打开 `/preview/index.html`（默认地址为 `http://localhost:5173/preview/index.html`）。请使用完整路径；Vite 开发环境下 `/preview/` 会回退到旧首页。
+
+原型使用木、水、心、我、山、田六个固定示例，支持单字大画布、多字导航、逐笔定位／重播、三种节奏、整组演示，以及空白、加载和失败状态。它使用独立定时模型模拟播放，尚未接入正式动画引擎或笔画录音；不能用原型演示证明音画同步已经解决。现有首页保持不变。
+
+[W1 交付记录](docs/Web交互原型.md)列出原型范围、验证结果和后续衔接。原型资源随生产构建复制到 `dist/preview/`，不增加运行时依赖。
+
 ## 测试与检查
 
 ```bash
 npm test                # 仅测试当前页面使用的 v3
 node test/run.js v3      # 等价的直接入口
+npm run test:preview    # W1 原型交互状态回归
 ```
 
 测试读取 `test/data/` 中的字形 fixture。该目录在 `.gitignore` 中，但部分 fixture 已被 Git 跟踪；运行前需确认测试数据是否齐全。`test/download_data.js` 是需要网络的下载辅助脚本。
