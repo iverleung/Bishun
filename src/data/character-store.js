@@ -16,7 +16,7 @@ function withSignal(promise, signal) {
 }
 
 export class CharacterStore {
-    constructor({ fetchImpl = globalThis.fetch, timeoutMs = 3000, getNames = char => v3.getStrokeNames(char) } = {}) {
+    constructor({ fetchImpl = (...args) => globalThis.fetch(...args), timeoutMs = 3000, getNames = char => v3.getStrokeNames(char) } = {}) {
         this.fetch = fetchImpl;
         this.timeoutMs = timeoutMs;
         this.getNames = getNames;

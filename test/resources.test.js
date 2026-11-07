@@ -9,6 +9,16 @@ const manifest = { schemaVersion: 1, version: '2.0.1', count: 2, characters: '�
 const json = value => new Response(JSON.stringify(value), { headers: { 'content-type': 'application/json' } });
 const names = () => ['横', '竖', '撇', '捺'];
 
+test('default fetch preserves the browser global receiver', async () => {
+    const original = globalThis.fetch;
+    globalThis.fetch = function (url) {
+        assert.equal(this, globalThis);
+        return Promise.resolve(json(url.endsWith('manifest.json') ? manifest : data));
+    };
+    try { assert.equal((await new CharacterStore({ getNames: names }).load('木')).character, '木'); }
+    finally { globalThis.fetch = original; }
+});
+
 test('same-origin requests are deduplicated and successful records cached', async () => {
     const calls = [];
     const store = new CharacterStore({ getNames: names, fetchImpl: async url => { calls.push(url); return json(url.endsWith('manifest.json') ? manifest : data); } });

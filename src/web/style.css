@@ -54,7 +54,7 @@ body[data-phase="lesson"] .input-footnote { display: none; }
 .lesson-panel { padding-bottom: 40px; min-width: 0; }
 .character-lane { display: grid; grid-template-columns: minmax(0, 1fr) var(--canvas-size) minmax(0, 1fr); gap: clamp(12px, 3vw, 40px); align-items: center; width: calc(100% + 48px); margin-left: -24px; overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent); }
 .stage { width: var(--canvas-size); height: var(--canvas-size); flex-shrink: 0; position: relative; }
-.writing-grid { width: 100%; height: 100%; border: 1px solid #c9d5c4; background: #fffefa; border-radius: 5px; }
+.writing-grid { position: relative; width: 100%; height: 100%; border: 1px solid #c9d5c4; background: #fffefa; border-radius: 5px; }
 .character-ink { transform-origin: 512px 512px; }
 .writing-grid svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .grid-lines { fill: none; stroke: #c6cebb; stroke-width: 2; stroke-dasharray: 12 10; }
@@ -64,8 +64,6 @@ body[data-phase="lesson"] .input-footnote { display: none; }
 .no-outline .outline-paths { display: none; }
 #strokePaths path { fill: #31483d; }
 #strokePaths path.current-stroke { fill: var(--accent); }
-#strokePaths path.preview-stroke { animation: reveal-stroke var(--stroke-duration, 700ms) linear both; }
-@keyframes reveal-stroke { from { opacity: 0.12; } to { opacity: 1; } }
 .character-queue { display: flex; gap: 12px; align-items: center; min-width: 0; overflow: hidden; padding: 8px 4px; }
 .previous-queue { justify-content: flex-end; }
 .character-queue::-webkit-scrollbar { display: none; }
@@ -133,3 +131,6 @@ input[type="radio"], input[type="checkbox"] { width: 18px; height: 18px; }
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none; transition: none; }
 }
+
+.animation-layer { position: absolute; inset: 0; pointer-events: none; }
+.animation-layer > div, .animation-layer svg { display: block; width: 100%; height: 100%; }

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#f6f7f3">
-    <title>笔顺 · 新版交互预览</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>笔顺 · 新版试用</title>
+    <link rel="stylesheet" href="/src/web/style.css">
 </head>
 <body data-phase="search">
     <header class="site-header"><a class="brand" href="./index.html"><span class="brand-mark" aria-hidden="true">永</span>笔顺</a><a class="original-link" href="/">现有工具 ↗</a></header>
@@ -31,6 +31,7 @@
                             <g id="characterInk" class="character-ink"><g id="outlinePaths" class="outline-paths" transform="translate(0, 900) scale(1,-1)"></g>
                             <g id="strokePaths" transform="translate(0, 900) scale(1,-1)"></g></g>
                         </svg>
+                        <div id="animationLayer" class="animation-layer" aria-hidden="true"></div>
                     </div>
                     <div class="stage-message" id="stageMessage" hidden><h2 id="stageMessageTitle"></h2><p id="stageMessageText"></p><button id="retryBtn" type="button" class="secondary" hidden>重试</button></div>
                 </div>
@@ -58,7 +59,7 @@
         </section>
         <p id="status" class="sr-only" role="status" aria-live="polite"></p>
     </main>
-    <footer class="site-footer"><span>交互预览 · 六字样例，暂无声音</span><details class="preview-scenarios"><summary>预览状态</summary><div class="scenario-buttons"><button id="emptyScenario" type="button">空白</button><button id="loadingScenario" type="button">加载</button><button id="errorScenario" type="button">失败</button><button id="audioScenario" type="button">声音不可用</button><button type="button" data-query="木未水">部分字失败</button></div></details></footer>
-    <script type="module" src="./app.js"></script>
+    <footer class="site-footer"><span>新版试用 · 本站字库</span></footer>
+    <script type="module" src="/src/web/app.js"></script>
 </body>
 </html>

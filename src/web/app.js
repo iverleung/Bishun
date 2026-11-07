@@ -1,5 +1,7 @@
-import { samples } from './samples.js';
-import { PreviewPlayer } from './player.js';
+import { CharacterStore } from '../data/character-store.js';
+import { PlaybackController } from '../playback/controller.js';
+import { HanziAnimation } from '../playback/hanzi-animation.js';
+import { StrokeAudio } from '../playback/stroke-audio.js';
 import { QueryHistory } from './history.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
@@ -7,14 +9,27 @@ const svgNamespace = 'http://www.w3.org/2000/svg';
 let queueKey = '';
 let strokeListKey = '';
 let canvasKey = '';
-let audioNotice = false;
+let renderedSelection = '';
+let pendingArrival = null;
 let arrivalAnimation = null;
 let queueAnimations = [];
 let historyStorage = null;
 try { historyStorage = window.localStorage; } catch { /* Private/restricted storage may throw. */ }
 const history = new QueryHistory(historyStorage);
 
-const player = new PreviewPlayer(samples, render);
+const store = new CharacterStore();
+const audio = new StrokeAudio();
+const animation = new HanziAnimation(dom.animationLayer);
+const player = new PlaybackController({ store, audio, animation, onChange: render });
+
+function unlockAudio() {
+    const revision = player.revision;
+    void audio.unlock().then(() => {
+        if (revision === player.revision && player.speechEnabled) return audio.preload(player.names, { signal: player.queryTask.signal });
+    }).catch(error => {
+        if (revision === player.revision && player.speechEnabled) { player.audioWarning = error.message; player.notify(); }
+    });
+}
 
 function button(text, onClick) {
     const el = document.createElement('button');
@@ -31,32 +46,38 @@ function path(d) {
 }
 
 function createQueuedCharacter(char, index) {
-    const el = button('', () => {
-        player.select(index);
+    const el = button('', async () => {
+        const revision = player.revision;
+        await player.select(index);
+        if (revision !== player.revision || index !== player.index) return;
         if (!dom.playBtn.disabled) dom.playBtn.focus({ preventScroll: true });
         else if (!dom.nextCharBtn.disabled) dom.nextCharBtn.focus({ preventScroll: true });
         else dom.previousCharBtn.focus({ preventScroll: true });
     });
     el.dataset.index = String(index);
-    el.setAttribute('aria-label', `${char}，第 ${index + 1} 字${samples[char] ? '' : '，无预览数据'}`);
-    if (samples[char]) {
+    const record = player.records.get(char);
+    const failed = player.errors.has(char);
+    el.setAttribute('aria-label', `${char}，第 ${index + 1} 字${failed ? '，加载失败' : ''}`);
+    if (record) {
         const svg = document.createElementNS(svgNamespace, 'svg');
         svg.setAttribute('viewBox', '0 0 1024 1024');
         svg.setAttribute('aria-hidden', 'true');
         const group = document.createElementNS(svgNamespace, 'g');
         group.setAttribute('transform', 'translate(0, 900) scale(1,-1)');
-        group.append(...samples[char].strokes.map(path));
+        group.append(...record.data.strokes.map(path));
         svg.append(group);
         el.append(svg);
     } else {
         el.textContent = char;
-        el.className = 'fallback-character failed';
+        el.className = `fallback-character${failed ? ' failed' : ''}`;
     }
     return el;
 }
 
 function updateQueue(state) {
-    const key = `${JSON.stringify(state.entries)}:${state.index}`;
+    const selection = `${JSON.stringify(state.entries)}:${state.index}`;
+    const selected = selection !== renderedSelection;
+    const key = `${selection}:${[...state.records.keys()].join('')}:${[...state.errors.keys()].join('')}:${state.status === 'loading'}`;
     if (key === queueKey) return;
     const sameQuery = queueKey.split(':')[0] === JSON.stringify(state.entries);
     const queues = [dom.previousCharacterList, dom.characterList];
@@ -68,7 +89,8 @@ function updateQueue(state) {
     const sourceRect = rect && rect.right > 0 && rect.left < document.documentElement.clientWidth ? rect : null;
     const queueHadFocus = queues.some(queue => queue.contains(document.activeElement));
     queueKey = key;
-    arrivalAnimation?.cancel();
+    if (selected) { pendingArrival = { sourceRect }; arrivalAnimation?.cancel(); }
+    renderedSelection = selection;
     queueAnimations.forEach(animation => animation.cancel());
     queueAnimations = [];
     dom.previousCharacterList.replaceChildren(...state.entries.slice(0, state.index).map(createQueuedCharacter));
@@ -78,7 +100,9 @@ function updateQueue(state) {
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
         typeof dom.characterInk.animate === 'function' && state.entries.length) {
         const target = dom.writingGrid.getBoundingClientRect();
-        if (target.width && state.data) {
+        if (pendingArrival && target.width && state.data && state.status !== 'loading') {
+            const sourceRect = pendingArrival.sourceRect;
+            pendingArrival = null;
             const dx = sourceRect ? (sourceRect.x + sourceRect.width / 2 - target.x - target.width / 2) * 1024 / target.width : 70;
             const dy = sourceRect ? (sourceRect.y + sourceRect.height / 2 - target.y - target.height / 2) * 1024 / target.height : 0;
             const scale = sourceRect ? sourceRect.width / target.width : 0.96;
@@ -90,7 +114,7 @@ function updateQueue(state) {
         for (const el of queues.flatMap(queue => Array.from(queue.children))) {
             const before = sameQuery ? previousRects.get(el.dataset.index) : null;
             const after = el.getBoundingClientRect();
-            if (before) {
+            if (selected && before) {
                 queueAnimations.push(el.animate([
                     { transform: `translateX(${before.x - after.x}px)` },
                     { transform: 'translateX(0)' }
@@ -130,6 +154,8 @@ function render(state) {
     const data = state.data;
     const available = Boolean(data) && !['empty', 'loading', 'error'].includes(state.status);
     const count = available ? data.strokes.length : 0;
+    const names = state.names;
+    if (state.status === 'playing') { arrivalAnimation?.cancel(); pendingArrival = null; }
     const focused = state.active ?? state.completed - 1;
     document.body.dataset.phase = state.entries.length ? 'lesson' : 'search';
     dom.lesson.hidden = state.entries.length === 0;
@@ -137,12 +163,13 @@ function render(state) {
     dom.wordPosition.textContent = state.entries.length ? `${state.index + 1} / ${state.entries.length}` : '';
     dom.writingGrid.hidden = !available;
     dom.stageMessage.hidden = available;
-    dom.retryBtn.hidden = state.status !== 'error' || !data;
+    dom.retryBtn.hidden = state.status !== 'error';
     if (!available) {
         const messages = {
             empty: ['', ''],
             loading: ['加载中…', ''],
-            error: [data ? '加载失败' : '暂未收录', data ? '' : '可试木、水、心、我、山、田']
+            paused: ['已暂停', ''],
+            error: [state.errors.get(state.entry)?.code === 'UNSUPPORTED' ? '暂未收录' : '加载失败', state.errors.get(state.entry)?.message || '请重试或切换其他字']
         };
         const [title, description] = messages[state.status] || messages.empty;
         dom.stageMessageTitle.textContent = title;
@@ -151,12 +178,12 @@ function render(state) {
     const listStrokeKey = available ? state.entry : '';
     if (listStrokeKey !== strokeListKey) {
         strokeListKey = listStrokeKey;
-        dom.strokeList.replaceChildren(...(available ? data.names.map((name, index) => {
+        dom.strokeList.replaceChildren(...(available ? names.map((name, index) => {
             const el = button('', () => state.seek(index + 1));
             const number = document.createElement('span');
             number.textContent = String(index + 1).padStart(2, '0');
-            el.append(number, document.createTextNode(name));
-            el.setAttribute('aria-label', `第 ${index + 1} 笔，${name}`);
+            el.append(number, document.createTextNode(name || '暂缺'));
+            el.setAttribute('aria-label', `第 ${index + 1} 笔，${name || '名称暂缺'}`);
             return el;
         }) : []));
     }
@@ -165,29 +192,28 @@ function render(state) {
     if (paintKey !== canvasKey) {
         canvasKey = paintKey;
         dom.outlinePaths.replaceChildren(...(available ? data.strokes.map(path) : []));
-        const displayed = state.showFull ? count : state.completed + (state.active === null ? 0 : 1);
+        const displayed = state.showFull ? count : state.completed;
         dom.strokePaths.replaceChildren(...(available ? data.strokes.slice(0, displayed).map((d, index) => {
             const el = path(d);
             el.classList.toggle('current-stroke', !state.showFull && index === focused);
-            el.classList.toggle('preview-stroke', index === state.active);
             return el;
         }) : []));
-        dom.characterCanvas.style.setProperty('--stroke-duration', `${state.duration}ms`);
-        dom.characterCanvas.setAttribute('aria-label', available ? `${state.entry}，${state.showFull ? '完整字形' : `展示到第 ${displayed} 笔`}` : '等待查询');
+        dom.characterCanvas.setAttribute('aria-label', available ? `${state.entry}，${state.showFull ? '完整字形' : state.active !== null ? `正在书写第 ${state.active + 1} 笔` : `展示到第 ${displayed} 笔`}` : '等待查询');
     }
     dom.strokePosition.textContent = !available ? '' : state.showFull ? `${count} 笔` : `${Math.max(0, focused + 1)} / ${count} 笔`;
-    dom.strokeName.textContent = !available || state.showFull ? '' : data.names[focused] || '';
+    dom.strokeName.textContent = !available || state.showFull ? '' : names[focused] || (focused >= 0 ? '暂缺' : '');
     const labels = { ready: '播放', playing: '暂停', paused: '继续', complete: '重播' };
-    dom.playBtn.textContent = labels[state.status] || '播放';
-    dom.playBtn.disabled = !available;
+    dom.playBtn.textContent = state.status === 'loading' && state.isRunning ? '暂停' : labels[state.status] || '播放';
+    dom.playBtn.disabled = !available && !state.isRunning && !(state.status === 'paused' && state.resumeIndex !== null);
     dom.restartBtn.disabled = !available;
     dom.replayStrokeBtn.disabled = !available || state.showFull || focused < 0;
     dom.previousStrokeBtn.disabled = !available || state.showFull || state.completed === 0;
     dom.nextStrokeBtn.disabled = !available || (!state.showFull && state.completed >= count);
     dom.previousCharBtn.disabled = state.entries.length === 0 || state.index === 0;
     dom.nextCharBtn.disabled = state.entries.length === 0 || state.index >= state.entries.length - 1;
-    dom.restartGroupBtn.disabled = !state.entries.some(char => samples[char]);
+    dom.restartGroupBtn.disabled = !state.entries.length;
     dom.groupMode.checked = state.group;
+    dom.speechToggle.checked = state.speechEnabled;
     updateQueue(state);
     const statuses = {
         empty: '请输入汉字', ready: `${state.entry}，${count} 笔`,
@@ -195,13 +221,12 @@ function render(state) {
         paused: '已暂停', complete: state.groupComplete && state.skipped ? `播放完成，跳过 ${state.skipped} 个未收录字` : '播放完成',
         loading: '加载中', error: '当前字不可用'
     };
-    const showNotice = audioNotice || (state.groupComplete && state.skipped > 0);
+    const showNotice = state.audioWarning || (state.groupComplete && state.skipped > 0);
     dom.status.classList.toggle('sr-only', !showNotice);
-    dom.status.textContent = audioNotice ? '此预览暂无声音，可静音播放。' : statuses[state.status];
+    dom.status.textContent = state.audioWarning || statuses[state.status];
 }
 
 function query(value) {
-    audioNotice = false;
     const result = player.query(value);
     const notes = [];
     if (result.filtered) notes.push('已忽略非汉字内容。');
@@ -242,39 +267,29 @@ dom.clearHistoryBtn.addEventListener('click', () => {
     dom.query.focus();
 });
 dom.playBtn.addEventListener('click', () => {
-    audioNotice = false;
-    if (player.status === 'playing') player.pause();
+    if (player.speechEnabled) unlockAudio();
+    if (player.isRunning) player.pause();
     else player.play();
 });
-dom.restartBtn.addEventListener('click', () => player.play({ restart: true }));
-dom.replayStrokeBtn.addEventListener('click', () => player.play({ oneStroke: true }));
+dom.restartBtn.addEventListener('click', () => { if (player.speechEnabled) unlockAudio(); void player.play({ restart: true }); });
+dom.replayStrokeBtn.addEventListener('click', () => { if (player.speechEnabled) unlockAudio(); void player.play({ oneStroke: true }); });
 dom.previousStrokeBtn.addEventListener('click', () => player.seek(player.completed - 1));
 dom.nextStrokeBtn.addEventListener('click', () => player.seek(player.showFull ? 1 : player.completed + 1));
 dom.previousCharBtn.addEventListener('click', () => player.select(player.index - 1));
 dom.nextCharBtn.addEventListener('click', () => player.select(player.index + 1));
-dom.restartGroupBtn.addEventListener('click', () => player.restartGroup());
+dom.restartGroupBtn.addEventListener('click', () => { if (player.speechEnabled) unlockAudio(); void player.restartGroup(); });
 dom.groupMode.addEventListener('change', () => { player.group = dom.groupMode.checked; });
 document.querySelectorAll('[name="mode"]').forEach(el => el.addEventListener('change', () => {
-    audioNotice = false;
     player.setMode(el.value);
+    if (player.speechEnabled) unlockAudio();
 }));
 dom.speedSlider.addEventListener('input', () => {
     player.speed = Number(dom.speedSlider.value);
     dom.speedValue.textContent = ['极慢', '较慢', '正常', '较快', '极快'][player.speed - 1];
 });
-dom.speechToggle.addEventListener('change', () => { audioNotice = dom.speechToggle.checked; render(player); });
+dom.speechToggle.addEventListener('change', () => { player.setSpeech(dom.speechToggle.checked); if (player.speechEnabled) unlockAudio(); });
 dom.gridToggle.addEventListener('change', () => dom.writingGrid.classList.toggle('no-grid', !dom.gridToggle.checked));
 dom.outlineToggle.addEventListener('change', () => dom.writingGrid.classList.toggle('no-outline', !dom.outlineToggle.checked));
-dom.emptyScenario.addEventListener('click', () => { dom.query.value = ''; query(''); });
-dom.loadingScenario.addEventListener('click', () => {
-    if (!player.entries.length) { dom.query.value = '木'; query('木'); }
-    player.scenario('loading');
-});
-dom.errorScenario.addEventListener('click', () => {
-    if (!player.entries.length) { dom.query.value = '木'; query('木'); }
-    player.scenario('error');
-});
-dom.audioScenario.addEventListener('click', () => { audioNotice = true; render(player); });
 dom.retryBtn.addEventListener('click', () => player.select(player.index));
 document.addEventListener('visibilitychange', () => { if (document.hidden) player.pause(); });
 window.addEventListener('pagehide', () => player.pause());

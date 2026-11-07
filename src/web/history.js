@@ -1,6 +1,6 @@
 const storageKey = 'bishun-preview-query-history';
 const limit = 10;
-const isQuery = value => typeof value === 'string' && /^[\u4e00-\u9fa5]{1,20}$/.test(value);
+const isQuery = value => typeof value === 'string' && Array.from(value).length >= 1 && Array.from(value).length <= 20 && /^\p{Script=Han}+$/u.test(value);
 
 export class QueryHistory {
     constructor(storage) {
