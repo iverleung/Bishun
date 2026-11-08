@@ -4,7 +4,8 @@ import { QueryHistory } from '../src/web/history.js';
 import { defaultPreferences, loadPreferences, savePreferences } from '../src/web/preferences.js';
 import { SavedQueries } from '../src/web/saved-queries.js';
 import { bindCanvasSwipe } from '../src/web/canvas-swipe.js';
-import { characterReadings } from '../src/web/character-info.js';
+import { characterReadings, characterRadical } from '../src/web/character-info.js';
+import radicalDictionary from 'cnchar-radical';
 import { worksheetLayout, paginateCharacters } from '../src/web/print-layout.js';
 import { createShareUrl, readSharedQuery } from '../src/web/share.js';
 
@@ -280,5 +281,21 @@ test('multitouch, handwriting mode and changed query invalidate touch navigation
         disrupt(fixture);
         fixture.send('touchend',0,0,{touches:[],changedTouches:[touch(100)],cancelable:true,preventDefault(){}});
         assert.deepEqual(fixture.moves,[]);
+    }
+});
+
+test('radical information uses independent dictionary fields and preserves semantic variants', () => {
+    for (const [character, radical] of [['木','木'],['水','水'],['心','心'],['河','氵'],['打','扌'],['学','子'],['我','戈'],['新','斤']]) {
+        assert.equal(characterRadical(character, radicalDictionary), radical);
+    }
+    assert.equal(characterRadical('學', radicalDictionary), null);
+    assert.equal(characterRadical('𠮷', radicalDictionary), null);
+    assert.equal(characterRadical('木水', () => { throw new Error('must not query invalid input'); }), null);
+    assert.equal(characterRadical('木', () => [{ radical:'木', radicalCount:999, struct:'arbitrary' }]), '木');
+});
+
+test('invalid or ambiguous radical results remain unknown instead of guessing a first candidate', () => {
+    for(const result of [null, [], [{radical:''}], [{radical:'木|水'}], [{radical:'<script>'}], [{radical:'木'},{radical:'水'}], [{radical:3}]]) {
+        assert.equal(characterRadical('木', () => result), null);
     }
 });

@@ -7,7 +7,7 @@ import { defaultPreferences, loadPreferences, savePreferences } from './preferen
 import { SavedQueries } from './saved-queries.js';
 import { createSavedLibrary } from './saved-library.js';
 import { setupSharing, readSharedQuery, clearSharedQuery } from './share.js';
-import { characterReadings } from './character-info.js';
+import { characterReadings, loadCharacterRadical } from './character-info.js';
 import { createDrawer } from './drawer.js';
 import { bindCanvasSwipe } from './canvas-swipe.js';
 import { PracticeController } from '../practice/controller.js';
@@ -18,6 +18,7 @@ const svgNamespace = 'http://www.w3.org/2000/svg';
 let queueKey = '';
 let canvasKey = '';
 let informationKey = '';
+let radicalRequest = 0;
 let practiceOwner = '';
 let renderedSelection = '';
 let pendingArrival = null;
@@ -37,7 +38,7 @@ const practice = new PracticeController({ adapter: practiceAdapter, onChange: re
 let focusMode = false;
 let ownsFullscreen = false;
 let viewportWidth = window.innerWidth;
-const drawer = createDrawer({ dialog: dom.settings, trigger: dom.menuBtn, closeButton: dom.closeMenuBtn, onOpen: () => { canvasSwipe.reset(); player.pause(); practice.pause(); } });
+const drawer = createDrawer({ dialog: dom.settings, trigger: dom.menuBtn, closeButton: dom.closeMenuBtn, onOpen: () => { canvasSwipe.reset(); player.pause(); practice.pause(); void renderRadical(player); } });
 const canvasSwipe = bindCanvasSwipe(dom.stage, {
     enabled: () => player.entries.length > 1 && !practice.visible && !dom.settings.open,
     context: () => `${player.revision}:${player.index}`,
@@ -270,11 +271,30 @@ function renderPractice() {
     dom.characterCanvas.setAttribute('aria-label', `正在练习${practice.record.character}，已写 ${practice.completed} 笔`);
 }
 
+async function renderRadical(state) {
+    const request = ++radicalRequest;
+    const character = state.entry;
+    const revision = state.revision;
+    if (!state.data || ['empty', 'loading', 'error'].includes(state.status)) return;
+    dom.characterRadical.textContent = '加载中';
+    const current = () => request === radicalRequest && player.revision === revision && player.entry === character;
+    try {
+        const radical = await loadCharacterRadical(character);
+        if (current()) dom.characterRadical.textContent = radical || '暂缺';
+    } catch {
+        if (current()) dom.characterRadical.textContent = '暂不可用';
+    }
+}
+
 function renderBasicInformation(state) {
     const available = Boolean(state.data) && !['empty', 'loading', 'error'].includes(state.status);
     const key = `${state.entry}:${available}:${state.status === 'loading'}`;
     if (informationKey === key) return;
     informationKey = key;
+    radicalRequest++;
+    dom.lessonActionsHeading.textContent = state.entry ? `当前字 · ${state.entry}` : '当前字';
+    dom.characterRadical.textContent = available ? '加载中' : state.status === 'loading' ? '加载中' : '暂缺';
+    if (available && dom.settings.open) void renderRadical(state);
     const readings = available ? characterReadings(state.entry) : [];
     dom.characterReadings.textContent = !available ? (state.status === 'loading' ? '加载中' : '暂缺') : readings.length ? readings.join(' / ') : '暂缺';
     dom.characterReadings.setAttribute('aria-label', readings.length > 1 ? `多音字，${readings.join('，')}` : dom.characterReadings.textContent);
