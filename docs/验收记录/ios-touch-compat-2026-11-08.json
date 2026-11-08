@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-08",
+  "userEvidence": "iPhone screenshot shows focus layout, ordinary demonstration with 3 characters, paused after stroke 1/4; Safari bar remains. Screenshot was not copied into the repository.",
+  "iphoneStatus": "pending refresh and real-device retest; exact Safari event failure not established",
+  "nodeRegression": {
+    "passed": 61,
+    "characters": 48,
+    "strokes": 233
+  },
+  "browserScope": "Chrome 156.0.8078.81 via user-authorized CDP 9223, isolated contexts and injected touch input; not Safari device acceptance",
+  "nativeTouch": {
+    "browser": "Chrome/156.0.8078.81",
+    "checks": [
+      "right-top menu works before query, focus stays modal, Escape restores trigger; old link and indexed stroke controls removed",
+      "expanding library does not change main height or canvas center; nested editor Escape leaves drawer open; picking list closes it and focuses playback without opening keyboard",
+      "native touch gestures navigate left/right by index, retain duplicate characters, do not wrap at edge; small touch drags do not switch",
+      "native vertical touch scrolling completed without switching",
+      "mobile drawer is full-height, internally scrollable and closes from backdrop",
+      "swipe during animation cancels old playback and loads next target without autoplay",
+      "handwriting gestures never switch characters; opening drawer pauses practice and closing never auto-resumes",
+      "deleting last list keeps keyboard focus on enabled import action"
+    ],
+    "exceptions": []
+  },
+  "focusTouch": {
+    "browser": "Chrome/156.0.8078.81",
+    "checks": [
+      "unsupported native fullscreen keeps focus layout, centered grid and visible exit",
+      "same-width resize during a real touch gesture no longer clears character navigation",
+      "focus layout navigates both directions through Touch Events even if touch Pointer Events cancel",
+      "short touch drag never switches or double-switches",
+      "exit restores demonstration without starting handwriting or autoplay",
+      "native touch handwriting still completes two strokes without triggering character navigation"
+    ],
+    "scope": "Chrome touch injection; fullscreen capability and resize/pointercancel events deliberately simulated, not Safari device acceptance",
+    "exceptions": []
+  },
+  "fullPracticeRerun": {
+    "status": "blocked",
+    "output": "{\n  visibility: 'hidden',\n  progress: '0 / 2 笔',\n  feedback: '提示未完成，可继续练习',\n  hint: '继续练习',\n  layer: '<svg preserveAspectRatio=\"xMidYMid meet\" aria-hidden=\"true\" viewBox=\"0 0 438 438\" width=\"438\" height=\"438\" style=\"pointer-events: none;\"><defs><clipPa'\n} []\nfile:///Users/iver/Developer/Garage/Bishun/test/helpers/cdp.mjs:66\n                if (Date.now() > deadline) throw new Error(`Condition timeout: ${expression}`);\n                                                 ^\n\nError: Condition timeout: !document.querySelector('#practicePanel').hidden && !document.querySelector('#practiceHintBtn').disabled && document.querySelector('#practiceHintBtn').textContent === '提示下一笔'\n    at wait (file:///Users/iver/Developer/Garage/Bishun/test/helpers/cdp.mjs:66:50)\n    at async file:///Users/iver/Developer/Garage/Bishun/test/browser-practice.mjs:68:5\n\nNode.js v25.5.0\n",
+    "notes": "Full practice run stopped at hint with visibility=hidden and paused UI. Separate short native-touch handwriting completed both strokes successfully; do not claim full practice rerun passed."
+  }
+}

@@ -36,6 +36,7 @@ const practiceAdapter = new HanziPractice(dom.practiceLayer);
 const practice = new PracticeController({ adapter: practiceAdapter, onChange: renderPractice });
 let focusMode = false;
 let ownsFullscreen = false;
+let viewportWidth = window.innerWidth;
 const drawer = createDrawer({ dialog: dom.settings, trigger: dom.menuBtn, closeButton: dom.closeMenuBtn, onOpen: () => { canvasSwipe.reset(); player.pause(); practice.pause(); } });
 const canvasSwipe = bindCanvasSwipe(dom.stage, {
     enabled: () => player.entries.length > 1 && !practice.visible && !dom.settings.open,
@@ -489,7 +490,12 @@ document.addEventListener('keydown', event => {
 });
 document.addEventListener('visibilitychange', () => { if (document.hidden) { canvasSwipe.reset(); player.pause(); practice.pause(); } });
 window.addEventListener('pagehide', () => { canvasSwipe.reset(); player.pause(); practice.pause(); });
-window.addEventListener('resize', () => { canvasSwipe.reset(); updateQueueTabStops(); });
+window.addEventListener('resize', () => {
+    // Mobile Safari changes viewport height when its bars or keyboard move.
+    // Only a width change invalidates the canvas gesture geometry.
+    if (window.innerWidth !== viewportWidth) { canvasSwipe.reset(); viewportWidth = window.innerWidth; }
+    updateQueueTabStops();
+});
 applyPreferences(loadPreferences(historyStorage));
 renderSavedQueries();
 setupSharing({ dom, getSelection: () => ({ character: player.entry, group: player.entries.join('') }) });

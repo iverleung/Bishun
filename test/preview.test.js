@@ -238,3 +238,47 @@ test('child SVG implicit capture loss does not cancel a gesture captured by the 
     send('pointerup', 100, 100);
     assert.deepEqual(moves, [1]);
 });
+
+test('touch swipe uses one Touch Events stream and suppresses native panning only for horizontal intent', () => {
+    const { send, moves } = swipeFixture();
+    let prevented = 0;
+    const touch = (x,y) => ({ identifier:7,clientX:x,clientY:y });
+    const options = { cancelable:true, preventDefault: () => { prevented++; } };
+    send('pointerdown',200,100,{pointerType:'touch'});
+    send('touchstart',0,0,{...options,touches:[touch(200,100)]});
+    send('pointermove',100,100,{pointerType:'touch'});
+    send('touchmove',0,0,{...options,touches:[touch(100,105)]});
+    send('pointercancel',0,0,{pointerType:'touch'});
+    send('lostpointercapture',0,0,{pointerType:'touch'});
+    send('pointerup',100,105,{pointerType:'touch'});
+    send('touchend',0,0,{...options,touches:[],changedTouches:[touch(100,105)]});
+    assert.deepEqual(moves,[1]);
+    assert.equal(prevented,2);
+});
+
+test('vertical touch drag, short drag and cancelled touch preserve native scrolling without navigation', () => {
+    for (const [x,y,cancel] of [[195,200,false],[185,100,false],[100,100,true]]) {
+        const { send,moves } = swipeFixture();
+        let prevented=0;
+        const touch=(a,b)=>({identifier:2,clientX:a,clientY:b});
+        const options={cancelable:true,preventDefault:()=>{prevented++;}};
+        send('touchstart',0,0,{...options,touches:[touch(200,100)]});
+        send('touchmove',0,0,{...options,touches:[touch(x,y)]});
+        if(cancel) send('touchcancel',0,0);
+        send('touchend',0,0,{...options,touches:[],changedTouches:[touch(x,y)]});
+        assert.deepEqual(moves,[]);
+        if(x===195) assert.equal(prevented,0);
+    }
+});
+
+test('multitouch, handwriting mode and changed query invalidate touch navigation', () => {
+    for(const disrupt of [f=>f.change(),f=>f.disable(),f=>f.send('touchstart',0,0,{touches:[{identifier:1},{identifier:2}]})]) {
+        const fixture=swipeFixture();
+        const touch=x=>({identifier:1,clientX:x,clientY:100});
+        fixture.send('touchstart',0,0,{touches:[touch(200)]});
+        fixture.send('touchmove',0,0,{touches:[touch(100)],cancelable:true,preventDefault(){}});
+        disrupt(fixture);
+        fixture.send('touchend',0,0,{touches:[],changedTouches:[touch(100)],cancelable:true,preventDefault(){}});
+        assert.deepEqual(fixture.moves,[]);
+    }
+});

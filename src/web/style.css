@@ -194,7 +194,7 @@ input[type="radio"], input[type="checkbox"] { width: 18px; height: 18px; }
 .drawer-section { border-top: 1px solid var(--border); margin-top: 16px; padding-top: 20px; }
 .drawer-section h3 { font-size: 14px; font-weight: 550; margin: 0 0 12px; }
 .drawer-section > .secondary { display: block; width: 100%; margin-top: 8px; font-size: 13px; }
-.stage { touch-action: pan-y pinch-zoom; }
+.stage { touch-action: pan-y; touch-action: pan-y pinch-zoom; }
 .practice-mode .stage { touch-action: auto; }
 
 .focus-mode .site-header { display: flex; position: fixed; top: 0; right: 0; width: auto; padding: max(12px, env(safe-area-inset-top)) 16px 0; z-index: 11; }
