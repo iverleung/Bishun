@@ -1,66 +1,13 @@
-// Optional real-Chrome regression (Node 22+). Supply an authorized CDP endpoint and production URL.
+// Optional real-Chrome regression (Node 22+), using an explicitly authorized CDP endpoint.
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import { openBrowser } from './helpers/cdp.mjs';
 
 const [cdpUrl, pageUrl, screenshot] = process.argv.slice(2);
 if (!cdpUrl || !pageUrl) throw new Error('Usage: node test/browser-geometry.mjs <CDP HTTP URL> <preview URL> [screenshot.png]');
-if (typeof WebSocket !== 'function') throw new Error('This optional browser test requires Node 22+');
-const version = await (await fetch(new URL('/json/version', cdpUrl), { signal: AbortSignal.timeout(5000) })).json();
-const socket = new WebSocket(version.webSocketDebuggerUrl);
-await new Promise((resolve, reject) => { socket.onopen = resolve; socket.onerror = reject; });
-let id = 0;
-const pending = new Map();
-socket.onmessage = ({ data }) => {
-    const response = JSON.parse(data);
-    const task = pending.get(response.id);
-    if (!task) return;
-    pending.delete(response.id);
-    clearTimeout(task.timer);
-    if (response.error) task.reject(new Error(response.error.message));
-    else task.resolve(response.result);
-};
-function send(method, params = {}, sessionId) {
-    return new Promise((resolve, reject) => {
-        const requestId = ++id;
-        const timer = setTimeout(() => { pending.delete(requestId); reject(new Error(`CDP timeout: ${method}`)); }, 10000);
-        pending.set(requestId, { resolve, reject, timer });
-        socket.send(JSON.stringify({ id: requestId, method, params, ...(sessionId ? { sessionId } : {}) }));
-    });
-}
-
-let browserContextId;
+const browser = await openBrowser(cdpUrl, pageUrl);
+const { command, evaluate, click, wait } = browser;
 try {
-    ({ browserContextId } = await send('Target.createBrowserContext', { disposeOnDetach: true }));
-    const { targetId } = await send('Target.createTarget', { url: 'about:blank', browserContextId });
-    const { sessionId } = await send('Target.attachToTarget', { targetId, flatten: true });
-    await send('Target.activateTarget', { targetId });
-    const command = (method, params) => send(method, params, sessionId);
-    async function evaluate(expression) {
-        const result = await command('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true });
-        if (result.exceptionDetails) throw new Error(result.exceptionDetails.exception?.description || result.exceptionDetails.text);
-        return result.result.value;
-    }
-    async function wait(expression) {
-        const deadline = Date.now() + 8000;
-        while (!await evaluate(expression)) {
-            if (Date.now() > deadline) throw new Error(`Condition timeout: ${expression}`);
-            await new Promise(resolve => setTimeout(resolve, 25));
-        }
-    }
-    async function click(selector) {
-        const point = await evaluate(`(() => {
-            const el = document.querySelector(${JSON.stringify(selector)});
-            if (!el || el.disabled) throw new Error('Unavailable control');
-            el.scrollIntoView({ block: 'center' });
-            const rect = el.getBoundingClientRect();
-            return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 };
-        })()`);
-        await command('Input.dispatchMouseEvent', { type: 'mousePressed', ...point, button: 'left', clickCount: 1 });
-        await command('Input.dispatchMouseEvent', { type: 'mouseReleased', ...point, button: 'left', clickCount: 1 });
-    }
-    await command('Page.enable');
-    await command('Page.navigate', { url: pageUrl });
-    await wait("document.querySelector('#status')?.textContent === '请输入汉字'");
     await click('#query');
     await command('Input.insertText', { text: '木' });
     await click('#searchForm button[type=submit]');
@@ -101,8 +48,5 @@ try {
         await click('#strokeList button:nth-child(2)');
         await wait("document.querySelector('#animationLayer').children.length === 0");
     }
-    console.log(JSON.stringify({ browser: version.Browser, checks: results }, null, 2));
-} finally {
-    try { if (browserContextId) await send('Target.disposeBrowserContext', { browserContextId }); }
-    finally { socket.close(); }
-}
+    console.log(JSON.stringify({ browser: browser.version, checks: results }, null, 2));
+} finally { await browser.close(); }

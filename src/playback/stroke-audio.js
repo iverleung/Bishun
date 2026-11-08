@@ -8,6 +8,12 @@ function cancellable(promise, signal) {
     });
 }
 
+function resourceFailure(error) {
+    if (error instanceof TypeError) return new Error('录音加载失败，请检查网络，可静音继续');
+    if (error instanceof SyntaxError) return new Error('录音清单格式无效，可静音继续');
+    return error;
+}
+
 // One audio context, versioned local recordings, no browser speech synthesis.
 export class StrokeAudio {
     constructor({ fetchImpl = (...args) => globalThis.fetch(...args), createContext = () => new (window.AudioContext || window.webkitAudioContext)(), getAudioSession = () => globalThis.navigator?.audioSession } = {}) {
@@ -56,7 +62,7 @@ export class StrokeAudio {
                     entries.set(item.text, item);
                 }
                 return entries;
-            })).catch(error => { this.catalog = null; throw error; });
+            })).catch(error => { this.catalog = null; throw resourceFailure(error); });
         }
         return this.catalog;
     }
@@ -76,7 +82,7 @@ export class StrokeAudio {
                 const bytes = await response.arrayBuffer();
                 try { return await context.decodeAudioData(bytes); }
                 catch { throw new Error('录音无法播放，已静音继续'); }
-            })).catch(error => { this.buffers.delete(name); throw error; }));
+            })).catch(error => { this.buffers.delete(name); throw resourceFailure(error); }));
         }
         const buffer = await cancellable(this.buffers.get(name), signal);
         if (signal?.aborted) throw new DOMException('已取消', 'AbortError');

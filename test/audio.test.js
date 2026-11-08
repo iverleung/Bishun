@@ -104,3 +104,18 @@ test('invalid catalogs, decoding failures and a suspended context are explicit f
     context.state = 'suspended';
     await assert.rejects(audio.prepare('横'), /声音未启用/);
 });
+
+test('catalog and recording network failures use Chinese messages and can retry', async () => {
+    for (const failure of ['catalog', 'recording']) {
+        const { audio } = setup();
+        await audio.unlock();
+        const original = audio.fetch;
+        audio.fetch = async url => {
+            if (failure === 'catalog' || url.endsWith('.mp3')) throw new TypeError('Failed to fetch');
+            return original(url);
+        };
+        await assert.rejects(audio.prepare('横'), /录音加载失败.*网络/);
+        audio.fetch = original;
+        assert.equal((await audio.prepare('横')).duration, 0.4);
+    }
+});

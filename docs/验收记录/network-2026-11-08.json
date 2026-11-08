@@ -1,0 +1,54 @@
+{
+  "browser": "Chrome/156.0.8078.81",
+  "passed": true,
+  "cacheDisabled": true,
+  "scope": "Already-loaded page; in-memory character and decoded-audio caches, not offline reload support",
+  "checks": [
+    {
+      "case": "cold slow network",
+      "latencyMs": 400,
+      "downloadBytesPerSecond": 50000,
+      "elapsedMs": 2135
+    },
+    {
+      "case": "offline same-page cached character",
+      "newRequests": 0
+    },
+    {
+      "case": "offline uncached character",
+      "message": "网络连接失败，请检查网络后重试"
+    },
+    {
+      "case": "reconnect and retry",
+      "character": "花"
+    },
+    {
+      "case": "very slow cold manifest times out",
+      "latencyMs": 1000,
+      "downloadBytesPerSecond": 10000,
+      "elapsedMs": 3103,
+      "message": "资源加载超时，请重试"
+    },
+    {
+      "case": "timeout then retry",
+      "character": "心"
+    },
+    {
+      "case": "superseded slow query never overwrites new result",
+      "character": "木"
+    },
+    {
+      "case": "audio network failure degrades to silence",
+      "message": "录音加载失败，请检查网络，可静音继续"
+    },
+    {
+      "case": "audio reconnect on next query",
+      "completedStrokes": 4
+    },
+    {
+      "case": "offline same-page character and decoded audio",
+      "newRequests": 0,
+      "completedStrokes": 4
+    }
+  ]
+}

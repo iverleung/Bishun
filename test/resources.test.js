@@ -83,3 +83,12 @@ test('missing names remain null and never become dots', async () => {
     assert.deepEqual(record.strokeNames, [null, null, null, null]);
     assert.equal(record.nameStatus, 'partial');
 });
+
+test('transport and malformed JSON failures have recoverable Chinese messages', async () => {
+    const store = new CharacterStore({ getNames: names, fetchImpl: async () => { throw new TypeError('Failed to fetch'); } });
+    await assert.rejects(store.load('木'), error => error.code === 'NETWORK' && /网络.*重试/.test(error.message));
+    store.fetch = async url => json(url.endsWith('manifest.json') ? manifest : data);
+    assert.equal((await store.load('木')).character, '木');
+    const malformed = new CharacterStore({ getNames: names, fetchImpl: async url => url.endsWith('manifest.json') ? json(manifest) : new Response('invalid', { headers: { 'content-type': 'application/json' } }) });
+    await assert.rejects(malformed.load('木'), error => error.code === 'FORMAT' && /格式无效/.test(error.message));
+});

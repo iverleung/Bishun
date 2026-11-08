@@ -45,6 +45,10 @@ export class CharacterStore {
                     }, this.timeoutMs);
                 })
             ]);
+        } catch (error) {
+            if (error instanceof ResourceError) throw error;
+            if (error instanceof SyntaxError) throw new ResourceError('FORMAT', '字形资源格式无效，请重试');
+            throw new ResourceError('NETWORK', '网络连接失败，请检查网络后重试');
         } finally { clearTimeout(timer); }
     }
 
