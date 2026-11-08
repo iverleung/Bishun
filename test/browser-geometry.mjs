@@ -12,13 +12,15 @@ try {
     await command('Input.insertText', { text: '木' });
     await click('#searchForm button[type=submit]');
     await wait("document.querySelector('#characterCanvas').getAttribute('aria-label') === '木，完整字形'");
-    await click('#settings summary');
+    await click('#menuBtn');
     await click('#speedSlider');
     await command('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Home', code: 'Home' });
     await command('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Home', code: 'Home' });
+    await click('#closeMenuBtn');
     const results = [];
     for (const [width, height] of [[1024, 820], [768, 1024], [320, 820]]) {
         await command('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false });
+        await click('#menuBtn');
         await click('#restartBtn');
         await wait("!!document.querySelector('#animationLayer svg > g[transform]')");
         const geometry = await evaluate(`(() => {
@@ -44,8 +46,8 @@ try {
             const image = await command('Page.captureScreenshot', { format: 'png' });
             await fs.writeFile(screenshot, Buffer.from(image.data, 'base64'));
         }
-        // Positioning is an unconditional stop; toggling play could restart a just-finished stroke.
-        await click('#strokeList button:nth-child(2)');
+        // Stepping is an unconditional stop; toggling play could restart a just-finished stroke.
+        await click('#nextStrokeBtn');
         await wait("document.querySelector('#animationLayer').children.length === 0");
     }
     console.log(JSON.stringify({ browser: browser.version, checks: results }, null, 2));

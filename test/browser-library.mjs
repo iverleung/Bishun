@@ -13,6 +13,7 @@ try {
     await evaluate(`localStorage.setItem('bishun-saved-queries-v1', JSON.stringify(['木木水','心']))`);
     await command('Page.reload');
     await wait("document.querySelector('#savedCount')?.textContent === '2'");
+    await click('#menuBtn');
     await click('#savedQueries summary');
     await click('#manageSavedBtn');
     await click('.saved-query:first-child [data-action="edit"]');
@@ -32,6 +33,7 @@ try {
     await click('.saved-query:first-child [aria-label^="下移"]');
     await command('Page.reload');
     await wait("document.querySelector('#savedCount')?.textContent === '2'");
+    await click('#menuBtn');
     await click('#savedQueries summary');
     assert.deepEqual(await evaluate("Array.from(document.querySelectorAll('.saved-query > button')).map(el=>el.textContent)"), ['心', '今天的作业木水木']);
     checks.push('names, query editing and ordering survive reload');

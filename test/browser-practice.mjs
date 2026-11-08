@@ -15,7 +15,7 @@ try {
         await wait("!document.querySelector('#playBtn').disabled");
     }
     async function enter() {
-        await click('#settings summary');
+        await click('#menuBtn');
         await click('#practiceBtn');
         await wait(active);
     }

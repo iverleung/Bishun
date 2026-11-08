@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { QueryHistory } from '../src/web/history.js';
 import { defaultPreferences, loadPreferences, savePreferences } from '../src/web/preferences.js';
 import { SavedQueries } from '../src/web/saved-queries.js';
+import { bindCanvasSwipe } from '../src/web/canvas-swipe.js';
 import { characterReadings } from '../src/web/character-info.js';
 import { worksheetLayout, paginateCharacters } from '../src/web/print-layout.js';
 import { createShareUrl, readSharedQuery } from '../src/web/share.js';
@@ -182,4 +183,58 @@ test('character information keeps polyphonic candidates, rejects missing diction
     assert.deepEqual(characterReadings('木', { spell: () => ['<script>'] }), []);
     assert.deepEqual(characterReadings('木', { spell() { throw new Error(); } }), []);
     assert.deepEqual(characterReadings('木', { spell: () => ['(mù|)'] }), []);
+});
+
+
+function swipeFixture() {
+    const listeners = new Map();
+    const moves = [];
+    let enabled = true;
+    let key = 'query:0';
+    const element = { closest: () => null, addEventListener: (name, fn) => listeners.set(name, fn), setPointerCapture() {}, getBoundingClientRect: () => ({ width: 300 }) };
+    bindCanvasSwipe(element, { enabled: () => enabled, context: () => key, select: offset => moves.push(offset) });
+    const send = (type, x, y, extra = {}) => listeners.get(type)({ pointerId: 1, isPrimary: true, button: 0, clientX: x, clientY: y, target: element, ...extra });
+    return { moves, send, disable: () => { enabled = false; }, change: () => { key = 'query:1'; } };
+}
+
+test('canvas swipe distinguishes horizontal navigation from vertical scroll, short drags and cancellation', () => {
+    const { moves, send } = swipeFixture();
+    for (const [endX, endY, cancel] of [[80, 110, false], [220, 95, false], [140, 100, false], [190, 230, false], [50, 100, true]]) {
+        send('pointerdown', 150, 100);
+        send('pointermove', endX, endY);
+        if (cancel) send('pointercancel', endX, endY);
+        send('pointerup', endX, endY);
+    }
+    assert.deepEqual(moves, [1, -1]);
+});
+
+test('canvas swipe ignores changed queries, disabled handwriting mode, multitouch and interactive controls', () => {
+    const cases = [
+        fixture => fixture.change(), fixture => fixture.disable(),
+        fixture => fixture.send('pointerdown', 100, 100, { pointerId: 2, isPrimary: false }),
+        fixture => fixture.send('lostpointercapture', 100, 100)
+    ];
+    for (const disrupt of cases) {
+        const fixture = swipeFixture();
+        fixture.send('pointerdown', 200, 100);
+        fixture.send('pointermove', 100, 100);
+        disrupt(fixture);
+        fixture.send('pointerup', 100, 100);
+        assert.deepEqual(fixture.moves, []);
+    }
+    const fixture = swipeFixture();
+    fixture.send('pointerdown', 200, 100, { target: { closest: () => ({}) } });
+    fixture.send('pointermove', 100, 100);
+    fixture.send('pointerup', 100, 100);
+    assert.deepEqual(fixture.moves, []);
+});
+
+
+test('child SVG implicit capture loss does not cancel a gesture captured by the stage', () => {
+    const { send, moves } = swipeFixture();
+    send('pointerdown', 200, 100);
+    send('pointermove', 100, 100);
+    send('lostpointercapture', 100, 100, { target: { closest: () => null } });
+    send('pointerup', 100, 100);
+    assert.deepEqual(moves, [1]);
 });

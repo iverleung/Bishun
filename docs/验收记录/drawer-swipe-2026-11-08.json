@@ -1,0 +1,245 @@
+{
+  "date": "2026-11-08",
+  "scope": "Headless Chrome 156.0.8078.80, isolated contexts, local production build; not iPhone/iPad device acceptance",
+  "nodeRegression": {
+    "passed": 58,
+    "characters": 48,
+    "strokes": 233
+  },
+  "nativeTouchScroll": {
+    "status": "blocked",
+    "reason": "CDP touch/scroll acknowledgement timed out after pointercancel and page displacement; page became hidden. No visibility override. Default test uses mouse vertical drag and wheel scrolling; real-device vertical scrolling remains unverified."
+  },
+  "nativeShortTouchDrag": {
+    "status": "unverified",
+    "reason": "Tap-sized CDP touch streams stalled; threshold checked with Node and mouse Pointer Events. Long horizontal native touch gestures passed."
+  },
+  "browsers": [
+    {
+      "script": "browser-library",
+      "exitCode": 0,
+      "result": {
+        "browser": "Chrome/156.0.8078.80",
+        "checks": [
+          "legacy migration and edit cancellation do not write",
+          "names, query editing and ordering survive reload",
+          "duplicate edits stay in dialog; Escape cancels",
+          "file import previews conflicts; cancel preserves data; explicit confirm adds only valid new items",
+          "actual JSON download includes names and current order",
+          "320px management and dialog fit; opening a named list queries without autoplay"
+        ],
+        "exceptions": []
+      }
+    },
+    {
+      "script": "browser-share",
+      "exitCode": 0,
+      "result": {
+        "browser": "Chrome/156.0.8078.80",
+        "checks": [
+          "current character or immutable query snapshot, clean content-only link",
+          "unavailable clipboard falls back to selected link; closing restores focus",
+          "shared link and refresh restore duplicates in order without autoplay or saving",
+          "manual query clears stale shared URL; invalid links do not silently filter",
+          "cancelled system sharing is quiet (stub); 320px dialog fits"
+        ],
+        "exceptions": []
+      }
+    },
+    {
+      "script": "browser-print",
+      "exitCode": 0,
+      "result": {
+        "browser": "Chrome/156.0.8078.80",
+        "checks": [
+          {
+            "case": "print entry carries current group and character; return restores query without autoplay"
+          },
+          {
+            "case": "20-character large-grid 3-row worksheet with license appendix, print controls hidden",
+            "pages": 8
+          },
+          {
+            "case": "tian grid toggle and 320px controls fit; paper preview scrolls locally"
+          },
+          {
+            "case": "current-character printing can be selected without changing original query"
+          },
+          {
+            "case": "missing glyph blocks printing until explicitly removed; duplicates retained"
+          },
+          {
+            "case": "missing license blocks printing and can retry after recovery"
+          }
+        ],
+        "pdf": "/private/tmp/bishun-worksheet.pdf",
+        "exceptions": []
+      }
+    },
+    {
+      "script": "browser-info",
+      "exitCode": 0,
+      "result": {
+        "browser": "Chrome/156.0.8078.80",
+        "checks": [
+          "pinyin and geometry stroke count appear centered above canvas without opening settings",
+          "polyphonic candidates retained; unavailable traditional reading stays unknown while actual stroke count works",
+          "new query clears old information during loading; stale query cannot overwrite; 320px fits"
+        ],
+        "exceptions": []
+      }
+    },
+    {
+      "script": "browser-practice",
+      "exitCode": 0,
+      "result": {
+        "browser": "Chrome/156.0.8078.80",
+        "checks": [
+          "real mouse strokes reject wrong order and backwards input; both correct strokes complete without scoring",
+          "independent mode hides outline; hints never count; restarting during hint recovers",
+          "actual background tab pauses; accepted prefix survives; explicit resume and pen events finish",
+          "320px real touch events match both strokes without dragging page; scrolling is not globally disabled",
+          "canvas resize pauses and explicit resume remeasures input coordinates correctly",
+          "restarts reuse one writer without accumulating listeners; switching during hint cancels; exit restores full demonstration",
+          "touch paths for 木 and 水 including hooks complete; entering practice stops an active animation; cancelled pointer pauses without accepting partial stroke",
+          "clear and new query cancel practice; all resources same-origin; no page exceptions"
+        ],
+        "exceptions": []
+      }
+    },
+    {
+      "script": "browser-geometry",
+      "exitCode": 0,
+      "result": {
+        "browser": "Chrome/156.0.8078.80",
+        "checks": [
+          {
+            "viewport": [
+              1024,
+              820
+            ],
+            "viewBox": "0 0 1024 1024",
+            "difference": 0,
+            "missingViewBoxDifference": 585.3515625,
+            "label": "木，正在书写第 1 笔"
+          },
+          {
+            "viewport": [
+              768,
+              1024
+            ],
+            "viewBox": "0 0 1024 1024",
+            "difference": 0,
+            "missingViewBoxDifference": 585.3515625,
+            "label": "木，正在书写第 1 笔"
+          },
+          {
+            "viewport": [
+              320,
+              820
+            ],
+            "viewBox": "0 0 1024 1024",
+            "difference": 0,
+            "missingViewBoxDifference": 746.19140625,
+            "label": "木，正在书写第 1 笔"
+          }
+        ]
+      }
+    },
+    {
+      "script": "browser-drawer-swipe",
+      "exitCode": 0,
+      "result": {
+        "browser": "Chrome/156.0.8078.80",
+        "checks": [
+          "right-top menu works before query, focus stays modal, Escape restores trigger; old link and indexed stroke controls removed",
+          "expanding library does not change main height or canvas center; nested editor Escape leaves drawer open; picking list closes it and focuses playback without opening keyboard",
+          "native touch gestures navigate left/right by index, retain duplicate characters, do not wrap at edge; small mouse drags do not switch",
+          "vertical mouse drag ignored, wheel scroll works, pan-y preserved; native touch-scroll CDP check remains blocked",
+          "mobile drawer is full-height, internally scrollable and closes from backdrop",
+          "swipe during animation cancels old playback and loads next target without autoplay",
+          "handwriting gestures never switch characters; opening drawer pauses practice and closing never auto-resumes",
+          "deleting last list keeps keyboard focus on enabled import action"
+        ],
+        "exceptions": []
+      }
+    },
+    {
+      "script": "browser-entry",
+      "exitCode": 0,
+      "result": {
+        "browser": "Chrome/156.0.8078.80",
+        "passed": true,
+        "checks": [
+          {
+            "case": "default home uses new application",
+            "path": "/"
+          },
+          {
+            "case": "root recording and animation playback",
+            "completedStrokes": 4,
+            "geometryDifference": 0
+          },
+          {
+            "case": "main previous and next stroke controls remain available",
+            "position": "3 / 4"
+          },
+          {
+            "case": "preview compatibility redirects, preserves URL and local state",
+            "path": "/?candidate=1#query",
+            "savedLists": 2,
+            "autoplay": false
+          },
+          {
+            "case": "saved query opens after entry migration",
+            "position": "1 / 3"
+          },
+          {
+            "case": "root responsive layout",
+            "viewports": [
+              {
+                "viewport": [
+                  1280,
+                  900
+                ],
+                "width": 1265,
+                "scrollWidth": 1265,
+                "canvasCenter": 632.5
+              },
+              {
+                "viewport": [
+                  768,
+                  1024
+                ],
+                "width": 768,
+                "scrollWidth": 768,
+                "canvasCenter": 384
+              },
+              {
+                "viewport": [
+                  320,
+                  820
+                ],
+                "width": 320,
+                "scrollWidth": 320,
+                "canvasCenter": 160
+              }
+            ],
+            "scope": "Desktop viewport changes; not a new mobile-device acceptance"
+          },
+          {
+            "case": "new application resources same origin"
+          },
+          {
+            "case": "legacy entry loads original UI and module",
+            "path": "/legacy/index.html",
+            "analyticsBlockedForTest": true
+          },
+          {
+            "case": "legacy return link restores new home with saved lists"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -12,7 +12,7 @@ try {
     await wait("!document.querySelector('#playBtn').disabled");
     await click('#nextCharBtn');
     await wait("document.querySelector('#wordPosition').textContent === '2 / 3' && !document.querySelector('#playBtn').disabled");
-    await click('#settings summary');
+    await click('#menuBtn');
     await click('#printQueryBtn');
     await wait("document.body.dataset.ready === 'true'");
     assert.match(await evaluate("document.querySelector('#printCurrentOption').textContent"), /水/);
@@ -61,7 +61,7 @@ try {
     checks.push({ case: 'missing glyph blocks printing until explicitly removed; duplicates retained' });
     await command('Network.setBlockedURLs', { urls: ['*ARPHICPL.TXT*'] });
     await command('Page.reload');
-    await wait("document.querySelector('#printStatus').textContent.includes('许可文件加载失败')");
+    await wait("document.querySelector('#printStatus')?.textContent.includes('许可文件加载失败')");
     assert.equal(await evaluate("document.querySelector('#printBtn').disabled"), true);
     await command('Network.setBlockedURLs', { urls: [] });
     await click('#retryPrintBtn');

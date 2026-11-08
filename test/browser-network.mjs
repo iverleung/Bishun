@@ -60,8 +60,9 @@ try {
     checks.push({ case: 'superseded slow query never overwrites new result', character: '木' });
 
     await command('Network.setBlockedURLs', { urls: ['*/audio/strokes/*'] });
-    await click('#settings summary');
+    await click('#menuBtn');
     await click('[name="mode"][value="explain"]');
+    await click('#closeMenuBtn');
     await click('#playBtn');
     await wait("document.querySelector('#playBtn').textContent === '重播'", 20000);
     const audioMessage = await evaluate("document.querySelector('#status').textContent");
@@ -90,7 +91,7 @@ try {
     assert.deepEqual(browser.exceptions, []);
     assert.ok(browser.requests.filter(url => /^https?:/.test(url)).every(url => new URL(url).origin === new URL(pageUrl).origin));
     if (screenshot) {
-        await click('#settings summary');
+        await click('#menuBtn');
         await evaluate("document.querySelector('#writingGrid').scrollIntoView({block:'center'})");
         await browser.screenshot(screenshot);
     }

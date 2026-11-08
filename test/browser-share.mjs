@@ -9,7 +9,7 @@ try {
     await fill('#query', '木水木');
     await click('#searchForm [type="submit"]');
     await wait("!document.querySelector('#playBtn').disabled");
-    await click('#settings summary');
+    await click('#menuBtn');
     await click('#shareBtn');
     assert.equal(await evaluate("document.querySelector('#shareContent').textContent"), '链接包含：木');
     await click('#shareGroup');
@@ -50,7 +50,7 @@ try {
     await command('Page.navigate', { url: link });
     await wait("document.querySelector('#query').value === '木水木' && !document.querySelector('#playBtn').disabled");
     await evaluate("Object.defineProperty(navigator, 'share', { configurable: true, value: async () => { throw new DOMException('Cancelled', 'AbortError'); } })");
-    await click('#settings summary');
+    await click('#menuBtn');
     await click('#shareBtn');
     await click('#systemShareBtn');
     await wait("!document.querySelector('#systemShareBtn').disabled");

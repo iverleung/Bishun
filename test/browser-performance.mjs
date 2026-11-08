@@ -68,11 +68,11 @@ try {
         const next = index % 2 === 0;
         samples.cachedSwitch.push(await measure(next ? '#nextCharBtn' : '#previousCharBtn', label(next ? '水' : '木')));
     }
-    await click('#settings summary');
+    await click('#menuBtn');
     await click('#speedSlider');
     await command('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Home', code: 'Home' });
     await command('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Home', code: 'Home' });
-    await click('#settings summary');
+    await click('#closeMenuBtn');
     for (let index = 0; index < 30; index++) {
         samples.startAnimation.push(await measure('#playBtn', "document.querySelector('#playBtn').textContent === '暂停' && !!document.querySelector('#animationLayer svg > g[transform]')"));
         samples.pauseAnimation.push(await measure('#playBtn', "document.querySelector('#playBtn').textContent === '继续' && document.querySelector('#animationLayer').children.length === 0"));

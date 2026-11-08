@@ -8,13 +8,14 @@ import { SavedQueries } from './saved-queries.js';
 import { createSavedLibrary } from './saved-library.js';
 import { setupSharing, readSharedQuery, clearSharedQuery } from './share.js';
 import { characterReadings } from './character-info.js';
+import { createDrawer } from './drawer.js';
+import { bindCanvasSwipe } from './canvas-swipe.js';
 import { PracticeController } from '../practice/controller.js';
 import { HanziPractice } from '../practice/hanzi-practice.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
 const svgNamespace = 'http://www.w3.org/2000/svg';
 let queueKey = '';
-let strokeListKey = '';
 let canvasKey = '';
 let informationKey = '';
 let practiceOwner = '';
@@ -35,7 +36,16 @@ const practiceAdapter = new HanziPractice(dom.practiceLayer);
 const practice = new PracticeController({ adapter: practiceAdapter, onChange: renderPractice });
 let focusMode = false;
 let ownsFullscreen = false;
-let focusSettingsOpen = false;
+const drawer = createDrawer({ dialog: dom.settings, trigger: dom.menuBtn, closeButton: dom.closeMenuBtn, onOpen: () => { canvasSwipe.reset(); player.pause(); practice.pause(); } });
+const canvasSwipe = bindCanvasSwipe(dom.stage, {
+    enabled: () => player.entries.length > 1 && !practice.visible && !dom.settings.open,
+    context: () => `${player.revision}:${player.index}`,
+    select: offset => {
+        const next = player.index + offset;
+        if (next >= 0 && next < player.entries.length) void player.select(next);
+    }
+});
+
 
 function applyPreferences(preferences) {
     player.pause();
@@ -59,13 +69,12 @@ function rememberPreferences() {
 
 function setFocusMode(enabled) {
     if (focusMode === enabled) return;
-    if (enabled) { focusSettingsOpen = dom.settings.open; dom.settings.open = false; }
-    else dom.settings.open = focusSettingsOpen;
+    if (enabled) drawer.close({ restore: false });
     focusMode = enabled;
     document.body.classList.toggle('focus-mode', enabled);
     dom.exitFocusBtn.hidden = !enabled;
     if (enabled) dom.exitFocusBtn.focus({ preventScroll: true });
-    else if (player.entries.length) dom.fullscreenBtn.focus({ preventScroll: true });
+    else dom.menuBtn.focus({ preventScroll: true });
     updateQueueTabStops();
 }
 
@@ -144,7 +153,7 @@ function updateQueue(state) {
     const sourceRect = rect && rect.right > 0 && rect.left < document.documentElement.clientWidth ? rect : null;
     const queueHadFocus = queues.some(queue => queue.contains(document.activeElement));
     queueKey = key;
-    if (selected) { pendingArrival = { sourceRect }; arrivalAnimation?.cancel(); }
+    if (selected) { pendingArrival = { sourceRect, direction: incoming?.parentElement === dom.previousCharacterList ? -1 : 1 }; arrivalAnimation?.cancel(); }
     renderedSelection = selection;
     queueAnimations.forEach(animation => animation.cancel());
     queueAnimations = [];
@@ -156,9 +165,9 @@ function updateQueue(state) {
         typeof dom.characterInk.animate === 'function' && state.entries.length) {
         const target = dom.writingGrid.getBoundingClientRect();
         if (pendingArrival && target.width && state.data && state.status !== 'loading') {
-            const sourceRect = pendingArrival.sourceRect;
+            const { sourceRect, direction } = pendingArrival;
             pendingArrival = null;
-            const dx = sourceRect ? (sourceRect.x + sourceRect.width / 2 - target.x - target.width / 2) * 1024 / target.width : 70;
+            const dx = sourceRect ? (sourceRect.x + sourceRect.width / 2 - target.x - target.width / 2) * 1024 / target.width : 70 * direction;
             const dy = sourceRect ? (sourceRect.y + sourceRect.height / 2 - target.y - target.height / 2) * 1024 / target.height : 0;
             const scale = sourceRect ? sourceRect.width / target.width : 0.96;
             arrivalAnimation = dom.characterInk.animate([
@@ -215,8 +224,12 @@ const library = createSavedLibrary({
     openQuery(value) {
         dom.query.value = value;
         query(value);
-        dom.savedQueries.open = false;
-        dom.query.focus({ preventScroll: true });
+        drawer.close({ restore: false });
+        const revision = player.revision;
+        void player.ready.then(() => {
+            if (player.revision !== revision) return;
+            (dom.playBtn.disabled ? dom.menuBtn : dom.playBtn).focus({ preventScroll: true });
+        });
     },
     feedback: savedFeedback,
     changed() { savedFeedback('', false, dom.saveActionFeedback); player.notify(); }
@@ -231,7 +244,7 @@ function saveQuery(value) {
         savedFeedback(result.persisted ? '已收藏' : '已收藏，仅本次打开有效', !result.persisted, dom.saveActionFeedback);
         player.notify();
         // The save button is now disabled; retain a visible keyboard target.
-        dom.settings.querySelector('summary').focus({ preventScroll: true });
+        dom.closeMenuBtn.focus({ preventScroll: true });
     } else if (result.status === 'full') savedFeedback('生字本已满（30 条），请先删除一条', true, dom.saveActionFeedback);
 }
 
@@ -239,8 +252,9 @@ function renderPractice() {
     const visible = practice.visible;
     const changed = document.body.classList.contains('practice-mode') !== visible;
     document.body.classList.toggle('practice-mode', visible);
-    if (changed) updateQueueTabStops();
+    if (changed) { canvasSwipe.reset(); updateQueueTabStops(); }
     dom.practiceLayer.hidden = !visible;
+    dom.practiceBtn.disabled = visible || !player.record;
     dom.demonstrationControls.hidden = visible;
     dom.practicePanel.hidden = !visible;
     dom.practiceLayer.classList.toggle('accepts-input', ['active', 'hint'].includes(practice.status));
@@ -293,19 +307,6 @@ function render(state) {
         dom.stageMessageTitle.textContent = title;
         dom.stageMessageText.textContent = description;
     }
-    const listStrokeKey = available ? state.entry : '';
-    if (listStrokeKey !== strokeListKey) {
-        strokeListKey = listStrokeKey;
-        dom.strokeList.replaceChildren(...(available ? names.map((name, index) => {
-            const el = button('', () => state.seek(index + 1));
-            const number = document.createElement('span');
-            number.textContent = String(index + 1).padStart(2, '0');
-            el.append(number, document.createTextNode(name || '暂缺'));
-            el.setAttribute('aria-label', `第 ${index + 1} 笔，${name || '名称暂缺'}`);
-            return el;
-        }) : []));
-    }
-    Array.from(dom.strokeList.children).forEach((el, index) => el.setAttribute('aria-pressed', String(!state.showFull && index === focused)));
     const paintKey = [state.index, state.entry, available, state.showFull, state.completed, state.active].join(':');
     if (paintKey !== canvasKey) {
         canvasKey = paintKey;
@@ -324,8 +325,11 @@ function render(state) {
     dom.playBtn.textContent = state.status === 'loading' && state.isRunning ? '暂停' : labels[state.status] || '播放';
     dom.playBtn.disabled = !available && !state.isRunning && !(state.status === 'paused' && state.resumeIndex !== null);
     dom.restartBtn.disabled = !available;
-    dom.practiceBtn.disabled = !available;
-    dom.replayStrokeBtn.disabled = !available || state.showFull || focused < 0;
+    dom.practiceBtn.disabled = !available || practice.visible;
+    dom.lessonActions.hidden = !state.entries.length;
+    dom.fullscreenBtn.disabled = !available;
+    dom.shareBtn.disabled = !state.entries.length;
+    dom.printQueryBtn.disabled = !state.entries.length;
     dom.previousStrokeBtn.disabled = !available || state.showFull || state.completed === 0;
     dom.nextStrokeBtn.disabled = !available || (!state.showFull && state.completed >= count);
     dom.previousCharBtn.disabled = state.entries.length === 0 || state.index === 0;
@@ -363,7 +367,7 @@ function query(value, fromLink = false) {
     if (result.truncated) notes.push('仅查询前 20 个汉字。');
     dom.queryNotice.textContent = notes.join(' ');
     dom.queryNotice.hidden = notes.length === 0;
-    if (!player.entries.length) dom.settings.open = false;
+    if (!player.entries.length) drawer.close({ restore: false });
     if (player.entries.length) history.remember(player.entries.join(''));
     renderHistory();
 }
@@ -402,13 +406,12 @@ dom.playBtn.addEventListener('click', () => {
     if (player.isRunning) player.pause();
     else player.play();
 });
-dom.restartBtn.addEventListener('click', () => { if (player.speechEnabled) unlockAudio(); void player.play({ restart: true }); });
-dom.replayStrokeBtn.addEventListener('click', () => { if (player.speechEnabled) unlockAudio(); void player.play({ oneStroke: true }); });
+dom.restartBtn.addEventListener('click', () => { drawer.close({ restore: false }); if (player.speechEnabled) unlockAudio(); void player.play({ restart: true }); dom.playBtn.focus({ preventScroll: true }); });
 dom.previousStrokeBtn.addEventListener('click', () => player.seek(player.completed - 1));
 dom.nextStrokeBtn.addEventListener('click', () => player.seek(player.showFull ? 1 : player.completed + 1));
 dom.previousCharBtn.addEventListener('click', () => player.select(player.index - 1));
 dom.nextCharBtn.addEventListener('click', () => player.select(player.index + 1));
-dom.restartGroupBtn.addEventListener('click', () => { if (player.speechEnabled) unlockAudio(); void player.restartGroup(); });
+dom.restartGroupBtn.addEventListener('click', () => { drawer.close({ restore: false }); if (player.speechEnabled) unlockAudio(); void player.restartGroup(); dom.playBtn.focus({ preventScroll: true }); });
 dom.groupMode.addEventListener('change', () => { player.group = dom.groupMode.checked; });
 document.querySelectorAll('[name="mode"]').forEach(el => el.addEventListener('change', () => {
     player.setMode(el.value);
@@ -427,6 +430,7 @@ dom.saveQueryBtn.addEventListener('click', () => saveQuery(player.entries.join('
 dom.printQueryBtn.addEventListener('click', () => {
     if (!player.entries.length) return;
     player.pause();
+    drawer.close({ restore: false });
     const url = new URL('/print/index.html', location.href);
     url.hash = new URLSearchParams({ q: player.entries.join(''), c: String(player.index) }).toString();
     location.assign(url.href);
@@ -434,7 +438,7 @@ dom.printQueryBtn.addEventListener('click', () => {
 dom.practiceBtn.addEventListener('click', () => {
     if (!player.record || dom.practiceBtn.disabled) return;
     player.pause();
-    dom.settings.open = false;
+    drawer.close({ restore: false });
     practiceOwner = `${player.revision}:${player.index}`;
     void practice.start(player.record);
     dom.writingGrid.scrollIntoView({ block: 'center' });
@@ -459,7 +463,7 @@ const practiceResize = new ResizeObserver(() => {
     if (['active', 'hint'].includes(practice.status) && Math.abs(dom.practiceLayer.getBoundingClientRect().width - practiceAdapter.width) > 0.5) practice.pause();
 });
 practiceResize.observe(dom.practiceLayer);
-dom.settings.addEventListener('change', rememberPreferences);
+dom.settings.addEventListener('change', event => { if (event.target.closest('.drawer-section')) rememberPreferences(); });
 dom.resetSettingsBtn.addEventListener('click', () => {
     applyPreferences(defaultPreferences);
     rememberPreferences();
@@ -481,11 +485,11 @@ document.addEventListener('fullscreenchange', () => {
     updateQueueTabStops();
 });
 document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && focusMode) { event.preventDefault(); void exitFocusMode(); }
+    if (event.key === 'Escape' && focusMode && !document.querySelector('dialog[open]')) { event.preventDefault(); void exitFocusMode(); }
 });
-document.addEventListener('visibilitychange', () => { if (document.hidden) { player.pause(); practice.pause(); } });
-window.addEventListener('pagehide', () => { player.pause(); practice.pause(); });
-window.addEventListener('resize', updateQueueTabStops);
+document.addEventListener('visibilitychange', () => { if (document.hidden) { canvasSwipe.reset(); player.pause(); practice.pause(); } });
+window.addEventListener('pagehide', () => { canvasSwipe.reset(); player.pause(); practice.pause(); });
+window.addEventListener('resize', () => { canvasSwipe.reset(); updateQueueTabStops(); });
 applyPreferences(loadPreferences(historyStorage));
 renderSavedQueries();
 setupSharing({ dom, getSelection: () => ({ character: player.entry, group: player.entries.join('') }) });

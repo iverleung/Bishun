@@ -23,7 +23,7 @@ export function createSavedLibrary({ dom, savedQueries, openQuery, feedback, cha
     function restoreRowFocus(index, action = 'edit') {
         const rows = dom.savedList.children;
         const row = rows[Math.min(index, rows.length - 1)];
-        (row?.querySelector(`[data-action="${action}"]`) || dom.manageSavedBtn).focus({ preventScroll: true });
+        (row?.querySelector(`[data-action="${action}"]`) || (dom.manageSavedBtn.disabled ? dom.importSavedBtn : dom.manageSavedBtn)).focus({ preventScroll: true });
     }
 
     function render() {

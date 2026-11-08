@@ -10,13 +10,14 @@ const ready = character => `document.querySelector('#characterCanvas').getAttrib
 const checks = [];
 try {
     assert.equal(await evaluate('location.pathname'), '/');
-    assert.equal(await evaluate("document.querySelector('a.original-link').getAttribute('href')"), '/legacy/index.html');
+    assert.equal(await evaluate("document.querySelector('a.original-link')"), null);
     checks.push({ case: 'default home uses new application', path: '/' });
     await fill('#query', '木水心');
     await click('#searchForm button[type=submit]');
     await wait(ready('木'));
-    await click('#settings summary');
+    await click('#menuBtn');
     await click('[name="mode"][value="explain"]');
+    await click('#closeMenuBtn');
     await browser.activate();
     await wait("document.visibilityState === 'visible'");
     await click('#playBtn');
@@ -30,10 +31,13 @@ try {
     await wait("document.querySelector('#playBtn').textContent === '重播'", 20000);
     assert.equal(await evaluate("document.querySelector('#status').textContent"), '播放完成');
     checks.push({ case: 'root recording and animation playback', completedStrokes: 4, geometryDifference });
-    await click('#strokeList button:nth-child(2)');
-    await click('#replayStrokeBtn');
-    await wait("document.querySelector('#playBtn').textContent === '继续' && document.querySelector('#strokePosition').textContent === '2 / 4 笔'");
-    checks.push({ case: 'root single-stroke replay', position: '2 / 4' });
+    await click('#previousStrokeBtn');
+    await click('#previousStrokeBtn');
+    assert.equal(await evaluate("document.querySelector('#strokePosition').textContent"), '2 / 4 笔');
+    await click('#nextStrokeBtn');
+    assert.equal(await evaluate("document.querySelector('#strokePosition').textContent"), '3 / 4 笔');
+    checks.push({ case: 'main previous and next stroke controls remain available', position: '3 / 4' });
+    await click('#menuBtn');
     await click('#saveCharacterBtn');
     await click('#saveQueryBtn');
     const compatibility = new URL('/preview/index.html?candidate=1#query', root);
@@ -44,6 +48,7 @@ try {
     assert.equal(await evaluate("document.querySelector('#speechToggle').checked"), true);
     assert.equal(await evaluate("document.querySelector('#animationLayer').children.length"), 0);
     checks.push({ case: 'preview compatibility redirects, preserves URL and local state', path: '/?candidate=1#query', savedLists: 2, autoplay: false });
+    await click('#menuBtn');
     await click('#savedQueries summary');
     assert.equal(await evaluate("document.querySelector('#savedList .saved-query:first-child > button').textContent"), '木水心');
     await click('#savedList .saved-query:first-child > button');
@@ -74,7 +79,7 @@ try {
 
     // Keep the legacy analytics code unchanged, but don't contact it during the isolated regression.
     await command('Network.setBlockedURLs', { urls: ['https://www.googletagmanager.com/*', 'https://www.google-analytics.com/*'] });
-    await click('a.original-link');
+    await command('Page.navigate', { url: new URL('/legacy/index.html', root).href });
     await wait("location.pathname === '/legacy/index.html' && !!document.querySelector('#charInput') && document.querySelector('#buildInfo')?.textContent.startsWith('v')");
     assert.equal(await evaluate('document.title'), '给小朋友用的笔顺工具');
     checks.push({ case: 'legacy entry loads original UI and module', path: '/legacy/index.html', analyticsBlockedForTest: true });
