@@ -4,5 +4,6 @@ import { build } from 'vite';
 
 // Retry transient directory cleanup failures; never keep stale build artifacts.
 const outDir = fileURLToPath(new URL('../dist/', import.meta.url));
-rmSync(outDir, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 });
-await build({ build: { outDir, emptyOutDir: false } });
+rmSync(outDir, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 });
+const base = process.env.VITE_BASE || process.argv[2] || '/';
+await build({ base, build: { outDir, emptyOutDir: false } });
