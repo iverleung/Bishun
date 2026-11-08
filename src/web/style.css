@@ -180,6 +180,8 @@ input[type="radio"], input[type="checkbox"] { width: 18px; height: 18px; }
 #practiceProgress { color: var(--muted); font-size: 12px; }
 #practiceFeedback { min-height: 44px; padding: 12px 0; font-size: 13px; }
 .practice-actions { display: flex; gap: 8px; }
+#practiceContinueActions { margin-top: 8px; }
+.practice-actions[hidden] { display: none; }
 .practice-actions button { flex: 1; font-size: 13px; }
 .focus-mode.practice-mode { --canvas-size: max(128px, min(560px, calc(100vw - 48px), calc(100svh - 330px))); }
 
