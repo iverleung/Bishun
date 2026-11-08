@@ -382,6 +382,13 @@ dom.outlineToggle.addEventListener('change', () => dom.writingGrid.classList.tog
 dom.retryBtn.addEventListener('click', () => player.select(player.index));
 dom.saveCharacterBtn.addEventListener('click', () => saveQuery(player.entry));
 dom.saveQueryBtn.addEventListener('click', () => saveQuery(player.entries.join('')));
+dom.printQueryBtn.addEventListener('click', () => {
+    if (!player.entries.length) return;
+    player.pause();
+    const url = new URL('/print/index.html', location.href);
+    url.hash = new URLSearchParams({ q: player.entries.join(''), c: String(player.index) }).toString();
+    location.assign(url.href);
+});
 dom.settings.addEventListener('change', rememberPreferences);
 dom.resetSettingsBtn.addEventListener('click', () => {
     applyPreferences(defaultPreferences);

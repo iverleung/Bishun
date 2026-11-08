@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { QueryHistory } from '../src/web/history.js';
 import { defaultPreferences, loadPreferences, savePreferences } from '../src/web/preferences.js';
 import { SavedQueries } from '../src/web/saved-queries.js';
+import { worksheetLayout, paginateCharacters } from '../src/web/print-layout.js';
 import { createShareUrl, readSharedQuery } from '../src/web/share.js';
 
 test('saved queries preserve order and duplicates within a query, survive reload and stay separate from history', () => {
@@ -154,4 +155,17 @@ test('share links contain only validated query content and preserve Unicode, ord
     }
     assert.equal(readSharedQuery('https://example.com/?candidate=1#query').status, 'none');
     assert.throws(() => createShareUrl('file:///tmp/index.html', '木'));
+});
+
+
+test('worksheet pagination preserves duplicates and keeps each character block on an A4 page', () => {
+    for (const size of [16, 20, 24]) for (const rows of [1, 2, 3]) {
+        const chars = Array.from('木水木心家我线春风花草木水木心家我线春风');
+        const { layout, pages } = paginateCharacters(chars, { size, rows, grid: 'mi' });
+        assert.deepEqual(pages.flat(), chars);
+        assert.ok(layout.columns * size <= 180);
+        for (const page of pages) assert.ok(page.length * size * rows + (page.length - 1) * 8 <= 247);
+    }
+    assert.throws(() => worksheetLayout({ size: 99 }));
+    assert.throws(() => worksheetLayout({ grid: 'wrong' }));
 });

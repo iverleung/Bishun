@@ -1,0 +1,41 @@
+:root { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; color: #293d35; background: #f6f7f3; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none; }
+.print-controls { max-width: 760px; padding: 24px; margin: auto; font-size: 14px; }
+.print-controls a { color: #24715b; }
+h1 { font-size: 24px; }
+#printOptions { display: flex; flex-wrap: wrap; gap: 16px; }
+select, button { font: inherit; min-height: 44px; border: 1px solid #c9d5c4; border-radius: 8px; padding: 8px 12px; background: white; color: inherit; }
+button { cursor: pointer; margin: 8px 8px 8px 0; }
+button:disabled { opacity: .4; cursor: default; }
+#printBtn { color: white; background: #24715b; }
+summary { cursor: pointer; min-height: 44px; padding: 12px 0; }
+.print-controls p, .print-controls li { line-height: 1.8; overflow-wrap: anywhere; }
+.print-controls details p { margin-top: 0; }
+:focus-visible { outline: 3px solid #b88845; outline-offset: 3px; }
+#printPages { overflow-x: auto; padding: 0 16px 24px; }
+.print-page { position: relative; width: 210mm; min-height: 297mm; padding: 15mm; margin: 0 auto 24px; background: white; color: black; box-shadow: 0 2px 12px #293d3518; }
+.print-page h2 { font-size: 12pt; font-weight: 500; margin: 0 0 6mm; height: 6mm; }
+.page-content { display: flex; flex-direction: column; gap: 8mm; }
+.character-practice { display: grid; justify-content: center; break-inside: avoid; }
+.practice-cell { display: block; width: var(--cell-size); height: var(--cell-size); border: .2mm solid #999; }
+.cell-grid { fill: none; stroke: #bbb; stroke-width: 2; stroke-dasharray: 12 10; }
+.model g { fill: #222; }
+.trace g { fill: #b5b5b5; }
+.print-page footer { position: absolute; bottom: 8mm; left: 15mm; right: 15mm; font-size: 7pt; color: #555; text-align: center; }
+.license-page .page-content { display: block; }
+.source-notice { font-size: 8pt; line-height: 1.4; margin: 0 0 5mm; overflow-wrap: anywhere; }
+.license-text { columns: 2; column-gap: 6mm; white-space: pre-wrap; font: 7pt/1.25 sans-serif; overflow-wrap: anywhere; }
+.print-unavailable { display: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@page { size: A4 portrait; margin: 0; }
+@media print {
+    :root { background: white; }
+    .print-controls { display: none; }
+    #printPages { padding: 0; overflow: visible; }
+    .print-page { margin: 0; height: 297mm; min-height: 0; box-shadow: none; break-after: page; break-inside: avoid; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .print-page:last-child { break-after: auto; }
+    body:not([data-ready="true"]) #printPages { display: none; }
+    body:not([data-ready="true"]) .print-unavailable { display: block; padding: 20mm; }
+}

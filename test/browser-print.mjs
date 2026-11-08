@@ -1,0 +1,72 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import { openBrowser } from './helpers/cdp.mjs';
+
+const [cdpUrl = 'http://127.0.0.1:9224', pageUrl = 'http://127.0.0.1:5189/'] = process.argv.slice(2);
+const browser = await openBrowser(cdpUrl, pageUrl);
+const checks = [];
+try {
+    const { evaluate, command, wait, click, fill } = browser;
+    await fill('#query', '木水木');
+    await click('#searchForm [type="submit"]');
+    await wait("!document.querySelector('#playBtn').disabled");
+    await click('#nextCharBtn');
+    await wait("document.querySelector('#wordPosition').textContent === '2 / 3' && !document.querySelector('#playBtn').disabled");
+    await click('#settings summary');
+    await click('#printQueryBtn');
+    await wait("document.body.dataset.ready === 'true'");
+    assert.match(await evaluate("document.querySelector('#printCurrentOption').textContent"), /水/);
+    await click('#backLink');
+    await wait("document.querySelector('#query').value === '木水木' && !document.querySelector('#playBtn').disabled");
+    assert.equal(await evaluate("document.querySelector('#playBtn').textContent"), '播放');
+    checks.push({ case: 'print entry carries current group and character; return restores query without autoplay' });
+    const chars = '木水木心家我线春风花草木水木心家我线春风';
+    const url = new URL('/print/index.html', pageUrl);
+    url.hash = new URLSearchParams({ q: chars }).toString();
+    await command('Page.navigate', { url: url.href });
+    await wait("document.body.dataset.ready === 'true'", 15000);
+    assert.equal(await evaluate("document.querySelectorAll('.character-practice').length"), Array.from(chars).length);
+    assert.equal(await evaluate("document.querySelectorAll('.license-page').length"), 1);
+    await evaluate("document.querySelector('#cellSize').value = '24'; document.querySelector('#rowCount').value = '3'; document.querySelector('#printOptions').dispatchEvent(new Event('change', { bubbles: true }))");
+    const pages = await evaluate("document.querySelectorAll('.print-page').length");
+    await command('Emulation.setEmulatedMedia', { media: 'print' });
+    const overflow = await evaluate(`Array.from(document.querySelectorAll('.print-page')).map(page => ({
+        contentBottom: page.querySelector('.page-content').getBoundingClientRect().bottom,
+        footerTop: page.querySelector('footer').getBoundingClientRect().top
+    })).filter(page => page.contentBottom > page.footerTop)`);
+    assert.deepEqual(overflow, []);
+    await command('Emulation.setEmulatedMedia', { media: 'print' });
+    assert.equal(await evaluate("getComputedStyle(document.querySelector('.print-controls')).display"), 'none');
+    const pdf = await command('Page.printToPDF', { printBackground: true, preferCSSPageSize: true, displayHeaderFooter: false });
+    await fs.writeFile('/private/tmp/bishun-worksheet.pdf', Buffer.from(pdf.data, 'base64'));
+    checks.push({ case: '20-character large-grid 3-row worksheet with license appendix, print controls hidden', pages });
+    await command('Emulation.setEmulatedMedia', { media: 'screen' });
+    await evaluate("document.querySelector('#gridStyle').value = 'tian'; document.querySelector('#printOptions').dispatchEvent(new Event('change', { bubbles: true }))");
+    assert.equal(await evaluate("document.querySelector('.practice-cell').querySelectorAll('.cell-grid').length"), 1);
+    await command('Emulation.setDeviceMetricsOverride', { width: 320, height: 820, deviceScaleFactor: 1, mobile: true });
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true);
+    checks.push({ case: 'tian grid toggle and 320px controls fit; paper preview scrolls locally' });
+    await evaluate("document.querySelector('#printScope').value = 'current'; document.querySelector('#printScope').dispatchEvent(new Event('change', { bubbles: true }))");
+    await wait("document.querySelectorAll('.character-practice').length === 1 && document.body.dataset.ready === 'true'");
+    checks.push({ case: 'current-character printing can be selected without changing original query' });
+    const audit = JSON.parse(await fs.readFile(new URL('../resources/character-audit.json', import.meta.url), 'utf8'));
+    const missing = Array.from(audit.standardMissingCharacters)[0];
+    url.hash = new URLSearchParams({ q: `木${missing}木` }).toString();
+    await command('Page.navigate', { url: url.href });
+    await wait("!document.querySelector('#removePrintErrorsBtn').hidden");
+    assert.equal(await evaluate("document.querySelector('#printBtn').disabled"), true);
+    await click('#removePrintErrorsBtn');
+    assert.equal(await evaluate("document.querySelector('#printBtn').disabled"), false);
+    assert.equal(await evaluate("document.querySelectorAll('.character-practice').length"), 2);
+    checks.push({ case: 'missing glyph blocks printing until explicitly removed; duplicates retained' });
+    await command('Network.setBlockedURLs', { urls: ['*ARPHICPL.TXT*'] });
+    await command('Page.reload');
+    await wait("document.querySelector('#printStatus').textContent.includes('许可文件加载失败')");
+    assert.equal(await evaluate("document.querySelector('#printBtn').disabled"), true);
+    await command('Network.setBlockedURLs', { urls: [] });
+    await click('#retryPrintBtn');
+    await wait("!document.querySelector('#removePrintErrorsBtn').hidden");
+    checks.push({ case: 'missing license blocks printing and can retry after recovery' });
+    assert.deepEqual(browser.exceptions, []);
+    console.log(JSON.stringify({ browser: browser.version, checks, pdf: '/private/tmp/bishun-worksheet.pdf', exceptions: browser.exceptions }, null, 2));
+} catch (error) { console.error(await browser.evaluate("({url:location.href, status:document.querySelector('#printStatus')?.textContent, errors:document.querySelector('#printErrors')?.textContent})"), browser.exceptions); throw error; } finally { await browser.close(); }
