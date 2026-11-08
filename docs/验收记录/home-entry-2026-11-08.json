@@ -1,0 +1,73 @@
+{
+  "browser": "Chrome/156.0.8078.81",
+  "passed": true,
+  "checks": [
+    {
+      "case": "default home uses new application",
+      "path": "/"
+    },
+    {
+      "case": "root recording and animation playback",
+      "completedStrokes": 4,
+      "geometryDifference": 0
+    },
+    {
+      "case": "root single-stroke replay",
+      "position": "2 / 4"
+    },
+    {
+      "case": "preview compatibility redirects, preserves URL and local state",
+      "path": "/?candidate=1#query",
+      "savedLists": 2,
+      "autoplay": false
+    },
+    {
+      "case": "saved query opens after entry migration",
+      "position": "1 / 3"
+    },
+    {
+      "case": "root responsive layout",
+      "viewports": [
+        {
+          "viewport": [
+            1280,
+            900
+          ],
+          "width": 1280,
+          "scrollWidth": 1280,
+          "canvasCenter": 640
+        },
+        {
+          "viewport": [
+            768,
+            1024
+          ],
+          "width": 768,
+          "scrollWidth": 768,
+          "canvasCenter": 384
+        },
+        {
+          "viewport": [
+            320,
+            820
+          ],
+          "width": 320,
+          "scrollWidth": 320,
+          "canvasCenter": 160
+        }
+      ],
+      "scope": "Desktop viewport changes; not a new mobile-device acceptance"
+    },
+    {
+      "case": "new application resources same origin"
+    },
+    {
+      "case": "legacy entry loads original UI and module",
+      "path": "/legacy/index.html",
+      "analyticsBlockedForTest": true
+    },
+    {
+      "case": "legacy return link restores new home with saved lists"
+    }
+  ]
+}

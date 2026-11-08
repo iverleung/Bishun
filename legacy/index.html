@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给小朋友用的笔顺工具</title>
+    <link rel="icon" href="/icon.png" type="image/png">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>你确定会写这个字吗？</h1>
+        </header>
+
+        <div class="controls">
+            <div class="input-section">
+                <input type="text" id="charInput" placeholder="请输入汉字（最多20个）" maxlength="20" autocomplete="off">
+                <button id="playBtn" class="btn btn-primary">播放</button>
+                <button id="clearBtn" class="btn btn-secondary">清空</button>
+            </div>
+            <div class="play-settings" aria-label="播放设置">
+                <div class="speed-control">
+                    <label for="speedSlider">速度</label>
+                    <input type="range" id="speedSlider" min="1" max="5" value="3" step="1">
+                    <span id="speedValue">正常</span>
+                </div>
+                <label class="speech-control" for="speechToggle">
+                    <span>语音</span>
+                    <input type="checkbox" id="speechToggle" checked>
+                    <span class="toggle-track" aria-hidden="true"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="learning-status" role="status" aria-live="polite">
+            <span id="statusMessage">输入汉字后开始学习</span>
+            <span id="progressMessage" class="progress-message"></span>
+        </div>
+
+        <div id="characterGrid" class="character-grid">
+            <div class="placeholder">输入汉字后点击“播放”</div>
+        </div>
+
+        <footer>
+            <p><a href="/">返回新版笔顺工具</a></p>
+            <p>@文明奇迹 <span id="buildInfo" style="font-size: 0.8em; color: #888; margin-left: 10px;"></span></p>
+        </footer>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XY6CV1M8W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-7XY6CV1M8W');
+    </script>
+</body>
+
+</html>

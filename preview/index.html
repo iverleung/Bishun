@@ -3,70 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f6f7f3">
-    <title>笔顺 · 新版试用</title>
-    <link rel="stylesheet" href="/src/web/style.css">
+    <title>笔顺</title>
+    <link rel="icon" href="/icon.png" type="image/png">
+    <script>window.location.replace('/' + window.location.search + window.location.hash);</script>
 </head>
-<body data-phase="search">
-    <header class="site-header"><a class="brand" href="./index.html"><span class="brand-mark" aria-hidden="true">永</span>笔顺</a><a class="original-link" href="/">现有工具 ↗</a></header>
-    <main class="workspace">
-        <button id="exitFocusBtn" class="focus-exit secondary" type="button" hidden>退出专注</button>
-        <h1 class="sr-only">汉字笔顺查询</h1>
-        <section class="search-panel" aria-label="查字">
-            <form id="searchForm">
-                <label class="sr-only" for="query">输入汉字或词语</label>
-                <div class="search-field"><input id="query" name="query" placeholder="输入汉字或词语" aria-describedby="inputHint" autocomplete="off" autofocus><button id="clearBtn" class="clear-button" type="button" aria-label="清空" title="清空" hidden>×</button><button class="primary" type="submit">查询 <span aria-hidden="true">↗</span></button></div>
-                <div id="historyRow" class="query-history" hidden><nav id="historyList" class="history-list" aria-label="查询历史"></nav><button id="clearHistoryBtn" type="button" aria-label="清空查询历史" title="清空查询历史">×</button></div>
-                <div class="input-footnote"><span id="inputHint">最多 20 字</span><button type="button" data-query="木水心">试试「木水心」</button></div>
-            </form>
-            <p id="queryNotice" class="notice" hidden></p>
-            <details id="savedQueries" class="saved-queries" hidden><summary>我的字单 <span id="savedCount"></span></summary><nav id="savedList" aria-label="我的字单"></nav></details>
-            <p id="savedFeedback" class="sr-only" role="status" aria-live="polite"></p>
-        </section>
-
-        <section id="lesson" class="lesson-panel" aria-label="单字笔顺" hidden>
-            <div class="character-lane">
-                <nav id="previousCharacterList" class="character-queue previous-queue" aria-label="之前的字"></nav>
-                <div class="stage" id="stage">
-                    <div class="writing-grid" id="writingGrid">
-                        <svg id="characterCanvas" viewBox="0 0 1024 1024" role="img" aria-label="汉字字形">
-                            <g class="grid-lines" aria-hidden="true"><path d="M512 0V1024M0 512H1024"/><path class="diagonals" d="M0 0L1024 1024M1024 0L0 1024"/></g>
-                            <g id="characterInk" class="character-ink"><g id="outlinePaths" class="outline-paths" transform="translate(0, 900) scale(1,-1)"></g>
-                            <g id="strokePaths" transform="translate(0, 900) scale(1,-1)"></g></g>
-                        </svg>
-                        <div id="animationLayer" class="animation-layer" aria-hidden="true"></div>
-                    </div>
-                    <div class="stage-message" id="stageMessage" hidden><h2 id="stageMessageTitle"></h2><p id="stageMessageText"></p><button id="retryBtn" type="button" class="secondary" hidden>重试</button></div>
-                </div>
-                <nav id="characterList" class="character-queue" aria-label="接下来的字"></nav>
-            </div>
-            <div class="playback-area">
-                <div class="character-position"><button id="previousCharBtn" type="button" aria-label="上一字" title="上一字">‹</button><span id="wordPosition"></span><button id="nextCharBtn" type="button" aria-label="下一字" title="下一字">›</button></div>
-                <div class="stroke-status"><span id="strokePosition"></span><strong id="strokeName"></strong></div>
-                <div class="transport" aria-label="播放控制"><button id="previousStrokeBtn" class="secondary" type="button">上一笔</button><button id="playBtn" class="primary play-button" type="button">播放</button><button id="nextStrokeBtn" class="secondary" type="button">下一笔</button></div>
-                <div class="secondary-actions"><details id="settings" class="settings"><summary>笔画与设置</summary>
-                    <div class="settings-body">
-                        <button id="restartBtn" type="button" class="text-button">重播这个字</button>
-                        <div id="strokeList" class="stroke-list" aria-label="按笔画定位"></div>
-                        <button id="replayStrokeBtn" type="button" class="text-button" disabled>重播本笔</button>
-                        <div class="save-actions"><button id="saveCharacterBtn" type="button" class="text-button">收藏当前字</button><button id="saveQueryBtn" type="button" class="text-button">收藏这组字</button></div>
-                        <p id="saveActionFeedback" class="sr-only" role="status" aria-live="polite"></p>
-                        <fieldset class="mode-options"><legend>播放节奏</legend><label><input type="radio" name="mode" value="quick" checked>快速看</label><label><input type="radio" name="mode" value="explain">听讲解</label><label><input type="radio" name="mode" value="follow">跟着写</label></fieldset>
-                        <label class="toggle-setting" for="groupMode">整组播放<input id="groupMode" type="checkbox"></label>
-                        <label class="toggle-setting" for="speechToggle">语音<input id="speechToggle" type="checkbox"></label>
-                        <label class="speed-setting" for="speedSlider"><span>速度 <output id="speedValue" for="speedSlider">正常</output></span><input id="speedSlider" type="range" min="1" max="5" value="3"></label>
-                        <label class="toggle-setting" for="gridToggle">米字格<input id="gridToggle" type="checkbox" checked></label>
-                        <label class="toggle-setting" for="outlineToggle">字形轮廓<input id="outlineToggle" type="checkbox" checked></label>
-                        <button id="restartGroupBtn" type="button" class="secondary">整组从头播放</button>
-                        <button id="fullscreenBtn" type="button" class="secondary">全屏书写</button>
-                        <button id="resetSettingsBtn" type="button" class="text-button">恢复默认设置</button>
-                    </div>
-                </details></div>
-            </div>
-        </section>
-        <p id="status" class="sr-only" role="status" aria-live="polite"></p>
-    </main>
-    <footer class="site-footer"><span>新版试用 · 本站字库</span></footer>
-    <script type="module" src="/src/web/app.js"></script>
-</body>
+<body><p><a href="/">打开笔顺工具</a></p></body>
 </html>
