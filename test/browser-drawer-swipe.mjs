@@ -4,6 +4,8 @@ import { openBrowser } from './helpers/cdp.mjs';
 const [cdpUrl = 'http://127.0.0.1:9224', pageUrl = 'http://127.0.0.1:5189/'] = process.argv.slice(2);
 const browser = await openBrowser(cdpUrl, pageUrl);
 const checks = [];
+const nativeTouch = process.argv.includes('--native-touch');
+const nativeScroll = nativeTouch || process.argv.includes('--native-scroll');
 try {
     const { command, evaluate, wait, click, fill } = browser;
     const ready = "!document.querySelector('#playBtn').disabled";
@@ -79,22 +81,25 @@ try {
     assert.equal(await evaluate("document.querySelector('#wordPosition').textContent"), '3 / 3');
     await gesture(120);
     await wait(position('2 / 3'));
-    // CDP touchEnd stalls on tap-sized drags in this Chrome environment.
-    // Exercise the shared Pointer Events threshold with a native mouse drag.
-    const shortStart = await evaluate("(() => { const r = document.querySelector('#stage').getBoundingClientRect(); return {x:r.left+r.width/2,y:r.top+r.height/2}; })()");
-    await command('Input.dispatchMouseEvent', {type:'mousePressed',...shortStart,button:'left',buttons:1,clickCount:1});
-    await command('Input.dispatchMouseEvent', {type:'mouseMoved',x:shortStart.x+18,y:shortStart.y,button:'left',buttons:1});
-    await command('Input.dispatchMouseEvent', {type:'mouseReleased',x:shortStart.x+18,y:shortStart.y,button:'left',buttons:0,clickCount:1});
+    if (nativeTouch) await gesture(18);
+    else {
+        // Tap-sized CDP drags stalled in the prior headless environment.
+        // Exercise the shared Pointer Events threshold with a native mouse drag.
+        const shortStart = await evaluate("(() => { const r = document.querySelector('#stage').getBoundingClientRect(); return {x:r.left+r.width/2,y:r.top+r.height/2}; })()");
+        await command('Input.dispatchMouseEvent', {type:'mousePressed',...shortStart,button:'left',buttons:1,clickCount:1});
+        await command('Input.dispatchMouseEvent', {type:'mouseMoved',x:shortStart.x+18,y:shortStart.y,button:'left',buttons:1});
+        await command('Input.dispatchMouseEvent', {type:'mouseReleased',x:shortStart.x+18,y:shortStart.y,button:'left',buttons:0,clickCount:1});
+    }
     assert.equal(await evaluate("document.querySelector('#wordPosition').textContent"), '2 / 3');
-    checks.push('native touch gestures navigate left/right by index, retain duplicate characters, do not wrap at edge; small mouse drags do not switch');
+    checks.push(`native touch gestures navigate left/right by index, retain duplicate characters, do not wrap at edge; small ${nativeTouch ? 'touch' : 'mouse'} drags do not switch`);
 
     await command('Emulation.setDeviceMetricsOverride', { width:390,height:600,deviceScaleFactor:1,mobile:true });
     await evaluate('window.scrollTo(0,0)');
     const y = await evaluate('scrollY');
     const p = await evaluate("(() => { const r = document.querySelector('#stage').getBoundingClientRect(); return {x:r.left+r.width/2,y:Math.min(innerHeight-40,r.top+r.height*.7)} })()");
     await browser.activate();
-    if (process.argv.includes('--native-scroll')) {
-        // Reproduce the current Chrome/CDP native-scroll acknowledgement block.
+    if (nativeScroll) {
+        // Optional native touch scrolling (previously blocked in headless Chrome).
         await command('Input.synthesizeScrollGesture', { x:p.x,y:p.y,yDistance:-120,gestureSourceType:'touch',preventFling:true,speed:600 });
     } else {
         await command('Input.dispatchMouseEvent', {type:'mousePressed',...p,button:'left',buttons:1,clickCount:1});
@@ -105,7 +110,7 @@ try {
     await wait(`scrollY > ${y}`);
     assert.equal(await evaluate("document.querySelector('#wordPosition').textContent"), '2 / 3');
     assert.equal(await evaluate("getComputedStyle(document.querySelector('#stage')).touchAction"), 'pan-y pinch-zoom');
-    checks.push(process.argv.includes('--native-scroll') ? 'native vertical touch scrolling completed without switching' : 'vertical mouse drag ignored, wheel scroll works, pan-y preserved; native touch-scroll CDP check remains blocked');
+    checks.push(nativeScroll ? 'native vertical touch scrolling completed without switching' : 'vertical mouse drag ignored, wheel scroll works, pan-y preserved; native touch scrolling not requested in this run');
 
     await click('#menuBtn');
     assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true);

@@ -77,7 +77,7 @@ node --check src/engine/speech.js
 node --check src/engine/recognition/v3.js
 ```
 
-另提供需要 Node 22+ 和已授权 CDP 接口的实际浏览器坐标回归：`node test/browser-geometry.mjs <CDP地址> <新版页面地址>`，比较播放中动画与静态字形的位置，含旧缺陷反例。网络回归为 `node test/browser-network.mjs <CDP地址> <新版页面地址>`，验证模拟弱网、断网缓存与重试。两项浏览器测试共用隔离 CDP 会话辅助代码，不影响已有标签页。性能采样入口为 `node test/browser-performance.mjs <CDP地址> <新版页面地址>`；要求测试窗口真实保持前台。桌面 Chrome 每项 30 次的 DOM 响应采样已完成，见 [性能记录](docs/Web稳定性验证.md#第九批性能采样准备与构建完整性)；不代表实际画面呈现或音频时序通过。生字本专项检查为 `node test/browser-library.mjs <CDP地址> <新版页面地址>`，文件上传／下载检查要求 CDP 浏览器与脚本在同一主机。抽屉与滑动专项为 `node test/browser-drawer-swipe.mjs <CDP地址> <新版页面地址>`；本环境原生纵向触控滚动回执超时，保留 `--native-scroll` 复现选项，该项及真机滑动仍待确认。尚无完整的浏览器自动化覆盖或经过验证的浏览器版本支持矩阵。布局和媒体播放需要在实际浏览器与代表性移动设备上检查。Chrome/CDP 已完成部分真实浏览器检查；iPhone／iPad Safari 优先的步骤、实际结果与待验收范围见 [浏览器与真机验收](docs/Web浏览器与真机验收.md)。
+另提供需要 Node 22+ 和已授权 CDP 接口的实际浏览器坐标回归：`node test/browser-geometry.mjs <CDP地址> <新版页面地址>`，比较播放中动画与静态字形的位置，含旧缺陷反例。网络回归为 `node test/browser-network.mjs <CDP地址> <新版页面地址>`，验证模拟弱网、断网缓存与重试。两项浏览器测试共用隔离 CDP 会话辅助代码，不影响已有标签页。性能采样入口为 `node test/browser-performance.mjs <CDP地址> <新版页面地址>`；要求测试窗口真实保持前台。桌面 Chrome 每项 30 次的 DOM 响应采样已完成，见 [性能记录](docs/Web稳定性验证.md#第九批性能采样准备与构建完整性)；不代表实际画面呈现或音频时序通过。生字本专项检查为 `node test/browser-library.mjs <CDP地址> <新版页面地址>`，文件上传／下载检查要求 CDP 浏览器与脚本在同一主机。抽屉与滑动专项为 `node test/browser-drawer-swipe.mjs <CDP地址> <新版页面地址>`；先前 Headless 环境的触控回执阻塞已在用户提供的 9223 Chrome 中复测通过，`--native-touch` 同时检查原生短拖动与纵向滚动；记录见 [CDP 复测](docs/验收记录/drawer-swipe-cdp-9223-2026-11-08.json)，真机 Safari 滑动仍待专项确认。尚无完整的浏览器自动化覆盖或经过验证的浏览器版本支持矩阵。布局和媒体播放需要在实际浏览器与代表性移动设备上检查。Chrome/CDP 已完成部分真实浏览器检查；iPhone／iPad Safari 优先的步骤、实际结果与待验收范围见 [浏览器与真机验收](docs/Web浏览器与真机验收.md)。
 
 ## 项目结构
 

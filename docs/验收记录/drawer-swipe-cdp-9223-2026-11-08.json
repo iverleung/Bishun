@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-08",
+  "cdp": "http://127.0.0.1:9223",
+  "page": "http://192.168.6.169:5188/",
+  "scope": "User-provided Chrome CDP, isolated test contexts, mobile viewport emulation and injected native touch input; not iPhone/iPad Safari device acceptance.",
+  "nativeVerticalScroll": "passed",
+  "nativeShortTouchDrag": "passed (18px drag leaves current character unchanged)",
+  "previousEvidence": "drawer-swipe-2026-11-08.json retains the earlier headless Chrome 156.0.8078.80 block; that block did not recur in this Chrome 156.0.8078.81 run. Root cause is not established.",
+  "runs": [
+    {
+      "option": "--native-scroll",
+      "exitCode": 0,
+      "result": {
+        "browser": "Chrome/156.0.8078.81",
+        "checks": [
+          "right-top menu works before query, focus stays modal, Escape restores trigger; old link and indexed stroke controls removed",
+          "expanding library does not change main height or canvas center; nested editor Escape leaves drawer open; picking list closes it and focuses playback without opening keyboard",
+          "native touch gestures navigate left/right by index, retain duplicate characters, do not wrap at edge; small mouse drags do not switch",
+          "native vertical touch scrolling completed without switching",
+          "mobile drawer is full-height, internally scrollable and closes from backdrop",
+          "swipe during animation cancels old playback and loads next target without autoplay",
+          "handwriting gestures never switch characters; opening drawer pauses practice and closing never auto-resumes",
+          "deleting last list keeps keyboard focus on enabled import action"
+        ],
+        "exceptions": []
+      }
+    },
+    {
+      "option": "--native-touch",
+      "exitCode": 0,
+      "result": {
+        "browser": "Chrome/156.0.8078.81",
+        "checks": [
+          "right-top menu works before query, focus stays modal, Escape restores trigger; old link and indexed stroke controls removed",
+          "expanding library does not change main height or canvas center; nested editor Escape leaves drawer open; picking list closes it and focuses playback without opening keyboard",
+          "native touch gestures navigate left/right by index, retain duplicate characters, do not wrap at edge; small touch drags do not switch",
+          "native vertical touch scrolling completed without switching",
+          "mobile drawer is full-height, internally scrollable and closes from backdrop",
+          "swipe during animation cancels old playback and loads next target without autoplay",
+          "handwriting gestures never switch characters; opening drawer pauses practice and closing never auto-resumes",
+          "deleting last list keeps keyboard focus on enabled import action"
+        ],
+        "exceptions": []
+      }
+    }
+  ]
+}
