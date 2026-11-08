@@ -22,61 +22,58 @@ const radicalRequests = browser => browser.requests.filter(url=>/cnchar\.radical
 
 await run(async browser=>{
     const {command,click,wait,evaluate}=browser;
-    await query(browser,'河水學');
     assert.equal(radicalRequests(browser).length,0);
     await command('Network.setCacheDisabled',{cacheDisabled:true});
     await command('Fetch.enable',{patterns:[{urlPattern:'*cnchar.radical.min-*.js',requestStage:'Request'}]});
-    await click('#menuBtn');
+    await query(browser,'河水學');
     assert.equal(await evaluate("document.querySelector('#characterRadical').textContent"),'加载中');
-    await click('#closeMenuBtn');
     await query(browser,'水');
-    await click('#menuBtn');
     await command('Fetch.disable');
     await wait(radicalIs('水'));
     assert.equal(await evaluate("document.querySelector('#lessonActionsHeading').textContent"),'当前字 · 水');
     assert.equal(radicalRequests(browser).length,1);
-    checks.push('dictionary loads only on opening menu, shares one request and cannot overwrite a newer query');
-    await click('#closeMenuBtn');
+    checks.push('dictionary loads after querying, shares one request and cannot overwrite a newer query');
     for(const [character,radical,count] of [['河','氵',8],['打','扌',5],['学','子',8],['學','暂缺',16]]) {
-        await query(browser,character);await click('#menuBtn');await wait(radicalIs(radical));
+        await query(browser,character);await wait(radicalIs(radical));
         assert.equal(await evaluate("document.querySelector('#characterStrokeCount').textContent"),`${count} 笔`);
-        await click('#closeMenuBtn');
     }
     assert.equal(radicalRequests(browser).length,1);
     checks.push('semantic radical forms and unknown traditional data display correctly, without replacing total stroke count');
     await command('Emulation.setDeviceMetricsOverride',{width:320,height:820,deviceScaleFactor:1,mobile:true});
-    await query(browser,'河');await click('#menuBtn');await wait(radicalIs('氵'));
-    assert.equal(await evaluate("document.querySelector('main #characterRadical')"),null);
+    await query(browser,'河');await wait(radicalIs('氵'));
+    assert.equal(await evaluate("document.querySelector('#basicInfo .character-radical').previousElementSibling.id"),'characterStrokeCount');
+    assert.equal(await evaluate("document.querySelector('#settings #characterRadical')"),null);
+    assert.equal(await evaluate("document.querySelector('#settings').open"),false);
+    const aligned = await evaluate(`(() => { const a=document.querySelector('#basicInfo').getBoundingClientRect(), b=document.querySelector('#writingGrid').getBoundingClientRect(); return a.bottom <= b.top && Math.abs((a.left+a.right-b.left-b.right)/2)<1; })()`);
+    assert.equal(aligned,true);
     assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'),true);
-    await browser.screenshot('/private/tmp/bishun-radical-drawer.png');
+    await browser.screenshot('/private/tmp/bishun-radical-above.png');
     assert.ok(browser.requests.filter(url=>/^https?:/.test(url)).every(url=>new URL(url).origin===new URL(pageUrl).origin));
-    checks.push('320px drawer fits and main canvas remains unchanged; all requests same-origin');
+    checks.push('radical follows pinyin and count above canvas, fits centered at 320px without opening menu; all requests same-origin');
 });
 
 await run(async browser=>{
     const {command,click,wait,evaluate}=browser;
-    await query(browser,'木');
     await command('Network.setCacheDisabled',{cacheDisabled:true});
     await command('Network.setBlockedURLs',{urls:['*cnchar.radical.min-*.js']});
-    await click('#menuBtn');await wait(radicalIs('暂不可用'));
-    await click('#closeMenuBtn');await click('#nextStrokeBtn');
+    await query(browser,'木');await wait(radicalIs('暂不可用'));
+    await click('#nextStrokeBtn');
     assert.equal(await evaluate("document.querySelector('#strokePosition').textContent"),'1 / 4 笔');
     await command('Network.setBlockedURLs',{urls:[]});
     await command('Page.reload');await wait("document.querySelector('#status')?.textContent === '请输入汉字'");
-    await query(browser,'木');await click('#menuBtn');await wait(radicalIs('木'));
+    await query(browser,'木');await wait(radicalIs('木'));
     checks.push('failed optional chunk degrades without blocking stroke controls; reload after network recovery succeeds');
 });
 
 await run(async browser=>{
     const {command,click,wait,evaluate}=browser;
-    await query(browser,'木');
     await command('Network.setCacheDisabled',{cacheDisabled:true});
     await command('Fetch.enable',{patterns:[{urlPattern:'*cnchar.radical.min-*.js',requestStage:'Request'}]});
-    await click('#menuBtn');await wait(radicalIs('暂不可用'));
+    await query(browser,'木');await wait(radicalIs('暂不可用'));
     await command('Fetch.disable');
     await wait("performance.getEntriesByType('resource').some(entry => /cnchar\\.radical\\.min-/.test(entry.name) && entry.responseEnd > 0)");
     assert.equal(await evaluate("document.querySelector('#characterRadical').textContent"),'暂不可用');
-    await click('#closeMenuBtn');await click('#menuBtn');await wait(radicalIs('木'));
+    await query(browser,'水');await wait(radicalIs('水'));
     checks.push('slow dictionary import has a bounded wait; late result stays hidden until a new request');
 });
 console.log(JSON.stringify({checks,scope:'Isolated Chrome CDP contexts, injected network faults and viewport sizing; not a full dictionary content audit'},null,2));

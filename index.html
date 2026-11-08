@@ -25,8 +25,8 @@
         </section>
 
         <section id="lesson" class="lesson-panel" aria-label="单字笔顺" hidden>
-            <div id="basicInfo" class="canvas-information" role="group" aria-label="当前字的拼音与笔画数">
-                <span id="characterReadings" class="character-readings" title="cnchar 字典读音；多音字并列显示"></span><span id="characterStrokeCount" class="character-stroke-count"></span>
+            <div id="basicInfo" class="canvas-information" role="group" aria-label="当前字的拼音、笔画数与部首">
+                <span id="characterReadings" class="character-readings" title="cnchar 字典读音；多音字并列显示"></span><span id="characterStrokeCount" class="character-stroke-count"></span><span class="character-radical">部首 <span id="characterRadical" role="status" aria-live="polite">暂缺</span></span>
             </div>
             <div class="character-lane">
                 <nav id="previousCharacterList" class="character-queue previous-queue" aria-label="之前的字"></nav>
@@ -70,7 +70,6 @@
             </details>
             <p id="savedFeedback" class="sr-only" role="status" aria-live="polite"></p>
             <section id="lessonActions" class="drawer-section" aria-label="当前字" hidden><h3 id="lessonActionsHeading">当前字</h3>
-                <dl class="character-facts"><dt>部首</dt><dd id="characterRadical" role="status" aria-live="polite">暂缺</dd></dl>
 
                         <button id="restartBtn" type="button" class="text-button">重播这个字</button>
                         <div class="save-actions"><button id="saveCharacterBtn" type="button" class="text-button">收藏当前字</button><button id="saveQueryBtn" type="button" class="text-button">收藏这组字</button></div>

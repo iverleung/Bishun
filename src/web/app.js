@@ -38,7 +38,7 @@ const practice = new PracticeController({ adapter: practiceAdapter, onChange: re
 let focusMode = false;
 let ownsFullscreen = false;
 let viewportWidth = window.innerWidth;
-const drawer = createDrawer({ dialog: dom.settings, trigger: dom.menuBtn, closeButton: dom.closeMenuBtn, onOpen: () => { canvasSwipe.reset(); player.pause(); practice.pause(); void renderRadical(player); } });
+const drawer = createDrawer({ dialog: dom.settings, trigger: dom.menuBtn, closeButton: dom.closeMenuBtn, onOpen: () => { canvasSwipe.reset(); player.pause(); practice.pause(); } });
 const canvasSwipe = bindCanvasSwipe(dom.stage, {
     enabled: () => player.entries.length > 1 && !practice.visible && !dom.settings.open,
     context: () => `${player.revision}:${player.index}`,
@@ -294,7 +294,7 @@ function renderBasicInformation(state) {
     radicalRequest++;
     dom.lessonActionsHeading.textContent = state.entry ? `当前字 · ${state.entry}` : '当前字';
     dom.characterRadical.textContent = available ? '加载中' : state.status === 'loading' ? '加载中' : '暂缺';
-    if (available && dom.settings.open) void renderRadical(state);
+    if (available) void renderRadical(state);
     const readings = available ? characterReadings(state.entry) : [];
     dom.characterReadings.textContent = !available ? (state.status === 'loading' ? '加载中' : '暂缺') : readings.length ? readings.join(' / ') : '暂缺';
     dom.characterReadings.setAttribute('aria-label', readings.length > 1 ? `多音字，${readings.join('，')}` : dom.characterReadings.textContent);

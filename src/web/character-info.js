@@ -26,7 +26,7 @@ export function characterRadical(character, dictionary) {
 
 export async function loadCharacterRadical(character, { timeoutMs = 3000 } = {}) {
     if (!isSingleHan(character)) return null;
-    // Only the optional drawer information needs this dictionary chunk. A late
+    // Load this optional dictionary chunk after a character is available. A late
     // import may still be reused next time, but must not leave the UI waiting.
     radicalDictionary ||= import('cnchar-radical').then(module => module.default);
     let timer;
