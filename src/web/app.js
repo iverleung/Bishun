@@ -8,6 +8,8 @@ import { SavedQueries } from './saved-queries.js';
 import { createSavedLibrary } from './saved-library.js';
 import { setupSharing, readSharedQuery, clearSharedQuery } from './share.js';
 import { characterReadings } from './character-info.js';
+import { PracticeController } from '../practice/controller.js';
+import { HanziPractice } from '../practice/hanzi-practice.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
 const svgNamespace = 'http://www.w3.org/2000/svg';
@@ -15,6 +17,7 @@ let queueKey = '';
 let strokeListKey = '';
 let canvasKey = '';
 let informationKey = '';
+let practiceOwner = '';
 let renderedSelection = '';
 let pendingArrival = null;
 let arrivalAnimation = null;
@@ -28,6 +31,8 @@ const store = new CharacterStore();
 const audio = new StrokeAudio();
 const animation = new HanziAnimation(dom.animationLayer);
 const player = new PlaybackController({ store, audio, animation, onChange: render });
+const practiceAdapter = new HanziPractice(dom.practiceLayer);
+const practice = new PracticeController({ adapter: practiceAdapter, onChange: renderPractice });
 let focusMode = false;
 let ownsFullscreen = false;
 let focusSettingsOpen = false;
@@ -230,6 +235,26 @@ function saveQuery(value) {
     } else if (result.status === 'full') savedFeedback('生字本已满（30 条），请先删除一条', true, dom.saveActionFeedback);
 }
 
+function renderPractice() {
+    const visible = practice.visible;
+    const changed = document.body.classList.contains('practice-mode') !== visible;
+    document.body.classList.toggle('practice-mode', visible);
+    if (changed) updateQueueTabStops();
+    dom.practiceLayer.hidden = !visible;
+    dom.demonstrationControls.hidden = visible;
+    dom.practicePanel.hidden = !visible;
+    dom.practiceLayer.classList.toggle('accepts-input', ['active', 'hint'].includes(practice.status));
+    if (!visible) return;
+    dom.practiceMode.value = practice.mode;
+    dom.practiceProgress.textContent = `${practice.completed} / ${practice.total} 笔`;
+    const name = practice.record?.strokeNames[practice.completed];
+    const next = practice.completed < practice.total ? `第 ${practice.completed + 1} 笔${name ? ` · ${name}` : ''}` : '';
+    dom.practiceFeedback.textContent = practice.status === 'preparing' ? '准备中…' : practice.message ? `${practice.message}${practice.status === 'active' ? `，${next}` : ''}` : next;
+    dom.practiceHintBtn.textContent = practice.status === 'paused' ? '继续练习' : '提示下一笔';
+    dom.practiceHintBtn.disabled = !['active', 'paused'].includes(practice.status);
+    dom.characterCanvas.setAttribute('aria-label', `正在练习${practice.record.character}，已写 ${practice.completed} 笔`);
+}
+
 function renderBasicInformation(state) {
     const available = Boolean(state.data) && !['empty', 'loading', 'error'].includes(state.status);
     const key = `${state.entry}:${available}:${state.status === 'loading'}`;
@@ -246,6 +271,7 @@ function render(state) {
     const data = state.data;
     const available = Boolean(data) && !['empty', 'loading', 'error'].includes(state.status);
     const count = available ? data.strokes.length : 0;
+    if (practice.visible && (practiceOwner !== `${state.revision}:${state.index}` || !available || state.isRunning)) practice.exit();
     const names = state.names;
     if (state.status === 'playing') { arrivalAnimation?.cancel(); pendingArrival = null; }
     const focused = state.active ?? state.completed - 1;
@@ -298,6 +324,7 @@ function render(state) {
     dom.playBtn.textContent = state.status === 'loading' && state.isRunning ? '暂停' : labels[state.status] || '播放';
     dom.playBtn.disabled = !available && !state.isRunning && !(state.status === 'paused' && state.resumeIndex !== null);
     dom.restartBtn.disabled = !available;
+    dom.practiceBtn.disabled = !available;
     dom.replayStrokeBtn.disabled = !available || state.showFull || focused < 0;
     dom.previousStrokeBtn.disabled = !available || state.showFull || state.completed === 0;
     dom.nextStrokeBtn.disabled = !available || (!state.showFull && state.completed >= count);
@@ -323,6 +350,7 @@ function render(state) {
     const showNotice = state.audioWarning || (state.groupComplete && state.skipped > 0);
     dom.status.classList.toggle('sr-only', !showNotice);
     dom.status.textContent = state.audioWarning || statuses[state.status];
+    if (practice.visible) renderPractice();
 }
 
 function query(value, fromLink = false) {
@@ -403,6 +431,34 @@ dom.printQueryBtn.addEventListener('click', () => {
     url.hash = new URLSearchParams({ q: player.entries.join(''), c: String(player.index) }).toString();
     location.assign(url.href);
 });
+dom.practiceBtn.addEventListener('click', () => {
+    if (!player.record || dom.practiceBtn.disabled) return;
+    player.pause();
+    dom.settings.open = false;
+    practiceOwner = `${player.revision}:${player.index}`;
+    void practice.start(player.record);
+    dom.writingGrid.scrollIntoView({ block: 'center' });
+    dom.practiceMode.focus({ preventScroll: true });
+});
+dom.practiceMode.addEventListener('change', () => void practice.restart(dom.practiceMode.value));
+dom.practiceHintBtn.addEventListener('click', () => {
+    if (practice.status === 'paused') void practice.resume();
+    else void practice.hint();
+});
+dom.practiceRestartBtn.addEventListener('click', () => void practice.restart());
+dom.practiceExitBtn.addEventListener('click', () => {
+    practice.exit();
+    const revision = player.revision;
+    void player.select(player.index).then(() => {
+        if (player.revision === revision && !dom.playBtn.disabled) dom.playBtn.focus({ preventScroll: true });
+    });
+});
+for (const event of ['touchcancel', 'pointercancel']) dom.practiceLayer.addEventListener(event, () => practice.pause(), { passive: true });
+dom.practiceLayer.addEventListener('touchstart', event => { if (event.touches.length > 1) practice.pause(); }, { capture: true, passive: true });
+const practiceResize = new ResizeObserver(() => {
+    if (['active', 'hint'].includes(practice.status) && Math.abs(dom.practiceLayer.getBoundingClientRect().width - practiceAdapter.width) > 0.5) practice.pause();
+});
+practiceResize.observe(dom.practiceLayer);
 dom.settings.addEventListener('change', rememberPreferences);
 dom.resetSettingsBtn.addEventListener('click', () => {
     applyPreferences(defaultPreferences);
@@ -427,8 +483,8 @@ document.addEventListener('fullscreenchange', () => {
 document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && focusMode) { event.preventDefault(); void exitFocusMode(); }
 });
-document.addEventListener('visibilitychange', () => { if (document.hidden) player.pause(); });
-window.addEventListener('pagehide', () => player.pause());
+document.addEventListener('visibilitychange', () => { if (document.hidden) { player.pause(); practice.pause(); } });
+window.addEventListener('pagehide', () => { player.pause(); practice.pause(); });
 window.addEventListener('resize', updateQueueTabStops);
 applyPreferences(loadPreferences(historyStorage));
 renderSavedQueries();

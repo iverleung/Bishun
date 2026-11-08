@@ -174,3 +174,17 @@ input[type="radio"], input[type="checkbox"] { width: 18px; height: 18px; }
 .canvas-information { width: var(--canvas-size); min-height: 52px; margin: 0 auto; padding-bottom: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 12px; text-align: center; line-height: 1.5; }
 .character-readings { min-width: 0; font-size: 18px; overflow-wrap: anywhere; }
 .character-stroke-count { color: var(--muted); font-size: 12px; white-space: nowrap; }
+
+.practice-mode { --canvas-size: min(440px, calc(100vw - 48px)); }
+.practice-mode #characterInk { visibility: hidden; }
+.practice-layer { position: absolute; inset: 0; user-select: none; -webkit-user-select: none; }
+.practice-layer svg { display: block; width: 100%; height: 100%; }
+.practice-layer.accepts-input { touch-action: none; }
+.practice-panel { padding-top: 8px; text-align: center; }
+.practice-options { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.practice-options select { border: 1px solid var(--border); border-radius: 8px; min-height: 44px; padding: 8px 12px; color: inherit; background: #fffefa; font: inherit; font-size: 13px; }
+#practiceProgress { color: var(--muted); font-size: 12px; }
+#practiceFeedback { min-height: 44px; padding: 12px 0; font-size: 13px; }
+.practice-actions { display: flex; gap: 8px; }
+.practice-actions button { flex: 1; font-size: 13px; }
+.focus-mode.practice-mode { --canvas-size: max(128px, min(560px, calc(100vw - 48px), calc(100svh - 330px))); }
