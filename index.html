@@ -29,6 +29,9 @@
         </section>
 
         <section id="lesson" class="lesson-panel" aria-label="单字笔顺" hidden>
+            <div id="basicInfo" class="canvas-information" role="group" aria-label="当前字的拼音与笔画数">
+                <span id="characterReadings" class="character-readings" title="cnchar 字典读音；多音字并列显示"></span><span id="characterStrokeCount" class="character-stroke-count"></span>
+            </div>
             <div class="character-lane">
                 <nav id="previousCharacterList" class="character-queue previous-queue" aria-label="之前的字"></nav>
                 <div class="stage" id="stage">
@@ -50,7 +53,6 @@
                 <div class="transport" aria-label="播放控制"><button id="previousStrokeBtn" class="secondary" type="button">上一笔</button><button id="playBtn" class="primary play-button" type="button">播放</button><button id="nextStrokeBtn" class="secondary" type="button">下一笔</button></div>
                 <div class="secondary-actions"><details id="settings" class="settings"><summary>笔画与设置</summary>
                     <div class="settings-body">
-                        <details id="basicInfo"><summary>字音与笔数</summary><dl class="basic-information"><dt>字典读音</dt><dd id="characterReadings"></dd><dt>笔画数</dt><dd id="characterStrokeCount"></dd></dl><p class="information-source">读音：cnchar 3.2.6 · <a href="/licenses/cnchar-LICENSE.txt" target="_blank" rel="noopener">数据许可 ↗</a></p></details>
                         <button id="restartBtn" type="button" class="text-button">重播这个字</button>
                         <div id="strokeList" class="stroke-list" aria-label="按笔画定位"></div>
                         <button id="replayStrokeBtn" type="button" class="text-button" disabled>重播本笔</button>

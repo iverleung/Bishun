@@ -9,15 +9,18 @@ try {
     await fill('#query', '木长學');
     await click('#searchForm [type="submit"]');
     await wait("!document.querySelector('#playBtn').disabled");
-    await click('#settings summary');
-    assert.equal(await evaluate("document.querySelector('#basicInfo').open"), false);
-    assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"), '');
-    const requestCount = browser.requests.length;
-    await click('#basicInfo summary');
     await wait("document.querySelector('#characterReadings').textContent === 'mù'");
     assert.equal(await evaluate("document.querySelector('#characterStrokeCount').textContent"), '4 笔');
-    assert.equal(browser.requests.length, requestCount);
-    checks.push('information collapsed by default, local readings and geometry stroke count appear on demand');
+    assert.equal(await evaluate("document.querySelector('#strokePosition').textContent"), '');
+    const geometry = await evaluate(`(() => {
+        const info = document.querySelector('#basicInfo').getBoundingClientRect();
+        const grid = document.querySelector('#writingGrid').getBoundingClientRect();
+        return { above: info.bottom <= grid.top, centerDifference: Math.abs((info.left + info.right - grid.left - grid.right) / 2) };
+    })()`);
+    assert.equal(geometry.above, true);
+    assert.ok(geometry.centerDifference < 1);
+    assert.equal(await evaluate("document.querySelector('#settings').open"), false);
+    checks.push('pinyin and geometry stroke count appear centered above canvas without opening settings');
     await click('#nextCharBtn');
     await wait("document.querySelector('#characterReadings').textContent === 'cháng / zhǎng'");
     assert.equal(await evaluate("document.querySelector('#characterReadings').getAttribute('aria-label')"), '多音字，cháng，zhǎng');
@@ -39,6 +42,17 @@ try {
     assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"), 'mù');
     await command('Emulation.setDeviceMetricsOverride', { width: 320, height: 820, deviceScaleFactor: 1, mobile: true });
     assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true);
+    await fill('#query', '行');
+    await click('#searchForm [type="submit"]');
+    await wait("document.querySelector('#characterReadings').textContent.includes('xíng')");
+    assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true);
+    const aligned = await evaluate(`(() => {
+        const info = document.querySelector('#basicInfo').getBoundingClientRect();
+        const grid = document.querySelector('#writingGrid').getBoundingClientRect();
+        return info.bottom <= grid.top && Math.abs((info.left + info.right - grid.left - grid.right) / 2) < 1;
+    })()`);
+    assert.equal(aligned, true);
+    await browser.screenshot('/private/tmp/bishun-info-above-mobile.png');
     assert.deepEqual(browser.exceptions, []);
     checks.push('new query clears old information during loading; stale query cannot overwrite; 320px fits');
     console.log(JSON.stringify({ browser: browser.version, checks, exceptions: browser.exceptions }, null, 2));

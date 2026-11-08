@@ -171,8 +171,6 @@ input[type="radio"], input[type="checkbox"] { width: 18px; height: 18px; }
     .library-dialog { padding: 18px; }
 }
 
-.basic-information { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 14px; margin: 4px 0 12px; font-size: 13px; }
-.basic-information dt { color: var(--muted); }
-.basic-information dd { margin: 0; overflow-wrap: anywhere; }
-.information-source { color: var(--muted); font-size: 10px; padding-bottom: 12px; }
-.information-source a { text-decoration: underline; }
+.canvas-information { width: var(--canvas-size); min-height: 52px; margin: 0 auto; padding-bottom: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 12px; text-align: center; line-height: 1.5; }
+.character-readings { min-width: 0; font-size: 18px; overflow-wrap: anywhere; }
+.character-stroke-count { color: var(--muted); font-size: 12px; white-space: nowrap; }

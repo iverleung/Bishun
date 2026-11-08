@@ -231,7 +231,6 @@ function saveQuery(value) {
 }
 
 function renderBasicInformation(state) {
-    if (!dom.basicInfo.open) return;
     const available = Boolean(state.data) && !['empty', 'loading', 'error'].includes(state.status);
     const key = `${state.entry}:${available}:${state.status === 'loading'}`;
     if (informationKey === key) return;
@@ -293,7 +292,7 @@ function render(state) {
         }) : []));
         dom.characterCanvas.setAttribute('aria-label', available ? `${state.entry}，${state.showFull ? '完整字形' : state.active !== null ? `正在书写第 ${state.active + 1} 笔` : `展示到第 ${displayed} 笔`}` : '等待查询');
     }
-    dom.strokePosition.textContent = !available ? '' : state.showFull ? `${count} 笔` : `${Math.max(0, focused + 1)} / ${count} 笔`;
+    dom.strokePosition.textContent = !available || state.showFull ? '' : `${Math.max(0, focused + 1)} / ${count} 笔`;
     dom.strokeName.textContent = !available || state.showFull ? '' : names[focused] || (focused >= 0 ? '暂缺' : '');
     const labels = { ready: '播放', playing: '暂停', paused: '继续', complete: '重播' };
     dom.playBtn.textContent = state.status === 'loading' && state.isRunning ? '暂停' : labels[state.status] || '播放';
@@ -405,7 +404,6 @@ dom.printQueryBtn.addEventListener('click', () => {
     location.assign(url.href);
 });
 dom.settings.addEventListener('change', rememberPreferences);
-dom.basicInfo.addEventListener('toggle', () => { informationKey = ''; renderBasicInformation(player); });
 dom.resetSettingsBtn.addEventListener('click', () => {
     applyPreferences(defaultPreferences);
     rememberPreferences();
