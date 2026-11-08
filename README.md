@@ -69,7 +69,7 @@ node --check src/engine/speech.js
 node --check src/engine/recognition/v3.js
 ```
 
-另提供需要 Node 22+ 和已授权 CDP 接口的实际浏览器坐标回归：`node test/browser-geometry.mjs <CDP地址> <新版页面地址>`，比较播放中动画与静态字形的位置，含旧缺陷反例。网络回归为 `node test/browser-network.mjs <CDP地址> <新版页面地址>`，验证模拟弱网、断网缓存与重试。两项浏览器测试共用隔离 CDP 会话辅助代码，不影响已有标签页。尚无完整的浏览器自动化覆盖或经过验证的浏览器版本支持矩阵。布局和媒体播放需要在实际浏览器与代表性移动设备上检查。Chrome/CDP 已完成部分真实浏览器检查；iPhone／iPad Safari 优先的步骤、实际结果与待验收范围见 [浏览器与真机验收](docs/Web浏览器与真机验收.md)。
+另提供需要 Node 22+ 和已授权 CDP 接口的实际浏览器坐标回归：`node test/browser-geometry.mjs <CDP地址> <新版页面地址>`，比较播放中动画与静态字形的位置，含旧缺陷反例。网络回归为 `node test/browser-network.mjs <CDP地址> <新版页面地址>`，验证模拟弱网、断网缓存与重试。两项浏览器测试共用隔离 CDP 会话辅助代码，不影响已有标签页。性能采样入口为 `node test/browser-performance.mjs <CDP地址> <新版页面地址>`；要求测试窗口真实保持前台，当前采样尚未完成，不作为已达标证据。尚无完整的浏览器自动化覆盖或经过验证的浏览器版本支持矩阵。布局和媒体播放需要在实际浏览器与代表性移动设备上检查。Chrome/CDP 已完成部分真实浏览器检查；iPhone／iPad Safari 优先的步骤、实际结果与待验收范围见 [浏览器与真机验收](docs/Web浏览器与真机验收.md)。
 
 ## 项目结构
 

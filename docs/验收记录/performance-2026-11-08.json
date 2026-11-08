@@ -1,0 +1,24 @@
+{
+  "browser": "Chrome/156.0.8078.81",
+  "passed": false,
+  "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'UI condition timeout'\n- undefined\n",
+  "visibility": "hidden",
+  "window": {
+    "bounds": {
+      "left": 44,
+      "top": 69,
+      "width": 1200,
+      "height": 905,
+      "windowState": "normal"
+    }
+  },
+  "completedSamples": {
+    "cachedQuery": 3,
+    "cachedSwitch": 0,
+    "startAnimation": 0,
+    "pauseAnimation": 0
+  },
+  "status": "blocked-by-foreground-visibility",
+  "statisticsAccepted": false,
+  "discardedAttempts": 3
+}

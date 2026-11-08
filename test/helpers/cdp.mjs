@@ -46,8 +46,15 @@ export async function openBrowser(cdpUrl, pageUrl) {
         ({ browserContextId } = await send('Target.createBrowserContext', { disposeOnDetach: true }));
         const { targetId } = await send('Target.createTarget', { url: 'about:blank', browserContextId });
         const { sessionId } = await send('Target.attachToTarget', { targetId, flatten: true });
-        await send('Target.activateTarget', { targetId });
         const command = (method, params = {}) => send(method, params, sessionId);
+        const windowState = () => send('Browser.getWindowForTarget', { targetId });
+        async function activate() {
+            const { windowId, bounds } = await windowState();
+            if (bounds.windowState === 'minimized') await send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'normal' } });
+            await send('Target.activateTarget', { targetId });
+            await command('Page.bringToFront');
+        }
+        await activate();
         async function evaluate(expression) {
             const result = await command('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true });
             if (result.exceptionDetails) throw new Error(result.exceptionDetails.exception?.description || result.exceptionDetails.text);
@@ -86,6 +93,6 @@ export async function openBrowser(cdpUrl, pageUrl) {
         await command('Network.enable');
         await command('Page.navigate', { url: pageUrl });
         await wait("document.querySelector('#status')?.textContent === '请输入汉字' && document.visibilityState === 'visible'");
-        return { version: version.Browser, command, evaluate, wait, click, fill, screenshot, close, requests, responses, exceptions };
+        return { version: version.Browser, command, evaluate, wait, click, fill, screenshot, close, activate, windowState, requests, responses, exceptions };
     } catch (error) { await close(); throw error; }
 }
