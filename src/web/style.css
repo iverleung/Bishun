@@ -201,5 +201,3 @@ input[type="radio"], input[type="checkbox"] { width: 18px; height: 18px; }
 .focus-mode .site-header .brand { display: none; }
 .focus-mode .focus-exit { right: 72px; }
 .drawer-open body.focus-mode { overflow: hidden; }
-
-.character-radical { color: var(--muted); font-size: 12px; white-space: nowrap; }
