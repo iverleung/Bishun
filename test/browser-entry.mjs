@@ -17,6 +17,8 @@ try {
     await wait(ready('木'));
     await click('#settings summary');
     await click('[name="mode"][value="explain"]');
+    await browser.activate();
+    await wait("document.visibilityState === 'visible'");
     await click('#playBtn');
     await wait("!!document.querySelector('#animationLayer svg > g[transform]')");
     const geometryDifference = await evaluate(`(() => {
@@ -82,4 +84,7 @@ try {
     checks.push({ case: 'legacy return link restores new home with saved lists' });
     assert.deepEqual(browser.exceptions, []);
     console.log(JSON.stringify({ browser: browser.version, passed: true, checks }, null, 2));
+} catch (error) {
+    console.error(await evaluate(`({ visibility: document.visibilityState, play: document.querySelector('#playBtn')?.textContent, status: document.querySelector('#status')?.textContent, stroke: document.querySelector('#strokePosition')?.textContent })`));
+    throw error;
 } finally { await browser.close(); }

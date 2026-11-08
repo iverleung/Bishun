@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { QueryHistory } from '../src/web/history.js';
 import { defaultPreferences, loadPreferences, savePreferences } from '../src/web/preferences.js';
 import { SavedQueries } from '../src/web/saved-queries.js';
+import { characterReadings } from '../src/web/character-info.js';
 import { worksheetLayout, paginateCharacters } from '../src/web/print-layout.js';
 import { createShareUrl, readSharedQuery } from '../src/web/share.js';
 
@@ -168,4 +169,17 @@ test('worksheet pagination preserves duplicates and keeps each character block o
     }
     assert.throws(() => worksheetLayout({ size: 99 }));
     assert.throws(() => worksheetLayout({ grid: 'wrong' }));
+});
+
+
+test('character information keeps polyphonic candidates, rejects missing dictionary echoes and never guesses', () => {
+    assert.deepEqual(characterReadings('木'), ['mù']);
+    assert.deepEqual(characterReadings('长'), ['cháng', 'zhǎng']);
+    assert.deepEqual(characterReadings('绿'), ['lǜ', 'lù']);
+    assert.deepEqual(characterReadings('𠮷'), []);
+    assert.deepEqual(characterReadings('學'), []);
+    assert.deepEqual(characterReadings('木水'), []);
+    assert.deepEqual(characterReadings('木', { spell: () => ['<script>'] }), []);
+    assert.deepEqual(characterReadings('木', { spell() { throw new Error(); } }), []);
+    assert.deepEqual(characterReadings('木', { spell: () => ['(mù|)'] }), []);
 });

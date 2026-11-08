@@ -7,12 +7,14 @@ import { defaultPreferences, loadPreferences, savePreferences } from './preferen
 import { SavedQueries } from './saved-queries.js';
 import { createSavedLibrary } from './saved-library.js';
 import { setupSharing, readSharedQuery, clearSharedQuery } from './share.js';
+import { characterReadings } from './character-info.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
 const svgNamespace = 'http://www.w3.org/2000/svg';
 let queueKey = '';
 let strokeListKey = '';
 let canvasKey = '';
+let informationKey = '';
 let renderedSelection = '';
 let pendingArrival = null;
 let arrivalAnimation = null;
@@ -228,7 +230,20 @@ function saveQuery(value) {
     } else if (result.status === 'full') savedFeedback('生字本已满（30 条），请先删除一条', true, dom.saveActionFeedback);
 }
 
+function renderBasicInformation(state) {
+    if (!dom.basicInfo.open) return;
+    const available = Boolean(state.data) && !['empty', 'loading', 'error'].includes(state.status);
+    const key = `${state.entry}:${available}:${state.status === 'loading'}`;
+    if (informationKey === key) return;
+    informationKey = key;
+    const readings = available ? characterReadings(state.entry) : [];
+    dom.characterReadings.textContent = !available ? (state.status === 'loading' ? '加载中' : '暂缺') : readings.length ? readings.join(' / ') : '暂缺';
+    dom.characterReadings.setAttribute('aria-label', readings.length > 1 ? `多音字，${readings.join('，')}` : dom.characterReadings.textContent);
+    dom.characterStrokeCount.textContent = available ? `${state.data.strokes.length} 笔` : '暂缺';
+}
+
 function render(state) {
+    renderBasicInformation(state);
     const data = state.data;
     const available = Boolean(data) && !['empty', 'loading', 'error'].includes(state.status);
     const count = available ? data.strokes.length : 0;
@@ -390,6 +405,7 @@ dom.printQueryBtn.addEventListener('click', () => {
     location.assign(url.href);
 });
 dom.settings.addEventListener('change', rememberPreferences);
+dom.basicInfo.addEventListener('toggle', () => { informationKey = ''; renderBasicInformation(player); });
 dom.resetSettingsBtn.addEventListener('click', () => {
     applyPreferences(defaultPreferences);
     rememberPreferences();
