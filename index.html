@@ -21,7 +21,10 @@
                 <div class="input-footnote"><span id="inputHint">最多 20 字</span><button type="button" data-query="木水心">试试「木水心」</button></div>
             </form>
             <p id="queryNotice" class="notice" hidden></p>
-            <details id="savedQueries" class="saved-queries" hidden><summary>我的字单 <span id="savedCount"></span></summary><nav id="savedList" aria-label="我的字单"></nav></details>
+            <details id="savedQueries" class="saved-queries"><summary>我的生字本 <span id="savedCount"></span></summary>
+                <div class="library-tools"><button id="manageSavedBtn" type="button" aria-pressed="false">管理</button><button id="exportSavedBtn" type="button">导出</button><button id="importSavedBtn" type="button">导入</button><input id="importSavedFile" type="file" accept=".json,application/json" hidden></div>
+                <nav id="savedList" aria-label="生字清单"></nav>
+            </details>
             <p id="savedFeedback" class="sr-only" role="status" aria-live="polite"></p>
         </section>
 
@@ -67,6 +70,20 @@
         </section>
         <p id="status" class="sr-only" role="status" aria-live="polite"></p>
     </main>
+    <dialog id="editSavedDialog" class="library-dialog" aria-labelledby="editSavedTitle">
+        <form id="editSavedForm">
+            <h2 id="editSavedTitle">编辑生字清单</h2>
+            <label for="savedName">名称（选填）</label><input id="savedName" maxlength="80" autocomplete="off" placeholder="例如：今天的作业">
+            <label for="savedText">汉字（最多 20 字）</label><textarea id="savedText" rows="3" required></textarea>
+            <p id="editSavedError" class="notice" role="alert" hidden></p>
+            <div class="dialog-actions"><button id="cancelEditSavedBtn" type="button">取消</button><button type="submit" class="primary">保存</button></div>
+        </form>
+    </dialog>
+    <dialog id="importSavedDialog" class="library-dialog" aria-labelledby="importSavedTitle">
+        <h2 id="importSavedTitle">导入生字清单</h2>
+        <p id="importSavedSummary" role="status"></p><ul id="importSavedPreview"></ul>
+        <div class="dialog-actions"><button id="cancelImportSavedBtn" type="button">取消</button><button id="confirmImportSavedBtn" type="button" class="primary">导入</button></div>
+    </dialog>
     <footer class="site-footer"><span>本站字库</span></footer>
     <script type="module" src="/src/web/app.js"></script>
 </body>

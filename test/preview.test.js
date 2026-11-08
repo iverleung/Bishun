@@ -33,7 +33,7 @@ test('saved query capacity never silently evicts an existing item', () => {
 });
 
 test('saved queries ignore invalid stored entries and report in-memory fallback', () => {
-    const saved = new SavedQueries({ getItem: () => '["木",null,1,"abc","木","𠮷"]' });
+    const saved = new SavedQueries({ getItem: key => key === 'bishun-saved-queries-v1' ? '["木",null,1,"abc","木","𠮷"]' : null });
     assert.deepEqual(saved.items, ['木', '𠮷']);
     for (const value of ['', '<script>', '木'.repeat(21), null]) assert.equal(saved.save(value).status, 'invalid');
     assert.deepEqual(new SavedQueries({ getItem: () => '{' }).items, []);
@@ -96,4 +96,47 @@ test('history ignores malformed entries and works when storage is unavailable', 
     unavailable.clear();
     assert.deepEqual(unavailable.items, []);
     assert.deepEqual(new QueryHistory({ getItem: () => '{broken' }).items, []);
+});
+
+test('library migrates old collections on edit without overwriting legacy storage, preserves names and order', () => {
+    const values = new Map([['bishun-saved-queries-v1', '["木木水","心"]']]);
+    const storage = { getItem: key => values.get(key), setItem: (key, value) => values.set(key, value) };
+    const saved = new SavedQueries(storage);
+    assert.deepEqual(saved.items, ['木木水', '心']);
+    assert.equal(values.has('bishun-saved-queries-v2'), false);
+    assert.equal(saved.update('木木水', '木水木', ' 今天的作业 ').status, 'saved');
+    saved.move('木水木', 1);
+    const reloaded = new SavedQueries(storage);
+    assert.deepEqual(reloaded.entries(), [{ query: '心', name: '' }, { query: '木水木', name: '今天的作业' }]);
+    assert.equal(values.get('bishun-saved-queries-v1'), '["木木水","心"]');
+    const before = reloaded.exportBackup();
+    assert.equal(reloaded.update('心', '木水木', '重复').status, 'exists');
+    assert.equal(reloaded.update('心', 'abc', '').status, 'invalid');
+    assert.equal(reloaded.update('心', '心', '名'.repeat(41)).status, 'invalid');
+    assert.equal(reloaded.update('心', '心', '坏\n名称').status, 'invalid');
+    assert.equal(reloaded.move('心', -1).status, 'invalid');
+    assert.equal(reloaded.exportBackup(), before);
+});
+
+test('library backup preview never mutates, import reports duplicates, invalid entries and capacity overflow', () => {
+    const saved = new SavedQueries(null);
+    for (let i = 0; i < 29; i++) saved.save(String.fromCodePoint(0x4e00 + i));
+    const backup = JSON.stringify({ type: 'bishun-wordlists', version: 1, items: [
+        { query: '木木水', name: '作业' }, { query: '木木水', name: '重复' },
+        { query: '一', name: '' }, { query: '心', name: '' }, { query: 'abc', name: '' }, { query: '水', name: 12 }
+    ] });
+    const before = saved.exportBackup();
+    const preview = saved.previewImport(backup);
+    assert.deepEqual(preview, { entries: [{ query: '木木水', name: '作业' }], duplicates: 2, invalid: 2, overflow: 1 });
+    assert.equal(saved.exportBackup(), before);
+    const result = saved.importBackup(backup);
+    assert.equal(result.persisted, false);
+    assert.equal(saved.items.length, 30);
+    assert.equal(saved.names.get('木木水'), '作业');
+    const restored = new SavedQueries(null);
+    restored.importBackup(saved.exportBackup());
+    assert.deepEqual(restored.entries(), saved.entries());
+    for (const text of ['{', '{}', JSON.stringify({ type: 'bishun-wordlists', version: 2, items: [] }), ' '.repeat(100001)]) {
+        assert.throws(() => saved.previewImport(text));
+    }
 });

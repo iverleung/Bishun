@@ -148,3 +148,25 @@ input[type="radio"], input[type="checkbox"] { width: 18px; height: 18px; }
 .saved-query > button:first-child { flex: 1; min-width: 0; text-align: left; font-size: 13px; overflow-wrap: anywhere; }
 .remove-saved-query { flex-shrink: 0; width: 44px; color: var(--muted); font-size: 18px; }
 .save-actions { display: flex; flex-wrap: wrap; }
+
+.library-tools { display: flex; gap: 4px; font-size: 12px; }
+.saved-query small { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
+.library-row-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; }
+.library-row-actions button { padding: 8px; font-size: 12px; }
+.library-row-actions .remove-saved-query { width: auto; }
+.library-empty { padding: 16px; font-size: 12px; }
+.library-dialog { width: min(480px, calc(100vw - 32px)); max-height: calc(100svh - 32px); overflow-y: auto; border: 1px solid var(--border); border-radius: 16px; padding: 24px; color: #293d35; background: #fffefa; }
+.library-dialog::backdrop { background: #20392c66; }
+.library-dialog h2 { font-size: 18px; margin-bottom: 18px; }
+.library-dialog label { display: block; font-size: 13px; margin: 14px 0 8px; }
+.library-dialog input, .library-dialog textarea { display: block; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font: inherit; color: inherit; background: #fff; }
+.library-dialog textarea { resize: vertical; }
+.library-dialog p, .library-dialog li { font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
+.library-dialog ul { padding-left: 22px; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+@media (max-width: 540px) {
+    .saved-query:has(.library-row-actions) { flex-wrap: wrap; }
+    .saved-query:has(.library-row-actions) > button:first-child { flex-basis: 100%; }
+    .library-row-actions { width: 100%; border-top: 1px solid #edf0e8; }
+    .library-dialog { padding: 18px; }
+}

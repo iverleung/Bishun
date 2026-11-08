@@ -5,6 +5,7 @@ import { StrokeAudio } from '../playback/stroke-audio.js';
 import { QueryHistory } from './history.js';
 import { defaultPreferences, loadPreferences, savePreferences } from './preferences.js';
 import { SavedQueries } from './saved-queries.js';
+import { createSavedLibrary } from './saved-library.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
 const svgNamespace = 'http://www.w3.org/2000/svg';
@@ -201,36 +202,19 @@ function savedFeedback(message, visible = false, target = dom.savedFeedback) {
     target.className = visible ? 'notice' : 'sr-only';
 }
 
-function renderSavedQueries() {
-    dom.savedQueries.hidden = savedQueries.items.length === 0;
-    dom.savedCount.textContent = savedQueries.items.length;
-    dom.savedList.replaceChildren(...savedQueries.items.map(item => {
-        const row = document.createElement('div');
-        row.className = 'saved-query';
-        const open = button(item, () => {
-            dom.query.value = item;
-            query(item);
-            dom.savedQueries.open = false;
-            dom.query.focus({ preventScroll: true });
-        });
-        open.title = item;
-        const remove = button('×', () => {
-            const index = savedQueries.items.indexOf(item);
-            const persisted = savedQueries.remove(item);
-            renderSavedQueries();
-            savedFeedback(persisted ? '已移除字单' : '已移除，本次无法保存更改', !persisted);
-            savedFeedback('', false, dom.saveActionFeedback);
-            const remaining = Array.from(dom.savedList.querySelectorAll('.remove-saved-query'));
-            if (remaining.length) remaining[Math.min(index, remaining.length - 1)].focus({ preventScroll: true });
-            else dom.query.focus({ preventScroll: true });
-            player.notify();
-        });
-        remove.className = 'remove-saved-query';
-        remove.setAttribute('aria-label', `删除字单 ${item}`);
-        row.append(open, remove);
-        return row;
-    }));
-}
+const library = createSavedLibrary({
+    dom, savedQueries,
+    openQuery(value) {
+        dom.query.value = value;
+        query(value);
+        dom.savedQueries.open = false;
+        dom.query.focus({ preventScroll: true });
+    },
+    feedback: savedFeedback,
+    changed() { savedFeedback('', false, dom.saveActionFeedback); player.notify(); }
+});
+
+function renderSavedQueries() { library.render(); }
 
 function saveQuery(value) {
     const result = savedQueries.save(value);
@@ -240,7 +224,7 @@ function saveQuery(value) {
         player.notify();
         // The save button is now disabled; retain a visible keyboard target.
         dom.settings.querySelector('summary').focus({ preventScroll: true });
-    } else if (result.status === 'full') savedFeedback('字单已满（30 条），请先删除一条', true, dom.saveActionFeedback);
+    } else if (result.status === 'full') savedFeedback('生字本已满（30 条），请先删除一条', true, dom.saveActionFeedback);
 }
 
 function render(state) {
