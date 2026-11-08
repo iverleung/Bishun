@@ -12,7 +12,9 @@
       "durationMs": 594,
       "bytes": 4124,
       "sha256": "18da0cc24c27afac3cc0260342f5bf3cc850308dce7665754dcac360814f3b5b",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-35a9db278ad3",
@@ -21,7 +23,9 @@
       "durationMs": 651,
       "bytes": 4556,
       "sha256": "a9a59990333c8a9afec9a2a6eee66dd1728fc6c2d56591830f94d8bbec6a7395",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-e44c1d0bddc1",
@@ -30,7 +34,9 @@
       "durationMs": 445,
       "bytes": 3260,
       "sha256": "824ecc95f6e32728d713724cca05ec07b0ae142806b66e0b88aee34b219d74a5",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-bfc4aff8a00d",
@@ -39,7 +45,9 @@
       "durationMs": 455,
       "bytes": 3260,
       "sha256": "85b76692a52864b573d920e93522d505d64696535c51a6b44bed3ac180085edd",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-8fddd7cdb49f",
@@ -48,7 +56,9 @@
       "durationMs": 474,
       "bytes": 3404,
       "sha256": "67f24b40c2af0b36ba7e1cf2e8862e7254e73ec7bd8ea4c758668706a80f6106",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-2d7a6a8d82fd",
@@ -57,7 +67,9 @@
       "durationMs": 758,
       "bytes": 5132,
       "sha256": "d7a3eac8ef55e573d66876f8db4b42e592bb4c4e7aab82b85f98058ffc8c84c1",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-15ddeafbfd5c",
@@ -66,7 +78,9 @@
       "durationMs": 708,
       "bytes": 4844,
       "sha256": "6856da6629d4e18cd8c119d8e3bb44dd27966bf1a96e6a018732c3eb69990810",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-8d9f7a9d2c62",
@@ -75,7 +89,9 @@
       "durationMs": 725,
       "bytes": 4988,
       "sha256": "c728f63a5109566a7b89a130dd611119d51353a495208ff30db38eea48e580b9",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-f8c6e3e86baa",
@@ -84,7 +100,9 @@
       "durationMs": 429,
       "bytes": 3116,
       "sha256": "e47958e214d499c3aaf8f09931aba432caca2ca1cf03b67353092e5d1ac5c410",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-999eeceff4ed",
@@ -93,7 +111,9 @@
       "durationMs": 717,
       "bytes": 4844,
       "sha256": "33f234e9d4aa5704520f160619b6a1b65b3c4564797dab840ade5f6227a3834c",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-7918e80a097a",
@@ -102,7 +122,9 @@
       "durationMs": 1082,
       "bytes": 7148,
       "sha256": "3cbe2546363f68af8c16dd887777f9077d006e069e219da41c313c7f24a11e42",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-46af3459c747",
@@ -111,7 +133,9 @@
       "durationMs": 1183,
       "bytes": 7724,
       "sha256": "a5fd109c18e43d3c9c9a00adaa4501a8287f3726560caa4561ae8fddbd18947d",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-b9bdb52db5d1",
@@ -120,7 +144,9 @@
       "durationMs": 1132,
       "bytes": 7436,
       "sha256": "d1083bc2f98da82b11545671c69f2a240c940881e423e52bd1ce6483b0d3bd72",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-90318bd11d95",
@@ -129,7 +155,9 @@
       "durationMs": 955,
       "bytes": 6284,
       "sha256": "49600b2364c5c337be5608c3c3c54d1b8cbc60ebd562422ab27b32c90b236657",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-dc4a29407aee",
@@ -138,7 +166,9 @@
       "durationMs": 870,
       "bytes": 5852,
       "sha256": "26befa67d5e1349061e2e701916a5c8f8fdc7a3d4a1204b73e603c0a09ce4714",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-59965e2093f7",
@@ -147,7 +177,9 @@
       "durationMs": 699,
       "bytes": 4844,
       "sha256": "396bf3b9b4aa0e9be1d021337ad5a26bacd97898fed2d35f21a132201f8e1aea",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-d521db950c15",
@@ -156,7 +188,9 @@
       "durationMs": 891,
       "bytes": 5996,
       "sha256": "1c74fb7e018077283aec863161be6cccae82c6452bb0b012c0331810b0345d1b",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-2abbef3287b3",
@@ -165,7 +199,9 @@
       "durationMs": 650,
       "bytes": 4556,
       "sha256": "704a5271e305daa89d6ce8c86dab1747922585e72891d3dccec7884362d8a041",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-08dddeac1319",
@@ -174,7 +210,9 @@
       "durationMs": 435,
       "bytes": 3260,
       "sha256": "10d3680e0e52a526e296574f2f8271c58be3459bd2b72f1243896d30cfbc0d10",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-b86568089d7c",
@@ -183,7 +221,9 @@
       "durationMs": 506,
       "bytes": 3692,
       "sha256": "38fa419c28a48f9dd0395f72ed842c6f749230ef4a4baf1f29c52b88c4a0203a",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-3a75e5ce265a",
@@ -192,7 +232,9 @@
       "durationMs": 683,
       "bytes": 4700,
       "sha256": "d738ec9abbd501354cddc84f702174d59331f87572c7684216582231c3253ea2",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-1691d4b364c1",
@@ -201,7 +243,9 @@
       "durationMs": 897,
       "bytes": 5996,
       "sha256": "464493895f7b31137216315b2b53ef8ec88f413b5da0371109d602c2e4605ed6",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-fc60cfd821df",
@@ -210,7 +254,9 @@
       "durationMs": 762,
       "bytes": 5132,
       "sha256": "2984e6fe0ea5728d8e4944c4455ca81f79b3520a6816025904cb7dd92209e0a7",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-141e431009ad",
@@ -219,7 +265,9 @@
       "durationMs": 1135,
       "bytes": 7436,
       "sha256": "ca14d0e5d20fd19f97310a402f2aa3d19972ca653b6b272d6bf73541b82758dc",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-91326dfb2a71",
@@ -228,7 +276,9 @@
       "durationMs": 778,
       "bytes": 5276,
       "sha256": "8c4cd73eb7e8a267b9e5a5a84e7e2fd067d134cb19082593f451d8e5233e8d91",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     },
     {
       "id": "stroke-7eba1915dccd",
@@ -237,7 +287,9 @@
       "durationMs": 705,
       "bytes": 4844,
       "sha256": "a5b320683fab6894520634ffdc1171224092712da73dbfc3c0529b943529b544",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed",
+      "reviewedAt": "2026-11-08",
+      "reviewMethod": "user-confirmed-listening-reel"
     }
   ]
 }
