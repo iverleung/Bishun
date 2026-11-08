@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { QueryHistory } from '../src/web/history.js';
 import { defaultPreferences, loadPreferences, savePreferences } from '../src/web/preferences.js';
 import { SavedQueries } from '../src/web/saved-queries.js';
+import { createShareUrl, readSharedQuery } from '../src/web/share.js';
 
 test('saved queries preserve order and duplicates within a query, survive reload and stay separate from history', () => {
     const values = new Map();
@@ -139,4 +140,18 @@ test('library backup preview never mutates, import reports duplicates, invalid e
     for (const text of ['{', '{}', JSON.stringify({ type: 'bishun-wordlists', version: 2, items: [] }), ' '.repeat(100001)]) {
         assert.throws(() => saved.previewImport(text));
     }
+});
+
+
+test('share links contain only validated query content and preserve Unicode, order and duplicates', () => {
+    const url = createShareUrl('https://example.com/?private=1#old', '木𠮷木');
+    assert.equal(new URL(url).search, '');
+    assert.equal(new URL(url).pathname, '/');
+    assert.deepEqual(readSharedQuery(url), { status: 'valid', query: '木𠮷木' });
+    for (const value of ['', 'abc', '木'.repeat(21), null]) assert.throws(() => createShareUrl('https://example.com', value));
+    for (const hash of ['q=', 'q=abc', 'q=木&q=水', 'q=' + '木'.repeat(21), 'q=%E0%A4%A']) {
+        assert.equal(readSharedQuery('https://example.com/#' + hash).status, 'invalid');
+    }
+    assert.equal(readSharedQuery('https://example.com/?candidate=1#query').status, 'none');
+    assert.throws(() => createShareUrl('file:///tmp/index.html', '木'));
 });

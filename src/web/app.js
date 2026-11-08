@@ -6,6 +6,7 @@ import { QueryHistory } from './history.js';
 import { defaultPreferences, loadPreferences, savePreferences } from './preferences.js';
 import { SavedQueries } from './saved-queries.js';
 import { createSavedLibrary } from './saved-library.js';
+import { setupSharing, readSharedQuery, clearSharedQuery } from './share.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
 const svgNamespace = 'http://www.w3.org/2000/svg';
@@ -310,7 +311,8 @@ function render(state) {
     dom.status.textContent = state.audioWarning || statuses[state.status];
 }
 
-function query(value) {
+function query(value, fromLink = false) {
+    if (!fromLink) clearSharedQuery();
     savedFeedback('');
     savedFeedback('', false, dom.saveActionFeedback);
     const result = player.query(value);
@@ -409,4 +411,15 @@ window.addEventListener('pagehide', () => player.pause());
 window.addEventListener('resize', updateQueueTabStops);
 applyPreferences(loadPreferences(historyStorage));
 renderSavedQueries();
-query('');
+setupSharing({ dom, getSelection: () => ({ character: player.entry, group: player.entries.join('') }) });
+function restoreSharedQuery() {
+    const shared = readSharedQuery(location.href);
+    dom.query.value = shared.status === 'valid' ? shared.query : '';
+    query(dom.query.value, true);
+    if (shared.status === 'invalid') {
+        dom.queryNotice.textContent = '分享链接无效，请输入 1—20 个汉字';
+        dom.queryNotice.hidden = false;
+    }
+}
+window.addEventListener('hashchange', restoreSharedQuery);
+restoreSharedQuery();
