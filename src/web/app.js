@@ -293,7 +293,7 @@ async function movePractice(index, { replay = false } = {}) {
         const started = practice.start(player.record);
         if (run.suspended || document.hidden || dom.settings.open) pausePractice();
         await started;
-        if (practiceRun === run && !dom.settings.open && !document.hidden) dom.practiceMode.focus({ preventScroll: true });
+        if (practiceRun === run && !dom.settings.open && !document.hidden) dom.practicePanel.focus({ preventScroll: true });
     } catch {
         if (practiceRun !== run || run.task.signal.aborted) return;
         run.pending = false;
@@ -313,7 +313,7 @@ function renderPractice() {
     dom.practicePanel.hidden = !visible;
     dom.practiceLayer.classList.toggle('accepts-input', ['active', 'hint'].includes(practice.status));
     if (!visible) return;
-    dom.practiceMode.value = practice.mode;
+    if (dom.practiceMode.value !== practice.mode) dom.practiceMode.value = practice.mode;
     dom.practiceProgress.textContent = `${practice.completed} / ${practice.total} 笔`;
     const name = practice.record?.strokeNames[practice.completed];
     const next = practice.completed < practice.total ? `第 ${practice.completed + 1} 笔${name ? ` · ${name}` : ''}` : '';
@@ -515,14 +515,17 @@ dom.practiceBtn.addEventListener('click', () => {
     practiceRun = { revision: player.revision, start: player.index, completed: new Set(), skipped: new Set(), task: new AbortController(), pending: false, failed: null, transition: false };
     void practice.start(player.record);
     dom.writingGrid.scrollIntoView({ block: 'center' });
-    dom.practiceMode.focus({ preventScroll: true });
+    dom.practicePanel.focus({ preventScroll: true });
 });
 dom.practiceMode.addEventListener('change', () => void practice.restart(dom.practiceMode.value));
 dom.practiceHintBtn.addEventListener('click', () => {
     if (practice.status === 'paused') void practice.resume();
     else void practice.hint();
 });
-dom.practiceRestartBtn.addEventListener('click', () => void practice.restart());
+dom.practiceRestartBtn.addEventListener('click', () => {
+    dom.practicePanel.focus({ preventScroll: true });
+    void practice.restart();
+});
 dom.practiceNextBtn.addEventListener('click', () => {
     if (!practiceRun) return;
     const index = nextPracticeIndex();

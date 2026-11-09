@@ -8,13 +8,18 @@ const checks=[];
 let backgroundResumes = 0;
 try {
     const {command,evaluate,wait,click,fill}=browser;
+    await evaluate("window.modeFocusCount=0;document.querySelector('#practiceMode').addEventListener('focus',()=>window.modeFocusCount++);");
+    async function focusOnPractice() {
+        await wait("document.activeElement.id === 'practicePanel'");
+        assert.equal(await evaluate('window.modeFocusCount'),0);
+    }
     const active="!document.querySelector('#practicePanel').hidden && !document.querySelector('#practiceHintBtn').disabled && document.querySelector('#practiceHintBtn').textContent === '提示下一笔'";
     const feedback=text=>`document.querySelector('#practiceFeedback').textContent === ${JSON.stringify(text)}`;
     async function query(text) {
         await fill('#query',text);await click('#searchForm [type="submit"]');
         await wait(`!document.querySelector('#playBtn').disabled && document.querySelector('#lessonActionsHeading').textContent === '当前字 · ${Array.from(text)[0]}'`);
     }
-    async function enter() { await click('#menuBtn');await click('#practiceBtn');await wait(active); }
+    async function enter() { await click('#menuBtn');await click('#practiceBtn');await wait(active);await focusOnPractice(); }
     async function finish(character) {
         const count=character==='一'?1:2;
         for(let index=0;index<count;index++) {
@@ -31,6 +36,7 @@ try {
     async function next(position) {
         await click('#practiceNextBtn');await wait(active);
         await wait(`document.querySelector('#wordPosition').textContent === '${position}'`);
+        await focusOnPractice();
         assert.equal(await evaluate("document.querySelector('#practiceProgress').textContent.startsWith('0 /')"),true);
         assert.equal(await evaluate("document.querySelector('#animationLayer').children.length"),0);
         assert.equal(await evaluate("document.querySelector('#practiceMode').value"),'independent');
@@ -39,8 +45,9 @@ try {
     await evaluate("document.querySelector('#practiceMode').value='independent';document.querySelector('#practiceMode').dispatchEvent(new Event('change'))");
     await wait(active);
     assert.equal(await evaluate("document.querySelector('#practiceContinueActions').hidden"),true);
+    assert.deepEqual(await evaluate("Array.from(document.querySelector('#practiceMode').options, option=>option.text)"),['描红','背临']);
     await finish('一');await wait(feedback('这一字写完了'));
-    await click('#practiceRestartBtn');await wait(active);await finish('一');
+    await click('#practiceRestartBtn');await wait(active);await focusOnPractice();await finish('一');
     await next('2 / 3');await finish('十');await next('3 / 3');await finish('一');
     await wait(feedback('本次写完 3 字'));
     assert.equal(await evaluate("document.querySelector('#practiceNextBtn').textContent"),'再练一遍');
@@ -107,6 +114,8 @@ try {
     await command('Emulation.setDeviceMetricsOverride',{width:320,height:820,deviceScaleFactor:1,mobile:true});
     assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'),true);
     await browser.screenshot('/private/tmp/bishun-practice-sequence-complete.png');
+    assert.equal(await evaluate('window.modeFocusCount'),0);
+    checks.push('enter, next and rewrite focus the practice panel without focusing the native mode picker; modes labelled 描红 and 背临');
     assert.deepEqual(browser.exceptions,[]);
     console.log(JSON.stringify({browser:browser.version,checks,backgroundResumes,exceptions:browser.exceptions},null,2));
 } catch(error) {

@@ -51,8 +51,9 @@
                 <div class="transport" aria-label="播放控制"><button id="previousStrokeBtn" class="secondary" type="button">上一笔</button><button id="playBtn" class="primary play-button" type="button">播放</button><button id="nextStrokeBtn" class="secondary" type="button">下一笔</button></div>
 
                 </div>
-                <section id="practicePanel" class="practice-panel" aria-label="屏幕练习" hidden>
-                    <div class="practice-options"><label for="practiceMode" class="sr-only">练习方式（切换后重写）</label><select id="practiceMode"><option value="trace">描写</option><option value="independent">独立写</option></select><span id="practiceProgress"></span></div>
+                <section id="practicePanel" class="practice-panel" aria-label="屏幕练习" tabindex="-1" hidden>
+                    <div class="practice-options"><label for="practiceMode" class="sr-only">练习方式（切换后重写）</label><select id="practiceMode" aria-describedby="practiceModeHelp"><option value="trace">描红</option><option value="independent">背临</option></select><span id="practiceProgress"></span></div>
+                    <p id="practiceModeHelp" class="sr-only">描红：沿淡色字形书写。背临：隐藏范字，凭记忆书写。</p>
                     <p id="practiceFeedback" role="status" aria-live="polite"></p>
                     <div class="practice-actions"><button id="practiceHintBtn" type="button" class="secondary">提示下一笔</button><button id="practiceRestartBtn" type="button" class="secondary">重写</button></div>
                     <div id="practiceContinueActions" class="practice-actions" hidden><button id="practiceNextBtn" type="button" class="primary">下一个字</button><button id="practiceSkipBtn" type="button" class="secondary" hidden>跳过这个字</button></div>
