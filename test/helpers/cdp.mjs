@@ -79,6 +79,13 @@ export async function openBrowser(cdpUrl, pageUrl) {
             await command('Input.dispatchMouseEvent', { type: 'mouseReleased', ...point, button: 'left', clickCount: 1 });
         }
         async function fill(selector, text) {
+            // Result pages expose search through the compact toolbar. Follow
+            // the actual UI instead of reaching into its hidden input.
+            if (selector === '#query' && !await evaluate("document.querySelector('#query').getClientRects().length > 0")) {
+                if (await evaluate("document.querySelector('#exitFocusBtn') && !document.querySelector('#exitFocusBtn').hidden")) await click('#exitFocusBtn');
+                await click('#openSearchBtn');
+                await wait("document.querySelector('#searchDialog').open && document.querySelector('#query').getClientRects().length > 0");
+            }
             await click(selector);
             await command('Input.dispatchKeyEvent', { type: 'keyDown', key: 'a', code: 'KeyA', modifiers: 4, commands: ['selectAll'] });
             await command('Input.dispatchKeyEvent', { type: 'keyUp', key: 'a', code: 'KeyA', modifiers: 4 });

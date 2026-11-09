@@ -127,7 +127,9 @@ try {
     await wait("document.querySelector('#animationLayer').children.length > 0");
     await enter();
     assert.equal(await evaluate("document.querySelector('#animationLayer').children.length"), 0);
+    await click('#openSearchBtn');
     await click('#clearBtn');
+    await click('#searchForm [type=\"submit\"]');
     await wait("document.querySelector('#lesson').hidden");
     assert.equal(await evaluate("document.querySelector('#practiceLayer').hidden"), true);
     await query('木');

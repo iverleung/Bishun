@@ -20,6 +20,7 @@ let canvasKey = '';
 let informationKey = '';
 let practiceOwner = '';
 let practiceRun = null;
+let composing = false;
 let renderedSelection = '';
 let pendingArrival = null;
 let arrivalAnimation = null;
@@ -48,6 +49,29 @@ const canvasSwipe = bindCanvasSwipe(dom.stage, {
     select: offset => {
         const next = player.index + offset;
         if (next >= 0 && next < player.entries.length) void player.select(next);
+    }
+});
+
+
+const search = createDrawer({
+    dialog: dom.searchDialog, trigger: dom.openSearchBtn, closeButton: dom.closeSearchBtn, initialFocus: dom.query,
+    onOpen() {
+        composing = false;
+        canvasSwipe.reset();
+        player.pause();
+        pausePractice();
+        dom.query.value = player.entries.join('');
+        dom.clearBtn.hidden = !dom.query.value;
+        dom.searchError.hidden = true;
+        dom.searchDialog.append(dom.searchPanel);
+    },
+    onClose() {
+        composing = false;
+        dom.searchHome.append(dom.searchPanel);
+        dom.query.value = player.entries.join('');
+        dom.clearBtn.hidden = !dom.query.value;
+        dom.searchError.hidden = true;
+        if (!player.entries.length) dom.query.focus({ preventScroll: true });
     }
 });
 
@@ -274,7 +298,7 @@ async function movePractice(index, { replay = false } = {}) {
     const run = practiceRun;
     if (!run || run.pending || practice.status !== 'complete') return;
     run.pending = true;
-    run.suspended = document.hidden || dom.settings.open;
+    run.suspended = document.hidden || dom.settings.open || dom.searchDialog.open;
     run.failed = null;
     if (replay) { run.completed.clear(); run.skipped.clear(); }
     if (index >= player.entries.length) { run.pending = false; renderPractice(); return; }
@@ -291,9 +315,9 @@ async function movePractice(index, { replay = false } = {}) {
         run.transition = false;
         run.pending = false;
         const started = practice.start(player.record);
-        if (run.suspended || document.hidden || dom.settings.open) pausePractice();
+        if (run.suspended || document.hidden || dom.settings.open || dom.searchDialog.open) pausePractice();
         await started;
-        if (practiceRun === run && !dom.settings.open && !document.hidden) dom.practicePanel.focus({ preventScroll: true });
+        if (practiceRun === run && !dom.settings.open && !dom.searchDialog.open && !document.hidden) dom.practicePanel.focus({ preventScroll: true });
     } catch {
         if (practiceRun !== run || run.task.signal.aborted) return;
         run.pending = false;
@@ -362,8 +386,16 @@ function render(state) {
     if (state.status === 'playing') { arrivalAnimation?.cancel(); pendingArrival = null; }
     const focused = state.active ?? state.completed - 1;
     document.body.dataset.phase = state.entries.length ? 'lesson' : 'search';
+    dom.searchHome.hidden = state.entries.length > 0;
+    dom.openSearchBtn.hidden = state.entries.length === 0;
+    const committedQuery = state.entries.join('');
+    if (dom.currentQuery.textContent !== committedQuery) {
+        dom.currentQuery.textContent = committedQuery;
+        dom.openSearchBtn.setAttribute('aria-label', `重新查询，当前字组：${committedQuery}`);
+        dom.openSearchBtn.title = committedQuery;
+    }
     dom.lesson.hidden = state.entries.length === 0;
-    dom.clearBtn.hidden = !dom.query.value && !state.entries.length;
+    dom.clearBtn.hidden = !dom.query.value && (dom.searchDialog.open || !state.entries.length);
     dom.wordPosition.textContent = state.entries.length ? `${state.index + 1} / ${state.entries.length}` : '';
     dom.writingGrid.hidden = !available;
     dom.stageMessage.hidden = available;
@@ -442,10 +474,15 @@ function query(value, fromLink = false) {
     if (!player.entries.length) drawer.close({ restore: false });
     if (player.entries.length) history.remember(player.entries.join(''));
     renderHistory();
+    if (player.entries.length) dom.query.blur();
+    if (dom.searchDialog.open) search.close({ restore: false });
+    if (!player.entries.length && focusMode) void exitFocusMode();
 }
 
-let composing = false;
-dom.query.addEventListener('input', () => { dom.clearBtn.hidden = !dom.query.value && !player.entries.length; });
+dom.query.addEventListener('input', () => {
+    dom.clearBtn.hidden = !dom.query.value && (dom.searchDialog.open || !player.entries.length);
+    dom.searchError.hidden = true;
+});
 dom.query.addEventListener('compositionstart', () => { composing = true; });
 dom.query.addEventListener('compositionend', () => { composing = false; });
 dom.query.addEventListener('keydown', event => {
@@ -454,6 +491,12 @@ dom.query.addEventListener('keydown', event => {
 dom.searchForm.addEventListener('submit', event => {
     event.preventDefault();
     if (!composing) {
+        if (dom.searchDialog.open && dom.query.value.trim() && !/\p{Script=Han}/u.test(dom.query.value)) {
+            dom.searchError.textContent = '请输入汉字';
+            dom.searchError.hidden = false;
+            dom.query.focus({ preventScroll: true });
+            return;
+        }
         query(dom.query.value);
         if (!dom.playBtn.disabled && player.entries.length) dom.playBtn.focus({ preventScroll: true });
     }
@@ -463,6 +506,13 @@ document.querySelectorAll('[data-query]').forEach(el => el.addEventListener('cli
     query(el.dataset.query);
 }));
 dom.clearBtn.addEventListener('click', () => {
+    if (dom.searchDialog.open) {
+        dom.query.value = '';
+        dom.clearBtn.hidden = true;
+        dom.searchError.hidden = true;
+        dom.query.focus({ preventScroll: true });
+        return;
+    }
     if (focusMode) void exitFocusMode();
     dom.query.value = '';
     query('');

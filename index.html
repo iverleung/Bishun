@@ -9,20 +9,20 @@
     <link rel="stylesheet" href="/src/web/style.css">
 </head>
 <body data-phase="search">
-    <header class="site-header"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">永</span>笔顺</a><button id="menuBtn" class="menu-button" type="button" aria-label="打开菜单" title="菜单" aria-haspopup="dialog" aria-controls="settings" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 6H20M4 12H20M4 18H20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button></header>
+    <header class="site-header"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">永</span>笔顺</a><button id="openSearchBtn" class="query-trigger" type="button" aria-label="重新查询" aria-haspopup="dialog" aria-controls="searchDialog" aria-expanded="false" hidden><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span id="currentQuery"></span></button><button id="menuBtn" class="menu-button" type="button" aria-label="打开菜单" title="菜单" aria-haspopup="dialog" aria-controls="settings" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 6H20M4 12H20M4 18H20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button></header>
     <main class="workspace">
         <button id="exitFocusBtn" class="focus-exit secondary" type="button" hidden>退出专注</button>
         <h1 class="sr-only">汉字笔顺查询</h1>
-        <section class="search-panel" aria-label="查字">
+        <div id="searchHome"><section id="searchPanel" class="search-panel" aria-label="查字">
             <form id="searchForm">
                 <label class="sr-only" for="query">输入汉字或词语</label>
                 <div class="search-field"><input id="query" name="query" placeholder="输入汉字或词语" aria-describedby="inputHint" autocomplete="off" autofocus><button id="clearBtn" class="clear-button" type="button" aria-label="清空" title="清空" hidden>×</button><button class="primary" type="submit">查询 <span aria-hidden="true">↗</span></button></div>
                 <div id="historyRow" class="query-history" hidden><nav id="historyList" class="history-list" aria-label="查询历史"></nav><button id="clearHistoryBtn" type="button" aria-label="清空查询历史" title="清空查询历史">×</button></div>
                 <div class="input-footnote"><span id="inputHint">最多 20 字</span><button type="button" data-query="木水心">试试「木水心」</button></div>
             </form>
-            <p id="queryNotice" class="notice" hidden></p>
-
-        </section>
+            <p id="searchError" class="notice" role="alert" hidden></p>
+        </section></div>
+        <p id="queryNotice" class="notice query-notice" role="status" hidden></p>
 
         <section id="lesson" class="lesson-panel" aria-label="单字笔顺" hidden>
             <div id="basicInfo" class="canvas-information" role="group" aria-label="当前字的拼音与笔画数">
@@ -63,6 +63,7 @@
         </section>
         <p id="status" class="sr-only" role="status" aria-live="polite"></p>
     </main>
+    <dialog id="searchDialog" class="search-dialog" aria-labelledby="searchTitle"><div class="search-dialog-header"><h2 id="searchTitle">查字</h2><button id="closeSearchBtn" type="button">取消</button></div></dialog>
     <dialog id="settings" class="settings-drawer" aria-labelledby="menuTitle">
         <div class="drawer-header"><h2 id="menuTitle">菜单</h2><button id="closeMenuBtn" type="button" aria-label="关闭菜单">×</button></div>
         <div class="drawer-content">
