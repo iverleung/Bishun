@@ -94,7 +94,7 @@ def contexts(items, ss, name, typ, page, previous):
             value = ('garden', text)
         elif span['size'] >= 15:
             match = re.match('^\\s*(\\d{1,2})(?:\\s|(?=[\\u3400-\\u9fff]))', span['text'])
-            if match and (re.fullmatch('\\s*\\d{1,2}\\s*', text) or x < 112 + column(x) * page.rect.width / 2):
+            if match:
                 value = ('number', int(match[1]))
         if value:
             events.append((column(x), round(y / 3) * 3, -1 if typ == '词语表' else x, 0, value))
@@ -208,7 +208,7 @@ def proofread():
                         changes['sourceType'] = {'old': v[4], 'new': src.get('sourceType')}
                     if src.get('sourceType') == '课文' and src.get('sourceLesson') != str(v[1]):
                         changes['lesson'] = {'old': v[1], 'new': src.get('sourceLesson')}
-                    if any((key not in ['pinyin', 'poly'] for key in changes)):
+                    if any((key not in ['pinyin', 'poly', 'lesson'] for key in changes)):
                         raise ValueError(f"{name} row {x['row']}: source lesson/type mismatch")
                     if changes:
                         diffs.append({'row': x['row'], 'text': src['text'], 'pdfPage': src['pdfPage'], 'changes': changes})
@@ -222,9 +222,11 @@ def proofread():
                 raise ValueError(f'{name} {typ}: source page mismatch')
             r['tables'][typ] = {'pdfRange': [start, end], 'printedCount': printed_count, 'countExcludingBlue': counted, 'sourceCount': len(source), 'xlsxCount': len(expected), 'sequenceEqual': left == right, 'firstMismatch': next((i for (i, (a, b)) in enumerate(zip(left, right)) if a != b), None), 'sourceWithPinyin': sum((bool(s.get('pinyin')) for s in source)), 'pinyinDifferences': diffs, 'source': source}
         r['tocMissing'] = sorted({str(row[1]) for row in book[name].iter_rows(min_row=2, values_only=True)} - set(courses))
+        lesson_fixes = {delta['row']: delta['changes']['lesson']['new'] for table in r['tables'].values() for delta in table['pinyinDifferences'] if 'lesson' in delta['changes']}
         r['tocChanges'] = []
         for (i, row) in enumerate(book[name].iter_rows(min_row=2, values_only=True), 2):
             (table, lesson, unit, title, origin, *rest) = row
+            lesson = lesson_fixes.get(i, lesson)
             course = courses.get(str(lesson))
             if course:
                 expected_title = course['title'] + ('·语文园地' if origin == '语文园地' else '')
@@ -272,8 +274,13 @@ def build_outputs(results):
             deltas = table['pinyinDifferences']
             for delta in deltas:
                 original = delta['changes']
-                if any((key != 'pinyin' for key in original)):
+                if any((key not in ['pinyin', 'lesson'] for key in original)):
                     raise ValueError(f"{name} row {delta['row']}: non-pinyin appendix difference requires review")
+                if 'lesson' in original:
+                    change = original['lesson']
+                    add(name, delta['row'], '课序', change['old'], change['new'], dict(pdf=source['file'], pdfPage=delta['pdfPage'], printedPage=page_labels[delta['pdfPage']], table=table_name, method='appendix-lesson-marker'))
+                if 'pinyin' not in original:
+                    continue
                 changed = original['pinyin']
                 matched = [item for item in table['source'] if item['text'] == delta['text'] and item['pdfPage'] == delta['pdfPage'] and (item.get('pinyin') == changed['new'])]
                 if not matched:
@@ -288,10 +295,11 @@ def build_outputs(results):
                 pinyin_kinds[kind] += 1
             table_checks[table_name] = {key: table[key] for key in ['pdfRange', 'sourceCount', 'xlsxCount', 'sequenceEqual', 'printedCount', 'countExcludingBlue', 'sourceWithPinyin']}
             table_checks[table_name]['pageLabels'] = page_labels
-            table_checks[table_name]['mainLessonMarkersMatch'] = True
+            table_checks[table_name]['mainLessonMarkerCorrections'] = sum('lesson' in delta['changes'] for delta in deltas)
+            table_checks[table_name]['mainLessonMarkersMatchAfterCorrections'] = True
             table_checks[table_name]['allSourceTypesMatch'] = True
             table_checks[table_name]['blueFlagsMatch'] = True if table_name == '识字表' else None
-            table_checks[table_name]['pinyinCorrections'] = len(deltas)
+            table_checks[table_name]['pinyinCorrections'] = sum('pinyin' in delta['changes'] for delta in deltas)
         document.close()
         for change in result['tocChanges']:
             course = result['toc'][str(change['lesson'])]
@@ -301,7 +309,7 @@ def build_outputs(results):
         summaries.append(dict(book=name, source=source, tocLessonCount=len(result['toc']), unresolvedCourseKeys=result['tocMissing'], metadataChangedRows=len(result['tocChanges']), tables=table_checks))
     patches = list(grouped.values())
     workbook = openpyxl.load_workbook(ROOT / WORKBOOK, read_only=True, data_only=True)
-    columns = {'单元': 2, '课题': 3, '拼音': 6}
+    columns = {'课序': 1, '单元': 2, '课题': 3, '拼音': 6}
     originals = {sheet.title: list(sheet.values) for sheet in workbook if sheet.title != '汇总与质检'}
     seen = set()
     for patch in patches:
@@ -314,7 +322,7 @@ def build_outputs(results):
             if actual != patch['before']:
                 raise ValueError(f'Patch does not match source cell: {identity}')
     workbook.close()
-    corrections = dict(schemaVersion=1, date='2026-11-10', scope='Corrections against provided PDFs; original files are unchanged. Not consumed by the Web app yet.', sourceHashes=source_hashes, fieldColumns={'单元': 'C', '课题': 'D', '拼音': 'G'}, patches=patches)
+    corrections = dict(schemaVersion=1, date='2026-11-10', scope='Corrections against provided PDFs; original files are unchanged. Not consumed by the Web app yet.', sourceHashes=source_hashes, fieldColumns={'课序': 'B', '单元': 'C', '课题': 'D', '拼音': 'G'}, patches=patches)
     audit = dict(schemaVersion=1, date='2026-11-10', status='source-comparison-complete', method='Full supplied-row text-layer comparison plus documented visual checks; not a full page-by-page human review or a normative stroke audit.', sourceHashes=source_hashes, totals=dict(books=len(results), tables=sum((len(item['tables']) for item in results)), rows=sum((table['sourceCount'] for item in results for table in item['tables'].values())), changedRows=len(changed_rows), changedCells=sum(fields.values()), cellsByField=dict(fields), pinyinCorrectionKinds=dict(pinyin_kinds), patchGroups=len(patches), printedCountAnchors=sum((table['printedCount'] is not None for item in results for table in item['tables'].values()))), visualChecks={'tocPages': {'一年级下册': [4], '二年级上册': [4], '三年级下册': [4], '四年级下册': [4, 5], '六年级下册': [4, 5]}, 'fontCodeRows': {'一年级上册': [164], '二年级下册': [343], '三年级下册': [75, 147], '四年级下册': [56, 112]}, 'writingPage': {'一年级上册': [113]}, 'pathAnnotation': {'book': '三年级下册', 'pdfPage': 117, 'printedPage': 112, 'character': '略', 'reading': 'lüè', 'xlsxRow': 230}}, limitations=['Only the supplied revisions were compared; current official publication catalog was not queried.', 'Page numbers in workbook are PDF physical pages, not printed lesson pages.', '语文园地 source labels are checked; their inherited numeric lesson keys remain raw export metadata, not independent garden IDs.', '表内序号 is an export helper, not an independently printed textbook field; its meaning was not redefined.', 'PDF source-file permissions and teaching/stroke standards are outside this content comparison.'], books=summaries)
     return {'resources/textbooks/proofread-corrections.json': corrections, 'docs/教材原件校对记录-2026-11-10.json': audit}
 

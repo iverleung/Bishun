@@ -18,11 +18,107 @@
     "refs/六年级下册.pdf": "878f8d7fba64b1f1277be9a5729952ecccbe1cb2c4ba135f9eb668724d20a683"
   },
   "fieldColumns": {
+    "课序": "B",
     "单元": "C",
     "课题": "D",
     "拼音": "G"
   },
   "patches": [
+    {
+      "sheet": "一年级上册",
+      "field": "课序",
+      "before": "汉语拼音3",
+      "after": "汉语拼音4",
+      "rows": [
+        37,
+        38,
+        39,
+        40
+      ],
+      "evidence": {
+        "pdf": "refs/一年级上册.pdf",
+        "pdfPage": 110,
+        "printedPage": "105",
+        "table": "识字表",
+        "method": "appendix-lesson-marker"
+      }
+    },
+    {
+      "sheet": "一年级上册",
+      "field": "课序",
+      "before": "汉语拼音5",
+      "after": "汉语拼音8",
+      "rows": [
+        53,
+        54,
+        55,
+        56
+      ],
+      "evidence": {
+        "pdf": "refs/一年级上册.pdf",
+        "pdfPage": 110,
+        "printedPage": "105",
+        "table": "识字表",
+        "method": "appendix-lesson-marker"
+      }
+    },
+    {
+      "sheet": "一年级上册",
+      "field": "课序",
+      "before": "汉语拼音6",
+      "after": "汉语拼音9",
+      "rows": [
+        61,
+        62,
+        63,
+        64
+      ],
+      "evidence": {
+        "pdf": "refs/一年级上册.pdf",
+        "pdfPage": 110,
+        "printedPage": "105",
+        "table": "识字表",
+        "method": "appendix-lesson-marker"
+      }
+    },
+    {
+      "sheet": "一年级上册",
+      "field": "课序",
+      "before": "汉语拼音10",
+      "after": "汉语拼音13",
+      "rows": [
+        82,
+        83,
+        84,
+        85
+      ],
+      "evidence": {
+        "pdf": "refs/一年级上册.pdf",
+        "pdfPage": 111,
+        "printedPage": "106",
+        "table": "识字表",
+        "method": "appendix-lesson-marker"
+      }
+    },
+    {
+      "sheet": "一年级上册",
+      "field": "课序",
+      "before": "汉语拼音11",
+      "after": "汉语拼音14",
+      "rows": [
+        90,
+        91,
+        92,
+        93
+      ],
+      "evidence": {
+        "pdf": "refs/一年级上册.pdf",
+        "pdfPage": 111,
+        "printedPage": "106",
+        "table": "识字表",
+        "method": "appendix-lesson-marker"
+      }
+    },
     {
       "sheet": "一年级上册",
       "field": "拼音",
@@ -1502,6 +1598,101 @@
         "printedPage": "108",
         "table": "写字表",
         "method": "text-layer"
+      }
+    },
+    {
+      "sheet": "一年级上册",
+      "field": "课题",
+      "before": "b p m f",
+      "after": "d t n l",
+      "rows": [
+        37,
+        38,
+        39,
+        40
+      ],
+      "evidence": {
+        "pdf": "refs/一年级上册.pdf",
+        "pdfPage": 4,
+        "method": "toc-text-layer",
+        "lesson": "汉语拼音4",
+        "printedLessonStartPage": 26
+      }
+    },
+    {
+      "sheet": "一年级上册",
+      "field": "课题",
+      "before": "g  h",
+      "after": "zh ch sh r",
+      "rows": [
+        53,
+        54,
+        55,
+        56
+      ],
+      "evidence": {
+        "pdf": "refs/一年级上册.pdf",
+        "pdfPage": 5,
+        "method": "toc-text-layer",
+        "lesson": "汉语拼音8",
+        "printedLessonStartPage": 38
+      }
+    },
+    {
+      "sheet": "一年级上册",
+      "field": "课题",
+      "before": "j q x",
+      "after": "y w",
+      "rows": [
+        61,
+        62,
+        63,
+        64
+      ],
+      "evidence": {
+        "pdf": "refs/一年级上册.pdf",
+        "pdfPage": 5,
+        "method": "toc-text-layer",
+        "lesson": "汉语拼音9",
+        "printedLessonStartPage": 40
+      }
+    },
+    {
+      "sheet": "一年级上册",
+      "field": "课题",
+      "before": "ai ei ui",
+      "after": "an en in un ün",
+      "rows": [
+        82,
+        83,
+        84,
+        85
+      ],
+      "evidence": {
+        "pdf": "refs/一年级上册.pdf",
+        "pdfPage": 5,
+        "method": "toc-text-layer",
+        "lesson": "汉语拼音13",
+        "printedLessonStartPage": 51
+      }
+    },
+    {
+      "sheet": "一年级上册",
+      "field": "课题",
+      "before": "ao ou iu",
+      "after": "ang eng ing ong",
+      "rows": [
+        90,
+        91,
+        92,
+        93
+      ],
+      "evidence": {
+        "pdf": "refs/一年级上册.pdf",
+        "pdfPage": 5,
+        "method": "toc-text-layer",
+        "lesson": "汉语拼音14",
+        "printedLessonStartPage": 54
       }
     },
     {

@@ -22,11 +22,12 @@
     "books": 12,
     "tables": 32,
     "rows": 7819,
-    "changedRows": 907,
-    "changedCells": 1029,
+    "changedRows": 927,
+    "changedCells": 1069,
     "cellsByField": {
+      "课序": 20,
       "拼音": 557,
-      "课题": 156,
+      "课题": 176,
       "单元": 316
     },
     "pinyinCorrectionKinds": {
@@ -34,7 +35,7 @@
       "missing-writing-pinyin": 550,
       "visual-path-annotation": 1
     },
-    "patchGroups": 547,
+    "patchGroups": 557,
     "printedCountAnchors": 29
   },
   "visualChecks": {
@@ -104,7 +105,7 @@
       },
       "tocLessonCount": 32,
       "unresolvedCourseKeys": [],
-      "metadataChangedRows": 0,
+      "metadataChangedRows": 20,
       "tables": {
         "识字表": {
           "pdfRange": [
@@ -122,7 +123,8 @@
             "111": "106",
             "112": "107"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 20,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": true,
           "pinyinCorrections": 1
@@ -141,7 +143,8 @@
           "pageLabels": {
             "113": "108"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 100
@@ -175,7 +178,8 @@
             "120": "115",
             "121": "116"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": true,
           "pinyinCorrections": 0
@@ -196,7 +200,8 @@
             "123": "118",
             "124": "119"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 200
@@ -232,7 +237,8 @@
             "116": "111",
             "117": "112"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": true,
           "pinyinCorrections": 0
@@ -253,7 +259,8 @@
             "119": "114",
             "120": "115"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 250
@@ -274,7 +281,8 @@
             "122": "117",
             "123": "118"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -309,7 +317,8 @@
             "120": "115",
             "121": "116"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": true,
           "pinyinCorrections": 1
@@ -330,7 +339,8 @@
             "123": "118",
             "124": "119"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -351,7 +361,8 @@
             "126": "121",
             "127": "122"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -385,7 +396,8 @@
             "115": "110",
             "116": "111"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": true,
           "pinyinCorrections": 0
@@ -405,7 +417,8 @@
             "117": "112",
             "118": "113"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -426,7 +439,8 @@
             "120": "115",
             "121": "116"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -460,7 +474,8 @@
             "117": "112",
             "118": "113"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": true,
           "pinyinCorrections": 3
@@ -480,7 +495,8 @@
             "119": "114",
             "120": "115"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -501,7 +517,8 @@
             "122": "117",
             "123": "118"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -535,7 +552,8 @@
             "128": "123",
             "129": "124"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": true,
           "pinyinCorrections": 0
@@ -555,7 +573,8 @@
             "130": "125",
             "131": "126"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -576,7 +595,8 @@
             "133": "128",
             "134": "129"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -610,7 +630,8 @@
             "143": "138",
             "144": "139"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": true,
           "pinyinCorrections": 2
@@ -630,7 +651,8 @@
             "145": "140",
             "146": "141"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -651,7 +673,8 @@
             "148": "143",
             "149": "144"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -685,7 +708,8 @@
             "121": "116",
             "122": "117"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": true,
           "pinyinCorrections": 0
@@ -705,7 +729,8 @@
             "123": "118",
             "124": "119"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -726,7 +751,8 @@
             "126": "121",
             "127": "122"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -759,7 +785,8 @@
             "124": "119",
             "125": "120"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": true,
           "pinyinCorrections": 0
@@ -779,7 +806,8 @@
             "126": "121",
             "127": "122"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -799,7 +827,8 @@
             "128": "123",
             "129": "124"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -832,7 +861,8 @@
             "131": "126",
             "132": "127"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -853,7 +883,8 @@
             "134": "129",
             "135": "130"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -885,7 +916,8 @@
           "pageLabels": {
             "126": "121"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0
@@ -905,7 +937,8 @@
             "127": "122",
             "128": "123"
           },
-          "mainLessonMarkersMatch": true,
+          "mainLessonMarkerCorrections": 0,
+          "mainLessonMarkersMatchAfterCorrections": true,
           "allSourceTypesMatch": true,
           "blueFlagsMatch": null,
           "pinyinCorrections": 0

@@ -45,6 +45,13 @@ class TextbookProofreadTests(unittest.TestCase):
         target = [row for row in rows if row['sourceType'] == '课文' and row['sourceLesson'] == '阅读10']
         self.assertEqual(''.join(row['text'] for row in target), '来半你有')
 
+    def test_partial_double_columns_do_not_merge_right_hand_pinyin_lessons(self):
+        rows = self.books['一年级上册']['tables']['识字表']['source']
+        expected = {'汉语拼音4':'大马路土','汉语拼音8':'桌纸读书','汉语拼音9':'鱼鸭乌鸦','汉语拼音13':'蓝云草原','汉语拼音14':'冰自行车'}
+        for lesson, characters in expected.items():
+            actual = ''.join(row['text'] for row in rows if row['sourceType']=='课文' and row['sourceLesson']==lesson)
+            self.assertEqual(actual, characters)
+
     def test_font_codes_and_extraction_punctuation_are_not_new_readings(self):
         self.assertEqual(proof.decode('lC'), 'lǜ')
         self.assertEqual(proof.decode('lB'), 'lǘ')
@@ -62,11 +69,11 @@ class TextbookProofreadTests(unittest.TestCase):
     def test_corrections_are_cell_scoped_with_original_values_and_source_hashes(self):
         correction = self.outputs['resources/textbooks/proofread-corrections.json']
         self.assertEqual(len(correction['sourceHashes']), 13)
-        self.assertEqual(set(correction['fieldColumns']), {'拼音','单元','课题'})
+        self.assertEqual(set(correction['fieldColumns']), {'课序','拼音','单元','课题'})
         totals = self.outputs['docs/教材原件校对记录-2026-11-10.json']['totals']
-        self.assertEqual(totals['cellsByField'], {'拼音':557,'课题':156,'单元':316})
+        self.assertEqual(totals['cellsByField'], {'拼音':557,'课序':20,'课题':176,'单元':316})
         self.assertEqual(totals['pinyinCorrectionKinds'], {'font-code-decoding':6,'missing-writing-pinyin':550,'visual-path-annotation':1})
-        self.assertEqual(totals['changedCells'], 1029)
+        self.assertEqual(totals['changedCells'], 1069)
         self.assertTrue(all(patch['evidence'].get('pdfPage') for patch in correction['patches']))
 
 
