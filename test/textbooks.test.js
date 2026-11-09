@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import secondBook from '../resources/textbooks/pilot-v1/g1-second.json' with { type:'json' };
 import book from '../resources/textbooks/pilot-v1/g1-first.json' with { type:'json' };
 import {TextbookStore,validateTextbook,textbookSelection,textbookBooks} from '../src/data/textbooks.js';
 const clone = () => structuredClone(book);
@@ -48,4 +49,31 @@ test('bounded loads and invalid HTML/JSON responses are recoverable without alte
     await assert.rejects(store.load('g1-first'),/暂不可用/);assert.equal(store.books.size,0);
     store.fetch=async()=>new Response('{bad',{headers:{'content-type':'application/json'}});await assert.rejects(store.load('g1-first'),/重试/);
     store.fetch=async()=>json(book);assert.equal((await store.load('g1-first')).id,'g1-first');
+});
+
+test('second volume preserves all corrected source records and independent gardens',()=>{
+    validateTextbook(secondBook,'g1-second');
+    assert.equal(secondBook.title,'一年级下册');
+    const tasks=secondBook.units.flatMap(unit=>unit.tasks);
+    assert.equal(tasks.length,36);assert.equal(tasks.filter(task=>task.kind==='garden').length,8);
+    assert.equal(tasks.reduce((sum,task)=>sum+task.read.length,0),419);
+    assert.equal(tasks.reduce((sum,task)=>sum+task.write.length,0),200);
+    assert.equal(tasks.flatMap(task=>task.read).filter(entry=>entry.polyphonic).length,9);
+    assert.equal(secondBook.source.appliedCells,214);
+    assert.equal(textbookSelection(secondBook,'literacy-1','write').query,'春冬吹花飞入');
+    assert.equal(tasks.find(task=>task.id==='literacy-1').title,'春夏秋冬');
+    assert.equal(textbookSelection(secondBook,'literacy-1','read').query,'霜吹落降飘游池入');
+    assert.equal(textbookSelection(secondBook,'garden-1','write').query,'文卡片合');
+    assert.notEqual(textbookSelection(book,'literacy-1').query,textbookSelection(secondBook,'literacy-1').query);
+});
+test('volume caches and identity validation cannot substitute the same lesson ID from another book',async()=>{
+    const calls=[];
+    const store=new TextbookStore({fetchImpl:async url=>{calls.push(url);return json(url===textbookBooks[0].url?book:secondBook);}});
+    const first=await store.load('g1-first');const second=await store.load('g1-second');
+    assert.equal(await store.load('g1-first'),first);assert.equal(await store.load('g1-second'),second);
+    assert.equal(calls.length,2);assert.notEqual(first,second);
+    assert.throws(()=>validateTextbook(book,'g1-second'),/无效/);
+    const swapped=new TextbookStore({fetchImpl:async()=>json(book)});
+    await assert.rejects(swapped.load('g1-second'),/无效/);
+    assert.equal(swapped.books.size,0);
 });

@@ -1,0 +1,5375 @@
+{
+  "schemaVersion": 1,
+  "dataset": "pilot-v1",
+  "id": "g1-second",
+  "title": "一年级下册",
+  "edition": "统编版",
+  "source": {
+    "workbookSha256": "437169a8febcfb9cc055898e2eeb12e9be4fd8303897a7ab57dd55d3717398fd",
+    "pdfSha256": "a503884e543a48d0a9763a42c37425665b7893897662b3f029f368ddb1b92269",
+    "correctionsSha256": "2a9ccd60115f195e1552b1258c2a8443393505fade7afe2f51f2d333d30deb6a",
+    "appliedCells": 214
+  },
+  "units": [
+    {
+      "id": "unit-1",
+      "title": "第一单元",
+      "tasks": [
+        {
+          "id": "literacy-1",
+          "kind": "lesson",
+          "label": "识字1",
+          "title": "春夏秋冬",
+          "read": [
+            {
+              "id": "row-2",
+              "character": "霜",
+              "reading": "shuāng",
+              "polyphonic": false,
+              "sourceRow": 2,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-3",
+              "character": "吹",
+              "reading": "chuī",
+              "polyphonic": false,
+              "sourceRow": 3,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-4",
+              "character": "落",
+              "reading": "luò",
+              "polyphonic": false,
+              "sourceRow": 4,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-5",
+              "character": "降",
+              "reading": "jiàng",
+              "polyphonic": false,
+              "sourceRow": 5,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-6",
+              "character": "飘",
+              "reading": "piāo",
+              "polyphonic": false,
+              "sourceRow": 6,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-7",
+              "character": "游",
+              "reading": "yóu",
+              "polyphonic": false,
+              "sourceRow": 7,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-8",
+              "character": "池",
+              "reading": "chí",
+              "polyphonic": false,
+              "sourceRow": 8,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-9",
+              "character": "入",
+              "reading": "rù",
+              "polyphonic": false,
+              "sourceRow": 9,
+              "pdfPage": 119
+            }
+          ],
+          "write": [
+            {
+              "id": "row-421",
+              "character": "春",
+              "reading": "chūn",
+              "polyphonic": false,
+              "sourceRow": 421,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-422",
+              "character": "冬",
+              "reading": "dōng",
+              "polyphonic": false,
+              "sourceRow": 422,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-423",
+              "character": "吹",
+              "reading": "chuī",
+              "polyphonic": false,
+              "sourceRow": 423,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-424",
+              "character": "花",
+              "reading": "huā",
+              "polyphonic": false,
+              "sourceRow": 424,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-425",
+              "character": "飞",
+              "reading": "fēi",
+              "polyphonic": false,
+              "sourceRow": 425,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-426",
+              "character": "入",
+              "reading": "rù",
+              "polyphonic": false,
+              "sourceRow": 426,
+              "pdfPage": 122
+            }
+          ]
+        },
+        {
+          "id": "literacy-2",
+          "kind": "lesson",
+          "label": "识字2",
+          "title": "姓氏歌",
+          "read": [
+            {
+              "id": "row-10",
+              "character": "氏",
+              "reading": "shì",
+              "polyphonic": false,
+              "sourceRow": 10,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-11",
+              "character": "什",
+              "reading": "shén",
+              "polyphonic": false,
+              "sourceRow": 11,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-12",
+              "character": "李",
+              "reading": "lǐ",
+              "polyphonic": false,
+              "sourceRow": 12,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-13",
+              "character": "张",
+              "reading": "zhāng",
+              "polyphonic": false,
+              "sourceRow": 13,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-14",
+              "character": "弓",
+              "reading": "gōng",
+              "polyphonic": false,
+              "sourceRow": 14,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-15",
+              "character": "古",
+              "reading": "gǔ",
+              "polyphonic": false,
+              "sourceRow": 15,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-16",
+              "character": "胡",
+              "reading": "hú",
+              "polyphonic": false,
+              "sourceRow": 16,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-17",
+              "character": "吴",
+              "reading": "wú",
+              "polyphonic": false,
+              "sourceRow": 17,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-18",
+              "character": "言",
+              "reading": "yán",
+              "polyphonic": false,
+              "sourceRow": 18,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-19",
+              "character": "孙",
+              "reading": "sūn",
+              "polyphonic": false,
+              "sourceRow": 19,
+              "pdfPage": 119
+            }
+          ],
+          "write": [
+            {
+              "id": "row-427",
+              "character": "什",
+              "reading": "shén",
+              "polyphonic": false,
+              "sourceRow": 427,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-428",
+              "character": "么",
+              "reading": "me",
+              "polyphonic": false,
+              "sourceRow": 428,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-429",
+              "character": "古",
+              "reading": "gǔ",
+              "polyphonic": false,
+              "sourceRow": 429,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-430",
+              "character": "胡",
+              "reading": "hú",
+              "polyphonic": false,
+              "sourceRow": 430,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-431",
+              "character": "双",
+              "reading": "shuāng",
+              "polyphonic": false,
+              "sourceRow": 431,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-432",
+              "character": "言",
+              "reading": "yán",
+              "polyphonic": false,
+              "sourceRow": 432,
+              "pdfPage": 122
+            }
+          ]
+        },
+        {
+          "id": "literacy-3",
+          "kind": "lesson",
+          "label": "识字3",
+          "title": "小青蛙",
+          "read": [
+            {
+              "id": "row-20",
+              "character": "河",
+              "reading": "hé",
+              "polyphonic": false,
+              "sourceRow": 20,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-21",
+              "character": "晴",
+              "reading": "qíng",
+              "polyphonic": false,
+              "sourceRow": 21,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-22",
+              "character": "眼",
+              "reading": "yǎn",
+              "polyphonic": false,
+              "sourceRow": 22,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-23",
+              "character": "睛",
+              "reading": "jīng",
+              "polyphonic": false,
+              "sourceRow": 23,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-24",
+              "character": "保",
+              "reading": "bǎo",
+              "polyphonic": false,
+              "sourceRow": 24,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-25",
+              "character": "护",
+              "reading": "hù",
+              "polyphonic": false,
+              "sourceRow": 25,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-26",
+              "character": "苗",
+              "reading": "miáo",
+              "polyphonic": false,
+              "sourceRow": 26,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-27",
+              "character": "吃",
+              "reading": "chī",
+              "polyphonic": false,
+              "sourceRow": 27,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-28",
+              "character": "事",
+              "reading": "shì",
+              "polyphonic": false,
+              "sourceRow": 28,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-29",
+              "character": "情",
+              "reading": "qíng",
+              "polyphonic": false,
+              "sourceRow": 29,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-30",
+              "character": "请",
+              "reading": "qǐng",
+              "polyphonic": false,
+              "sourceRow": 30,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-31",
+              "character": "让",
+              "reading": "ràng",
+              "polyphonic": false,
+              "sourceRow": 31,
+              "pdfPage": 119
+            }
+          ],
+          "write": [
+            {
+              "id": "row-433",
+              "character": "青",
+              "reading": "qīng",
+              "polyphonic": false,
+              "sourceRow": 433,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-434",
+              "character": "清",
+              "reading": "qīng",
+              "polyphonic": false,
+              "sourceRow": 434,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-435",
+              "character": "晴",
+              "reading": "qíng",
+              "polyphonic": false,
+              "sourceRow": 435,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-436",
+              "character": "苗",
+              "reading": "miáo",
+              "polyphonic": false,
+              "sourceRow": 436,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-437",
+              "character": "请",
+              "reading": "qǐng",
+              "polyphonic": false,
+              "sourceRow": 437,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-438",
+              "character": "生",
+              "reading": "shēng",
+              "polyphonic": false,
+              "sourceRow": 438,
+              "pdfPage": 122
+            }
+          ]
+        },
+        {
+          "id": "literacy-4",
+          "kind": "lesson",
+          "label": "识字4",
+          "title": "猜字谜",
+          "read": [
+            {
+              "id": "row-32",
+              "character": "猜",
+              "reading": "cāi",
+              "polyphonic": false,
+              "sourceRow": 32,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-33",
+              "character": "边",
+              "reading": "biān",
+              "polyphonic": false,
+              "sourceRow": 33,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-34",
+              "character": "凉",
+              "reading": "liáng",
+              "polyphonic": false,
+              "sourceRow": 34,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-35",
+              "character": "喜",
+              "reading": "xǐ",
+              "polyphonic": false,
+              "sourceRow": 35,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-36",
+              "character": "欢",
+              "reading": "huān",
+              "polyphonic": false,
+              "sourceRow": 36,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-37",
+              "character": "时",
+              "reading": "shí",
+              "polyphonic": false,
+              "sourceRow": 37,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-38",
+              "character": "怕",
+              "reading": "pà",
+              "polyphonic": false,
+              "sourceRow": 38,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-39",
+              "character": "攻",
+              "reading": "gōng",
+              "polyphonic": false,
+              "sourceRow": 39,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-40",
+              "character": "令",
+              "reading": "lìng",
+              "polyphonic": false,
+              "sourceRow": 40,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-41",
+              "character": "感",
+              "reading": "gǎn",
+              "polyphonic": false,
+              "sourceRow": 41,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-42",
+              "character": "动",
+              "reading": "dòng",
+              "polyphonic": false,
+              "sourceRow": 42,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-43",
+              "character": "万",
+              "reading": "wàn",
+              "polyphonic": false,
+              "sourceRow": 43,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-44",
+              "character": "无",
+              "reading": "wú",
+              "polyphonic": false,
+              "sourceRow": 44,
+              "pdfPage": 119
+            }
+          ],
+          "write": [
+            {
+              "id": "row-439",
+              "character": "字",
+              "reading": "zì",
+              "polyphonic": false,
+              "sourceRow": 439,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-440",
+              "character": "红",
+              "reading": "hóng",
+              "polyphonic": false,
+              "sourceRow": 440,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-441",
+              "character": "动",
+              "reading": "dòng",
+              "polyphonic": false,
+              "sourceRow": 441,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-442",
+              "character": "万",
+              "reading": "wàn",
+              "polyphonic": false,
+              "sourceRow": 442,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-443",
+              "character": "无",
+              "reading": "wú",
+              "polyphonic": false,
+              "sourceRow": 443,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-444",
+              "character": "明",
+              "reading": "míng",
+              "polyphonic": false,
+              "sourceRow": 444,
+              "pdfPage": 122
+            }
+          ]
+        },
+        {
+          "id": "garden-1",
+          "kind": "garden",
+          "label": "",
+          "title": "语文园地一",
+          "read": [
+            {
+              "id": "row-45",
+              "character": "识",
+              "reading": "shí",
+              "polyphonic": false,
+              "sourceRow": 45,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-46",
+              "character": "组",
+              "reading": "zǔ",
+              "polyphonic": false,
+              "sourceRow": 46,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-47",
+              "character": "计",
+              "reading": "jì",
+              "polyphonic": false,
+              "sourceRow": 47,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-48",
+              "character": "算",
+              "reading": "suàn",
+              "polyphonic": false,
+              "sourceRow": 48,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-49",
+              "character": "减",
+              "reading": "jiǎn",
+              "polyphonic": false,
+              "sourceRow": 49,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-50",
+              "character": "式",
+              "reading": "shì",
+              "polyphonic": false,
+              "sourceRow": 50,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-51",
+              "character": "图",
+              "reading": "tú",
+              "polyphonic": false,
+              "sourceRow": 51,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-52",
+              "character": "形",
+              "reading": "xíng",
+              "polyphonic": false,
+              "sourceRow": 52,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-53",
+              "character": "卡",
+              "reading": "kǎ",
+              "polyphonic": false,
+              "sourceRow": 53,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-54",
+              "character": "合",
+              "reading": "hé",
+              "polyphonic": false,
+              "sourceRow": 54,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-55",
+              "character": "唱",
+              "reading": "chàng",
+              "polyphonic": false,
+              "sourceRow": 55,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-56",
+              "character": "团",
+              "reading": "tuán",
+              "polyphonic": false,
+              "sourceRow": 56,
+              "pdfPage": 119
+            }
+          ],
+          "write": [
+            {
+              "id": "row-445",
+              "character": "文",
+              "reading": "wén",
+              "polyphonic": false,
+              "sourceRow": 445,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-446",
+              "character": "卡",
+              "reading": "kǎ",
+              "polyphonic": false,
+              "sourceRow": 446,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-447",
+              "character": "片",
+              "reading": "piàn",
+              "polyphonic": false,
+              "sourceRow": 447,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-448",
+              "character": "合",
+              "reading": "hé",
+              "polyphonic": false,
+              "sourceRow": 448,
+              "pdfPage": 122
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-2",
+      "title": "第二单元",
+      "tasks": [
+        {
+          "id": "reading-1",
+          "kind": "lesson",
+          "label": "阅读1",
+          "title": "热爱中国共产党",
+          "read": [
+            {
+              "id": "row-57",
+              "character": "热",
+              "reading": "rè",
+              "polyphonic": false,
+              "sourceRow": 57,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-58",
+              "character": "爱",
+              "reading": "ài",
+              "polyphonic": false,
+              "sourceRow": 58,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-59",
+              "character": "共",
+              "reading": "gòng",
+              "polyphonic": false,
+              "sourceRow": 59,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-60",
+              "character": "产",
+              "reading": "chǎn",
+              "polyphonic": false,
+              "sourceRow": 60,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-61",
+              "character": "党",
+              "reading": "dǎng",
+              "polyphonic": false,
+              "sourceRow": 61,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-62",
+              "character": "太",
+              "reading": "tài",
+              "polyphonic": false,
+              "sourceRow": 62,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-63",
+              "character": "阳",
+              "reading": "yáng",
+              "polyphonic": false,
+              "sourceRow": 63,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-64",
+              "character": "光",
+              "reading": "guāng",
+              "polyphonic": false,
+              "sourceRow": 64,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-65",
+              "character": "怀",
+              "reading": "huái",
+              "polyphonic": false,
+              "sourceRow": 65,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-66",
+              "character": "抱",
+              "reading": "bào",
+              "polyphonic": false,
+              "sourceRow": 66,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-67",
+              "character": "幸",
+              "reading": "xìng",
+              "polyphonic": false,
+              "sourceRow": 67,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-68",
+              "character": "福",
+              "reading": "fú",
+              "polyphonic": false,
+              "sourceRow": 68,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-69",
+              "character": "成",
+              "reading": "chéng",
+              "polyphonic": false,
+              "sourceRow": 69,
+              "pdfPage": 119
+            }
+          ],
+          "write": [
+            {
+              "id": "row-449",
+              "character": "共",
+              "reading": "gòng",
+              "polyphonic": false,
+              "sourceRow": 449,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-450",
+              "character": "产",
+              "reading": "chǎn",
+              "polyphonic": false,
+              "sourceRow": 450,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-451",
+              "character": "党",
+              "reading": "dǎng",
+              "polyphonic": false,
+              "sourceRow": 451,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-452",
+              "character": "太",
+              "reading": "tài",
+              "polyphonic": false,
+              "sourceRow": 452,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-453",
+              "character": "阳",
+              "reading": "yáng",
+              "polyphonic": false,
+              "sourceRow": 453,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-454",
+              "character": "光",
+              "reading": "guāng",
+              "polyphonic": false,
+              "sourceRow": 454,
+              "pdfPage": 122
+            }
+          ]
+        },
+        {
+          "id": "reading-2",
+          "kind": "lesson",
+          "label": "阅读2",
+          "title": "吃水不忘挖井人",
+          "read": [
+            {
+              "id": "row-70",
+              "character": "井",
+              "reading": "jǐng",
+              "polyphonic": false,
+              "sourceRow": 70,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-71",
+              "character": "城",
+              "reading": "chéng",
+              "polyphonic": false,
+              "sourceRow": 71,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-72",
+              "character": "村",
+              "reading": "cūn",
+              "polyphonic": false,
+              "sourceRow": 72,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-73",
+              "character": "毛",
+              "reading": "máo",
+              "polyphonic": false,
+              "sourceRow": 73,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-74",
+              "character": "主",
+              "reading": "zhǔ",
+              "polyphonic": false,
+              "sourceRow": 74,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-75",
+              "character": "席",
+              "reading": "xí",
+              "polyphonic": false,
+              "sourceRow": 75,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-76",
+              "character": "住",
+              "reading": "zhù",
+              "polyphonic": false,
+              "sourceRow": 76,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-77",
+              "character": "乡",
+              "reading": "xiāng",
+              "polyphonic": false,
+              "sourceRow": 77,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-78",
+              "character": "亲",
+              "reading": "qīn",
+              "polyphonic": false,
+              "sourceRow": 78,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-79",
+              "character": "战",
+              "reading": "zhàn",
+              "polyphonic": false,
+              "sourceRow": 79,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-80",
+              "character": "士",
+              "reading": "shì",
+              "polyphonic": false,
+              "sourceRow": 80,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-81",
+              "character": "想",
+              "reading": "xiǎng",
+              "polyphonic": false,
+              "sourceRow": 81,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-82",
+              "character": "念",
+              "reading": "niàn",
+              "polyphonic": false,
+              "sourceRow": 82,
+              "pdfPage": 119
+            }
+          ],
+          "write": [
+            {
+              "id": "row-455",
+              "character": "井",
+              "reading": "jǐng",
+              "polyphonic": false,
+              "sourceRow": 455,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-456",
+              "character": "主",
+              "reading": "zhǔ",
+              "polyphonic": false,
+              "sourceRow": 456,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-457",
+              "character": "江",
+              "reading": "jiāng",
+              "polyphonic": false,
+              "sourceRow": 457,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-458",
+              "character": "住",
+              "reading": "zhù",
+              "polyphonic": false,
+              "sourceRow": 458,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-459",
+              "character": "方",
+              "reading": "fāng",
+              "polyphonic": false,
+              "sourceRow": 459,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-460",
+              "character": "后",
+              "reading": "hòu",
+              "polyphonic": false,
+              "sourceRow": 460,
+              "pdfPage": 122
+            }
+          ]
+        },
+        {
+          "id": "reading-3",
+          "kind": "lesson",
+          "label": "阅读3",
+          "title": "我多想去看看",
+          "read": [
+            {
+              "id": "row-83",
+              "character": "告",
+              "reading": "gào",
+              "polyphonic": false,
+              "sourceRow": 83,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-84",
+              "character": "诉",
+              "reading": "sù",
+              "polyphonic": false,
+              "sourceRow": 84,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-85",
+              "character": "走",
+              "reading": "zǒu",
+              "polyphonic": false,
+              "sourceRow": 85,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-86",
+              "character": "京",
+              "reading": "jīng",
+              "polyphonic": false,
+              "sourceRow": 86,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-87",
+              "character": "座",
+              "reading": "zuò",
+              "polyphonic": false,
+              "sourceRow": 87,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-88",
+              "character": "安",
+              "reading": "ān",
+              "polyphonic": false,
+              "sourceRow": 88,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-89",
+              "character": "广",
+              "reading": "guǎng",
+              "polyphonic": false,
+              "sourceRow": 89,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-90",
+              "character": "场",
+              "reading": "chǎng",
+              "polyphonic": false,
+              "sourceRow": 90,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-91",
+              "character": "非",
+              "reading": "fēi",
+              "polyphonic": false,
+              "sourceRow": 91,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-92",
+              "character": "宽",
+              "reading": "kuān",
+              "polyphonic": false,
+              "sourceRow": 92,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-93",
+              "character": "丽",
+              "reading": "lì",
+              "polyphonic": false,
+              "sourceRow": 93,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-94",
+              "character": "洁",
+              "reading": "jié",
+              "polyphonic": false,
+              "sourceRow": 94,
+              "pdfPage": 119
+            }
+          ],
+          "write": [
+            {
+              "id": "row-461",
+              "character": "告",
+              "reading": "gào",
+              "polyphonic": false,
+              "sourceRow": 461,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-462",
+              "character": "的",
+              "reading": "de",
+              "polyphonic": false,
+              "sourceRow": 462,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-463",
+              "character": "会",
+              "reading": "huì",
+              "polyphonic": false,
+              "sourceRow": 463,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-464",
+              "character": "北",
+              "reading": "běi",
+              "polyphonic": false,
+              "sourceRow": 464,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-465",
+              "character": "京",
+              "reading": "jīng",
+              "polyphonic": false,
+              "sourceRow": 465,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-466",
+              "character": "广",
+              "reading": "guǎng",
+              "polyphonic": false,
+              "sourceRow": 466,
+              "pdfPage": 122
+            }
+          ]
+        },
+        {
+          "id": "garden-2",
+          "kind": "garden",
+          "label": "",
+          "title": "语文园地二",
+          "read": [
+            {
+              "id": "row-95",
+              "character": "认",
+              "reading": "rèn",
+              "polyphonic": false,
+              "sourceRow": 95,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-96",
+              "character": "连",
+              "reading": "lián",
+              "polyphonic": false,
+              "sourceRow": 96,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-97",
+              "character": "选",
+              "reading": "xuǎn",
+              "polyphonic": false,
+              "sourceRow": 97,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-98",
+              "character": "圈",
+              "reading": "quān",
+              "polyphonic": false,
+              "sourceRow": 98,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-99",
+              "character": "涂",
+              "reading": "tú",
+              "polyphonic": false,
+              "sourceRow": 99,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-100",
+              "character": "填",
+              "reading": "tián",
+              "polyphonic": false,
+              "sourceRow": 100,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-101",
+              "character": "试",
+              "reading": "shì",
+              "polyphonic": false,
+              "sourceRow": 101,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-102",
+              "character": "练",
+              "reading": "liàn",
+              "polyphonic": false,
+              "sourceRow": 102,
+              "pdfPage": 119
+            }
+          ],
+          "write": [
+            {
+              "id": "row-467",
+              "character": "写",
+              "reading": "xiě",
+              "polyphonic": false,
+              "sourceRow": 467,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-468",
+              "character": "认",
+              "reading": "rèn",
+              "polyphonic": false,
+              "sourceRow": 468,
+              "pdfPage": 122
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-3",
+      "title": "第三单元",
+      "tasks": [
+        {
+          "id": "reading-4",
+          "kind": "lesson",
+          "label": "阅读4",
+          "title": "小公鸡和小鸭子",
+          "read": [
+            {
+              "id": "row-103",
+              "character": "玩",
+              "reading": "wán",
+              "polyphonic": false,
+              "sourceRow": 103,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-104",
+              "character": "得",
+              "reading": "de",
+              "polyphonic": false,
+              "sourceRow": 104,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-105",
+              "character": "急",
+              "reading": "jí",
+              "polyphonic": false,
+              "sourceRow": 105,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-106",
+              "character": "直",
+              "reading": "zhí",
+              "polyphonic": false,
+              "sourceRow": 106,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-107",
+              "character": "哭",
+              "reading": "kū",
+              "polyphonic": false,
+              "sourceRow": 107,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-108",
+              "character": "跟",
+              "reading": "gēn",
+              "polyphonic": false,
+              "sourceRow": 108,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-109",
+              "character": "忽",
+              "reading": "hū",
+              "polyphonic": false,
+              "sourceRow": 109,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-110",
+              "character": "然",
+              "reading": "rán",
+              "polyphonic": false,
+              "sourceRow": 110,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-111",
+              "character": "听",
+              "reading": "tīng",
+              "polyphonic": false,
+              "sourceRow": 111,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-112",
+              "character": "喊",
+              "reading": "hǎn",
+              "polyphonic": false,
+              "sourceRow": 112,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-113",
+              "character": "快",
+              "reading": "kuài",
+              "polyphonic": false,
+              "sourceRow": 113,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-114",
+              "character": "己",
+              "reading": "jǐ",
+              "polyphonic": false,
+              "sourceRow": 114,
+              "pdfPage": 119
+            },
+            {
+              "id": "row-115",
+              "character": "背",
+              "reading": "bèi",
+              "polyphonic": false,
+              "sourceRow": 115,
+              "pdfPage": 119
+            }
+          ],
+          "write": [
+            {
+              "id": "row-469",
+              "character": "走",
+              "reading": "zǒu",
+              "polyphonic": false,
+              "sourceRow": 469,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-470",
+              "character": "河",
+              "reading": "hé",
+              "polyphonic": false,
+              "sourceRow": 470,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-471",
+              "character": "说",
+              "reading": "shuō",
+              "polyphonic": false,
+              "sourceRow": 471,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-472",
+              "character": "让",
+              "reading": "ràng",
+              "polyphonic": false,
+              "sourceRow": 472,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-473",
+              "character": "自",
+              "reading": "zì",
+              "polyphonic": false,
+              "sourceRow": 473,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-474",
+              "character": "己",
+              "reading": "jǐ",
+              "polyphonic": false,
+              "sourceRow": 474,
+              "pdfPage": 122
+            }
+          ]
+        },
+        {
+          "id": "reading-5",
+          "kind": "lesson",
+          "label": "阅读5",
+          "title": "树和喜鹊",
+          "read": [
+            {
+              "id": "row-116",
+              "character": "只",
+              "reading": "zhǐ",
+              "polyphonic": true,
+              "sourceRow": 116,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-117",
+              "character": "很",
+              "reading": "hěn",
+              "polyphonic": false,
+              "sourceRow": 117,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-118",
+              "character": "孤",
+              "reading": "gū",
+              "polyphonic": false,
+              "sourceRow": 118,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-119",
+              "character": "单",
+              "reading": "dān",
+              "polyphonic": false,
+              "sourceRow": 119,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-120",
+              "character": "种",
+              "reading": "zhòng",
+              "polyphonic": false,
+              "sourceRow": 120,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-121",
+              "character": "每",
+              "reading": "měi",
+              "polyphonic": false,
+              "sourceRow": 121,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-122",
+              "character": "都",
+              "reading": "dōu",
+              "polyphonic": false,
+              "sourceRow": 122,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-123",
+              "character": "邻",
+              "reading": "lín",
+              "polyphonic": false,
+              "sourceRow": 123,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-124",
+              "character": "居",
+              "reading": "jū",
+              "polyphonic": false,
+              "sourceRow": 124,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-125",
+              "character": "叫",
+              "reading": "jiào",
+              "polyphonic": false,
+              "sourceRow": 125,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-126",
+              "character": "招",
+              "reading": "zhāo",
+              "polyphonic": false,
+              "sourceRow": 126,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-127",
+              "character": "呼",
+              "reading": "hū",
+              "polyphonic": false,
+              "sourceRow": 127,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-128",
+              "character": "乐",
+              "reading": "lè",
+              "polyphonic": false,
+              "sourceRow": 128,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-475",
+              "character": "从",
+              "reading": "cóng",
+              "polyphonic": false,
+              "sourceRow": 475,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-476",
+              "character": "好",
+              "reading": "hǎo",
+              "polyphonic": false,
+              "sourceRow": 476,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-477",
+              "character": "们",
+              "reading": "men",
+              "polyphonic": false,
+              "sourceRow": 477,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-478",
+              "character": "叫",
+              "reading": "jiào",
+              "polyphonic": false,
+              "sourceRow": 478,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-479",
+              "character": "他",
+              "reading": "tā",
+              "polyphonic": false,
+              "sourceRow": 479,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-480",
+              "character": "回",
+              "reading": "huí",
+              "polyphonic": false,
+              "sourceRow": 480,
+              "pdfPage": 122
+            }
+          ]
+        },
+        {
+          "id": "reading-6",
+          "kind": "lesson",
+          "label": "阅读6",
+          "title": "怎么都快乐",
+          "read": [
+            {
+              "id": "row-129",
+              "character": "怎",
+              "reading": "zěn",
+              "polyphonic": false,
+              "sourceRow": 129,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-130",
+              "character": "独",
+              "reading": "dú",
+              "polyphonic": false,
+              "sourceRow": 130,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-131",
+              "character": "跳",
+              "reading": "tiào",
+              "polyphonic": false,
+              "sourceRow": 131,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-132",
+              "character": "绳",
+              "reading": "shéng",
+              "polyphonic": false,
+              "sourceRow": 132,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-133",
+              "character": "当",
+              "reading": "dāng",
+              "polyphonic": false,
+              "sourceRow": 133,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-134",
+              "character": "还",
+              "reading": "hái",
+              "polyphonic": false,
+              "sourceRow": 134,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-135",
+              "character": "乐",
+              "reading": "yuè",
+              "polyphonic": true,
+              "sourceRow": 135,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-136",
+              "character": "得",
+              "reading": "děi",
+              "polyphonic": true,
+              "sourceRow": 136,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-137",
+              "character": "羽",
+              "reading": "yǔ",
+              "polyphonic": false,
+              "sourceRow": 137,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-138",
+              "character": "球",
+              "reading": "qiú",
+              "polyphonic": false,
+              "sourceRow": 138,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-139",
+              "character": "劲",
+              "reading": "jìn",
+              "polyphonic": false,
+              "sourceRow": 139,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-140",
+              "character": "轮",
+              "reading": "lún",
+              "polyphonic": false,
+              "sourceRow": 140,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-141",
+              "character": "排",
+              "reading": "pái",
+              "polyphonic": false,
+              "sourceRow": 141,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-481",
+              "character": "快",
+              "reading": "kuài",
+              "polyphonic": false,
+              "sourceRow": 481,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-482",
+              "character": "乐",
+              "reading": "lè",
+              "polyphonic": false,
+              "sourceRow": 482,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-483",
+              "character": "当",
+              "reading": "dāng",
+              "polyphonic": false,
+              "sourceRow": 483,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-484",
+              "character": "书",
+              "reading": "shū",
+              "polyphonic": false,
+              "sourceRow": 484,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-485",
+              "character": "画",
+              "reading": "huà",
+              "polyphonic": false,
+              "sourceRow": 485,
+              "pdfPage": 122
+            },
+            {
+              "id": "row-486",
+              "character": "毛",
+              "reading": "máo",
+              "polyphonic": false,
+              "sourceRow": 486,
+              "pdfPage": 122
+            }
+          ]
+        },
+        {
+          "id": "garden-3",
+          "kind": "garden",
+          "label": "",
+          "title": "语文园地三",
+          "read": [
+            {
+              "id": "row-142",
+              "character": "母",
+              "reading": "mǔ",
+              "polyphonic": false,
+              "sourceRow": 142,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-143",
+              "character": "页",
+              "reading": "yè",
+              "polyphonic": false,
+              "sourceRow": 143,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-144",
+              "character": "止",
+              "reading": "zhǐ",
+              "polyphonic": false,
+              "sourceRow": 144,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-145",
+              "character": "斤",
+              "reading": "jīn",
+              "polyphonic": false,
+              "sourceRow": 145,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-146",
+              "character": "寸",
+              "reading": "cùn",
+              "polyphonic": false,
+              "sourceRow": 146,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-147",
+              "character": "丁",
+              "reading": "dīng",
+              "polyphonic": false,
+              "sourceRow": 147,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-148",
+              "character": "千",
+              "reading": "qiān",
+              "polyphonic": false,
+              "sourceRow": 148,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-149",
+              "character": "全",
+              "reading": "quán",
+              "polyphonic": false,
+              "sourceRow": 149,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-150",
+              "character": "旦",
+              "reading": "dàn",
+              "polyphonic": false,
+              "sourceRow": 150,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-487",
+              "character": "止",
+              "reading": "zhǐ",
+              "polyphonic": false,
+              "sourceRow": 487,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-488",
+              "character": "斤",
+              "reading": "jīn",
+              "polyphonic": false,
+              "sourceRow": 488,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-489",
+              "character": "寸",
+              "reading": "cùn",
+              "polyphonic": false,
+              "sourceRow": 489,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-490",
+              "character": "丁",
+              "reading": "dīng",
+              "polyphonic": false,
+              "sourceRow": 490,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-491",
+              "character": "千",
+              "reading": "qiān",
+              "polyphonic": false,
+              "sourceRow": 491,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-492",
+              "character": "旦",
+              "reading": "dàn",
+              "polyphonic": false,
+              "sourceRow": 492,
+              "pdfPage": 123
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-4",
+      "title": "第四单元",
+      "tasks": [
+        {
+          "id": "reading-7",
+          "kind": "lesson",
+          "label": "阅读7",
+          "title": "静夜思",
+          "read": [
+            {
+              "id": "row-151",
+              "character": "静",
+              "reading": "jìng",
+              "polyphonic": false,
+              "sourceRow": 151,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-152",
+              "character": "思",
+              "reading": "sī",
+              "polyphonic": false,
+              "sourceRow": 152,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-153",
+              "character": "床",
+              "reading": "chuáng",
+              "polyphonic": false,
+              "sourceRow": 153,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-154",
+              "character": "疑",
+              "reading": "yí",
+              "polyphonic": false,
+              "sourceRow": 154,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-155",
+              "character": "举",
+              "reading": "jǔ",
+              "polyphonic": false,
+              "sourceRow": 155,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-156",
+              "character": "望",
+              "reading": "wàng",
+              "polyphonic": false,
+              "sourceRow": 156,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-157",
+              "character": "低",
+              "reading": "dī",
+              "polyphonic": false,
+              "sourceRow": 157,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-158",
+              "character": "故",
+              "reading": "gù",
+              "polyphonic": false,
+              "sourceRow": 158,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-493",
+              "character": "思",
+              "reading": "sī",
+              "polyphonic": false,
+              "sourceRow": 493,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-494",
+              "character": "床",
+              "reading": "chuáng",
+              "polyphonic": false,
+              "sourceRow": 494,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-495",
+              "character": "前",
+              "reading": "qián",
+              "polyphonic": false,
+              "sourceRow": 495,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-496",
+              "character": "地",
+              "reading": "dì",
+              "polyphonic": false,
+              "sourceRow": 496,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-497",
+              "character": "故",
+              "reading": "gù",
+              "polyphonic": false,
+              "sourceRow": 497,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-498",
+              "character": "乡",
+              "reading": "xiāng",
+              "polyphonic": false,
+              "sourceRow": 498,
+              "pdfPage": 123
+            }
+          ]
+        },
+        {
+          "id": "reading-8",
+          "kind": "lesson",
+          "label": "阅读8",
+          "title": "夜色",
+          "read": [
+            {
+              "id": "row-159",
+              "character": "胆",
+              "reading": "dǎn",
+              "polyphonic": false,
+              "sourceRow": 159,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-160",
+              "character": "敢",
+              "reading": "gǎn",
+              "polyphonic": false,
+              "sourceRow": 160,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-161",
+              "character": "勇",
+              "reading": "yǒng",
+              "polyphonic": false,
+              "sourceRow": 161,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-162",
+              "character": "讲",
+              "reading": "jiǎng",
+              "polyphonic": false,
+              "sourceRow": 162,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-163",
+              "character": "窗",
+              "reading": "chuāng",
+              "polyphonic": false,
+              "sourceRow": 163,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-164",
+              "character": "乱",
+              "reading": "luàn",
+              "polyphonic": false,
+              "sourceRow": 164,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-165",
+              "character": "拉",
+              "reading": "lā",
+              "polyphonic": false,
+              "sourceRow": 165,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-166",
+              "character": "样",
+              "reading": "yàng",
+              "polyphonic": false,
+              "sourceRow": 166,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-167",
+              "character": "笑",
+              "reading": "xiào",
+              "polyphonic": false,
+              "sourceRow": 167,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-168",
+              "character": "再",
+              "reading": "zài",
+              "polyphonic": false,
+              "sourceRow": 168,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-169",
+              "character": "睡",
+              "reading": "shuì",
+              "polyphonic": false,
+              "sourceRow": 169,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-170",
+              "character": "觉",
+              "reading": "jiào",
+              "polyphonic": false,
+              "sourceRow": 170,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-499",
+              "character": "色",
+              "reading": "sè",
+              "polyphonic": false,
+              "sourceRow": 499,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-500",
+              "character": "把",
+              "reading": "bǎ",
+              "polyphonic": false,
+              "sourceRow": 500,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-501",
+              "character": "讲",
+              "reading": "jiǎng",
+              "polyphonic": false,
+              "sourceRow": 501,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-502",
+              "character": "样",
+              "reading": "yàng",
+              "polyphonic": false,
+              "sourceRow": 502,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-503",
+              "character": "笑",
+              "reading": "xiào",
+              "polyphonic": false,
+              "sourceRow": 503,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-504",
+              "character": "再",
+              "reading": "zài",
+              "polyphonic": false,
+              "sourceRow": 504,
+              "pdfPage": 123
+            }
+          ]
+        },
+        {
+          "id": "reading-9",
+          "kind": "lesson",
+          "label": "阅读9",
+          "title": "端午粽",
+          "read": [
+            {
+              "id": "row-171",
+              "character": "端",
+              "reading": "duān",
+              "polyphonic": false,
+              "sourceRow": 171,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-172",
+              "character": "粽",
+              "reading": "zòng",
+              "polyphonic": false,
+              "sourceRow": 172,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-173",
+              "character": "节",
+              "reading": "jié",
+              "polyphonic": false,
+              "sourceRow": 173,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-174",
+              "character": "总",
+              "reading": "zǒng",
+              "polyphonic": false,
+              "sourceRow": 174,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-175",
+              "character": "煮",
+              "reading": "zhǔ",
+              "polyphonic": false,
+              "sourceRow": 175,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-176",
+              "character": "盼",
+              "reading": "pàn",
+              "polyphonic": false,
+              "sourceRow": 176,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-177",
+              "character": "米",
+              "reading": "mǐ",
+              "polyphonic": false,
+              "sourceRow": 177,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-178",
+              "character": "枣",
+              "reading": "zǎo",
+              "polyphonic": false,
+              "sourceRow": 178,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-179",
+              "character": "甜",
+              "reading": "tián",
+              "polyphonic": false,
+              "sourceRow": 179,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-180",
+              "character": "分",
+              "reading": "fēn",
+              "polyphonic": false,
+              "sourceRow": 180,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-181",
+              "character": "鲜",
+              "reading": "xiān",
+              "polyphonic": false,
+              "sourceRow": 181,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-182",
+              "character": "肉",
+              "reading": "ròu",
+              "polyphonic": false,
+              "sourceRow": 182,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-183",
+              "character": "了",
+              "reading": "liǎo",
+              "polyphonic": true,
+              "sourceRow": 183,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-505",
+              "character": "节",
+              "reading": "jié",
+              "polyphonic": false,
+              "sourceRow": 505,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-506",
+              "character": "米",
+              "reading": "mǐ",
+              "polyphonic": false,
+              "sourceRow": 506,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-507",
+              "character": "间",
+              "reading": "jiān",
+              "polyphonic": false,
+              "sourceRow": 507,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-508",
+              "character": "分",
+              "reading": "fēn",
+              "polyphonic": false,
+              "sourceRow": 508,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-509",
+              "character": "吃",
+              "reading": "chī",
+              "polyphonic": false,
+              "sourceRow": 509,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-510",
+              "character": "肉",
+              "reading": "ròu",
+              "polyphonic": false,
+              "sourceRow": 510,
+              "pdfPage": 123
+            }
+          ]
+        },
+        {
+          "id": "garden-4",
+          "kind": "garden",
+          "label": "",
+          "title": "语文园地四",
+          "read": [
+            {
+              "id": "row-184",
+              "character": "册",
+              "reading": "cè",
+              "polyphonic": false,
+              "sourceRow": 184,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-185",
+              "character": "支",
+              "reading": "zhī",
+              "polyphonic": false,
+              "sourceRow": 185,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-186",
+              "character": "台",
+              "reading": "tái",
+              "polyphonic": false,
+              "sourceRow": 186,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-187",
+              "character": "电",
+              "reading": "diàn",
+              "polyphonic": false,
+              "sourceRow": 187,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-188",
+              "character": "视",
+              "reading": "shì",
+              "polyphonic": false,
+              "sourceRow": 188,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-189",
+              "character": "部",
+              "reading": "bù",
+              "polyphonic": false,
+              "sourceRow": 189,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-190",
+              "character": "机",
+              "reading": "jī",
+              "polyphonic": false,
+              "sourceRow": 190,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-191",
+              "character": "衣",
+              "reading": "yī",
+              "polyphonic": false,
+              "sourceRow": 191,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-192",
+              "character": "裤",
+              "reading": "kù",
+              "polyphonic": false,
+              "sourceRow": 192,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-193",
+              "character": "被",
+              "reading": "bèi",
+              "polyphonic": false,
+              "sourceRow": 193,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-511",
+              "character": "册",
+              "reading": "cè",
+              "polyphonic": false,
+              "sourceRow": 511,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-512",
+              "character": "支",
+              "reading": "zhī",
+              "polyphonic": false,
+              "sourceRow": 512,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-513",
+              "character": "电",
+              "reading": "diàn",
+              "polyphonic": false,
+              "sourceRow": 513,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-514",
+              "character": "衣",
+              "reading": "yī",
+              "polyphonic": false,
+              "sourceRow": 514,
+              "pdfPage": 123
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-5",
+      "title": "第五单元",
+      "tasks": [
+        {
+          "id": "literacy-5",
+          "kind": "lesson",
+          "label": "识字5",
+          "title": "动物儿歌",
+          "read": [
+            {
+              "id": "row-194",
+              "character": "物",
+              "reading": "wù",
+              "polyphonic": false,
+              "sourceRow": 194,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-195",
+              "character": "捉",
+              "reading": "zhuō",
+              "polyphonic": false,
+              "sourceRow": 195,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-196",
+              "character": "迷",
+              "reading": "mí",
+              "polyphonic": false,
+              "sourceRow": 196,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-197",
+              "character": "藏",
+              "reading": "cáng",
+              "polyphonic": false,
+              "sourceRow": 197,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-198",
+              "character": "造",
+              "reading": "zào",
+              "polyphonic": false,
+              "sourceRow": 198,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-199",
+              "character": "蚂",
+              "reading": "mǎ",
+              "polyphonic": false,
+              "sourceRow": 199,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-200",
+              "character": "蚁",
+              "reading": "yǐ",
+              "polyphonic": false,
+              "sourceRow": 200,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-201",
+              "character": "运",
+              "reading": "yùn",
+              "polyphonic": false,
+              "sourceRow": 201,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-202",
+              "character": "食",
+              "reading": "shí",
+              "polyphonic": false,
+              "sourceRow": 202,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-203",
+              "character": "粮",
+              "reading": "liáng",
+              "polyphonic": false,
+              "sourceRow": 203,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-204",
+              "character": "房",
+              "reading": "fáng",
+              "polyphonic": false,
+              "sourceRow": 204,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-205",
+              "character": "结",
+              "reading": "jié",
+              "polyphonic": false,
+              "sourceRow": 205,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-206",
+              "character": "网",
+              "reading": "wǎng",
+              "polyphonic": false,
+              "sourceRow": 206,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-515",
+              "character": "物",
+              "reading": "wù",
+              "polyphonic": false,
+              "sourceRow": 515,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-516",
+              "character": "造",
+              "reading": "zào",
+              "polyphonic": false,
+              "sourceRow": 516,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-517",
+              "character": "运",
+              "reading": "yùn",
+              "polyphonic": false,
+              "sourceRow": 517,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-518",
+              "character": "欢",
+              "reading": "huān",
+              "polyphonic": false,
+              "sourceRow": 518,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-519",
+              "character": "房",
+              "reading": "fáng",
+              "polyphonic": false,
+              "sourceRow": 519,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-520",
+              "character": "网",
+              "reading": "wǎng",
+              "polyphonic": false,
+              "sourceRow": 520,
+              "pdfPage": 123
+            }
+          ]
+        },
+        {
+          "id": "literacy-6",
+          "kind": "lesson",
+          "label": "识字6",
+          "title": "古对今",
+          "read": [
+            {
+              "id": "row-207",
+              "character": "圆",
+              "reading": "yuán",
+              "polyphonic": false,
+              "sourceRow": 207,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-208",
+              "character": "严",
+              "reading": "yán",
+              "polyphonic": false,
+              "sourceRow": 208,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-209",
+              "character": "寒",
+              "reading": "hán",
+              "polyphonic": false,
+              "sourceRow": 209,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-210",
+              "character": "酷",
+              "reading": "kù",
+              "polyphonic": false,
+              "sourceRow": 210,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-211",
+              "character": "暑",
+              "reading": "shǔ",
+              "polyphonic": false,
+              "sourceRow": 211,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-212",
+              "character": "暖",
+              "reading": "nuǎn",
+              "polyphonic": false,
+              "sourceRow": 212,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-213",
+              "character": "晨",
+              "reading": "chén",
+              "polyphonic": false,
+              "sourceRow": 213,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-214",
+              "character": "细",
+              "reading": "xì",
+              "polyphonic": false,
+              "sourceRow": 214,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-215",
+              "character": "朝",
+              "reading": "zhāo",
+              "polyphonic": false,
+              "sourceRow": 215,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-216",
+              "character": "霞",
+              "reading": "xiá",
+              "polyphonic": false,
+              "sourceRow": 216,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-217",
+              "character": "夕",
+              "reading": "xī",
+              "polyphonic": false,
+              "sourceRow": 217,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-218",
+              "character": "杨",
+              "reading": "yáng",
+              "polyphonic": false,
+              "sourceRow": 218,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-219",
+              "character": "香",
+              "reading": "xiāng",
+              "polyphonic": false,
+              "sourceRow": 219,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-521",
+              "character": "对",
+              "reading": "duì",
+              "polyphonic": false,
+              "sourceRow": 521,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-522",
+              "character": "今",
+              "reading": "jīn",
+              "polyphonic": false,
+              "sourceRow": 522,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-523",
+              "character": "雪",
+              "reading": "xuě",
+              "polyphonic": false,
+              "sourceRow": 523,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-524",
+              "character": "细",
+              "reading": "xì",
+              "polyphonic": false,
+              "sourceRow": 524,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-525",
+              "character": "夕",
+              "reading": "xī",
+              "polyphonic": false,
+              "sourceRow": 525,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-526",
+              "character": "语",
+              "reading": "yǔ",
+              "polyphonic": false,
+              "sourceRow": 526,
+              "pdfPage": 123
+            }
+          ]
+        },
+        {
+          "id": "literacy-7",
+          "kind": "lesson",
+          "label": "识字7",
+          "title": "操场上",
+          "read": [
+            {
+              "id": "row-220",
+              "character": "操",
+              "reading": "cāo",
+              "polyphonic": false,
+              "sourceRow": 220,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-221",
+              "character": "拔",
+              "reading": "bá",
+              "polyphonic": false,
+              "sourceRow": 221,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-222",
+              "character": "拍",
+              "reading": "pāi",
+              "polyphonic": false,
+              "sourceRow": 222,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-223",
+              "character": "跑",
+              "reading": "pǎo",
+              "polyphonic": false,
+              "sourceRow": 223,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-224",
+              "character": "踢",
+              "reading": "tī",
+              "polyphonic": false,
+              "sourceRow": 224,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-225",
+              "character": "铃",
+              "reading": "líng",
+              "polyphonic": false,
+              "sourceRow": 225,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-226",
+              "character": "真",
+              "reading": "zhēn",
+              "polyphonic": false,
+              "sourceRow": 226,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-227",
+              "character": "闹",
+              "reading": "nào",
+              "polyphonic": false,
+              "sourceRow": 227,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-228",
+              "character": "丢",
+              "reading": "diū",
+              "polyphonic": false,
+              "sourceRow": 228,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-229",
+              "character": "沙",
+              "reading": "shā",
+              "polyphonic": false,
+              "sourceRow": 229,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-230",
+              "character": "身",
+              "reading": "shēn",
+              "polyphonic": false,
+              "sourceRow": 230,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-231",
+              "character": "体",
+              "reading": "tǐ",
+              "polyphonic": false,
+              "sourceRow": 231,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-527",
+              "character": "打",
+              "reading": "dǎ",
+              "polyphonic": false,
+              "sourceRow": 527,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-528",
+              "character": "皮",
+              "reading": "pí",
+              "polyphonic": false,
+              "sourceRow": 528,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-529",
+              "character": "跑",
+              "reading": "pǎo",
+              "polyphonic": false,
+              "sourceRow": 529,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-530",
+              "character": "足",
+              "reading": "zú",
+              "polyphonic": false,
+              "sourceRow": 530,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-531",
+              "character": "沙",
+              "reading": "shā",
+              "polyphonic": false,
+              "sourceRow": 531,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-532",
+              "character": "包",
+              "reading": "bāo",
+              "polyphonic": false,
+              "sourceRow": 532,
+              "pdfPage": 123
+            }
+          ]
+        },
+        {
+          "id": "literacy-8",
+          "kind": "lesson",
+          "label": "识字8",
+          "title": "人之初",
+          "read": [
+            {
+              "id": "row-232",
+              "character": "之",
+              "reading": "zhī",
+              "polyphonic": false,
+              "sourceRow": 232,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-233",
+              "character": "初",
+              "reading": "chū",
+              "polyphonic": false,
+              "sourceRow": 233,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-234",
+              "character": "相",
+              "reading": "xiāng",
+              "polyphonic": false,
+              "sourceRow": 234,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-235",
+              "character": "近",
+              "reading": "jìn",
+              "polyphonic": false,
+              "sourceRow": 235,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-236",
+              "character": "习",
+              "reading": "xí",
+              "polyphonic": false,
+              "sourceRow": 236,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-237",
+              "character": "远",
+              "reading": "yuǎn",
+              "polyphonic": false,
+              "sourceRow": 237,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-238",
+              "character": "教",
+              "reading": "jiào",
+              "polyphonic": false,
+              "sourceRow": 238,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-239",
+              "character": "道",
+              "reading": "dào",
+              "polyphonic": false,
+              "sourceRow": 239,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-240",
+              "character": "专",
+              "reading": "zhuān",
+              "polyphonic": false,
+              "sourceRow": 240,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-241",
+              "character": "幼",
+              "reading": "yòu",
+              "polyphonic": false,
+              "sourceRow": 241,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-242",
+              "character": "玉",
+              "reading": "yù",
+              "polyphonic": false,
+              "sourceRow": 242,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-243",
+              "character": "知",
+              "reading": "zhī",
+              "polyphonic": false,
+              "sourceRow": 243,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-244",
+              "character": "义",
+              "reading": "yì",
+              "polyphonic": false,
+              "sourceRow": 244,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-533",
+              "character": "近",
+              "reading": "jìn",
+              "polyphonic": false,
+              "sourceRow": 533,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-534",
+              "character": "习",
+              "reading": "xí",
+              "polyphonic": false,
+              "sourceRow": 534,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-535",
+              "character": "远",
+              "reading": "yuǎn",
+              "polyphonic": false,
+              "sourceRow": 535,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-536",
+              "character": "学",
+              "reading": "xué",
+              "polyphonic": false,
+              "sourceRow": 536,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-537",
+              "character": "玉",
+              "reading": "yù",
+              "polyphonic": false,
+              "sourceRow": 537,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-538",
+              "character": "义",
+              "reading": "yì",
+              "polyphonic": false,
+              "sourceRow": 538,
+              "pdfPage": 123
+            }
+          ]
+        },
+        {
+          "id": "garden-5",
+          "kind": "garden",
+          "label": "",
+          "title": "语文园地五",
+          "read": [
+            {
+              "id": "row-245",
+              "character": "饭",
+              "reading": "fàn",
+              "polyphonic": false,
+              "sourceRow": 245,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-246",
+              "character": "饱",
+              "reading": "bǎo",
+              "polyphonic": false,
+              "sourceRow": 246,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-247",
+              "character": "茶",
+              "reading": "chá",
+              "polyphonic": false,
+              "sourceRow": 247,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-248",
+              "character": "泡",
+              "reading": "pào",
+              "polyphonic": false,
+              "sourceRow": 248,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-249",
+              "character": "轻",
+              "reading": "qīng",
+              "polyphonic": false,
+              "sourceRow": 249,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-250",
+              "character": "穿",
+              "reading": "chuān",
+              "polyphonic": false,
+              "sourceRow": 250,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-251",
+              "character": "袍",
+              "reading": "páo",
+              "polyphonic": false,
+              "sourceRow": 251,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-252",
+              "character": "鞭",
+              "reading": "biān",
+              "polyphonic": false,
+              "sourceRow": 252,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-253",
+              "character": "炮",
+              "reading": "pào",
+              "polyphonic": false,
+              "sourceRow": 253,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-539",
+              "character": "饱",
+              "reading": "bǎo",
+              "polyphonic": false,
+              "sourceRow": 539,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-540",
+              "character": "抱",
+              "reading": "bào",
+              "polyphonic": false,
+              "sourceRow": 540,
+              "pdfPage": 123
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-6",
+      "title": "第六单元",
+      "tasks": [
+        {
+          "id": "reading-10",
+          "kind": "lesson",
+          "label": "阅读10",
+          "title": "古诗二首",
+          "read": [
+            {
+              "id": "row-254",
+              "character": "诗",
+              "reading": "shī",
+              "polyphonic": false,
+              "sourceRow": 254,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-255",
+              "character": "首",
+              "reading": "shǒu",
+              "polyphonic": false,
+              "sourceRow": 255,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-256",
+              "character": "偷",
+              "reading": "tōu",
+              "polyphonic": false,
+              "sourceRow": 256,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-257",
+              "character": "浮",
+              "reading": "fú",
+              "polyphonic": false,
+              "sourceRow": 257,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-258",
+              "character": "萍",
+              "reading": "píng",
+              "polyphonic": false,
+              "sourceRow": 258,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-259",
+              "character": "泉",
+              "reading": "quán",
+              "polyphonic": false,
+              "sourceRow": 259,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-260",
+              "character": "惜",
+              "reading": "xī",
+              "polyphonic": false,
+              "sourceRow": 260,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-261",
+              "character": "照",
+              "reading": "zhào",
+              "polyphonic": false,
+              "sourceRow": 261,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-262",
+              "character": "柔",
+              "reading": "róu",
+              "polyphonic": false,
+              "sourceRow": 262,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-263",
+              "character": "荷",
+              "reading": "hé",
+              "polyphonic": false,
+              "sourceRow": 263,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-264",
+              "character": "露",
+              "reading": "lù",
+              "polyphonic": false,
+              "sourceRow": 264,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-265",
+              "character": "角",
+              "reading": "jiǎo",
+              "polyphonic": false,
+              "sourceRow": 265,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-541",
+              "character": "首",
+              "reading": "shǒu",
+              "polyphonic": false,
+              "sourceRow": 541,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-542",
+              "character": "池",
+              "reading": "chí",
+              "polyphonic": false,
+              "sourceRow": 542,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-543",
+              "character": "采",
+              "reading": "cǎi",
+              "polyphonic": false,
+              "sourceRow": 543,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-544",
+              "character": "尖",
+              "reading": "jiān",
+              "polyphonic": false,
+              "sourceRow": 544,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-545",
+              "character": "角",
+              "reading": "jiǎo",
+              "polyphonic": false,
+              "sourceRow": 545,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-546",
+              "character": "早",
+              "reading": "zǎo",
+              "polyphonic": false,
+              "sourceRow": 546,
+              "pdfPage": 123
+            }
+          ]
+        },
+        {
+          "id": "reading-11",
+          "kind": "lesson",
+          "label": "阅读11",
+          "title": "浪花",
+          "read": [
+            {
+              "id": "row-266",
+              "character": "浪",
+              "reading": "làng",
+              "polyphonic": false,
+              "sourceRow": 266,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-267",
+              "character": "迈",
+              "reading": "mài",
+              "polyphonic": false,
+              "sourceRow": 267,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-268",
+              "character": "悄",
+              "reading": "qiāo",
+              "polyphonic": false,
+              "sourceRow": 268,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-269",
+              "character": "泪",
+              "reading": "lèi",
+              "polyphonic": false,
+              "sourceRow": 269,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-270",
+              "character": "次",
+              "reading": "cì",
+              "polyphonic": false,
+              "sourceRow": 270,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-271",
+              "character": "给",
+              "reading": "gěi",
+              "polyphonic": false,
+              "sourceRow": 271,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-272",
+              "character": "壳",
+              "reading": "ké",
+              "polyphonic": false,
+              "sourceRow": 272,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-273",
+              "character": "虾",
+              "reading": "xiā",
+              "polyphonic": false,
+              "sourceRow": 273,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-274",
+              "character": "装",
+              "reading": "zhuāng",
+              "polyphonic": false,
+              "sourceRow": 274,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-275",
+              "character": "像",
+              "reading": "xiàng",
+              "polyphonic": false,
+              "sourceRow": 275,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-276",
+              "character": "淘",
+              "reading": "táo",
+              "polyphonic": false,
+              "sourceRow": 276,
+              "pdfPage": 120
+            },
+            {
+              "id": "row-277",
+              "character": "娃",
+              "reading": "wá",
+              "polyphonic": false,
+              "sourceRow": 277,
+              "pdfPage": 120
+            }
+          ],
+          "write": [
+            {
+              "id": "row-547",
+              "character": "眼",
+              "reading": "yǎn",
+              "polyphonic": false,
+              "sourceRow": 547,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-548",
+              "character": "泪",
+              "reading": "lèi",
+              "polyphonic": false,
+              "sourceRow": 548,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-549",
+              "character": "它",
+              "reading": "tā",
+              "polyphonic": false,
+              "sourceRow": 549,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-550",
+              "character": "贝",
+              "reading": "bèi",
+              "polyphonic": false,
+              "sourceRow": 550,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-551",
+              "character": "气",
+              "reading": "qì",
+              "polyphonic": false,
+              "sourceRow": 551,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-552",
+              "character": "娃",
+              "reading": "wá",
+              "polyphonic": false,
+              "sourceRow": 552,
+              "pdfPage": 123
+            }
+          ]
+        },
+        {
+          "id": "reading-12",
+          "kind": "lesson",
+          "label": "阅读12",
+          "title": "荷叶圆圆",
+          "read": [
+            {
+              "id": "row-278",
+              "character": "珠",
+              "reading": "zhū",
+              "polyphonic": false,
+              "sourceRow": 278,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-279",
+              "character": "摇",
+              "reading": "yáo",
+              "polyphonic": false,
+              "sourceRow": 279,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-280",
+              "character": "篮",
+              "reading": "lán",
+              "polyphonic": false,
+              "sourceRow": 280,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-281",
+              "character": "亮",
+              "reading": "liàng",
+              "polyphonic": false,
+              "sourceRow": 281,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-282",
+              "character": "晶",
+              "reading": "jīng",
+              "polyphonic": false,
+              "sourceRow": 282,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-283",
+              "character": "停",
+              "reading": "tíng",
+              "polyphonic": false,
+              "sourceRow": 283,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-284",
+              "character": "坪",
+              "reading": "píng",
+              "polyphonic": false,
+              "sourceRow": 284,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-285",
+              "character": "展",
+              "reading": "zhǎn",
+              "polyphonic": false,
+              "sourceRow": 285,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-286",
+              "character": "透",
+              "reading": "tòu",
+              "polyphonic": false,
+              "sourceRow": 286,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-287",
+              "character": "翅",
+              "reading": "chì",
+              "polyphonic": false,
+              "sourceRow": 287,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-288",
+              "character": "膀",
+              "reading": "bǎng",
+              "polyphonic": false,
+              "sourceRow": 288,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-289",
+              "character": "朵",
+              "reading": "duǒ",
+              "polyphonic": false,
+              "sourceRow": 289,
+              "pdfPage": 121
+            }
+          ],
+          "write": [
+            {
+              "id": "row-553",
+              "character": "机",
+              "reading": "jī",
+              "polyphonic": false,
+              "sourceRow": 553,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-554",
+              "character": "台",
+              "reading": "tái",
+              "polyphonic": false,
+              "sourceRow": 554,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-555",
+              "character": "唱",
+              "reading": "chàng",
+              "polyphonic": false,
+              "sourceRow": 555,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-556",
+              "character": "伞",
+              "reading": "sǎn",
+              "polyphonic": false,
+              "sourceRow": 556,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-557",
+              "character": "朵",
+              "reading": "duǒ",
+              "polyphonic": false,
+              "sourceRow": 557,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-558",
+              "character": "美",
+              "reading": "měi",
+              "polyphonic": false,
+              "sourceRow": 558,
+              "pdfPage": 123
+            }
+          ]
+        },
+        {
+          "id": "reading-13",
+          "kind": "lesson",
+          "label": "阅读13",
+          "title": "要下雨了",
+          "read": [
+            {
+              "id": "row-290",
+              "character": "要",
+              "reading": "yào",
+              "polyphonic": false,
+              "sourceRow": 290,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-291",
+              "character": "腰",
+              "reading": "yāo",
+              "polyphonic": false,
+              "sourceRow": 291,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-292",
+              "character": "阴",
+              "reading": "yīn",
+              "polyphonic": false,
+              "sourceRow": 292,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-293",
+              "character": "沉",
+              "reading": "chén",
+              "polyphonic": false,
+              "sourceRow": 293,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-294",
+              "character": "呀",
+              "reading": "ya",
+              "polyphonic": false,
+              "sourceRow": 294,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-295",
+              "character": "忙",
+              "reading": "máng",
+              "polyphonic": false,
+              "sourceRow": 295,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-296",
+              "character": "呢",
+              "reading": "ne",
+              "polyphonic": false,
+              "sourceRow": 296,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-297",
+              "character": "吗",
+              "reading": "ma",
+              "polyphonic": false,
+              "sourceRow": 297,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-298",
+              "character": "面",
+              "reading": "miàn",
+              "polyphonic": false,
+              "sourceRow": 298,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-299",
+              "character": "空",
+              "reading": "kòng",
+              "polyphonic": true,
+              "sourceRow": 299,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-300",
+              "character": "闷",
+              "reading": "mēn",
+              "polyphonic": false,
+              "sourceRow": 300,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-301",
+              "character": "吧",
+              "reading": "ba",
+              "polyphonic": false,
+              "sourceRow": 301,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-302",
+              "character": "消",
+              "reading": "xiāo",
+              "polyphonic": false,
+              "sourceRow": 302,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-303",
+              "character": "息",
+              "reading": "xī",
+              "polyphonic": false,
+              "sourceRow": 303,
+              "pdfPage": 121
+            }
+          ],
+          "write": [
+            {
+              "id": "row-559",
+              "character": "这",
+              "reading": "zhè",
+              "polyphonic": false,
+              "sourceRow": 559,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-560",
+              "character": "看",
+              "reading": "kàn",
+              "polyphonic": false,
+              "sourceRow": 560,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-561",
+              "character": "鱼",
+              "reading": "yú",
+              "polyphonic": false,
+              "sourceRow": 561,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-562",
+              "character": "面",
+              "reading": "miàn",
+              "polyphonic": false,
+              "sourceRow": 562,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-563",
+              "character": "问",
+              "reading": "wèn",
+              "polyphonic": false,
+              "sourceRow": 563,
+              "pdfPage": 123
+            },
+            {
+              "id": "row-564",
+              "character": "加",
+              "reading": "jiā",
+              "polyphonic": false,
+              "sourceRow": 564,
+              "pdfPage": 123
+            }
+          ]
+        },
+        {
+          "id": "garden-6",
+          "kind": "garden",
+          "label": "",
+          "title": "语文园地六",
+          "read": [
+            {
+              "id": "row-304",
+              "character": "棍",
+              "reading": "gùn",
+              "polyphonic": false,
+              "sourceRow": 304,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-305",
+              "character": "豆",
+              "reading": "dòu",
+              "polyphonic": false,
+              "sourceRow": 305,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-306",
+              "character": "汤",
+              "reading": "tāng",
+              "polyphonic": false,
+              "sourceRow": 306,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-307",
+              "character": "蚊",
+              "reading": "wén",
+              "polyphonic": false,
+              "sourceRow": 307,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-308",
+              "character": "扇",
+              "reading": "shàn",
+              "polyphonic": false,
+              "sourceRow": 308,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-309",
+              "character": "椅",
+              "reading": "yǐ",
+              "polyphonic": false,
+              "sourceRow": 309,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-310",
+              "character": "牵",
+              "reading": "qiān",
+              "polyphonic": false,
+              "sourceRow": 310,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-311",
+              "character": "织",
+              "reading": "zhī",
+              "polyphonic": false,
+              "sourceRow": 311,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-312",
+              "character": "斗",
+              "reading": "dǒu",
+              "polyphonic": false,
+              "sourceRow": 312,
+              "pdfPage": 121
+            }
+          ],
+          "write": [
+            {
+              "id": "row-565",
+              "character": "豆",
+              "reading": "dòu",
+              "polyphonic": false,
+              "sourceRow": 565,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-566",
+              "character": "斗",
+              "reading": "dǒu",
+              "polyphonic": false,
+              "sourceRow": 566,
+              "pdfPage": 124
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-7",
+      "title": "第七单元",
+      "tasks": [
+        {
+          "id": "reading-14",
+          "kind": "lesson",
+          "label": "阅读14",
+          "title": "文具的家",
+          "read": [
+            {
+              "id": "row-313",
+              "character": "具",
+              "reading": "jù",
+              "polyphonic": false,
+              "sourceRow": 313,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-314",
+              "character": "铅",
+              "reading": "qiān",
+              "polyphonic": false,
+              "sourceRow": 314,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-315",
+              "character": "新",
+              "reading": "xīn",
+              "polyphonic": false,
+              "sourceRow": 315,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-316",
+              "character": "平",
+              "reading": "píng",
+              "polyphonic": false,
+              "sourceRow": 316,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-317",
+              "character": "盒",
+              "reading": "hé",
+              "polyphonic": false,
+              "sourceRow": 317,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-318",
+              "character": "些",
+              "reading": "xiē",
+              "polyphonic": false,
+              "sourceRow": 318,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-319",
+              "character": "此",
+              "reading": "cǐ",
+              "polyphonic": false,
+              "sourceRow": 319,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-320",
+              "character": "仔",
+              "reading": "zǐ",
+              "polyphonic": false,
+              "sourceRow": 320,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-321",
+              "character": "检",
+              "reading": "jiǎn",
+              "polyphonic": false,
+              "sourceRow": 321,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-322",
+              "character": "查",
+              "reading": "chá",
+              "polyphonic": false,
+              "sourceRow": 322,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-323",
+              "character": "所",
+              "reading": "suǒ",
+              "polyphonic": false,
+              "sourceRow": 323,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-324",
+              "character": "伙",
+              "reading": "huǒ",
+              "polyphonic": false,
+              "sourceRow": 324,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-325",
+              "character": "伴",
+              "reading": "bàn",
+              "polyphonic": false,
+              "sourceRow": 325,
+              "pdfPage": 121
+            }
+          ],
+          "write": [
+            {
+              "id": "row-567",
+              "character": "笔",
+              "reading": "bǐ",
+              "polyphonic": false,
+              "sourceRow": 567,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-568",
+              "character": "知",
+              "reading": "zhī",
+              "polyphonic": false,
+              "sourceRow": 568,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-569",
+              "character": "道",
+              "reading": "dào",
+              "polyphonic": false,
+              "sourceRow": 569,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-570",
+              "character": "放",
+              "reading": "fàng",
+              "polyphonic": false,
+              "sourceRow": 570,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-571",
+              "character": "平",
+              "reading": "píng",
+              "polyphonic": false,
+              "sourceRow": 571,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-572",
+              "character": "安",
+              "reading": "ān",
+              "polyphonic": false,
+              "sourceRow": 572,
+              "pdfPage": 124
+            }
+          ]
+        },
+        {
+          "id": "reading-15",
+          "kind": "lesson",
+          "label": "阅读15",
+          "title": "一分钟",
+          "read": [
+            {
+              "id": "row-326",
+              "character": "钟",
+              "reading": "zhōng",
+              "polyphonic": false,
+              "sourceRow": 326,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-327",
+              "character": "迟",
+              "reading": "chí",
+              "polyphonic": false,
+              "sourceRow": 327,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-328",
+              "character": "背",
+              "reading": "bēi",
+              "polyphonic": true,
+              "sourceRow": 328,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-329",
+              "character": "灯",
+              "reading": "dēng",
+              "polyphonic": false,
+              "sourceRow": 329,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-330",
+              "character": "等",
+              "reading": "děng",
+              "polyphonic": false,
+              "sourceRow": 330,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-331",
+              "character": "啊",
+              "reading": "a",
+              "polyphonic": false,
+              "sourceRow": 331,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-332",
+              "character": "决",
+              "reading": "jué",
+              "polyphonic": false,
+              "sourceRow": 332,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-333",
+              "character": "定",
+              "reading": "dìng",
+              "polyphonic": false,
+              "sourceRow": 333,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-334",
+              "character": "已",
+              "reading": "yǐ",
+              "polyphonic": false,
+              "sourceRow": 334,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-335",
+              "character": "经",
+              "reading": "jīng",
+              "polyphonic": false,
+              "sourceRow": 335,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-336",
+              "character": "位",
+              "reading": "wèi",
+              "polyphonic": false,
+              "sourceRow": 336,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-337",
+              "character": "表",
+              "reading": "biǎo",
+              "polyphonic": false,
+              "sourceRow": 337,
+              "pdfPage": 121
+            }
+          ],
+          "write": [
+            {
+              "id": "row-573",
+              "character": "元",
+              "reading": "yuán",
+              "polyphonic": false,
+              "sourceRow": 573,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-574",
+              "character": "灯",
+              "reading": "dēng",
+              "polyphonic": false,
+              "sourceRow": 574,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-575",
+              "character": "车",
+              "reading": "chē",
+              "polyphonic": false,
+              "sourceRow": 575,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-576",
+              "character": "站",
+              "reading": "zhàn",
+              "polyphonic": false,
+              "sourceRow": 576,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-577",
+              "character": "坐",
+              "reading": "zuò",
+              "polyphonic": false,
+              "sourceRow": 577,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-578",
+              "character": "老",
+              "reading": "lǎo",
+              "polyphonic": false,
+              "sourceRow": 578,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-579",
+              "character": "师",
+              "reading": "shī",
+              "polyphonic": false,
+              "sourceRow": 579,
+              "pdfPage": 124
+            }
+          ]
+        },
+        {
+          "id": "reading-16",
+          "kind": "lesson",
+          "label": "阅读16",
+          "title": "动物王国开大会",
+          "read": [
+            {
+              "id": "row-338",
+              "character": "虎",
+              "reading": "hǔ",
+              "polyphonic": false,
+              "sourceRow": 338,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-339",
+              "character": "熊",
+              "reading": "xióng",
+              "polyphonic": false,
+              "sourceRow": 339,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-340",
+              "character": "通",
+              "reading": "tōng",
+              "polyphonic": false,
+              "sourceRow": 340,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-341",
+              "character": "注",
+              "reading": "zhù",
+              "polyphonic": false,
+              "sourceRow": 341,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-342",
+              "character": "意",
+              "reading": "yì",
+              "polyphonic": false,
+              "sourceRow": 342,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-343",
+              "character": "遍",
+              "reading": "biàn",
+              "polyphonic": false,
+              "sourceRow": 343,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-344",
+              "character": "百",
+              "reading": "bǎi",
+              "polyphonic": false,
+              "sourceRow": 344,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-345",
+              "character": "为",
+              "reading": "wèi",
+              "polyphonic": false,
+              "sourceRow": 345,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-346",
+              "character": "因",
+              "reading": "yīn",
+              "polyphonic": false,
+              "sourceRow": 346,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-347",
+              "character": "舌",
+              "reading": "shé",
+              "polyphonic": false,
+              "sourceRow": 347,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-348",
+              "character": "理",
+              "reading": "lǐ",
+              "polyphonic": false,
+              "sourceRow": 348,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-349",
+              "character": "呀",
+              "reading": "yā",
+              "polyphonic": true,
+              "sourceRow": 349,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-350",
+              "character": "忘",
+              "reading": "wàng",
+              "polyphonic": false,
+              "sourceRow": 350,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-351",
+              "character": "第",
+              "reading": "dì",
+              "polyphonic": false,
+              "sourceRow": 351,
+              "pdfPage": 121
+            }
+          ],
+          "write": [
+            {
+              "id": "row-580",
+              "character": "国",
+              "reading": "guó",
+              "polyphonic": false,
+              "sourceRow": 580,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-581",
+              "character": "都",
+              "reading": "dōu",
+              "polyphonic": false,
+              "sourceRow": 581,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-582",
+              "character": "百",
+              "reading": "bǎi",
+              "polyphonic": false,
+              "sourceRow": 582,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-583",
+              "character": "听",
+              "reading": "tīng",
+              "polyphonic": false,
+              "sourceRow": 583,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-584",
+              "character": "时",
+              "reading": "shí",
+              "polyphonic": false,
+              "sourceRow": 584,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-585",
+              "character": "点",
+              "reading": "diǎn",
+              "polyphonic": false,
+              "sourceRow": 585,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-586",
+              "character": "林",
+              "reading": "lín",
+              "polyphonic": false,
+              "sourceRow": 586,
+              "pdfPage": 124
+            }
+          ]
+        },
+        {
+          "id": "reading-17",
+          "kind": "lesson",
+          "label": "阅读17",
+          "title": "小猴子下山",
+          "read": [
+            {
+              "id": "row-352",
+              "character": "猴",
+              "reading": "hóu",
+              "polyphonic": false,
+              "sourceRow": 352,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-353",
+              "character": "块",
+              "reading": "kuài",
+              "polyphonic": false,
+              "sourceRow": 353,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-354",
+              "character": "结",
+              "reading": "jiē",
+              "polyphonic": true,
+              "sourceRow": 354,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-355",
+              "character": "兴",
+              "reading": "xìng",
+              "polyphonic": false,
+              "sourceRow": 355,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-356",
+              "character": "掰",
+              "reading": "bāi",
+              "polyphonic": false,
+              "sourceRow": 356,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-357",
+              "character": "扛",
+              "reading": "káng",
+              "polyphonic": false,
+              "sourceRow": 357,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-358",
+              "character": "往",
+              "reading": "wǎng",
+              "polyphonic": false,
+              "sourceRow": 358,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-359",
+              "character": "棵",
+              "reading": "kē",
+              "polyphonic": false,
+              "sourceRow": 359,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-360",
+              "character": "满",
+              "reading": "mǎn",
+              "polyphonic": false,
+              "sourceRow": 360,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-361",
+              "character": "扔",
+              "reading": "rēng",
+              "polyphonic": false,
+              "sourceRow": 361,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-362",
+              "character": "摘",
+              "reading": "zhāi",
+              "polyphonic": false,
+              "sourceRow": 362,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-363",
+              "character": "捧",
+              "reading": "pěng",
+              "polyphonic": false,
+              "sourceRow": 363,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-364",
+              "character": "追",
+              "reading": "zhuī",
+              "polyphonic": false,
+              "sourceRow": 364,
+              "pdfPage": 121
+            }
+          ],
+          "write": [
+            {
+              "id": "row-587",
+              "character": "高",
+              "reading": "gāo",
+              "polyphonic": false,
+              "sourceRow": 587,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-588",
+              "character": "兴",
+              "reading": "xìng",
+              "polyphonic": false,
+              "sourceRow": 588,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-589",
+              "character": "着",
+              "reading": "zhe",
+              "polyphonic": false,
+              "sourceRow": 589,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-590",
+              "character": "往",
+              "reading": "wǎng",
+              "polyphonic": false,
+              "sourceRow": 590,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-591",
+              "character": "瓜",
+              "reading": "guā",
+              "polyphonic": false,
+              "sourceRow": 591,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-592",
+              "character": "兔",
+              "reading": "tù",
+              "polyphonic": false,
+              "sourceRow": 592,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-593",
+              "character": "进",
+              "reading": "jìn",
+              "polyphonic": false,
+              "sourceRow": 593,
+              "pdfPage": 124
+            }
+          ]
+        },
+        {
+          "id": "garden-7",
+          "kind": "garden",
+          "label": "",
+          "title": "语文园地七",
+          "read": [
+            {
+              "id": "row-365",
+              "character": "刷",
+              "reading": "shuā",
+              "polyphonic": false,
+              "sourceRow": 365,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-366",
+              "character": "梳",
+              "reading": "shū",
+              "polyphonic": false,
+              "sourceRow": 366,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-367",
+              "character": "巾",
+              "reading": "jīn",
+              "polyphonic": false,
+              "sourceRow": 367,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-368",
+              "character": "皂",
+              "reading": "zào",
+              "polyphonic": false,
+              "sourceRow": 368,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-369",
+              "character": "洗",
+              "reading": "xǐ",
+              "polyphonic": false,
+              "sourceRow": 369,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-370",
+              "character": "澡",
+              "reading": "zǎo",
+              "polyphonic": false,
+              "sourceRow": 370,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-371",
+              "character": "脸",
+              "reading": "liǎn",
+              "polyphonic": false,
+              "sourceRow": 371,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-372",
+              "character": "盆",
+              "reading": "pén",
+              "polyphonic": false,
+              "sourceRow": 372,
+              "pdfPage": 121
+            }
+          ],
+          "write": [
+            {
+              "id": "row-594",
+              "character": "巾",
+              "reading": "jīn",
+              "polyphonic": false,
+              "sourceRow": 594,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-595",
+              "character": "洗",
+              "reading": "xǐ",
+              "polyphonic": false,
+              "sourceRow": 595,
+              "pdfPage": 124
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-8",
+      "title": "第八单元",
+      "tasks": [
+        {
+          "id": "reading-18",
+          "kind": "lesson",
+          "label": "阅读18",
+          "title": "棉花姑娘",
+          "read": [
+            {
+              "id": "row-373",
+              "character": "棉",
+              "reading": "mián",
+              "polyphonic": false,
+              "sourceRow": 373,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-374",
+              "character": "姑",
+              "reading": "gū",
+              "polyphonic": false,
+              "sourceRow": 374,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-375",
+              "character": "娘",
+              "reading": "niáng",
+              "polyphonic": false,
+              "sourceRow": 375,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-376",
+              "character": "病",
+              "reading": "bìng",
+              "polyphonic": false,
+              "sourceRow": 376,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-377",
+              "character": "她",
+              "reading": "tā",
+              "polyphonic": false,
+              "sourceRow": 377,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-378",
+              "character": "治",
+              "reading": "zhì",
+              "polyphonic": false,
+              "sourceRow": 378,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-379",
+              "character": "燕",
+              "reading": "yàn",
+              "polyphonic": false,
+              "sourceRow": 379,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-380",
+              "character": "帮",
+              "reading": "bāng",
+              "polyphonic": false,
+              "sourceRow": 380,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-381",
+              "character": "害",
+              "reading": "hài",
+              "polyphonic": false,
+              "sourceRow": 381,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-382",
+              "character": "别",
+              "reading": "bié",
+              "polyphonic": false,
+              "sourceRow": 382,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-383",
+              "character": "干",
+              "reading": "gàn",
+              "polyphonic": false,
+              "sourceRow": 383,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-384",
+              "character": "惊",
+              "reading": "jīng",
+              "polyphonic": false,
+              "sourceRow": 384,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-385",
+              "character": "奇",
+              "reading": "qí",
+              "polyphonic": false,
+              "sourceRow": 385,
+              "pdfPage": 121
+            }
+          ],
+          "write": [
+            {
+              "id": "row-596",
+              "character": "她",
+              "reading": "tā",
+              "polyphonic": false,
+              "sourceRow": 596,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-597",
+              "character": "空",
+              "reading": "kōng",
+              "polyphonic": false,
+              "sourceRow": 597,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-598",
+              "character": "还",
+              "reading": "hái",
+              "polyphonic": false,
+              "sourceRow": 598,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-599",
+              "character": "干",
+              "reading": "gàn",
+              "polyphonic": false,
+              "sourceRow": 599,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-600",
+              "character": "身",
+              "reading": "shēn",
+              "polyphonic": false,
+              "sourceRow": 600,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-601",
+              "character": "星",
+              "reading": "xīng",
+              "polyphonic": false,
+              "sourceRow": 601,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-602",
+              "character": "久",
+              "reading": "jiǔ",
+              "polyphonic": false,
+              "sourceRow": 602,
+              "pdfPage": 124
+            }
+          ]
+        },
+        {
+          "id": "reading-19",
+          "kind": "lesson",
+          "label": "阅读19",
+          "title": "咕咚",
+          "read": [
+            {
+              "id": "row-386",
+              "character": "咕",
+              "reading": "gū",
+              "polyphonic": false,
+              "sourceRow": 386,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-387",
+              "character": "咚",
+              "reading": "dōng",
+              "polyphonic": false,
+              "sourceRow": 387,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-388",
+              "character": "熟",
+              "reading": "shú",
+              "polyphonic": false,
+              "sourceRow": 388,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-389",
+              "character": "掉",
+              "reading": "diào",
+              "polyphonic": false,
+              "sourceRow": 389,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-390",
+              "character": "湖",
+              "reading": "hú",
+              "polyphonic": false,
+              "sourceRow": 390,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-391",
+              "character": "吓",
+              "reading": "xià",
+              "polyphonic": false,
+              "sourceRow": 391,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-392",
+              "character": "啦",
+              "reading": "la",
+              "polyphonic": false,
+              "sourceRow": 392,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-393",
+              "character": "鹿",
+              "reading": "lù",
+              "polyphonic": false,
+              "sourceRow": 393,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-394",
+              "character": "象",
+              "reading": "xiàng",
+              "polyphonic": false,
+              "sourceRow": 394,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-395",
+              "character": "野",
+              "reading": "yě",
+              "polyphonic": false,
+              "sourceRow": 395,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-396",
+              "character": "拦",
+              "reading": "lán",
+              "polyphonic": false,
+              "sourceRow": 396,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-397",
+              "character": "哪",
+              "reading": "nǎ",
+              "polyphonic": false,
+              "sourceRow": 397,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-398",
+              "character": "那",
+              "reading": "nà",
+              "polyphonic": false,
+              "sourceRow": 398,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-399",
+              "character": "领",
+              "reading": "lǐng",
+              "polyphonic": false,
+              "sourceRow": 399,
+              "pdfPage": 121
+            }
+          ],
+          "write": [
+            {
+              "id": "row-603",
+              "character": "吓",
+              "reading": "xià",
+              "polyphonic": false,
+              "sourceRow": 603,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-604",
+              "character": "为",
+              "reading": "wèi",
+              "polyphonic": false,
+              "sourceRow": 604,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-605",
+              "character": "怕",
+              "reading": "pà",
+              "polyphonic": false,
+              "sourceRow": 605,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-606",
+              "character": "家",
+              "reading": "jiā",
+              "polyphonic": false,
+              "sourceRow": 606,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-607",
+              "character": "象",
+              "reading": "xiàng",
+              "polyphonic": false,
+              "sourceRow": 607,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-608",
+              "character": "没",
+              "reading": "méi",
+              "polyphonic": false,
+              "sourceRow": 608,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-609",
+              "character": "到",
+              "reading": "dào",
+              "polyphonic": false,
+              "sourceRow": 609,
+              "pdfPage": 124
+            }
+          ]
+        },
+        {
+          "id": "reading-20",
+          "kind": "lesson",
+          "label": "阅读20",
+          "title": "小壁虎借尾巴",
+          "read": [
+            {
+              "id": "row-400",
+              "character": "壁",
+              "reading": "bì",
+              "polyphonic": false,
+              "sourceRow": 400,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-401",
+              "character": "借",
+              "reading": "jiè",
+              "polyphonic": false,
+              "sourceRow": 401,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-402",
+              "character": "咬",
+              "reading": "yǎo",
+              "polyphonic": false,
+              "sourceRow": 402,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-403",
+              "character": "难",
+              "reading": "nán",
+              "polyphonic": false,
+              "sourceRow": 403,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-404",
+              "character": "哪",
+              "reading": "na",
+              "polyphonic": true,
+              "sourceRow": 404,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-405",
+              "character": "爬",
+              "reading": "pá",
+              "polyphonic": false,
+              "sourceRow": 405,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-406",
+              "character": "您",
+              "reading": "nín",
+              "polyphonic": false,
+              "sourceRow": 406,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-407",
+              "character": "拨",
+              "reading": "bō",
+              "polyphonic": false,
+              "sourceRow": 407,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-408",
+              "character": "赶",
+              "reading": "gǎn",
+              "polyphonic": false,
+              "sourceRow": 408,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-409",
+              "character": "摆",
+              "reading": "bǎi",
+              "polyphonic": false,
+              "sourceRow": 409,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-410",
+              "character": "过",
+              "reading": "guò",
+              "polyphonic": false,
+              "sourceRow": 410,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-411",
+              "character": "孩",
+              "reading": "hái",
+              "polyphonic": false,
+              "sourceRow": 411,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-412",
+              "character": "转",
+              "reading": "zhuǎn",
+              "polyphonic": false,
+              "sourceRow": 412,
+              "pdfPage": 121
+            }
+          ],
+          "write": [
+            {
+              "id": "row-610",
+              "character": "向",
+              "reading": "xiàng",
+              "polyphonic": false,
+              "sourceRow": 610,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-611",
+              "character": "边",
+              "reading": "biān",
+              "polyphonic": false,
+              "sourceRow": 611,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-612",
+              "character": "行",
+              "reading": "xíng",
+              "polyphonic": false,
+              "sourceRow": 612,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-613",
+              "character": "草",
+              "reading": "cǎo",
+              "polyphonic": false,
+              "sourceRow": 613,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-614",
+              "character": "赶",
+              "reading": "gǎn",
+              "polyphonic": false,
+              "sourceRow": 614,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-615",
+              "character": "过",
+              "reading": "guò",
+              "polyphonic": false,
+              "sourceRow": 615,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-616",
+              "character": "找",
+              "reading": "zhǎo",
+              "polyphonic": false,
+              "sourceRow": 616,
+              "pdfPage": 124
+            }
+          ]
+        },
+        {
+          "id": "garden-8",
+          "kind": "garden",
+          "label": "",
+          "title": "语文园地八",
+          "read": [
+            {
+              "id": "row-413",
+              "character": "吵",
+              "reading": "chǎo",
+              "polyphonic": false,
+              "sourceRow": 413,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-414",
+              "character": "现",
+              "reading": "xiàn",
+              "polyphonic": false,
+              "sourceRow": 414,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-415",
+              "character": "顶",
+              "reading": "dǐng",
+              "polyphonic": false,
+              "sourceRow": 415,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-416",
+              "character": "胖",
+              "reading": "pàng",
+              "polyphonic": false,
+              "sourceRow": 416,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-417",
+              "character": "票",
+              "reading": "piào",
+              "polyphonic": false,
+              "sourceRow": 417,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-418",
+              "character": "户",
+              "reading": "hù",
+              "polyphonic": false,
+              "sourceRow": 418,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-419",
+              "character": "交",
+              "reading": "jiāo",
+              "polyphonic": false,
+              "sourceRow": 419,
+              "pdfPage": 121
+            },
+            {
+              "id": "row-420",
+              "character": "父",
+              "reading": "fù",
+              "polyphonic": false,
+              "sourceRow": 420,
+              "pdfPage": 121
+            }
+          ],
+          "write": [
+            {
+              "id": "row-617",
+              "character": "页",
+              "reading": "yè",
+              "polyphonic": false,
+              "sourceRow": 617,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-618",
+              "character": "户",
+              "reading": "hù",
+              "polyphonic": false,
+              "sourceRow": 618,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-619",
+              "character": "交",
+              "reading": "jiāo",
+              "polyphonic": false,
+              "sourceRow": 619,
+              "pdfPage": 124
+            },
+            {
+              "id": "row-620",
+              "character": "父",
+              "reading": "fù",
+              "polyphonic": false,
+              "sourceRow": 620,
+              "pdfPage": 124
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

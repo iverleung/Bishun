@@ -100,7 +100,7 @@
     </dialog>
     <dialog id="textbookDialog" class="textbook-dialog" aria-labelledby="textbookTitle">
         <div class="textbook-header"><h2 id="textbookTitle">小学教材</h2><button id="closeTextbookBtn" type="button">关闭</button></div>
-        <p id="textbookEdition" class="textbook-edition">一年级上册</p>
+        <div class="textbook-bookline"><label class="sr-only" for="textbookBook">选择册次</label><select id="textbookBook"></select><p id="textbookEdition" class="textbook-edition">统编版</p></div>
         <p id="textbookMessage" role="status" aria-live="polite"></p><button id="retryTextbookBtn" type="button" class="secondary" hidden>重试</button>
         <div id="textbookBody" class="textbook-body" hidden>
             <div class="textbook-directory"><label class="sr-only" for="textbookUnit">选择单元</label><select id="textbookUnit"></select><nav id="textbookLessons" aria-label="选择课文或语文园地"></nav></div>

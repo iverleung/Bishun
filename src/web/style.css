@@ -275,3 +275,6 @@ body[data-phase="lesson"]:not(.focus-mode):not(.practice-mode) { --canvas-size: 
     #textbookLessons button { flex-shrink: 0; max-width: 210px; }
     .textbook-footer { position: sticky; bottom: 0; background: #f6f7f3; padding-bottom: max(8px, env(safe-area-inset-bottom)); }
 }
+
+.textbook-bookline { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.textbook-bookline select { min-width: 0; max-width: 100%; min-height: 44px; padding: 8px 12px; color: inherit; font: inherit; background: #fffefa; border: 1px solid var(--border); border-radius: 8px; }

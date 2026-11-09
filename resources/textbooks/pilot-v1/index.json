@@ -9,6 +9,14 @@
       "url": "/textbooks/pilot-v1/g1-first-09b0989feae4.json",
       "sha256": "09b0989feae434fce496bb47096b2ea925c17cfe065ff4b30136336dccd87531",
       "bytes": 94282
+    },
+    {
+      "id": "g1-second",
+      "title": "一年级下册",
+      "edition": "统编版",
+      "url": "/textbooks/pilot-v1/g1-second-0327c624dc9d.json",
+      "sha256": "0327c624dc9d500d6fac7448fbe0f542f5014fa993a274dddc6a3a3591546d41",
+      "bytes": 146554
     }
   ]
 }

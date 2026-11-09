@@ -5,8 +5,11 @@ const preferenceKey = 'bishun-textbook-last-v1';
 export function createTextbookPicker({dom,storage,onOpen,onChoose,store = new TextbookStore()}) {
     let book = null, unit = null, task = null, mode = 'write', request = null, current = null, last = null;
     try { last = JSON.parse(storage?.getItem(preferenceKey) || 'null'); } catch { /* Optional browsing preference. */ }
+    dom.textbookBook.replaceChildren(...textbookBooks.map(entry => {
+        const option = document.createElement('option');option.value = entry.id;option.textContent = entry.title;return option;
+    }));
     const panel = createDrawer({ dialog:dom.textbookDialog,trigger:dom.openTextbookBtn,closeButton:dom.closeTextbookBtn,returnFocus:dom.menuBtn,
-        onOpen() { onOpen(); void load(); }, onClose() { request?.abort(); request = null; } });
+        onOpen() { onOpen(); void load(current?.bookId || last?.bookId || textbookBooks[0].id); }, onClose() { request?.abort(); request = null; } });
 
     function setCurrent(selection) {
         current = selection;
@@ -22,7 +25,7 @@ export function createTextbookPicker({dom,storage,onOpen,onChoose,store = new Te
         dom.textbookBody.hidden = !book;
         dom.openTextbookTaskBtn.disabled = !book || !task;
         if (!book) return;
-        dom.textbookEdition.textContent = `${book.title} · ${book.edition}`;
+        dom.textbookEdition.textContent = book.edition;
         if (dom.textbookUnit.dataset.book !== book.id) {
             dom.textbookUnit.replaceChildren(...book.units.map(item => {
                 const option = document.createElement('option');option.value = item.id;option.textContent = item.title;return option;
@@ -56,15 +59,18 @@ export function createTextbookPicker({dom,storage,onOpen,onChoose,store = new Te
         }));
         dom.openTextbookTaskBtn.textContent = `打开本课 · ${task[mode].length} 字`;
     }
-    async function load() {
+    async function load(id = dom.textbookBook.value) {
+        const requested = textbookBooks.find(entry => entry.id === id) || textbookBooks[0];
+        if (dom.textbookBook.value !== requested.id) dom.textbookBook.value = requested.id;
         request?.abort();const pending = new AbortController();request = pending;
         book = unit = task = null;render();
+        dom.textbookEdition.textContent = requested.edition;
         dom.textbookMessage.textContent = '正在加载教材…';dom.retryTextbookBtn.hidden = true;
         try {
-            const loaded = await store.load(textbookBooks[0].id,{signal:pending.signal});
+            const loaded = await store.load(requested.id,{signal:pending.signal});
             if (request !== pending || pending.signal.aborted || !dom.textbookDialog.open) return;
             book = loaded;
-            const preference = current || last;
+            const preference = current?.bookId === loaded.id ? current : last?.bookId === loaded.id ? last : null;
             unit = book.units.find(item => item.id === preference?.unitId) || book.units[0];
             dom.textbookMessage.textContent = '';
             selectTask(preference?.taskId,preference?.mode === 'read' ? 'read' : 'write');
@@ -82,6 +88,7 @@ export function createTextbookPicker({dom,storage,onOpen,onChoose,store = new Te
         panel.close({restore:false});
         onChoose(selection);
     }
+    dom.textbookBook.addEventListener('change',()=>void load(dom.textbookBook.value));
     dom.textbookUnit.addEventListener('change',()=>{
         unit = book.units.find(item => item.id === dom.textbookUnit.value);selectTask(unit.tasks[0].id);
     });
