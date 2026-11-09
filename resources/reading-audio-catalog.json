@@ -26,7 +26,7 @@
       "sha256": "ce16b52e705e0af16716b617ad5319aa14f164d63f48846f1028de89ad319666",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-mu4.mp3",
       "originalTitle": "mu4 (cmn)",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed"
     },
     {
       "reading": "shuǐ",
@@ -38,7 +38,7 @@
       "sha256": "0fba720c0b492453ee0c7785104ed25a65f52b8d6e031bd718a6805eb48d3876",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-shui3.mp3",
       "originalTitle": "shui3 (cmn)",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed"
     },
     {
       "reading": "xīn",
@@ -50,7 +50,7 @@
       "sha256": "3be9866e41ddcbc14cd16e1277df2ee4e9013daacfa62dfc9445e5a20bb217db",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-xin1.mp3",
       "originalTitle": "xin1 (cmn)",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed"
     },
     {
       "reading": "cháng",
@@ -62,7 +62,7 @@
       "sha256": "b3d84633492192df08aa65833806a0e42145cf84236d05f618dc139873c1a6d8",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-chang2.mp3",
       "originalTitle": "chang2 (cmn)",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed"
     },
     {
       "reading": "zhǎng",
@@ -74,7 +74,7 @@
       "sha256": "b88c8d502f70e0d4556809e039b2406497785b7c4ab2403e3f90ab6f70e54321",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-zhang3.mp3",
       "originalTitle": "zhang3 (cmn)",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed"
     },
     {
       "reading": "xíng",
@@ -86,7 +86,7 @@
       "sha256": "ab0a49ec8c7c1e2e7617718e446605bad304f5d23aa4268c1698c9a008e30b32",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-xing2.mp3",
       "originalTitle": "xing2 (cmn)",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed"
     },
     {
       "reading": "háng",
@@ -98,7 +98,7 @@
       "sha256": "3c9fbc3a7e7caecb595f80150a19d7be19f3e21060b28c97c438f853449bb170",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-hang2.mp3",
       "originalTitle": "hang2 (cmn)",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed"
     },
     {
       "reading": "hàng",
@@ -110,7 +110,7 @@
       "sha256": "f3d3a0e8dd034cfc77f83a157eb84648739fe951282a6683bfffddb9e8abf331",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-hang4.mp3",
       "originalTitle": "hang4 (cmn)",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed"
     },
     {
       "reading": "héng",
@@ -122,7 +122,7 @@
       "sha256": "97abc90101bedd848dda52c84c3eb64f3e1f0c7a97b32985bda139fcd80ef84e",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-heng2.mp3",
       "originalTitle": "heng2 (cmn)",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed"
     },
     {
       "reading": "zhòng",
@@ -134,7 +134,7 @@
       "sha256": "abfd6830066db41a11104ad811b8e9df63fe5081ee9113952012d5fa9de351fd",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-zhong4.mp3",
       "originalTitle": "zhong4 (cmn)",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed"
     },
     {
       "reading": "chóng",
@@ -146,7 +146,7 @@
       "sha256": "49575501e963566c5fd4156562e899b51b75e72c9d95087d576a5dcade8d3c9e",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-chong2.mp3",
       "originalTitle": "chong2 (cmn)",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed"
     },
     {
       "reading": "lè",
@@ -158,7 +158,7 @@
       "sha256": "0ba8d62b8e1f87b2f249b335db61e3aebf8764ab94d4f8ddf0e03efaf1511540",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-le4.mp3",
       "originalTitle": "le4 (cmn)",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed"
     },
     {
       "reading": "yuè",
@@ -170,7 +170,13 @@
       "sha256": "7a69bb511c0a1031814a8b35e98298e6818c95bf07d653f720bef65681c7bb3d",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-yue4.mp3",
       "originalTitle": "yue4 (cmn)",
-      "reviewStatus": "pending-listening"
+      "reviewStatus": "reviewed"
     }
-  ]
+  ],
+  "listeningReview": {
+    "date": "2026-11-09",
+    "confirmedBy": "user",
+    "evidence": "用户反馈：验证通过",
+    "scope": "首批 13 段读音样本及交互；不代表全库教学审核或新增设备专项验收"
+  }
 }
