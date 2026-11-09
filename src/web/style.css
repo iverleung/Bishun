@@ -246,3 +246,32 @@ body[data-phase="lesson"]:not(.focus-mode):not(.practice-mode) { --canvas-size: 
 .reading-button:hover, .reading-button.is-speaking { background: #e7eee5; color: #24715f; }
 #readingFeedback:not(.sr-only) { margin: 0 auto 12px; text-align: center; font-size: 13px; color: #89541f; }
 .reading-source { font-size: 12px; color: #6e7a70; }
+
+.textbook-entry { display: block; width: 100%; text-align: left; font-weight: 550; margin: 8px 0; }
+.textbook-entry small { display: block; font-size: 11px; font-weight: 400; color: var(--muted); margin-top: 6px; overflow-wrap: anywhere; }
+.textbook-dialog { width: min(820px, calc(100vw - 40px)); max-height: calc(100dvh - 40px); border: 1px solid var(--border); border-radius: 16px; padding: 24px; color: inherit; background: #f6f7f3; overflow-y: auto; overscroll-behavior: contain; }
+.textbook-dialog::backdrop { background: #20392c66; }
+.textbook-header { display: flex; align-items: center; justify-content: space-between; }
+.textbook-header h2 { font-size: 20px; font-weight: 550; }
+.textbook-edition, #textbookMessage { color: var(--muted); font-size: 12px; line-height: 1.7; }
+.textbook-body { display: grid; grid-template-columns: minmax(160px, 1fr) minmax(0, 2fr); gap: 24px; margin-top: 20px; }
+.textbook-body[hidden] { display: none; }
+.textbook-directory select { width: 100%; min-height: 44px; background: #fffefa; border: 1px solid var(--border); border-radius: 8px; padding: 8px; color: inherit; font: inherit; }
+#textbookLessons { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+#textbookLessons button { text-align: left; font-size: 13px; }
+#textbookLessons [aria-pressed="true"], .textbook-modes [aria-pressed="true"] { background: #e3ece0; color: var(--accent); }
+.textbook-preview h3 { font-size: 18px; font-weight: 550; margin: 4px 0 12px; }
+.textbook-modes { display: flex; gap: 8px; margin-bottom: 16px; }
+.textbook-characters { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 8px; }
+.textbook-character { display: flex; align-items: center; flex-direction: column; justify-content: center; padding: 12px 4px; background: #fffefa; border: 1px solid var(--border); }
+.textbook-character strong { font: 30px "Kaiti SC", KaiTi, serif; }
+.textbook-character span { font-size: 13px; margin-top: 6px; }
+.textbook-character.is-polyphonic { color: #2779a0; }
+.textbook-footer { display: flex; justify-content: flex-end; padding-top: 20px; }
+@media (max-width: 600px) {
+    .textbook-dialog { position: fixed; inset: 0; margin: 0; width: 100%; max-width: none; height: 100dvh; max-height: 100dvh; border: 0; border-radius: 0; padding: max(12px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom)); }
+    .textbook-body { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    #textbookLessons { flex-direction: row; overflow-x: auto; padding: 4px 0; }
+    #textbookLessons button { flex-shrink: 0; max-width: 210px; }
+    .textbook-footer { position: sticky; bottom: 0; background: #f6f7f3; padding-bottom: max(8px, env(safe-area-inset-bottom)); }
+}

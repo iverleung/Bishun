@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "dataset": "pilot-v1",
+  "books": [
+    {
+      "id": "g1-first",
+      "title": "一年级上册",
+      "edition": "统编版",
+      "url": "/textbooks/pilot-v1/g1-first-09b0989feae4.json",
+      "sha256": "09b0989feae434fce496bb47096b2ea925c17cfe065ff4b30136336dccd87531",
+      "bytes": 94282
+    }
+  ]
+}

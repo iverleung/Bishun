@@ -1,4 +1,4 @@
-export function createDrawer({ dialog, trigger, closeButton, onOpen = () => {}, onClose = () => {}, initialFocus = closeButton }) {
+export function createDrawer({ dialog, trigger, closeButton, onOpen = () => {}, onClose = () => {}, initialFocus = closeButton, returnFocus = trigger }) {
     let restoreFocus = true;
     let backdropStart = false;
     let locked = false;
@@ -54,7 +54,7 @@ export function createDrawer({ dialog, trigger, closeButton, onOpen = () => {}, 
         unlockScroll();
         trigger.setAttribute('aria-expanded', 'false');
         onClose();
-        if (restoreFocus) trigger.focus({ preventScroll: true });
+        if (restoreFocus) returnFocus.focus({ preventScroll: true });
     });
     dialog.addEventListener('pointerdown', event => { backdropStart = event.target === dialog && outside(event); });
     dialog.addEventListener('click', event => {

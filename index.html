@@ -70,6 +70,7 @@
         <div class="drawer-header"><h2 id="menuTitle">菜单</h2><button id="closeMenuBtn" type="button" aria-label="关闭菜单">×</button></div>
         <div class="drawer-content">
             <a class="reading-source" href="/audio/readings/v1/SOURCE.html" target="_blank" rel="noopener">读音来源与许可</a>
+            <button id="openTextbookBtn" class="textbook-entry" type="button" aria-haspopup="dialog" aria-controls="textbookDialog" aria-expanded="false">小学教材<small id="textbookCurrent" hidden></small></button>
             <details id="savedQueries" class="saved-queries"><summary>我的生字本 <span id="savedCount"></span></summary>
                 <div class="library-tools"><button id="manageSavedBtn" type="button" aria-pressed="false">管理</button><button id="exportSavedBtn" type="button">导出</button><button id="importSavedBtn" type="button">导入</button><input id="importSavedFile" type="file" accept=".json,application/json" hidden></div>
                 <nav id="savedList" aria-label="生字清单"></nav>
@@ -96,6 +97,16 @@
 
             </section>
         </div>
+    </dialog>
+    <dialog id="textbookDialog" class="textbook-dialog" aria-labelledby="textbookTitle">
+        <div class="textbook-header"><h2 id="textbookTitle">小学教材</h2><button id="closeTextbookBtn" type="button">关闭</button></div>
+        <p id="textbookEdition" class="textbook-edition">一年级上册</p>
+        <p id="textbookMessage" role="status" aria-live="polite"></p><button id="retryTextbookBtn" type="button" class="secondary" hidden>重试</button>
+        <div id="textbookBody" class="textbook-body" hidden>
+            <div class="textbook-directory"><label class="sr-only" for="textbookUnit">选择单元</label><select id="textbookUnit"></select><nav id="textbookLessons" aria-label="选择课文或语文园地"></nav></div>
+            <section class="textbook-preview" aria-labelledby="textbookTaskTitle"><h3 id="textbookTaskTitle"></h3><div class="textbook-modes" role="group" aria-label="字单类型"><button id="textbookWriteBtn" type="button" aria-pressed="true">会写</button><button id="textbookReadBtn" type="button" aria-pressed="false">会认</button></div><div id="textbookCharacters" class="textbook-characters"></div></section>
+        </div>
+        <div class="textbook-footer"><button id="openTextbookTaskBtn" class="primary" type="button" disabled>打开本课</button></div>
     </dialog>
     <dialog id="shareDialog" class="library-dialog" aria-labelledby="shareTitle">
         <h2 id="shareTitle">分享汉字</h2>

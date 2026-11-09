@@ -14,6 +14,7 @@ import { createDrawer } from './drawer.js';
 import { bindCanvasSwipe } from './canvas-swipe.js';
 import { PracticeController } from '../practice/controller.js';
 import { HanziPractice } from '../practice/hanzi-practice.js';
+import { createTextbookPicker } from './textbook-picker.js';
 import { setupOffline } from '../offline/client.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
@@ -25,6 +26,7 @@ let practiceOwner = '';
 let practiceRun = null;
 let composing = false;
 let offline = null;
+let textbooks = null;
 let renderedSelection = '';
 let pendingArrival = null;
 let arrivalAnimation = null;
@@ -306,7 +308,7 @@ async function movePractice(index, { replay = false } = {}) {
     const run = practiceRun;
     if (!run || run.pending || practice.status !== 'complete') return;
     run.pending = true;
-    run.suspended = document.hidden || dom.settings.open || dom.searchDialog.open;
+    run.suspended = document.hidden || dom.settings.open || dom.searchDialog.open || dom.textbookDialog.open;
     run.failed = null;
     if (replay) { run.completed.clear(); run.skipped.clear(); }
     if (index >= player.entries.length) { run.pending = false; renderPractice(); return; }
@@ -323,9 +325,9 @@ async function movePractice(index, { replay = false } = {}) {
         run.transition = false;
         run.pending = false;
         const started = practice.start(player.record);
-        if (run.suspended || document.hidden || dom.settings.open || dom.searchDialog.open) pausePractice();
+        if (run.suspended || document.hidden || dom.settings.open || dom.searchDialog.open || dom.textbookDialog.open) pausePractice();
         await started;
-        if (practiceRun === run && !dom.settings.open && !dom.searchDialog.open && !document.hidden) dom.practicePanel.focus({ preventScroll: true });
+        if (practiceRun === run && !dom.settings.open && !dom.searchDialog.open && !dom.textbookDialog.open && !document.hidden) dom.practicePanel.focus({ preventScroll: true });
     } catch {
         if (practiceRun !== run || run.task.signal.aborted) return;
         run.pending = false;
@@ -508,7 +510,8 @@ function render(state) {
     offline?.refreshSelection();
 }
 
-function query(value, fromLink = false) {
+function query(value, fromLink = false, textbook = null) {
+    textbooks?.setCurrent(textbook);
     if (!fromLink) clearSharedQuery();
     savedFeedback('');
     savedFeedback('', false, dom.saveActionFeedback);
@@ -685,6 +688,19 @@ window.addEventListener('resize', () => {
 });
 applyPreferences(loadPreferences(historyStorage));
 renderSavedQueries();
+textbooks = createTextbookPicker({ dom, storage:historyStorage,
+    onOpen() { drawer.close({restore:false});canvasSwipe.reset();player.pause();readingPlayer.cancel();pausePractice(); },
+    onChoose(selection) {
+        dom.query.value = selection.query;
+        query(selection.query,false,selection);
+        const revision = player.revision;
+        void player.ready.then(async () => {
+            if (player.revision !== revision) return;
+            if (selection.index) await player.select(selection.index);
+            if (player.revision === revision) (dom.playBtn.disabled ? dom.menuBtn : dom.playBtn).focus({preventScroll:true});
+        });
+    }
+});
 offline = setupOffline({ dom, getSelection: () => ({ query: player.entries.join(''), name: savedQueries.names.get(player.entries.join('')) || '' }), openQuery: openManagedQuery });
 setupSharing({ dom, getSelection: () => ({ character: player.entry, group: player.entries.join('') }) });
 function restoreSharedQuery() {
