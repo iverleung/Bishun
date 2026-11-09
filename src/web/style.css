@@ -203,3 +203,13 @@ input[type="radio"], input[type="checkbox"] { width: 18px; height: 18px; }
 .focus-mode .site-header .brand { display: none; }
 .focus-mode .focus-exit { right: 72px; }
 .drawer-open body.focus-mode { overflow: hidden; }
+
+#shareDialog .dialog-actions { flex-wrap: wrap; }
+.share-qr { text-align: center; margin-top: 16px; }
+.share-qr img { display: block; width: min(240px, 100%); height: auto; margin: 0 auto; image-rendering: pixelated; }
+.share-qr img:not([src]) { display: none; }
+.share-qr a { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; padding: 10px 14px; border-radius: 10px; background: #e8ede4; font-size: 13px; }
+.share-qr[hidden], .share-qr a[hidden] { display: none; }
+#shareDialog .mode-options label { display: inline-flex; align-items: center; gap: 6px; margin: 0 12px 0 0; }
+#shareDialog .mode-options label[hidden] { display: none; }
+#shareDialog input[type="radio"] { width: 18px; height: 18px; padding: 0; }

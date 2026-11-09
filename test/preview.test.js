@@ -8,6 +8,8 @@ import { characterReadings, characterRadical } from '../src/web/character-info.j
 import radicalDictionary from 'cnchar-radical';
 import { worksheetLayout, paginateCharacters } from '../src/web/print-layout.js';
 import { createShareUrl, readSharedQuery } from '../src/web/share.js';
+import { shareQrPixels } from '../src/web/share-qr.js';
+import jsQR from 'jsqr';
 
 test('saved queries preserve order and duplicates within a query, survive reload and stay separate from history', () => {
     const values = new Map();
@@ -297,5 +299,26 @@ test('radical information uses independent dictionary fields and preserves seman
 test('invalid or ambiguous radical results remain unknown instead of guessing a first candidate', () => {
     for(const result of [null, [], [{radical:''}], [{radical:'木|水'}], [{radical:'<script>'}], [{radical:'木'},{radical:'水'}], [{radical:3}]]) {
         assert.equal(characterRadical('木', () => result), null);
+    }
+});
+
+
+test('share QR pixels independently decode to exact content-only URLs, including repeats and 20 supplementary Han', () => {
+    for (const query of ['和', '木水木', '𠮷'.repeat(20)]) {
+        const url = createShareUrl('https://example.com/?private=excluded#old', query);
+        const image = shareQrPixels(url);
+        const decoded = jsQR(image.data, image.width, image.height);
+        assert.equal(decoded?.data, url);
+        assert.equal(readSharedQuery(decoded.data).query, query);
+        assert.equal(new URL(decoded.data).search, '');
+        assert.equal(image.width, image.height);
+        // Four whole white modules surround the code; no dark pixels on the border.
+        for (let x = 0; x < image.width; x++) assert.equal(image.data[x * 4], 255);
+    }
+});
+
+test('share QR rejects non-web and oversized links instead of creating a misleading image', () => {
+    for (const value of ['javascript:alert(1)', 'file:///tmp/a', 'not a URL', 'https://example.com/' + 'a'.repeat(2048)]) {
+        assert.throws(() => shareQrPixels(value));
     }
 });
