@@ -1,0 +1,646 @@
+{
+  "date": "2026-11-10",
+  "status": "read-only-initial-audit",
+  "scope": "Provided XLSX and 5-page methodology PDF; original textbook PDFs and extraction script not supplied or fetched. No curriculum function implemented.",
+  "sourceHashes": {
+    "统编版小学语文生字词表_1-6年级全12册.xlsx": "437169a8febcfb9cc055898e2eeb12e9be4fd8303897a7ab57dd55d3717398fd",
+    "小学语文三表获取方案_v3.pdf": "c32824c6d58e16c5e0522f38ff40e453f3f429d844dc1494f463d3770ee6fb15"
+  },
+  "totals": {
+    "rows": 7819,
+    "recognitionBlack": 3000,
+    "recognitionBlue": 157,
+    "writing": 2500,
+    "vocabulary": 2162
+  },
+  "unique": {
+    "all": 2983,
+    "recognition": 2905,
+    "writing": 2345,
+    "recognitionAndWriting": 2974,
+    "words": 2108,
+    "recognitionBlack": 2902
+  },
+  "bookCountChecks": [
+    {
+      "book": "一年级上册",
+      "version": "2022 课标修订版",
+      "expected": [
+        280,
+        4,
+        100,
+        0
+      ],
+      "observed": [
+        280,
+        4,
+        100,
+        0
+      ],
+      "match": true
+    },
+    {
+      "book": "一年级下册",
+      "version": "2022 课标修订版",
+      "expected": [
+        410,
+        9,
+        200,
+        0
+      ],
+      "observed": [
+        410,
+        9,
+        200,
+        0
+      ],
+      "match": true
+    },
+    {
+      "book": "二年级上册",
+      "version": "2022 课标修订版",
+      "expected": [
+        460,
+        22,
+        250,
+        236
+      ],
+      "observed": [
+        460,
+        22,
+        250,
+        236
+      ],
+      "match": true
+    },
+    {
+      "book": "二年级下册",
+      "version": "2022 课标修订版",
+      "expected": [
+        450,
+        15,
+        250,
+        240
+      ],
+      "observed": [
+        450,
+        15,
+        250,
+        240
+      ],
+      "match": true
+    },
+    {
+      "book": "三年级上册",
+      "version": "2022 课标修订版",
+      "expected": [
+        250,
+        27,
+        250,
+        250
+      ],
+      "observed": [
+        250,
+        27,
+        250,
+        250
+      ],
+      "match": true
+    },
+    {
+      "book": "三年级下册",
+      "version": "2022 课标修订版",
+      "expected": [
+        250,
+        25,
+        250,
+        271
+      ],
+      "observed": [
+        250,
+        25,
+        250,
+        271
+      ],
+      "match": true
+    },
+    {
+      "book": "四年级上册",
+      "version": "2022 课标修订版",
+      "expected": [
+        250,
+        15,
+        250,
+        220
+      ],
+      "observed": [
+        250,
+        15,
+        250,
+        220
+      ],
+      "match": true
+    },
+    {
+      "book": "四年级下册",
+      "version": "2016–2019 统编版",
+      "expected": [
+        250,
+        19,
+        250,
+        213
+      ],
+      "observed": [
+        250,
+        19,
+        250,
+        213
+      ],
+      "match": true
+    },
+    {
+      "book": "五年级上册",
+      "version": "2022 课标修订版",
+      "expected": [
+        200,
+        9,
+        220,
+        213
+      ],
+      "observed": [
+        200,
+        9,
+        220,
+        213
+      ],
+      "match": true
+    },
+    {
+      "book": "五年级下册",
+      "version": "2016–2019 统编版",
+      "expected": [
+        200,
+        12,
+        180,
+        142
+      ],
+      "observed": [
+        200,
+        12,
+        180,
+        142
+      ],
+      "match": true
+    },
+    {
+      "book": "六年级上册",
+      "version": "2022 课标修订版",
+      "expected": [
+        0,
+        0,
+        180,
+        215
+      ],
+      "observed": [
+        0,
+        0,
+        180,
+        215
+      ],
+      "match": true
+    },
+    {
+      "book": "六年级下册",
+      "version": "2016–2019 统编版",
+      "expected": [
+        0,
+        0,
+        120,
+        162
+      ],
+      "observed": [
+        0,
+        0,
+        120,
+        162
+      ],
+      "match": true
+    }
+  ],
+  "glyphCoverage": {
+    "manifest": "public/characters/2.0.1/manifest.json",
+    "sourceVersion": "2.0.1",
+    "checkedUniqueCharacters": 2983,
+    "missing": [],
+    "scope": "Manifest membership only, not normative stroke verification."
+  },
+  "pinyin": {
+    "rawDistinctNonEmpty": 1075,
+    "matchingAudioReadings": 46,
+    "matchingRecognitionRows": 180,
+    "missing": [
+      {
+        "book": "三年级下册",
+        "row": 230,
+        "table": "识字表",
+        "lesson": 24,
+        "unit": "第七单元",
+        "title": "我们奇妙的世界",
+        "source": "课文",
+        "text": "略",
+        "pinyin": null,
+        "poly": null,
+        "page": 117,
+        "ordinal": 9
+      }
+    ],
+    "invalidEncodingRows": [
+      {
+        "sheet": "一年级上册",
+        "row": 164,
+        "character": "绿",
+        "rawPinyin": "lC"
+      },
+      {
+        "sheet": "二年级下册",
+        "row": 343,
+        "character": "律",
+        "rawPinyin": "lC"
+      },
+      {
+        "sheet": "三年级下册",
+        "row": 75,
+        "character": "虑",
+        "rawPinyin": "lC"
+      },
+      {
+        "sheet": "三年级下册",
+        "row": 147,
+        "character": "驴",
+        "rawPinyin": "lB"
+      },
+      {
+        "sheet": "四年级下册",
+        "row": 56,
+        "character": "率",
+        "rawPinyin": "lC"
+      },
+      {
+        "sheet": "四年级下册",
+        "row": 112,
+        "character": "虑",
+        "rawPinyin": "lC"
+      }
+    ],
+    "dictionaryDifference": {
+      "count": 19,
+      "examples": [
+        {
+          "book": "一年级上册",
+          "row": 164,
+          "table": "识字表",
+          "lesson": "识字5",
+          "unit": "第六单元",
+          "title": "对韵歌",
+          "source": "课文",
+          "text": "绿",
+          "pinyin": "lC",
+          "poly": null,
+          "page": 111,
+          "ordinal": 7
+        },
+        {
+          "book": "一年级下册",
+          "row": 145,
+          "table": "识字表",
+          "lesson": "阅读6",
+          "unit": "第三单元",
+          "title": "怎么都快乐·语文园地",
+          "source": "语文园地",
+          "text": "斤",
+          "pinyin": "jīn",
+          "poly": null,
+          "page": 120,
+          "ordinal": 17
+        },
+        {
+          "book": "一年级下册",
+          "row": 404,
+          "table": "识字表",
+          "lesson": "阅读20",
+          "unit": "第八单元",
+          "title": "小壁虎借尾巴",
+          "source": "课文",
+          "text": "哪",
+          "pinyin": "na",
+          "poly": "是",
+          "page": 121,
+          "ordinal": 5
+        },
+        {
+          "book": "二年级下册",
+          "row": 220,
+          "table": "识字表",
+          "lesson": "阅读10",
+          "unit": "第四单元",
+          "title": "枫树上的喜鹊",
+          "source": "课文",
+          "text": "荫",
+          "pinyin": "yīn",
+          "poly": null,
+          "page": 120,
+          "ordinal": 2
+        },
+        {
+          "book": "二年级下册",
+          "row": 343,
+          "table": "识字表",
+          "lesson": "阅读17",
+          "unit": "第六单元",
+          "title": "太空生活趣事多·语文园地",
+          "source": "语文园地",
+          "text": "律",
+          "pinyin": "lC",
+          "poly": null,
+          "page": 120,
+          "ordinal": 25
+        },
+        {
+          "book": "三年级上册",
+          "row": 55,
+          "table": "识字表",
+          "lesson": 8,
+          "unit": "第三单元",
+          "title": "总也倒不了的老屋",
+          "source": "课文",
+          "text": "哦",
+          "pinyin": "ò",
+          "poly": null,
+          "page": 114,
+          "ordinal": 2
+        },
+        {
+          "book": "三年级上册",
+          "row": 99,
+          "table": "识字表",
+          "lesson": 11,
+          "unit": "第四单元",
+          "title": "宝葫芦的秘密（节选）",
+          "source": "课文",
+          "text": "少",
+          "pinyin": "shào",
+          "poly": "是",
+          "page": 115,
+          "ordinal": 2
+        },
+        {
+          "book": "三年级上册",
+          "row": 247,
+          "table": "识字表",
+          "lesson": 25,
+          "unit": "第八单元",
+          "title": "手术台就是阵地",
+          "source": "课文",
+          "text": "血",
+          "pinyin": "xuè",
+          "poly": null,
+          "page": 116,
+          "ordinal": 3
+        },
+        {
+          "book": "三年级下册",
+          "row": 75,
+          "table": "识字表",
+          "lesson": 8,
+          "unit": "第二单元",
+          "title": "池子与河流",
+          "source": "课文",
+          "text": "虑",
+          "pinyin": "lC",
+          "poly": null,
+          "page": 116,
+          "ordinal": 6
+        },
+        {
+          "book": "三年级下册",
+          "row": 147,
+          "table": "识字表",
+          "lesson": 15,
+          "unit": "第四单元",
+          "title": "一幅名扬中外的画",
+          "source": "课文",
+          "text": "驴",
+          "pinyin": "lB",
+          "poly": null,
+          "page": 117,
+          "ordinal": 5
+        },
+        {
+          "book": "三年级下册",
+          "row": 171,
+          "table": "识字表",
+          "lesson": 17,
+          "unit": "第五单元",
+          "title": "我变成了一棵树",
+          "source": "课文",
+          "text": "鳄",
+          "pinyin": "è",
+          "poly": null,
+          "page": 117,
+          "ordinal": 5
+        },
+        {
+          "book": "三年级下册",
+          "row": 221,
+          "table": "识字表",
+          "lesson": 23,
+          "unit": "第七单元",
+          "title": "暴风雨来临之前",
+          "source": "课文",
+          "text": "隆",
+          "pinyin": "lōng",
+          "poly": null,
+          "page": 117,
+          "ordinal": 8
+        },
+        {
+          "book": "四年级上册",
+          "row": 123,
+          "table": "识字表",
+          "lesson": 14,
+          "unit": "第四单元",
+          "title": "女娲补天",
+          "source": "课文",
+          "text": "混",
+          "pinyin": "hùn",
+          "poly": null,
+          "page": 128,
+          "ordinal": 4
+        },
+        {
+          "book": "四年级下册",
+          "row": 56,
+          "table": "识字表",
+          "lesson": 7,
+          "unit": "第二单元",
+          "title": "纳米技术就在我们身边",
+          "source": "课文",
+          "text": "率",
+          "pinyin": "lC",
+          "poly": "是",
+          "page": 142,
+          "ordinal": 10
+        },
+        {
+          "book": "四年级下册",
+          "row": 112,
+          "table": "识字表",
+          "lesson": 13,
+          "unit": "第四单元",
+          "title": "猫",
+          "source": "课文",
+          "text": "虑",
+          "pinyin": "lC",
+          "poly": null,
+          "page": 143,
+          "ordinal": 2
+        },
+        {
+          "book": "五年级上册",
+          "row": 64,
+          "table": "识字表",
+          "lesson": 9,
+          "unit": "第三单元",
+          "title": "牛郎织女（一）",
+          "source": "课文",
+          "text": "咧",
+          "pinyin": "liě",
+          "poly": null,
+          "page": 120,
+          "ordinal": 4
+        },
+        {
+          "book": "五年级下册",
+          "row": 27,
+          "table": "识字表",
+          "lesson": 3,
+          "unit": "第一单元",
+          "title": "月是故乡明",
+          "source": "课文",
+          "text": "莱",
+          "pinyin": "lái",
+          "poly": null,
+          "page": 124,
+          "ordinal": 11
+        },
+        {
+          "book": "五年级下册",
+          "row": 57,
+          "table": "识字表",
+          "lesson": 6,
+          "unit": "第二单元",
+          "title": "景阳冈",
+          "source": "课文",
+          "text": "斤",
+          "pinyin": "jīn",
+          "poly": null,
+          "page": 124,
+          "ordinal": 4
+        }
+      ]
+    },
+    "scope": "Raw strings counted before correction; dictionary difference does not prove which source is wrong."
+  },
+  "issues": {
+    "copyrightTextAsLessonTitle": {
+      "rows": 17,
+      "examples": [
+        {
+          "book": "三年级下册",
+          "row": 2,
+          "table": "识字表",
+          "lesson": 1,
+          "unit": "第八单元",
+          "title": "仅供个人学习使用，未经授权不得另做他用",
+          "source": "课文",
+          "text": "鸳",
+          "pinyin": "yuān",
+          "poly": null,
+          "page": 116,
+          "ordinal": 1
+        },
+        {
+          "book": "三年级下册",
+          "row": 3,
+          "table": "识字表",
+          "lesson": 1,
+          "unit": "第八单元",
+          "title": "仅供个人学习使用，未经授权不得另做他用",
+          "source": "课文",
+          "text": "鸯",
+          "pinyin": "yāng",
+          "poly": null,
+          "page": 116,
+          "ordinal": 2
+        },
+        {
+          "book": "三年级下册",
+          "row": 4,
+          "table": "识字表",
+          "lesson": 1,
+          "unit": "第八单元",
+          "title": "仅供个人学习使用，未经授权不得另做他用",
+          "source": "课文",
+          "text": "惠",
+          "pinyin": "huì",
+          "poly": null,
+          "page": 116,
+          "ordinal": 3
+        },
+        {
+          "book": "三年级下册",
+          "row": 5,
+          "table": "识字表",
+          "lesson": 1,
+          "unit": "第八单元",
+          "title": "仅供个人学习使用，未经授权不得另做他用",
+          "source": "课文",
+          "text": "崇",
+          "pinyin": "chóng",
+          "poly": null,
+          "page": 116,
+          "ordinal": 4
+        },
+        {
+          "book": "三年级下册",
+          "row": 6,
+          "table": "识字表",
+          "lesson": 1,
+          "unit": "第八单元",
+          "title": "仅供个人学习使用，未经授权不得另做他用",
+          "source": "课文",
+          "text": "豚",
+          "pinyin": "tún",
+          "poly": null,
+          "page": 116,
+          "ordinal": 5
+        }
+      ]
+    },
+    "lessonLengthOver20": {
+      "recognition": 0,
+      "writing": 0,
+      "vocabulary": 122,
+      "method": "Grouped by book/table/raw lesson/source type; vocabulary expanded into Han characters."
+    },
+    "maxWritingCharactersPerRawLesson": 15,
+    "missingRequiredFields": [],
+    "invalidCharacterLengths": []
+  },
+  "limitations": [
+    "Workbook internal counts agree; original printed count anchors not independently checked.",
+    "Mixed revision labels are from supplied workbook; current official catalog not queried.",
+    "Source-page type and actual lesson assignment require original-page review.",
+    "Publication/use permissions are not established by this local audit."
+  ]
+}
