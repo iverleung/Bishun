@@ -32,6 +32,7 @@ export class CharacterStore {
             return await Promise.race([
                 (async () => {
                     const response = await this.fetch(url, { signal: controller.signal, cache: immutable ? 'force-cache' : 'no-cache' });
+                    if (response.status === 503 && response.headers.get('X-Bishun-Offline') === 'missing') throw new ResourceError('OFFLINE_MISSING', '此字未离线保存，请联网后查询');
                     if (!response.ok) throw new ResourceError('HTTP', `资源请求失败（${response.status}）`);
                     if (!response.headers.get('content-type')?.includes('application/json')) {
                         throw new ResourceError('FORMAT', '资源返回了非 JSON 内容');

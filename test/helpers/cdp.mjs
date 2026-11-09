@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 
 // Isolated, optional browser tests: no access to existing user targets or stored browser data.
-export async function openBrowser(cdpUrl, pageUrl) {
+export async function openBrowser(cdpUrl, pageUrl, { ready = "document.querySelector('#status')?.textContent === '请输入汉字' && document.visibilityState === 'visible'" } = {}) {
     if (typeof WebSocket !== 'function') throw new Error('Browser tests require Node 22+');
     const response = await fetch(new URL('/json/version', cdpUrl), { signal: AbortSignal.timeout(5000) });
     if (!response.ok) throw new Error(`CDP connection failed: ${response.status}`);
@@ -99,7 +99,7 @@ export async function openBrowser(cdpUrl, pageUrl) {
         await command('Runtime.enable');
         await command('Network.enable');
         await command('Page.navigate', { url: pageUrl });
-        await wait("document.querySelector('#status')?.textContent === '请输入汉字' && document.visibilityState === 'visible'");
+        await wait(ready);
         return { version: version.Browser, command, evaluate, wait, click, fill, screenshot, close, activate, windowState, requests, responses, exceptions };
     } catch (error) { await close(); throw error; }
 }

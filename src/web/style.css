@@ -48,7 +48,7 @@ h1, h2, p { margin: 0; }
 .lesson-panel { padding-bottom: 40px; min-width: 0; }
 .character-lane { display: grid; grid-template-columns: minmax(0, 1fr) var(--canvas-size) minmax(0, 1fr); gap: clamp(12px, 3vw, 40px); align-items: center; width: calc(100% + 48px); margin-left: -24px; overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent); }
 .stage { width: var(--canvas-size); height: var(--canvas-size); flex-shrink: 0; position: relative; }
-.writing-grid { position: relative; width: 100%; height: 100%; border: 1px solid #c9d5c4; background: #fffefa; border-radius: 5px; }
+.writing-grid { scroll-margin-top: 64px; position: relative; width: 100%; height: 100%; border: 1px solid #c9d5c4; background: #fffefa; border-radius: 5px; }
 .character-ink { transform-origin: 512px 512px; }
 .writing-grid svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .grid-lines { fill: none; stroke: #c6cebb; stroke-width: 2; stroke-dasharray: 12 10; }
@@ -230,3 +230,14 @@ body[data-phase="lesson"]:not(.focus-mode):not(.practice-mode) { --canvas-size: 
     body[data-phase="lesson"]:not(.focus-mode) .site-header { padding-left: 16px; padding-right: 16px; }
     .search-dialog { padding: 16px; }
 }
+
+.offline-section { margin-top: 8px; color: var(--muted); }
+.offline-section summary { text-align: left; }
+#offlineMessage { font-size: 12px; line-height: 1.6; margin: 8px 0; overflow-wrap: anywhere; }
+.offline-actions, .offline-row-actions { display: flex; gap: 8px; }
+.offline-actions button, .offline-row-actions button { font-size: 12px; color: var(--accent); }
+.offline-row { padding: 8px 0; border-bottom: 1px solid var(--border); }
+.offline-open { display: block; width: 100%; text-align: left; color: #293d35; font-size: 13px; overflow-wrap: anywhere; }
+.offline-row small { display: block; padding: 0 14px; font-size: 11px; }
+.offline-row-actions { justify-content: flex-end; }
+.offline-note { font-size: 11px; line-height: 1.6; margin: 12px 0; }

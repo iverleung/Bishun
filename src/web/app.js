@@ -12,6 +12,7 @@ import { createDrawer } from './drawer.js';
 import { bindCanvasSwipe } from './canvas-swipe.js';
 import { PracticeController } from '../practice/controller.js';
 import { HanziPractice } from '../practice/hanzi-practice.js';
+import { setupOffline } from '../offline/client.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
 const svgNamespace = 'http://www.w3.org/2000/svg';
@@ -21,6 +22,7 @@ let informationKey = '';
 let practiceOwner = '';
 let practiceRun = null;
 let composing = false;
+let offline = null;
 let renderedSelection = '';
 let pendingArrival = null;
 let arrivalAnimation = null;
@@ -248,18 +250,19 @@ function savedFeedback(message, visible = false, target = dom.savedFeedback) {
     target.className = visible ? 'notice' : 'sr-only';
 }
 
+function openManagedQuery(value) {
+    dom.query.value = value;
+    query(value);
+    drawer.close({ restore: false });
+    const revision = player.revision;
+    void player.ready.then(() => {
+        if (player.revision !== revision) return;
+        (dom.playBtn.disabled ? dom.menuBtn : dom.playBtn).focus({ preventScroll: true });
+    });
+}
+
 const library = createSavedLibrary({
-    dom, savedQueries,
-    openQuery(value) {
-        dom.query.value = value;
-        query(value);
-        drawer.close({ restore: false });
-        const revision = player.revision;
-        void player.ready.then(() => {
-            if (player.revision !== revision) return;
-            (dom.playBtn.disabled ? dom.menuBtn : dom.playBtn).focus({ preventScroll: true });
-        });
-    },
+    dom, savedQueries, openQuery: openManagedQuery,
     feedback: savedFeedback,
     changed() { savedFeedback('', false, dom.saveActionFeedback); player.notify(); }
 });
@@ -459,6 +462,7 @@ function render(state) {
     dom.status.classList.toggle('sr-only', !showNotice);
     dom.status.textContent = state.audioWarning || statuses[state.status];
     if (practice.visible) renderPractice();
+    offline?.refreshSelection();
 }
 
 function query(value, fromLink = false) {
@@ -635,6 +639,7 @@ window.addEventListener('resize', () => {
 });
 applyPreferences(loadPreferences(historyStorage));
 renderSavedQueries();
+offline = setupOffline({ dom, getSelection: () => ({ query: player.entries.join(''), name: savedQueries.names.get(player.entries.join('')) || '' }), openQuery: openManagedQuery });
 setupSharing({ dom, getSelection: () => ({ character: player.entry, group: player.entries.join('') }) });
 function restoreSharedQuery() {
     const shared = readSharedQuery(location.href);

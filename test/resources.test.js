@@ -92,3 +92,9 @@ test('transport and malformed JSON failures have recoverable Chinese messages', 
     const malformed = new CharacterStore({ getNames: names, fetchImpl: async url => url.endsWith('manifest.json') ? json(manifest) : new Response('invalid', { headers: { 'content-type': 'application/json' } }) });
     await assert.rejects(malformed.load('木'), error => error.code === 'FORMAT' && /格式无效/.test(error.message));
 });
+
+
+test('offline missing glyphs explain the missing download instead of showing an HTTP code', async () => {
+    const store = new CharacterStore({ fetchImpl: async url => url.endsWith('manifest.json') ? json(manifest) : new Response('missing', { status:503, headers:{'X-Bishun-Offline':'missing'} }) });
+    await assert.rejects(store.load('木'), error => error.code === 'OFFLINE_MISSING' && /未离线保存/.test(error.message));
+});
