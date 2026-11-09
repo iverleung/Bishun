@@ -88,12 +88,13 @@ test('expanded basic-character readings are covered without borrowing a tone for
     assert.equal(readingRecording('de'),null);
 });
 
-test('expansion preserves exact approved recordings and leaves only the new batch pending', async () => {
+test('both user-approved batches bind listening confirmation to their exact recording files', async () => {
     const { default: catalog } = await import('../resources/reading-audio-catalog.json', { with: { type:'json' } });
     const approved = catalog.items.filter(item => item.reviewStatus === 'reviewed');
     const pending = catalog.items.filter(item => item.reviewStatus === 'pending-listening');
-    assert.equal(approved.length,13);
-    assert.equal(pending.length,34);
-    assert.ok(approved.every(item => item.batch === 'initial' && catalog.listeningReview.items[item.id] === item.sha256));
-    assert.ok(pending.every(item => item.batch === 'basics' && !catalog.listeningReview.items[item.id]));
+    assert.equal(approved.length,47);
+    assert.equal(pending.length,0);
+    assert.equal(approved.filter(item => item.batch === 'initial').length,13);
+    assert.equal(approved.filter(item => item.batch === 'basics').length,34);
+    assert.ok(approved.every(item => catalog.listeningReview.items[item.id] === item.sha256));
 });
