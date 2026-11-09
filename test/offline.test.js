@@ -31,6 +31,8 @@ async function fixture() {
     const catalog=JSON.parse(await fs.readFile(new URL('../public/audio/strokes/v1/manifest.json',import.meta.url),'utf8'));
     json('/audio/strokes/v1/manifest.json',catalog);
     for(const item of catalog.items)files.set(item.url,{body:await fs.readFile(new URL('../public'+item.url,import.meta.url)),type:'audio/mpeg'});
+    const readings=JSON.parse(await fs.readFile(new URL('../resources/reading-audio-catalog.json',import.meta.url),'utf8'));
+    for(const item of readings.items) files.set(item.url,{body:await fs.readFile(new URL('../public'+item.url,import.meta.url)),type:'audio/mpeg'});
     files.set('/',{body:Buffer.from('<!doctype html>offline fixture'),type:'text/html'});
     json('/offline-build.json',{schema:1,id:'build-A',files:Object.fromEntries(['/','/characters/2.0.1/manifest.json','/audio/strokes/v1/manifest.json'].map(path=>[path,hash(files.get(path).body)]))});
     const calls=[];
@@ -50,7 +52,8 @@ test('offline save commits only selected unique glyphs and needed audio, preserv
     assert.equal(saved.query,'木水木');assert.equal(saved.unknownNames,0);
     const glyphs=f.calls.filter(path=>/^\/characters\/.*\.json$/.test(path) && !/manifest|checksums/.test(path));
     assert.equal(glyphs.length,2);
-    assert.equal(f.calls.filter(path=>path.endsWith('.mp3')).length,6);
+    assert.equal(f.calls.filter(path=>path.startsWith('/audio/strokes/') && path.endsWith('.mp3')).length,6);
+    assert.equal(f.calls.filter(path=>path.startsWith('/audio/readings/') && path.endsWith('.mp3')).length,2);
     assert.ok(saved.files.every(path=>!path.includes('checksums')));
     assert.equal((await f.packs.list({verify:true}))[0].broken,undefined);
     assert.equal((await f.packs.match(new Request(origin+'/?any=1'))).status,200);

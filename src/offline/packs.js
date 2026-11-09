@@ -1,5 +1,7 @@
 import { CharacterStore, ResourceError } from '../data/character-store.js';
 import { characterBase } from '../data/character-data.js';
+import { characterReadings } from '../web/character-info.js';
+import { readingRecording } from '../data/reading-audio.js';
 import { isCharacterQuery } from '../web/history.js';
 
 export const packPrefix = 'bishun-offline-pack-v1-';
@@ -152,6 +154,13 @@ export class OfflinePacks {
                 if (!item || !/^stroke-[a-f0-9]{12}$/.test(item.id) || item.url !== `/audio/strokes/v1/${item.id}.mp3` || !/^[a-f0-9]{64}$/.test(item.sha256)) throw new Error(`“${name}”录音暂缺，未保存离线字单`);
                 const response = await put(item.url,item.sha256);
                 if (!(response.headers.get('content-type') || '').includes('audio/') || Number(response.headers.get('content-length') || item.bytes) !== item.bytes) throw new Error('录音格式或大小无效');
+            }
+            const readings = new Set(Array.from(query).flatMap(char => characterReadings(char)));
+            for (const reading of readings) {
+                const item = readingRecording(reading);
+                if (!item) continue;
+                const response = await put(item.url, item.sha256);
+                if (!(response.headers.get('content-type') || '').includes('audio/') || Number(response.headers.get('content-length') || item.bytes) !== item.bytes) throw new Error('读音录音格式或大小无效');
             }
             if (signal?.aborted) throw abortError();
             const meta = { schema:1,query,name:name.trim(),buildId:this.buildId,savedAt:this.now(),bytes:size,unknownNames,files:[...staged.keys()] };

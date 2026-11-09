@@ -29,6 +29,7 @@
             <div id="basicInfo" class="canvas-information" role="group" aria-label="当前字的拼音与笔画数">
                 <span id="characterReadings" class="character-readings" title="cnchar 字典读音；多音字并列显示"></span><span id="characterStrokeCount" class="character-stroke-count"></span>
             </div>
+            <p id="readingFeedback" class="sr-only" role="status" aria-live="polite"></p>
             <div class="character-lane">
                 <nav id="previousCharacterList" class="character-queue previous-queue" aria-label="之前的字"></nav>
                 <div class="stage" id="stage">
@@ -68,6 +69,7 @@
     <dialog id="settings" class="settings-drawer" aria-labelledby="menuTitle">
         <div class="drawer-header"><h2 id="menuTitle">菜单</h2><button id="closeMenuBtn" type="button" aria-label="关闭菜单">×</button></div>
         <div class="drawer-content">
+            <a class="reading-source" href="/audio/readings/v1/SOURCE.html" target="_blank" rel="noopener">读音来源与许可</a>
             <details id="savedQueries" class="saved-queries"><summary>我的生字本 <span id="savedCount"></span></summary>
                 <div class="library-tools"><button id="manageSavedBtn" type="button" aria-pressed="false">管理</button><button id="exportSavedBtn" type="button">导出</button><button id="importSavedBtn" type="button">导入</button><input id="importSavedFile" type="file" accept=".json,application/json" hidden></div>
                 <nav id="savedList" aria-label="生字清单"></nav>

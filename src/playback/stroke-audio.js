@@ -75,16 +75,24 @@ export class StrokeAudio {
         if (signal?.aborted) throw new DOMException('已取消', 'AbortError');
         const item = entries.get(name);
         if (!item) return null;
-        if (!this.buffers.has(name)) {
+        return this.prepareRecording(item, { signal });
+    }
+
+    async prepareRecording(item, { signal } = {}) {
+        if (this.unlocking) await cancellable(this.unlocking, signal);
+        if (signal?.aborted) throw new DOMException('已取消', 'AbortError');
+        if (!this.context || this.context.state !== 'running') throw new Error('声音未启用，请点击后重试');
+        const key = item.url;
+        if (!this.buffers.has(key)) {
             const context = this.context;
-            this.buffers.set(name, this.bounded(this.fetch(item.url, { cache: 'force-cache' }).then(async response => {
+            this.buffers.set(key, this.bounded(this.fetch(item.url, { cache: 'force-cache' }).then(async response => {
                 if (!response.ok) throw new Error('录音加载失败，可静音继续');
                 const bytes = await response.arrayBuffer();
                 try { return await context.decodeAudioData(bytes); }
                 catch { throw new Error('录音无法播放，已静音继续'); }
-            })).catch(error => { this.buffers.delete(name); throw resourceFailure(error); }));
+            })).catch(error => { this.buffers.delete(key); throw resourceFailure(error); }));
         }
-        const buffer = await cancellable(this.buffers.get(name), signal);
+        const buffer = await cancellable(this.buffers.get(key), signal);
         if (signal?.aborted) throw new DOMException('已取消', 'AbortError');
         return buffer;
     }

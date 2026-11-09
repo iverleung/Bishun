@@ -1,6 +1,8 @@
 import { CharacterStore } from '../data/character-store.js';
 import { PlaybackController } from '../playback/controller.js';
 import { HanziAnimation } from '../playback/hanzi-animation.js';
+import { ReadingPlayer } from '../playback/reading-player.js';
+import { readingRecording } from '../data/reading-audio.js';
 import { StrokeAudio } from '../playback/stroke-audio.js';
 import { QueryHistory } from './history.js';
 import { defaultPreferences, loadPreferences, savePreferences } from './preferences.js';
@@ -35,7 +37,9 @@ const savedQueries = new SavedQueries(historyStorage);
 const store = new CharacterStore();
 const audio = new StrokeAudio();
 const animation = new HanziAnimation(dom.animationLayer);
-const player = new PlaybackController({ store, audio, animation, onChange: render });
+let readingPlayer = null;
+const player = new PlaybackController({ store, audio, animation, onChange: render, onInterrupt: () => readingPlayer?.cancel() });
+readingPlayer = new ReadingPlayer({ audio, lookup: readingRecording, onChange: renderReadingPlayback });
 const practiceAdapter = new HanziPractice(dom.practiceLayer);
 const practice = new PracticeController({ adapter: practiceAdapter, onChange: () => {
     if (practice.status === 'complete' && practiceRun && !practiceRun.pending) practiceRun.completed.add(player.index);
@@ -44,7 +48,7 @@ const practice = new PracticeController({ adapter: practiceAdapter, onChange: ()
 let focusMode = false;
 let ownsFullscreen = false;
 let viewportWidth = window.innerWidth;
-const drawer = createDrawer({ dialog: dom.settings, trigger: dom.menuBtn, closeButton: dom.closeMenuBtn, onOpen: () => { canvasSwipe.reset(); player.pause(); pausePractice(); } });
+const drawer = createDrawer({ dialog: dom.settings, trigger: dom.menuBtn, closeButton: dom.closeMenuBtn, onOpen: () => { canvasSwipe.reset(); player.pause(); readingPlayer.cancel(); pausePractice(); } });
 const canvasSwipe = bindCanvasSwipe(dom.stage, {
     enabled: () => player.entries.length > 1 && !practice.visible && !dom.settings.open,
     context: () => `${player.revision}:${player.index}`,
@@ -61,6 +65,7 @@ const search = createDrawer({
         composing = false;
         canvasSwipe.reset();
         player.pause();
+        readingPlayer.cancel();
         pausePractice();
         dom.query.value = player.entries.join('');
         dom.clearBtn.hidden = !dom.query.value;
@@ -366,6 +371,26 @@ function renderPractice() {
     dom.characterCanvas.setAttribute('aria-label', `正在练习${practice.record.character}，已写 ${practice.completed} 笔`);
 }
 
+function renderReadingPlayback() {
+    if (!readingPlayer) return;
+    for (const button of dom.characterReadings.querySelectorAll('[data-reading]')) {
+        const active = button.dataset.reading === readingPlayer.reading && ['loading', 'playing'].includes(readingPlayer.status);
+        button.classList.toggle('is-speaking', active);
+        button.setAttribute('aria-busy', String(active));
+    }
+    const failed = readingPlayer.status === 'error';
+    dom.readingFeedback.classList.toggle('sr-only', !failed);
+    dom.readingFeedback.textContent = failed ? readingPlayer.message : readingPlayer.status === 'loading' ? '正在加载读音' : readingPlayer.status === 'playing' ? `正在播放 ${readingPlayer.reading}` : '';
+}
+
+dom.characterReadings.addEventListener('click', event => {
+    const button = event.target.closest('[data-reading]');
+    if (!button || !dom.characterReadings.contains(button)) return;
+    player.pause();
+    pausePractice();
+    void readingPlayer.play(button.dataset.reading);
+});
+
 function renderBasicInformation(state) {
     const available = Boolean(state.data) && !['empty', 'loading', 'error'].includes(state.status);
     const key = `${state.entry}:${available}:${state.status === 'loading'}`;
@@ -374,6 +399,24 @@ function renderBasicInformation(state) {
     dom.lessonActionsHeading.textContent = state.entry ? `当前字 · ${state.entry}` : '当前字';
     const readings = available ? characterReadings(state.entry) : [];
     dom.characterReadings.textContent = !available ? (state.status === 'loading' ? '加载中' : '暂缺') : readings.length ? readings.join(' / ') : '暂缺';
+    if (readings.length) {
+        dom.characterReadings.replaceChildren();
+        readings.forEach((reading, index) => {
+            if (index) dom.characterReadings.append(' / ');
+            const recording = readingRecording(reading);
+            const element = document.createElement(recording ? 'button' : 'span');
+            element.textContent = reading;
+            if (recording) {
+                element.type = 'button';
+                element.className = 'reading-button';
+                element.dataset.reading = reading;
+                element.setAttribute('aria-label', `播放读音 ${reading}`);
+                element.title = '点击听读音';
+            } else element.title = '该读音录音暂缺';
+            dom.characterReadings.append(element);
+        });
+    }
+    renderReadingPlayback();
     dom.characterReadings.setAttribute('aria-label', readings.length > 1 ? `多音字，${readings.join('，')}` : dom.characterReadings.textContent);
     dom.characterStrokeCount.textContent = available ? `${state.data.strokes.length} 笔` : '暂缺';
 }
@@ -563,6 +606,7 @@ dom.printQueryBtn.addEventListener('click', () => {
 });
 dom.practiceBtn.addEventListener('click', () => {
     if (!player.record || dom.practiceBtn.disabled) return;
+    readingPlayer.cancel();
     player.pause();
     drawer.close({ restore: false });
     practiceOwner = `${player.revision}:${player.index}`;
@@ -571,12 +615,14 @@ dom.practiceBtn.addEventListener('click', () => {
     dom.writingGrid.scrollIntoView({ block: 'center' });
     dom.practicePanel.focus({ preventScroll: true });
 });
-dom.practiceMode.addEventListener('change', () => void practice.restart(dom.practiceMode.value));
+dom.practiceMode.addEventListener('change', () => { readingPlayer.cancel(); void practice.restart(dom.practiceMode.value); });
 dom.practiceHintBtn.addEventListener('click', () => {
+    readingPlayer.cancel();
     if (practice.status === 'paused') void practice.resume();
     else void practice.hint();
 });
 dom.practiceRestartBtn.addEventListener('click', () => {
+    readingPlayer.cancel();
     dom.practicePanel.focus({ preventScroll: true });
     void practice.restart();
 });
@@ -629,8 +675,8 @@ document.addEventListener('fullscreenchange', () => {
 document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && focusMode && !document.querySelector('dialog[open]')) { event.preventDefault(); void exitFocusMode(); }
 });
-document.addEventListener('visibilitychange', () => { if (document.hidden) { canvasSwipe.reset(); player.pause(); pausePractice(); } });
-window.addEventListener('pagehide', () => { canvasSwipe.reset(); player.pause(); pausePractice(); });
+document.addEventListener('visibilitychange', () => { if (document.hidden) { canvasSwipe.reset(); player.pause(); readingPlayer.cancel(); pausePractice(); } });
+window.addEventListener('pagehide', () => { canvasSwipe.reset(); player.pause(); readingPlayer.cancel(); pausePractice(); });
 window.addEventListener('resize', () => {
     // Mobile Safari changes viewport height when its bars or keyboard move.
     // Only a width change invalidates the canvas gesture geometry.

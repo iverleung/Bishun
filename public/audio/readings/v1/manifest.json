@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "version": "v1",
+  "source": {
+    "repository": "https://github.com/hugolpz/audio-cmn",
+    "commit": "f759a0f18f27690742957619e1248ed91e9b3f2c",
+    "speaker": "Chen Wang 王琛",
+    "authors": [
+      "Wang Chen 王琛",
+      "Hugo Lopez",
+      "Nicolas Vion"
+    ],
+    "copyright": "Copyright 2013 Wang Chen, Lopez Hugo, Vion Nicolas",
+    "license": "CC-BY-SA-3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "modifications": "None. Upstream MP3 bytes and embedded metadata are preserved; local filenames use reading IDs."
+  },
+  "items": [
+    {
+      "reading": "mù",
+      "token": "mu4",
+      "id": "reading-24399f8e2934",
+      "url": "/audio/readings/v1/reading-24399f8e2934.mp3",
+      "durationMs": 1032,
+      "bytes": 9180,
+      "sha256": "ce16b52e705e0af16716b617ad5319aa14f164d63f48846f1028de89ad319666",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-mu4.mp3",
+      "originalTitle": "mu4 (cmn)",
+      "reviewStatus": "pending-listening"
+    },
+    {
+      "reading": "shuǐ",
+      "token": "shui3",
+      "id": "reading-20c5bb55e302",
+      "url": "/audio/readings/v1/reading-20c5bb55e302.mp3",
+      "durationMs": 1344,
+      "bytes": 11680,
+      "sha256": "0fba720c0b492453ee0c7785104ed25a65f52b8d6e031bd718a6805eb48d3876",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-shui3.mp3",
+      "originalTitle": "shui3 (cmn)",
+      "reviewStatus": "pending-listening"
+    },
+    {
+      "reading": "xīn",
+      "token": "xin1",
+      "id": "reading-46ac43929582",
+      "url": "/audio/readings/v1/reading-46ac43929582.mp3",
+      "durationMs": 1296,
+      "bytes": 11294,
+      "sha256": "3be9866e41ddcbc14cd16e1277df2ee4e9013daacfa62dfc9445e5a20bb217db",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-xin1.mp3",
+      "originalTitle": "xin1 (cmn)",
+      "reviewStatus": "pending-listening"
+    },
+    {
+      "reading": "cháng",
+      "token": "chang2",
+      "id": "reading-f17a052c466a",
+      "url": "/audio/readings/v1/reading-f17a052c466a.mp3",
+      "durationMs": 1032,
+      "bytes": 9186,
+      "sha256": "b3d84633492192df08aa65833806a0e42145cf84236d05f618dc139873c1a6d8",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-chang2.mp3",
+      "originalTitle": "chang2 (cmn)",
+      "reviewStatus": "pending-listening"
+    },
+    {
+      "reading": "zhǎng",
+      "token": "zhang3",
+      "id": "reading-07ad1c48379b",
+      "url": "/audio/readings/v1/reading-07ad1c48379b.mp3",
+      "durationMs": 1224,
+      "bytes": 10722,
+      "sha256": "b88c8d502f70e0d4556809e039b2406497785b7c4ab2403e3f90ab6f70e54321",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-zhang3.mp3",
+      "originalTitle": "zhang3 (cmn)",
+      "reviewStatus": "pending-listening"
+    },
+    {
+      "reading": "xíng",
+      "token": "xing2",
+      "id": "reading-cb4dbb8fbe5e",
+      "url": "/audio/readings/v1/reading-cb4dbb8fbe5e.mp3",
+      "durationMs": 1128,
+      "bytes": 9952,
+      "sha256": "ab0a49ec8c7c1e2e7617718e446605bad304f5d23aa4268c1698c9a008e30b32",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-xing2.mp3",
+      "originalTitle": "xing2 (cmn)",
+      "reviewStatus": "pending-listening"
+    },
+    {
+      "reading": "háng",
+      "token": "hang2",
+      "id": "reading-39c3e3d2ed32",
+      "url": "/audio/readings/v1/reading-39c3e3d2ed32.mp3",
+      "durationMs": 1080,
+      "bytes": 9568,
+      "sha256": "3c9fbc3a7e7caecb595f80150a19d7be19f3e21060b28c97c438f853449bb170",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-hang2.mp3",
+      "originalTitle": "hang2 (cmn)",
+      "reviewStatus": "pending-listening"
+    },
+    {
+      "reading": "hàng",
+      "token": "hang4",
+      "id": "reading-5707ec4b8171",
+      "url": "/audio/readings/v1/reading-5707ec4b8171.mp3",
+      "durationMs": 936,
+      "bytes": 8416,
+      "sha256": "f3d3a0e8dd034cfc77f83a157eb84648739fe951282a6683bfffddb9e8abf331",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-hang4.mp3",
+      "originalTitle": "hang4 (cmn)",
+      "reviewStatus": "pending-listening"
+    },
+    {
+      "reading": "héng",
+      "token": "heng2",
+      "id": "reading-75354f7edc07",
+      "url": "/audio/readings/v1/reading-75354f7edc07.mp3",
+      "durationMs": 936,
+      "bytes": 8416,
+      "sha256": "97abc90101bedd848dda52c84c3eb64f3e1f0c7a97b32985bda139fcd80ef84e",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-heng2.mp3",
+      "originalTitle": "heng2 (cmn)",
+      "reviewStatus": "pending-listening"
+    },
+    {
+      "reading": "zhòng",
+      "token": "zhong4",
+      "id": "reading-796d5729ac64",
+      "url": "/audio/readings/v1/reading-796d5729ac64.mp3",
+      "durationMs": 936,
+      "bytes": 8418,
+      "sha256": "abfd6830066db41a11104ad811b8e9df63fe5081ee9113952012d5fa9de351fd",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-zhong4.mp3",
+      "originalTitle": "zhong4 (cmn)",
+      "reviewStatus": "pending-listening"
+    },
+    {
+      "reading": "chóng",
+      "token": "chong2",
+      "id": "reading-b17a72855edf",
+      "url": "/audio/readings/v1/reading-b17a72855edf.mp3",
+      "durationMs": 1032,
+      "bytes": 9186,
+      "sha256": "49575501e963566c5fd4156562e899b51b75e72c9d95087d576a5dcade8d3c9e",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-chong2.mp3",
+      "originalTitle": "chong2 (cmn)",
+      "reviewStatus": "pending-listening"
+    },
+    {
+      "reading": "lè",
+      "token": "le4",
+      "id": "reading-e3e9a352e477",
+      "url": "/audio/readings/v1/reading-e3e9a352e477.mp3",
+      "durationMs": 984,
+      "bytes": 8796,
+      "sha256": "0ba8d62b8e1f87b2f249b335db61e3aebf8764ab94d4f8ddf0e03efaf1511540",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-le4.mp3",
+      "originalTitle": "le4 (cmn)",
+      "reviewStatus": "pending-listening"
+    },
+    {
+      "reading": "yuè",
+      "token": "yue4",
+      "id": "reading-2e3621863ceb",
+      "url": "/audio/readings/v1/reading-2e3621863ceb.mp3",
+      "durationMs": 984,
+      "bytes": 8798,
+      "sha256": "7a69bb511c0a1031814a8b35e98298e6818c95bf07d653f720bef65681c7bb3d",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-yue4.mp3",
+      "originalTitle": "yue4 (cmn)",
+      "reviewStatus": "pending-listening"
+    }
+  ]
+}

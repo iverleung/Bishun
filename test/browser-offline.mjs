@@ -45,10 +45,11 @@ try {
     await browser.screenshot('/private/tmp/bishun-offline-saved.png');
     await command('Emulation.clearDeviceMetricsOverride');
     let records=await metadata();assert.equal(records.length,1);assert.equal(records[0].query,'木水木');
+    assert.equal(records[0].files.filter(file=>file.startsWith('/audio/readings/') && file.endsWith('.mp3')).length,2);
     assert.equal(records[0].files.filter(file=>/\/characters\/.*\.json$/.test(file) && !file.endsWith('manifest.json')).length,2);
-    assert.equal(records[0].files.filter(file=>file.endsWith('.mp3')).length,6);
+    assert.equal(records[0].files.filter(file=>file.startsWith('/audio/strokes/') && file.endsWith('.mp3')).length,6);
     assert.ok(records[0].files.every(file=>!file.includes('/legacy/')));
-    checks.push('explicit save creates one complete pack with only two unique glyphs, six required recordings and the application shell');
+    checks.push('explicit save creates one complete pack with only two unique glyphs, six stroke recordings, two syllable samples and the application shell');
     await click('[name="mode"][value="explain"]');await click('#closeMenuBtn');
     const responseStart=browser.responses.length;
     const requestStart=state.requests.length;
@@ -57,6 +58,10 @@ try {
     assert.equal(await evaluate('Boolean(navigator.serviceWorker.controller)'),true);
     await offline();await click('#offlineList .offline-open');
     await wait("document.querySelector('#wordPosition').textContent === '1 / 3' && !document.querySelector('#playBtn').disabled");
+    await click('[data-reading="mù"]');await wait("Boolean(document.querySelector('.reading-button.is-speaking'))");
+    await wait("!document.querySelector('.reading-button.is-speaking')");
+    assert.equal(await evaluate("document.querySelector('#readingFeedback').textContent"),'');
+    assert.ok(browser.responses.slice(responseStart).some(item=>item.url.includes('/audio/readings/') && item.status===200));
     await click('#playBtn');await wait("document.querySelector('#playBtn').textContent === '重播'",20000);
     assert.equal(await evaluate("document.querySelector('#status').textContent"),'播放完成');
     assert.ok(browser.responses.slice(responseStart).some(item=>item.url.endsWith('.mp3') && item.status===200));
@@ -67,7 +72,7 @@ try {
     assert.equal(state.requests.slice(requestStart).some(path=>path.endsWith('.mp3') || /\/characters\/.*\.json$/.test(path)),false);
     await query('心',false);await wait("!document.querySelector('#retryBtn').hidden");
     assert.match(await evaluate("document.querySelector('#stageMessageText').textContent"),/未离线保存/);
-    checks.push('after real server disconnection and a fresh reload, saved query animates, decodes/plays audio and accepts handwriting; unsaved glyph is explicitly unavailable');
+    checks.push('after real server disconnection and a fresh reload, saved query animates, decodes/plays stroke and syllable audio and accepts handwriting; unsaved glyph is explicitly unavailable');
 
     state.offline=false;
     await offline();

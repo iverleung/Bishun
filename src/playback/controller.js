@@ -11,8 +11,8 @@ export function delay(milliseconds, signal) {
 }
 
 export class PlaybackController {
-    constructor({ store, animation, audio, onChange, wait = delay }) {
-        Object.assign(this, { store, animation, audio, onChange, wait });
+    constructor({ store, animation, audio, onChange, wait = delay, onInterrupt = () => {} }) {
+        Object.assign(this, { store, animation, audio, onChange, wait, onInterrupt });
         this.entries = [];
         this.records = new Map();
         this.errors = new Map();
@@ -45,6 +45,7 @@ export class PlaybackController {
 
     cancel() {
         this.task.abort();
+        this.onInterrupt();
         this.audioPreparation?.abort();
         this.animation.cancel();
         this.audio.cancel();

@@ -8,6 +8,7 @@ export async function prepareOfflineBuild(outDir) {
     const manifest=JSON.parse(await fs.readFile(path.join(outDir,'.vite/manifest.json'),'utf8'));
     const paths=new Set(['/','/index.html','/print/index.html','/preview/index.html','/icon.png',
         '/characters/2.0.1/manifest.json','/characters/2.0.1/ARPHICPL.TXT','/characters/2.0.1/SOURCE.txt',
+        '/audio/readings/v1/manifest.json','/audio/readings/v1/SOURCE.html',
         '/audio/strokes/v1/manifest.json','/licenses/cnchar-LICENSE.txt','/licenses/qrcode-generator-LICENSE.txt']);
     const seen=new Set();
     function collect(key) {
