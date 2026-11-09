@@ -1,0 +1,916 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-10",
+  "status": "source-comparison-complete",
+  "method": "Full supplied-row text-layer comparison plus documented visual checks; not a full page-by-page human review or a normative stroke audit.",
+  "sourceHashes": {
+    "refs/统编版小学语文生字词表_1-6年级全12册.xlsx": "437169a8febcfb9cc055898e2eeb12e9be4fd8303897a7ab57dd55d3717398fd",
+    "refs/一年级上册.pdf": "f8a9bba537d1925c16eced2ff79c6a2ae28804a12caf3ea362c5bbe51062013b",
+    "refs/一年级下册.pdf": "a503884e543a48d0a9763a42c37425665b7893897662b3f029f368ddb1b92269",
+    "refs/二年级上册.pdf": "0d1f2132731d53ff3ded1d3c1faee325f527dca1a081b9e18a6256a8d8924b9a",
+    "refs/二年级下册.pdf": "86f5a17b3d3703e7a49c1f44aab3612d58590070753fbe80b6dd09953cf0fa19",
+    "refs/三年级上册.pdf": "35169d6d9646a87be2ea84ea5b01de38a92774e26338d43810e8d8f22a558ac3",
+    "refs/三年级下册.pdf": "af911d41b10c46908fd82610ecb0ec0f2c62fa8f609947b9748d00ab0d58e141",
+    "refs/四年级上册.pdf": "a79c9ef08600c799c5fe455c27cf5c79437cbc668a86aec2cce6b15fdf9f7981",
+    "refs/四年级下册.pdf": "b5fd20a972e18a63c6e1f76ab03f9f189d25b8326ed1b5650358e2cab3e8dac1",
+    "refs/五年级上册.pdf": "86303735a78bed9df039cfb2183c354642d93a5bd6faa2366d94e4196a95b438",
+    "refs/五年级下册.pdf": "8fb0db8d5364c8118eefada554b90182ec7f6de923e43779eaa7c98efca20f47",
+    "refs/六年级上册.pdf": "e148a13518a9f081d1faa296c88f349ebceb81d426aa3d357958e93cbe752bd4",
+    "refs/六年级下册.pdf": "878f8d7fba64b1f1277be9a5729952ecccbe1cb2c4ba135f9eb668724d20a683"
+  },
+  "totals": {
+    "books": 12,
+    "tables": 32,
+    "rows": 7819,
+    "changedRows": 907,
+    "changedCells": 1029,
+    "cellsByField": {
+      "拼音": 557,
+      "课题": 156,
+      "单元": 316
+    },
+    "pinyinCorrectionKinds": {
+      "font-code-decoding": 6,
+      "missing-writing-pinyin": 550,
+      "visual-path-annotation": 1
+    },
+    "patchGroups": 547,
+    "printedCountAnchors": 29
+  },
+  "visualChecks": {
+    "tocPages": {
+      "一年级下册": [
+        4
+      ],
+      "二年级上册": [
+        4
+      ],
+      "三年级下册": [
+        4
+      ],
+      "四年级下册": [
+        4,
+        5
+      ],
+      "六年级下册": [
+        4,
+        5
+      ]
+    },
+    "fontCodeRows": {
+      "一年级上册": [
+        164
+      ],
+      "二年级下册": [
+        343
+      ],
+      "三年级下册": [
+        75,
+        147
+      ],
+      "四年级下册": [
+        56,
+        112
+      ]
+    },
+    "writingPage": {
+      "一年级上册": [
+        113
+      ]
+    },
+    "pathAnnotation": {
+      "book": "三年级下册",
+      "pdfPage": 117,
+      "printedPage": 112,
+      "character": "略",
+      "reading": "lüè",
+      "xlsxRow": 230
+    }
+  },
+  "limitations": [
+    "Only the supplied revisions were compared; current official publication catalog was not queried.",
+    "Page numbers in workbook are PDF physical pages, not printed lesson pages.",
+    "语文园地 source labels are checked; their inherited numeric lesson keys remain raw export metadata, not independent garden IDs.",
+    "表内序号 is an export helper, not an independently printed textbook field; its meaning was not redefined.",
+    "PDF source-file permissions and teaching/stroke standards are outside this content comparison."
+  ],
+  "books": [
+    {
+      "book": "一年级上册",
+      "source": {
+        "file": "refs/一年级上册.pdf",
+        "sha256": "f8a9bba537d1925c16eced2ff79c6a2ae28804a12caf3ea362c5bbe51062013b",
+        "pdfPages": 118
+      },
+      "tocLessonCount": 32,
+      "unresolvedCourseKeys": [],
+      "metadataChangedRows": 0,
+      "tables": {
+        "识字表": {
+          "pdfRange": [
+            110,
+            112
+          ],
+          "sourceCount": 284,
+          "xlsxCount": 284,
+          "sequenceEqual": true,
+          "printedCount": 280,
+          "countExcludingBlue": 280,
+          "sourceWithPinyin": 284,
+          "pageLabels": {
+            "110": "105",
+            "111": "106",
+            "112": "107"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": true,
+          "pinyinCorrections": 1
+        },
+        "写字表": {
+          "pdfRange": [
+            113,
+            113
+          ],
+          "sourceCount": 100,
+          "xlsxCount": 100,
+          "sequenceEqual": true,
+          "printedCount": 100,
+          "countExcludingBlue": 100,
+          "sourceWithPinyin": 100,
+          "pageLabels": {
+            "113": "108"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 100
+        }
+      }
+    },
+    {
+      "book": "一年级下册",
+      "source": {
+        "file": "refs/一年级下册.pdf",
+        "sha256": "a503884e543a48d0a9763a42c37425665b7893897662b3f029f368ddb1b92269",
+        "pdfPages": 127
+      },
+      "tocLessonCount": 28,
+      "unresolvedCourseKeys": [],
+      "metadataChangedRows": 14,
+      "tables": {
+        "识字表": {
+          "pdfRange": [
+            119,
+            121
+          ],
+          "sourceCount": 419,
+          "xlsxCount": 419,
+          "sequenceEqual": true,
+          "printedCount": 410,
+          "countExcludingBlue": 410,
+          "sourceWithPinyin": 419,
+          "pageLabels": {
+            "119": "114",
+            "120": "115",
+            "121": "116"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": true,
+          "pinyinCorrections": 0
+        },
+        "写字表": {
+          "pdfRange": [
+            122,
+            124
+          ],
+          "sourceCount": 200,
+          "xlsxCount": 200,
+          "sequenceEqual": true,
+          "printedCount": 200,
+          "countExcludingBlue": 200,
+          "sourceWithPinyin": 200,
+          "pageLabels": {
+            "122": "117",
+            "123": "118",
+            "124": "119"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 200
+        }
+      }
+    },
+    {
+      "book": "二年级上册",
+      "source": {
+        "file": "refs/二年级上册.pdf",
+        "sha256": "0d1f2132731d53ff3ded1d3c1faee325f527dca1a081b9e18a6256a8d8924b9a",
+        "pdfPages": 126
+      },
+      "tocLessonCount": 27,
+      "unresolvedCourseKeys": [],
+      "metadataChangedRows": 34,
+      "tables": {
+        "识字表": {
+          "pdfRange": [
+            113,
+            117
+          ],
+          "sourceCount": 482,
+          "xlsxCount": 482,
+          "sequenceEqual": true,
+          "printedCount": 460,
+          "countExcludingBlue": 460,
+          "sourceWithPinyin": 482,
+          "pageLabels": {
+            "113": "108",
+            "114": "109",
+            "115": "110",
+            "116": "111",
+            "117": "112"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": true,
+          "pinyinCorrections": 0
+        },
+        "写字表": {
+          "pdfRange": [
+            118,
+            120
+          ],
+          "sourceCount": 250,
+          "xlsxCount": 250,
+          "sequenceEqual": true,
+          "printedCount": 250,
+          "countExcludingBlue": 250,
+          "sourceWithPinyin": 250,
+          "pageLabels": {
+            "118": "113",
+            "119": "114",
+            "120": "115"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 250
+        },
+        "词语表": {
+          "pdfRange": [
+            121,
+            123
+          ],
+          "sourceCount": 236,
+          "xlsxCount": 236,
+          "sequenceEqual": true,
+          "printedCount": 236,
+          "countExcludingBlue": 236,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "121": "116",
+            "122": "117",
+            "123": "118"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        }
+      }
+    },
+    {
+      "book": "二年级下册",
+      "source": {
+        "file": "refs/二年级下册.pdf",
+        "sha256": "86f5a17b3d3703e7a49c1f44aab3612d58590070753fbe80b6dd09953cf0fa19",
+        "pdfPages": 130
+      },
+      "tocLessonCount": 28,
+      "unresolvedCourseKeys": [],
+      "metadataChangedRows": 0,
+      "tables": {
+        "识字表": {
+          "pdfRange": [
+            118,
+            121
+          ],
+          "sourceCount": 465,
+          "xlsxCount": 465,
+          "sequenceEqual": true,
+          "printedCount": 450,
+          "countExcludingBlue": 450,
+          "sourceWithPinyin": 465,
+          "pageLabels": {
+            "118": "113",
+            "119": "114",
+            "120": "115",
+            "121": "116"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": true,
+          "pinyinCorrections": 1
+        },
+        "写字表": {
+          "pdfRange": [
+            122,
+            124
+          ],
+          "sourceCount": 250,
+          "xlsxCount": 250,
+          "sequenceEqual": true,
+          "printedCount": 250,
+          "countExcludingBlue": 250,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "122": "117",
+            "123": "118",
+            "124": "119"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        },
+        "词语表": {
+          "pdfRange": [
+            125,
+            127
+          ],
+          "sourceCount": 240,
+          "xlsxCount": 240,
+          "sequenceEqual": true,
+          "printedCount": 240,
+          "countExcludingBlue": 240,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "125": "120",
+            "126": "121",
+            "127": "122"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        }
+      }
+    },
+    {
+      "book": "三年级上册",
+      "source": {
+        "file": "refs/三年级上册.pdf",
+        "sha256": "35169d6d9646a87be2ea84ea5b01de38a92774e26338d43810e8d8f22a558ac3",
+        "pdfPages": 123
+      },
+      "tocLessonCount": 26,
+      "unresolvedCourseKeys": [],
+      "metadataChangedRows": 0,
+      "tables": {
+        "识字表": {
+          "pdfRange": [
+            114,
+            116
+          ],
+          "sourceCount": 277,
+          "xlsxCount": 277,
+          "sequenceEqual": true,
+          "printedCount": 250,
+          "countExcludingBlue": 250,
+          "sourceWithPinyin": 277,
+          "pageLabels": {
+            "114": "109",
+            "115": "110",
+            "116": "111"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": true,
+          "pinyinCorrections": 0
+        },
+        "写字表": {
+          "pdfRange": [
+            117,
+            118
+          ],
+          "sourceCount": 250,
+          "xlsxCount": 250,
+          "sequenceEqual": true,
+          "printedCount": 250,
+          "countExcludingBlue": 250,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "117": "112",
+            "118": "113"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        },
+        "词语表": {
+          "pdfRange": [
+            119,
+            121
+          ],
+          "sourceCount": 250,
+          "xlsxCount": 250,
+          "sequenceEqual": true,
+          "printedCount": 250,
+          "countExcludingBlue": 250,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "119": "114",
+            "120": "115",
+            "121": "116"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        }
+      }
+    },
+    {
+      "book": "三年级下册",
+      "source": {
+        "file": "refs/三年级下册.pdf",
+        "sha256": "af911d41b10c46908fd82610ecb0ec0f2c62fa8f609947b9748d00ab0d58e141",
+        "pdfPages": 126
+      },
+      "tocLessonCount": 27,
+      "unresolvedCourseKeys": [],
+      "metadataChangedRows": 17,
+      "tables": {
+        "识字表": {
+          "pdfRange": [
+            116,
+            118
+          ],
+          "sourceCount": 275,
+          "xlsxCount": 275,
+          "sequenceEqual": true,
+          "printedCount": 250,
+          "countExcludingBlue": 250,
+          "sourceWithPinyin": 275,
+          "pageLabels": {
+            "116": "111",
+            "117": "112",
+            "118": "113"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": true,
+          "pinyinCorrections": 3
+        },
+        "写字表": {
+          "pdfRange": [
+            119,
+            120
+          ],
+          "sourceCount": 250,
+          "xlsxCount": 250,
+          "sequenceEqual": true,
+          "printedCount": 250,
+          "countExcludingBlue": 250,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "119": "114",
+            "120": "115"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        },
+        "词语表": {
+          "pdfRange": [
+            121,
+            123
+          ],
+          "sourceCount": 271,
+          "xlsxCount": 271,
+          "sequenceEqual": true,
+          "printedCount": 271,
+          "countExcludingBlue": 271,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "121": "116",
+            "122": "117",
+            "123": "118"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        }
+      }
+    },
+    {
+      "book": "四年级上册",
+      "source": {
+        "file": "refs/四年级上册.pdf",
+        "sha256": "a79c9ef08600c799c5fe455c27cf5c79437cbc668a86aec2cce6b15fdf9f7981",
+        "pdfPages": 138
+      },
+      "tocLessonCount": 27,
+      "unresolvedCourseKeys": [],
+      "metadataChangedRows": 0,
+      "tables": {
+        "识字表": {
+          "pdfRange": [
+            127,
+            129
+          ],
+          "sourceCount": 265,
+          "xlsxCount": 265,
+          "sequenceEqual": true,
+          "printedCount": 250,
+          "countExcludingBlue": 250,
+          "sourceWithPinyin": 265,
+          "pageLabels": {
+            "127": "122",
+            "128": "123",
+            "129": "124"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": true,
+          "pinyinCorrections": 0
+        },
+        "写字表": {
+          "pdfRange": [
+            130,
+            131
+          ],
+          "sourceCount": 250,
+          "xlsxCount": 250,
+          "sequenceEqual": true,
+          "printedCount": 250,
+          "countExcludingBlue": 250,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "130": "125",
+            "131": "126"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        },
+        "词语表": {
+          "pdfRange": [
+            132,
+            134
+          ],
+          "sourceCount": 220,
+          "xlsxCount": 220,
+          "sequenceEqual": true,
+          "printedCount": 220,
+          "countExcludingBlue": 220,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "132": "127",
+            "133": "128",
+            "134": "129"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        }
+      }
+    },
+    {
+      "book": "四年级下册",
+      "source": {
+        "file": "refs/四年级下册.pdf",
+        "sha256": "b5fd20a972e18a63c6e1f76ab03f9f189d25b8326ed1b5650358e2cab3e8dac1",
+        "pdfPages": 151
+      },
+      "tocLessonCount": 28,
+      "unresolvedCourseKeys": [],
+      "metadataChangedRows": 208,
+      "tables": {
+        "识字表": {
+          "pdfRange": [
+            142,
+            144
+          ],
+          "sourceCount": 269,
+          "xlsxCount": 269,
+          "sequenceEqual": true,
+          "printedCount": 250,
+          "countExcludingBlue": 250,
+          "sourceWithPinyin": 269,
+          "pageLabels": {
+            "142": "137",
+            "143": "138",
+            "144": "139"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": true,
+          "pinyinCorrections": 2
+        },
+        "写字表": {
+          "pdfRange": [
+            145,
+            146
+          ],
+          "sourceCount": 250,
+          "xlsxCount": 250,
+          "sequenceEqual": true,
+          "printedCount": 250,
+          "countExcludingBlue": 250,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "145": "140",
+            "146": "141"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        },
+        "词语表": {
+          "pdfRange": [
+            147,
+            149
+          ],
+          "sourceCount": 213,
+          "xlsxCount": 213,
+          "sequenceEqual": true,
+          "printedCount": null,
+          "countExcludingBlue": 213,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "147": "142",
+            "148": "143",
+            "149": "144"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        }
+      }
+    },
+    {
+      "book": "五年级上册",
+      "source": {
+        "file": "refs/五年级上册.pdf",
+        "sha256": "86303735a78bed9df039cfb2183c354642d93a5bd6faa2366d94e4196a95b438",
+        "pdfPages": 130
+      },
+      "tocLessonCount": 25,
+      "unresolvedCourseKeys": [],
+      "metadataChangedRows": 0,
+      "tables": {
+        "识字表": {
+          "pdfRange": [
+            120,
+            122
+          ],
+          "sourceCount": 209,
+          "xlsxCount": 209,
+          "sequenceEqual": true,
+          "printedCount": 200,
+          "countExcludingBlue": 200,
+          "sourceWithPinyin": 209,
+          "pageLabels": {
+            "120": "115",
+            "121": "116",
+            "122": "117"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": true,
+          "pinyinCorrections": 0
+        },
+        "写字表": {
+          "pdfRange": [
+            123,
+            124
+          ],
+          "sourceCount": 220,
+          "xlsxCount": 220,
+          "sequenceEqual": true,
+          "printedCount": 220,
+          "countExcludingBlue": 220,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "123": "118",
+            "124": "119"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        },
+        "词语表": {
+          "pdfRange": [
+            125,
+            127
+          ],
+          "sourceCount": 213,
+          "xlsxCount": 213,
+          "sequenceEqual": true,
+          "printedCount": 213,
+          "countExcludingBlue": 213,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "125": "120",
+            "126": "121",
+            "127": "122"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        }
+      }
+    },
+    {
+      "book": "五年级下册",
+      "source": {
+        "file": "refs/五年级下册.pdf",
+        "sha256": "8fb0db8d5364c8118eefada554b90182ec7f6de923e43779eaa7c98efca20f47",
+        "pdfPages": 131
+      },
+      "tocLessonCount": 23,
+      "unresolvedCourseKeys": [],
+      "metadataChangedRows": 0,
+      "tables": {
+        "识字表": {
+          "pdfRange": [
+            124,
+            125
+          ],
+          "sourceCount": 212,
+          "xlsxCount": 212,
+          "sequenceEqual": true,
+          "printedCount": 200,
+          "countExcludingBlue": 200,
+          "sourceWithPinyin": 212,
+          "pageLabels": {
+            "124": "119",
+            "125": "120"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": true,
+          "pinyinCorrections": 0
+        },
+        "写字表": {
+          "pdfRange": [
+            126,
+            127
+          ],
+          "sourceCount": 180,
+          "xlsxCount": 180,
+          "sequenceEqual": true,
+          "printedCount": 180,
+          "countExcludingBlue": 180,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "126": "121",
+            "127": "122"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        },
+        "词语表": {
+          "pdfRange": [
+            128,
+            129
+          ],
+          "sourceCount": 142,
+          "xlsxCount": 142,
+          "sequenceEqual": true,
+          "printedCount": null,
+          "countExcludingBlue": 142,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "128": "123",
+            "129": "124"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        }
+      }
+    },
+    {
+      "book": "六年级上册",
+      "source": {
+        "file": "refs/六年级上册.pdf",
+        "sha256": "e148a13518a9f081d1faa296c88f349ebceb81d426aa3d357958e93cbe752bd4",
+        "pdfPages": 138
+      },
+      "tocLessonCount": 26,
+      "unresolvedCourseKeys": [],
+      "metadataChangedRows": 0,
+      "tables": {
+        "写字表": {
+          "pdfRange": [
+            131,
+            132
+          ],
+          "sourceCount": 180,
+          "xlsxCount": 180,
+          "sequenceEqual": true,
+          "printedCount": 180,
+          "countExcludingBlue": 180,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "131": "126",
+            "132": "127"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        },
+        "词语表": {
+          "pdfRange": [
+            133,
+            135
+          ],
+          "sourceCount": 215,
+          "xlsxCount": 215,
+          "sequenceEqual": true,
+          "printedCount": 215,
+          "countExcludingBlue": 215,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "133": "128",
+            "134": "129",
+            "135": "130"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        }
+      }
+    },
+    {
+      "book": "六年级下册",
+      "source": {
+        "file": "refs/六年级下册.pdf",
+        "sha256": "878f8d7fba64b1f1277be9a5729952ecccbe1cb2c4ba135f9eb668724d20a683",
+        "pdfPages": 130
+      },
+      "tocLessonCount": 17,
+      "unresolvedCourseKeys": [],
+      "metadataChangedRows": 91,
+      "tables": {
+        "写字表": {
+          "pdfRange": [
+            126,
+            126
+          ],
+          "sourceCount": 120,
+          "xlsxCount": 120,
+          "sequenceEqual": true,
+          "printedCount": 120,
+          "countExcludingBlue": 120,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "126": "121"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        },
+        "词语表": {
+          "pdfRange": [
+            127,
+            128
+          ],
+          "sourceCount": 162,
+          "xlsxCount": 162,
+          "sequenceEqual": true,
+          "printedCount": null,
+          "countExcludingBlue": 162,
+          "sourceWithPinyin": 0,
+          "pageLabels": {
+            "127": "122",
+            "128": "123"
+          },
+          "mainLessonMarkersMatch": true,
+          "allSourceTypesMatch": true,
+          "blueFlagsMatch": null,
+          "pinyinCorrections": 0
+        }
+      }
+    }
+  ]
+}
