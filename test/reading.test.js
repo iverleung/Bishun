@@ -67,3 +67,33 @@ test('audio errors are actionable, cleared on navigation and retry succeeds', as
     player.cancel(); assert.equal(player.message,'');
     audio.unlock = async () => {}; await player.play('mù'); assert.deepEqual(starts,['mù']);
 });
+
+test('expanded basic-character readings are covered without borrowing a tone for missing neutral de', async () => {
+    const { characterReadings } = await import('../src/web/character-info.js');
+    const { default: plan } = await import('../resources/reading-audio-plan.json', { with: { type:'json' } });
+    const batch = plan.batches.find(batch => batch.id === 'basics');
+    const missing = new Set(batch.unavailableReadings.map(item => item.reading));
+    const covered = new Set();
+    for (const char of batch.sampleQueries.join('')) {
+        for (const reading of characterReadings(char)) {
+            if (missing.has(reading)) { assert.equal(readingRecording(reading), null); continue; }
+            const item = readingRecording(reading);
+            assert.ok(item, `${char}: ${reading}`);
+            covered.add(reading);
+        }
+    }
+    assert.equal(Object.keys(batch.items).length,34);
+    assert.equal(covered.size,37); // Includes previously available mù, yuè and zhòng.
+    assert.equal(readingRecording('dì').token,'di4');
+    assert.equal(readingRecording('de'),null);
+});
+
+test('expansion preserves exact approved recordings and leaves only the new batch pending', async () => {
+    const { default: catalog } = await import('../resources/reading-audio-catalog.json', { with: { type:'json' } });
+    const approved = catalog.items.filter(item => item.reviewStatus === 'reviewed');
+    const pending = catalog.items.filter(item => item.reviewStatus === 'pending-listening');
+    assert.equal(approved.length,13);
+    assert.equal(pending.length,34);
+    assert.ok(approved.every(item => item.batch === 'initial' && catalog.listeningReview.items[item.id] === item.sha256));
+    assert.ok(pending.every(item => item.batch === 'basics' && !catalog.listeningReview.items[item.id]));
+});

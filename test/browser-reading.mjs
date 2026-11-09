@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { openBrowser } from './helpers/cdp.mjs';
 import { practiceStroke } from './helpers/practice-input.mjs';
+import readingPlan from '../resources/reading-audio-plan.json' with { type: 'json' };
 import { readingRecording } from '../src/data/reading-audio.js';
 
 const [cdpUrl='http://127.0.0.1:9224',pageUrl='http://127.0.0.1:5189/']=process.argv.slice(2);
@@ -95,6 +96,30 @@ try {
     } finally {await command('Target.closeTarget',{targetId});await browser.activate();}
     assert.equal(await evaluate(busy),false);
     checks.push('a real background tab cancels pending voice and returning does not resume it');
+    const batch = readingPlan.batches.find(batch => batch.id === 'basics');
+    const played = new Set();
+    for (const group of batch.sampleQueries) {
+        await query(group);
+        for (let index = 0; index < Array.from(group).length; index++) {
+            if (index) { await click('#nextCharBtn');await wait('!document.querySelector("#playBtn").disabled'); }
+            const readings = await evaluate('Array.from(document.querySelectorAll(".reading-button"), button=>button.dataset.reading)');
+            for (const reading of readings) {
+                if (!Object.hasOwn(batch.items, reading) || played.has(reading)) continue;
+                const count = await starts();
+                await click(button(reading));await wait(`audioEvents.filter(type=>type==='start').length===${count+1}`);
+                await wait(`!(${busy})`);
+                assert.equal(await evaluate('document.querySelector("#readingFeedback").textContent'),'');
+                played.add(reading);
+            }
+            if (Array.from(group)[index] === '地') {
+                assert.equal(await evaluate('document.querySelector("#characterReadings").textContent'),'dì / de');
+                assert.equal(await evaluate('document.querySelector("[data-reading=de]")'),null);
+            }
+        }
+    }
+    assert.deepEqual([...played].sort(), Object.keys(batch.items).sort());
+    for (const reading of played) assert.ok(browser.responses.some(item=>item.url.endsWith(readingRecording(reading).url) && item.status===200));
+    checks.push('all 34 new syllables decode/start/end through the real UI; missing neutral de stays text');
     assert.deepEqual(browser.exceptions,[]);
     console.log(JSON.stringify({browser:browser.version,checks,exceptions:browser.exceptions},null,2));
 } finally {await browser.close();}

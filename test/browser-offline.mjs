@@ -93,6 +93,24 @@ try {
     assert.equal((await metadata()).length,1);
     checks.push('failed and cancelled updates preserve the old pack, clean staging, and a subsequent successful update replaces it atomically');
 
+    await click('#closeMenuBtn');await query('一地一');await offline();await click('#saveOfflineBtn');await saved();
+    const expanded=(await metadata()).find(item=>item.query==='一地一');
+    assert.equal(expanded.files.filter(file=>file.startsWith('/audio/readings/') && file.endsWith('.mp3')).length,2);
+    state.offline=true;await command('Page.reload');await wait("document.querySelector('#status')?.textContent === '请输入汉字'");
+    await offline();await click('#offlineList .offline-row:first-child .offline-open');
+    await wait("document.querySelector('#currentQuery').textContent==='一地一' && !document.querySelector('#playBtn').disabled");
+    for (const reading of ['yī','dì']) {
+        if (reading==='dì') {await click('#nextCharBtn');await wait("!document.querySelector('#playBtn').disabled");}
+        await click(`[data-reading="${reading}"]`);await wait("Boolean(document.querySelector('.reading-button.is-speaking'))");
+        await wait("!document.querySelector('.reading-button.is-speaking')");
+        assert.equal(await evaluate("document.querySelector('#readingFeedback').textContent"),'');
+    }
+    assert.equal(await evaluate("document.querySelector('[data-reading=de]')"),null);
+    assert.ok(await evaluate("(async()=> (await(await fetch('/audio/readings/v1/SOURCE.html')).text()).includes('creativecommons.org/licenses/by-sa/3.0/'))()"));
+    state.offline=false;await offline();await click('#offlineList .offline-row:first-child .offline-row-actions button:last-child');
+    await wait("document.querySelector('#offlineList').children.length===1");
+    checks.push('new batch deduplicates 一地一 to two syllables; both play after cold offline reload, neutral de stays unavailable and attribution is cached');
+
     // A real second worker release, with the same application logic but a new build identity.
     const build=JSON.parse(await fs.readFile('dist/offline-build.json','utf8'));
     const newId='b'.repeat(64);

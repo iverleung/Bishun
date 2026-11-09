@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "f759a0f18f27690742957619e1248ed91e9b3f2c",
+  "batches": [
+    {
+      "id": "initial",
+      "sampleQueries": [
+        "木水心长行重乐"
+      ],
+      "items": {
+        "mù": "mu4",
+        "shuǐ": "shui3",
+        "xīn": "xin1",
+        "cháng": "chang2",
+        "zhǎng": "zhang3",
+        "xíng": "xing2",
+        "háng": "hang2",
+        "hàng": "hang4",
+        "héng": "heng2",
+        "zhòng": "zhong4",
+        "chóng": "chong2",
+        "lè": "le4",
+        "yuè": "yue4"
+      }
+    },
+    {
+      "id": "basics",
+      "sampleQueries": [
+        "一二三四五六七八九十",
+        "人口手足耳目大小上下左右中",
+        "天地日月山石田土火金"
+      ],
+      "items": {
+        "yī": "yi1",
+        "èr": "er4",
+        "sān": "san1",
+        "sì": "si4",
+        "wǔ": "wu3",
+        "liù": "liu4",
+        "lù": "lu4",
+        "qī": "qi1",
+        "bā": "ba1",
+        "jiǔ": "jiu3",
+        "shí": "shi2",
+        "rén": "ren2",
+        "kǒu": "kou3",
+        "shǒu": "shou3",
+        "zú": "zu2",
+        "ěr": "er3",
+        "dà": "da4",
+        "dài": "dai4",
+        "xiǎo": "xiao3",
+        "shàng": "shang4",
+        "shǎng": "shang3",
+        "xià": "xia4",
+        "zuǒ": "zuo3",
+        "yòu": "you4",
+        "zhōng": "zhong1",
+        "tiān": "tian1",
+        "dì": "di4",
+        "rì": "ri4",
+        "shān": "shan1",
+        "dàn": "dan4",
+        "tián": "tian2",
+        "tǔ": "tu3",
+        "huǒ": "huo3",
+        "jīn": "jin1"
+      },
+      "unavailableReadings": [
+        {
+          "reading": "de",
+          "reason": "固定版本音源没有独立轻声录音；不使用 de1/de2/de3/de4 替代。"
+        }
+      ]
+    }
+  ]
+}
