@@ -82,5 +82,13 @@
         "hé": "he2"
       }
     }
-  ]
+  ],
+  "synthesized": {
+    "tián": {
+      "text": "田",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "-10%",
+      "generator": "edge-tts 7.3.1"
+    }
+  }
 }

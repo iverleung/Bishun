@@ -88,14 +88,14 @@ test('expanded basic-character readings are covered without borrowing a tone for
     assert.equal(readingRecording('de'),null);
 });
 
-test('both user-approved batches bind listening confirmation to their exact recording files', async () => {
+test('listening confirmations remain bound to exact files while reported and new recordings await review', async () => {
     const { default: catalog } = await import('../resources/reading-audio-catalog.json', { with: { type:'json' } });
     const approved = catalog.items.filter(item => item.reviewStatus === 'reviewed');
     const pending = catalog.items.filter(item => item.reviewStatus === 'pending-listening');
-    assert.equal(approved.length,47);
-    assert.deepEqual(pending.map(item => item.reading),['hé']);
+    assert.equal(approved.length,46);
+    assert.deepEqual(pending.map(item => item.reading),['tián','hé']);
     assert.equal(approved.filter(item => item.batch === 'initial').length,13);
-    assert.equal(approved.filter(item => item.batch === 'basics').length,34);
+    assert.equal(approved.filter(item => item.batch === 'basics').length,33);
     assert.ok(approved.every(item => catalog.listeningReview.items[item.id] === item.sha256));
 });
 
@@ -108,4 +108,19 @@ test('textbook 禾 has its own he2 recording without borrowing heng or another t
     assert.notEqual(item.url,readingRecording('héng').url);
     assert.deepEqual(characterReadings('田'),['tián']);
     assert.equal(readingRecording('tián').token,'tian2');
+});
+
+test('reported tián audio is replaced with a fresh content-bound URL and requires new listening', async () => {
+    const {createHash}=await import('node:crypto');
+    const {default:catalog}=await import('../resources/reading-audio-catalog.json',{with:{type:'json'}});
+    const item=readingRecording('tián');
+    const oldId='reading-16e6e7372e8f';
+    assert.notEqual(item.id,oldId);
+    assert.equal(item.id,'reading-'+createHash('sha256').update('tián:'+item.sha256).digest('hex').slice(0,12));
+    assert.equal(item.synthesis.text,'田');
+    assert.equal(item.synthesis.voice,'zh-CN-XiaoxiaoNeural');
+    assert.equal(item.upstream,undefined);
+    assert.equal(item.reviewStatus,'pending-listening');
+    assert.notEqual(catalog.listeningReview.items[item.id],item.sha256);
+    assert.notEqual(item.sha256,'ec5a7c95487f089a2c6db4436e3ad25ca7c797fb33451a55608129c5fe0998d0');
 });

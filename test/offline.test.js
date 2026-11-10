@@ -17,16 +17,16 @@ class MemoryStorage {
     async open(key){if(!this.items.has(key))this.items.set(key,new MemoryCache(this));return this.items.get(key);}
     async delete(key){return this.items.delete(key);}
 }
-async function fixture() {
+async function fixture(characters=['木','水']) {
     const files=new Map();
     const json=(path,value)=>files.set(path,{body:Buffer.from(JSON.stringify(value)),type:'application/json'});
     const checksums={};
-    for(const char of ['木','水']) {
+    for(const char of characters) {
         const bytes=await fs.readFile(new URL(`./data/${char}.json`,import.meta.url));
         checksums[`${char}.json`]=hash(bytes);
         files.set(`/characters/2.0.1/${encodeURIComponent(char)}.json`,{body:bytes,type:'application/json'});
     }
-    json('/characters/2.0.1/manifest.json',{schemaVersion:1,version:'2.0.1',count:2,characters:'木水',strokeCounts:[4,4],resourceSetSha256:hash(JSON.stringify(checksums))});
+    json('/characters/2.0.1/manifest.json',{schemaVersion:1,version:'2.0.1',count:characters.length,characters:characters.join(''),strokeCounts:characters.map(char=>JSON.parse(files.get(`/characters/2.0.1/${encodeURIComponent(char)}.json`).body).strokes.length),resourceSetSha256:hash(JSON.stringify(checksums))});
     json('/characters/2.0.1/checksums.json',checksums);
     const catalog=JSON.parse(await fs.readFile(new URL('../public/audio/strokes/v1/manifest.json',import.meta.url),'utf8'));
     json('/audio/strokes/v1/manifest.json',catalog);
@@ -157,4 +157,15 @@ test('interrupted duplicate snapshots do not consume an extra logical query slot
     await f.save('水');
     assert.equal(new Set((await f.packs.list()).map(item=>item.query)).size,10);
     await assert.rejects(f.save('水木'),/最多保存 10/);
+});
+
+test('saving 田 offline uses the replacement recording and never the rejected tian2 URL',async()=>{
+    const {readingRecording}=await import('../src/data/reading-audio.js');
+    const item=readingRecording('tián');
+    const f=await fixture(['田']);const saved=await f.save('田');
+    assert.ok(saved.files.includes(item.url));
+    assert.ok(!saved.files.includes('/audio/readings/v1/reading-16e6e7372e8f.mp3'));
+    assert.ok(!f.calls.includes('/audio/readings/v1/reading-16e6e7372e8f.mp3'));
+    const cached=await f.packs.match(new Request(origin+item.url));
+    assert.equal(hash(Buffer.from(await cached.arrayBuffer())),item.sha256);
 });

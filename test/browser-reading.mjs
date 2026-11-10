@@ -103,6 +103,16 @@ try {
     await wait(`!(${busy})`);
     assert.ok(browser.responses.some(item=>item.url.endsWith(readingRecording('hé').url) && item.status===200));
     checks.push('禾 exposes hé and fetches/decodes/plays its exact he2 recording; phonetic correctness remains pending listening');
+    await evaluate("fetch('/audio/readings/v1/reading-16e6e7372e8f.mp3',{cache:'force-cache'}).then(response=>response.arrayBuffer())");
+    const replacementStart=browser.requests.length;
+    await query('田');
+    assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"),'tián');
+    const beforeTian=await starts();
+    await click(button('tián'));await wait(`audioEvents.filter(type=>type==='start').length===${beforeTian+1}`);
+    await wait(`!(${busy})`);
+    assert.ok(browser.requests.slice(replacementStart).some(url=>url.endsWith(readingRecording('tián').url)));
+    assert.ok(!browser.requests.slice(replacementStart).some(url=>url.endsWith('/reading-16e6e7372e8f.mp3')));
+    checks.push('田 plays the replacement file from its new URL even with the rejected URL already cached; annotation stays tián');
     const batch = readingPlan.batches.find(batch => batch.id === 'basics');
     const played = new Set();
     for (const group of batch.sampleQueries) {

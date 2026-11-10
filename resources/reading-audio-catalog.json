@@ -578,14 +578,19 @@
     {
       "reading": "tián",
       "token": "tian2",
-      "id": "reading-16e6e7372e8f",
-      "url": "/audio/readings/v1/reading-16e6e7372e8f.mp3",
-      "durationMs": 936,
-      "bytes": 8416,
-      "sha256": "ec5a7c95487f089a2c6db4436e3ad25ca7c797fb33451a55608129c5fe0998d0",
-      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-tian2.mp3",
-      "originalTitle": "tian2 (cmn)",
-      "reviewStatus": "reviewed",
+      "id": "reading-efc445d0ba49",
+      "url": "/audio/readings/v1/reading-efc445d0ba49.mp3",
+      "durationMs": 1224,
+      "bytes": 7344,
+      "sha256": "ad0bd13df6277644ad9f1e8c11bc5dea6a558c5db7f6bcaa46235dd19e410d04",
+      "synthesis": {
+        "text": "田",
+        "voice": "zh-CN-XiaoxiaoNeural",
+        "rate": "-10%",
+        "generator": "edge-tts 7.3.1"
+      },
+      "originalTitle": "田 tián（预生成）",
+      "reviewStatus": "pending-listening",
       "batch": "basics"
     },
     {
