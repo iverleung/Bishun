@@ -96,6 +96,13 @@ try {
     } finally {await command('Target.closeTarget',{targetId});await browser.activate();}
     assert.equal(await evaluate(busy),false);
     checks.push('a real background tab cancels pending voice and returning does not resume it');
+    await query('禾');
+    assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"),'hé');
+    const beforeHe=await starts();
+    await click(button('hé'));await wait(`audioEvents.filter(type=>type==='start').length===${beforeHe+1}`);
+    await wait(`!(${busy})`);
+    assert.ok(browser.responses.some(item=>item.url.endsWith(readingRecording('hé').url) && item.status===200));
+    checks.push('禾 exposes hé and fetches/decodes/plays its exact he2 recording; phonetic correctness remains pending listening');
     const batch = readingPlan.batches.find(batch => batch.id === 'basics');
     const played = new Set();
     for (const group of batch.sampleQueries) {

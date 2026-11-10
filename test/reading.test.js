@@ -93,8 +93,19 @@ test('both user-approved batches bind listening confirmation to their exact reco
     const approved = catalog.items.filter(item => item.reviewStatus === 'reviewed');
     const pending = catalog.items.filter(item => item.reviewStatus === 'pending-listening');
     assert.equal(approved.length,47);
-    assert.equal(pending.length,0);
+    assert.deepEqual(pending.map(item => item.reading),['hé']);
     assert.equal(approved.filter(item => item.batch === 'initial').length,13);
     assert.equal(approved.filter(item => item.batch === 'basics').length,34);
     assert.ok(approved.every(item => catalog.listeningReview.items[item.id] === item.sha256));
+});
+
+test('textbook 禾 has its own he2 recording without borrowing heng or another tone', async () => {
+    const { characterReadings } = await import('../src/web/character-info.js');
+    assert.deepEqual(characterReadings('禾'),['hé']);
+    const item=readingRecording(characterReadings('禾')[0]);
+    assert.equal(item.token,'he2');
+    assert.equal(item.reviewStatus,'pending-listening');
+    assert.notEqual(item.url,readingRecording('héng').url);
+    assert.deepEqual(characterReadings('田'),['tián']);
+    assert.equal(readingRecording('tián').token,'tian2');
 });

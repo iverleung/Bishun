@@ -626,6 +626,19 @@
       "originalTitle": "jin1 (cmn)",
       "reviewStatus": "reviewed",
       "batch": "basics"
+    },
+    {
+      "reading": "hé",
+      "token": "he2",
+      "id": "reading-7dfbe0eab965",
+      "url": "/audio/readings/v1/reading-7dfbe0eab965.mp3",
+      "durationMs": 1080,
+      "bytes": 9564,
+      "sha256": "010a2aee776cf3001be63b6f8d997cbcf72d0ed0e6b311640202ba31ed9b0201",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-he2.mp3",
+      "originalTitle": "he2 (cmn)",
+      "reviewStatus": "pending-listening",
+      "batch": "textbook-fixes"
     }
   ],
   "listeningReview": {

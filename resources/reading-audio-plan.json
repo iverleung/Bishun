@@ -72,6 +72,15 @@
           "reason": "固定版本音源没有独立轻声录音；不使用 de1/de2/de3/de4 替代。"
         }
       ]
+    },
+    {
+      "id": "textbook-fixes",
+      "sampleQueries": [
+        "禾"
+      ],
+      "items": {
+        "hé": "he2"
+      }
     }
   ]
 }
