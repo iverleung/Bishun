@@ -27,7 +27,7 @@ try {
     `});
     await browser.command('Page.reload');await browser.wait("document.querySelector('#status')?.textContent==='请输入汉字'");
     const checks=[];
-    for(const character of ['口','游']) {
+    for(const character of ['口','游','学','感','专','朵','奶','阳']) {
         await browser.fill('#query',character);await browser.click('#searchForm [type=submit]');
         await browser.wait("!document.querySelector('#playBtn').disabled");
         await browser.click('#menuBtn');await browser.click('[name=mode][value=explain]');await browser.click('#closeMenuBtn');

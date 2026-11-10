@@ -8,10 +8,12 @@ from pathlib import Path
 
 parser = argparse.ArgumentParser()
 parser.add_argument('output_directory', type=Path)
+parser.add_argument('--pending-only', action='store_true', help='Include only recordings awaiting listening confirmation')
 args = parser.parse_args()
 root = Path(__file__).resolve().parent.parent
 source = root / 'public/audio/strokes/v1'
 manifest = json.loads((source / 'manifest.json').read_text())
+items = [item for item in manifest['items'] if not args.pending_only or item['reviewStatus'] == 'pending-listening']
 args.output_directory.mkdir(parents=True, exist_ok=True)
 sample_rate = 24000
 gap = b'\0' * (int(sample_rate * 0.75) * 2)
@@ -21,7 +23,7 @@ with wave.open(str(args.output_directory / 'stroke-audio-review.wav'), 'wb') as 
     output.setnchannels(1)
     output.setsampwidth(2)
     output.setframerate(sample_rate)
-    for index, item in enumerate(manifest['items'], 1):
+    for index, item in enumerate(items, 1):
         file = source / (item['id'] + '.mp3')
         if file.parent != source or hashlib.sha256(file.read_bytes()).hexdigest() != item['sha256']:
             raise ValueError('Recording path or checksum mismatch')

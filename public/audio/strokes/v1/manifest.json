@@ -116,6 +116,15 @@
       "reviewMethod": "user-confirmed-listening-reel"
     },
     {
+      "id": "stroke-b2f21037fc0c",
+      "text": "横折弯",
+      "url": "/audio/strokes/v1/stroke-b2f21037fc0c.mp3",
+      "durationMs": 867,
+      "bytes": 5852,
+      "sha256": "baea185dfd5c915682790c67a71bac5f73e6a0b1cb50e1a8567f78a939352d34",
+      "reviewStatus": "pending-listening"
+    },
+    {
       "id": "stroke-7918e80a097a",
       "text": "横折弯钩",
       "url": "/audio/strokes/v1/stroke-7918e80a097a.mp3",
@@ -136,6 +145,15 @@
       "reviewStatus": "reviewed",
       "reviewedAt": "2026-11-08",
       "reviewMethod": "user-confirmed-listening-reel"
+    },
+    {
+      "id": "stroke-0b1113b39394",
+      "text": "横折折折钩",
+      "url": "/audio/strokes/v1/stroke-0b1113b39394.mp3",
+      "durationMs": 1315,
+      "bytes": 8444,
+      "sha256": "cd2b4fea20b32a880d5bb7681ad1a2f81832f178058ef7eb7119f472362db2b3",
+      "reviewStatus": "pending-listening"
     },
     {
       "id": "stroke-b9bdb52db5d1",
@@ -180,6 +198,15 @@
       "reviewStatus": "reviewed",
       "reviewedAt": "2026-11-08",
       "reviewMethod": "user-confirmed-listening-reel"
+    },
+    {
+      "id": "stroke-ea794306136b",
+      "text": "横撇弯钩",
+      "url": "/audio/strokes/v1/stroke-ea794306136b.mp3",
+      "durationMs": 1084,
+      "bytes": 7148,
+      "sha256": "0715d99dbdbf8af61213cc31ac22289caa6adcdaf0d5048e685111ca04cf48ca",
+      "reviewStatus": "pending-listening"
     },
     {
       "id": "stroke-d521db950c15",
@@ -268,6 +295,15 @@
       "reviewStatus": "reviewed",
       "reviewedAt": "2026-11-08",
       "reviewMethod": "user-confirmed-listening-reel"
+    },
+    {
+      "id": "stroke-861b15f51d59",
+      "text": "竖折撇",
+      "url": "/audio/strokes/v1/stroke-861b15f51d59.mp3",
+      "durationMs": 941,
+      "bytes": 6284,
+      "sha256": "995461f9b9c96f89cb9fee90f84f67f808a305e293967b4be1af672431833148",
+      "reviewStatus": "pending-listening"
     },
     {
       "id": "stroke-91326dfb2a71",

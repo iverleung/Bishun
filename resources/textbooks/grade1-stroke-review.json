@@ -1,0 +1,3298 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-10",
+  "scope": "Only unresolved strokes in the currently integrated first-grade textbook volumes; no global alternative substitution.",
+  "sources": {
+    "strokeOrder": {
+      "path": "GF0023-2020《通用规范汉字笔顺规范》.pdf",
+      "sha256": "7917932691b3fe4f6fedf9a135a2da1fe44e88df56e9a5c55750fa96d1227e5a",
+      "pageNumbering": "1-based physical PDF pages",
+      "method": "Visually inspected every listed glyph sequence on 10 rendered proof sheets; enlarged uncertain sequences."
+    },
+    "strokeNames": {
+      "url": "https://www.moe.gov.cn/ewebeditor/uploadfile/2015/01/12/20150112170016626.pdf",
+      "sha256": "0a1dd59e367aa8314c4d6f7887fa333358eb11dfa2364ad7eba78a1b6206259b",
+      "pdfPages": [
+        9,
+        10
+      ],
+      "method": "Rendered and rotated folding-stroke tables; use common UI name 卧钩 for 心-shaped hooks, as in existing reviewed corrections."
+    }
+  },
+  "books": [
+    {
+      "id": "g1-first",
+      "sha256": "09b0989feae434fce496bb47096b2ea925c17cfe065ff4b30136336dccd87531"
+    },
+    {
+      "id": "g1-second",
+      "sha256": "0327c624dc9d500d6fac7448fbe0f542f5014fa993a274dddc6a3a3591546d41"
+    }
+  ],
+  "characters": [
+    {
+      "character": "专",
+      "ucs": "04E13",
+      "pdfPage": 12,
+      "sourceClip": [
+        304.0,
+        280.1103820800781,
+        508.0,
+        324.89788818359375
+      ],
+      "strokeCount": 4,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "竖折撇|竖折折",
+          "name": "竖折撇",
+          "namingReference": "5.18"
+        }
+      ]
+    },
+    {
+      "character": "久",
+      "ucs": "04E45",
+      "pdfPage": 11,
+      "sourceClip": [
+        88.0,
+        190.53564453125,
+        292.0,
+        235.322998046875
+      ],
+      "strokeCount": 3,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "之",
+      "ucs": "04E4B",
+      "pdfPage": 11,
+      "sourceClip": [
+        88.0,
+        683.1969604492188,
+        292.0,
+        727.9844970703125
+      ],
+      "strokeCount": 3,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "亮",
+      "ucs": "04EAE",
+      "pdfPage": 162,
+      "sourceClip": [
+        88.0,
+        562.441162109375,
+        292.0,
+        645.7796630859375
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 6,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "今",
+      "ucs": "04ECA",
+      "pdfPage": 15,
+      "sourceClip": [
+        88.0,
+        593.6222534179688,
+        292.0,
+        638.40966796875
+      ],
+      "strokeCount": 4,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "仔",
+      "ucs": "04ED4",
+      "pdfPage": 21,
+      "sourceClip": [
+        304.0,
+        459.26007080078125,
+        508.0,
+        504.04736328125
+      ],
+      "strokeCount": 5,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "令",
+      "ucs": "04EE4",
+      "pdfPage": 22,
+      "sourceClip": [
+        88.0,
+        280.1103820800781,
+        292.0,
+        324.89788818359375
+      ],
+      "strokeCount": 5,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "低",
+      "ucs": "04F4E",
+      "pdfPage": 51,
+      "sourceClip": [
+        304.0,
+        459.26007080078125,
+        508.0,
+        504.04736328125
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 5,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        }
+      ]
+    },
+    {
+      "character": "你",
+      "ucs": "04F60",
+      "pdfPage": 51,
+      "sourceClip": [
+        304.0,
+        504.04736328125,
+        508.0,
+        548.8348388671875
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "停",
+      "ucs": "0505C",
+      "pdfPage": 279,
+      "sourceClip": [
+        304.0,
+        145.748291015625,
+        508.0,
+        229.0867919921875
+      ],
+      "strokeCount": 11,
+      "strokes": [
+        {
+          "index": 8,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "像",
+      "ucs": "050CF",
+      "pdfPage": 391,
+      "sourceClip": [
+        304.0,
+        645.7796630859375,
+        508.0,
+        729.1182861328125
+      ],
+      "strokeCount": 13,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "兔",
+      "ucs": "05154",
+      "pdfPage": 97,
+      "sourceClip": [
+        88.0,
+        645.7796630859375,
+        292.0,
+        729.1182861328125
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "党",
+      "ucs": "0515A",
+      "pdfPage": 202,
+      "sourceClip": [
+        88.0,
+        479.1025695800781,
+        292.0,
+        562.441162109375
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "写",
+      "ucs": "05199",
+      "pdfPage": 24,
+      "sourceClip": [
+        88.0,
+        145.748291015625,
+        292.0,
+        190.53564453125
+      ],
+      "strokeCount": 5,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "冬",
+      "ucs": "051AC",
+      "pdfPage": 22,
+      "sourceClip": [
+        304.0,
+        369.6852722167969,
+        508.0,
+        414.4726867675781
+      ],
+      "strokeCount": 5,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "冰",
+      "ucs": "051B0",
+      "pdfPage": 35,
+      "sourceClip": [
+        88.0,
+        235.322998046875,
+        292.0,
+        280.1103820800781
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "减",
+      "ucs": "051CF",
+      "pdfPage": 285,
+      "sourceClip": [
+        304.0,
+        395.76397705078125,
+        508.0,
+        479.1025695800781
+      ],
+      "strokeCount": 11,
+      "strokes": [
+        {
+          "index": 8,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        }
+      ]
+    },
+    {
+      "character": "初",
+      "ucs": "0521D",
+      "pdfPage": 59,
+      "sourceClip": [
+        88.0,
+        414.4726867675781,
+        292.0,
+        459.26007080078125
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "劲",
+      "ucs": "052B2",
+      "pdfPage": 62,
+      "sourceClip": [
+        88.0,
+        190.53564453125,
+        292.0,
+        235.322998046875
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "勇",
+      "ucs": "052C7",
+      "pdfPage": 180,
+      "sourceClip": [
+        88.0,
+        645.7796630859375,
+        292.0,
+        729.1182861328125
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "又",
+      "ucs": "053C8",
+      "pdfPage": 9,
+      "sourceClip": [
+        304.0,
+        504.04736328125,
+        508.0,
+        548.8348388671875
+      ],
+      "strokeCount": 2,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "友",
+      "ucs": "053CB",
+      "pdfPage": 13,
+      "sourceClip": [
+        88.0,
+        504.04736328125,
+        292.0,
+        548.8348388671875
+      ],
+      "strokeCount": 4,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "双",
+      "ucs": "053CC",
+      "pdfPage": 17,
+      "sourceClip": [
+        88.0,
+        593.6221923828125,
+        292.0,
+        638.4095458984375
+      ],
+      "strokeCount": 4,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        },
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "反",
+      "ucs": "053CD",
+      "pdfPage": 15,
+      "sourceClip": [
+        88.0,
+        235.322998046875,
+        292.0,
+        280.1103820800781
+      ],
+      "strokeCount": 4,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "叔",
+      "ucs": "053D4",
+      "pdfPage": 78,
+      "sourceClip": [
+        304.0,
+        562.441162109375,
+        508.0,
+        645.7796630859375
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 6,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "名",
+      "ucs": "0540D",
+      "pdfPage": 34,
+      "sourceClip": [
+        304.0,
+        280.1103820800781,
+        508.0,
+        324.89788818359375
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "吹",
+      "ucs": "05439",
+      "pdfPage": 49,
+      "sourceClip": [
+        88.0,
+        324.89788818359375,
+        292.0,
+        369.6852722167969
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "咚",
+      "ucs": "0549A",
+      "pdfPage": 83,
+      "sourceClip": [
+        88.0,
+        562.441162109375,
+        292.0,
+        645.7796630859375
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "哪",
+      "ucs": "054EA",
+      "pdfPage": 146,
+      "sourceClip": [
+        304.0,
+        145.748291015625,
+        508.0,
+        229.0867919921875
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 7,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横撇弯钩",
+          "namingReference": "5.23"
+        }
+      ]
+    },
+    {
+      "character": "啊",
+      "ucs": "0554A",
+      "pdfPage": 207,
+      "sourceClip": [
+        88.0,
+        562.441162109375,
+        292.0,
+        645.7796630859375
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横撇弯钩",
+          "namingReference": "5.23"
+        }
+      ]
+    },
+    {
+      "character": "喊",
+      "ucs": "0558A",
+      "pdfPage": 327,
+      "sourceClip": [
+        88.0,
+        229.0867919921875,
+        292.0,
+        312.4253845214844
+      ],
+      "strokeCount": 12,
+      "strokes": [
+        {
+          "index": 9,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        }
+      ]
+    },
+    {
+      "character": "图",
+      "ucs": "056FE",
+      "pdfPage": 86,
+      "sourceClip": [
+        304.0,
+        645.7796630859375,
+        508.0,
+        729.1182861328125
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "场",
+      "ucs": "0573A",
+      "pdfPage": 26,
+      "sourceClip": [
+        304.0,
+        683.1969604492188,
+        508.0,
+        727.9844970703125
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横折折折钩",
+          "namingReference": "5.25"
+        }
+      ]
+    },
+    {
+      "character": "城",
+      "ucs": "057CE",
+      "pdfPage": 122,
+      "sourceClip": [
+        88.0,
+        479.1025695800781,
+        292.0,
+        562.441162109375
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 6,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        }
+      ]
+    },
+    {
+      "character": "壳",
+      "ucs": "058F3",
+      "pdfPage": 42,
+      "sourceClip": [
+        304.0,
+        190.53564453125,
+        508.0,
+        235.322998046875
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "处",
+      "ucs": "05904",
+      "pdfPage": 22,
+      "sourceClip": [
+        304.0,
+        324.89788818359375,
+        508.0,
+        369.6852722167969
+      ],
+      "strokeCount": 5,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "夏",
+      "ucs": "0590F",
+      "pdfPage": 198,
+      "sourceClip": [
+        88.0,
+        395.76397705078125,
+        292.0,
+        479.1025695800781
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 8,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "夕",
+      "ucs": "05915",
+      "pdfPage": 11,
+      "sourceClip": [
+        88.0,
+        145.748291015625,
+        292.0,
+        190.53564453125
+      ],
+      "strokeCount": 3,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "外",
+      "ucs": "05916",
+      "pdfPage": 22,
+      "sourceClip": [
+        304.0,
+        280.1103820800781,
+        508.0,
+        324.89788818359375
+      ],
+      "strokeCount": 5,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "多",
+      "ucs": "0591A",
+      "pdfPage": 34,
+      "sourceClip": [
+        304.0,
+        369.6852722167969,
+        508.0,
+        414.4726867675781
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        },
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "夜",
+      "ucs": "0591C",
+      "pdfPage": 99,
+      "sourceClip": [
+        88.0,
+        645.7796630859375,
+        292.0,
+        729.1182861328125
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 5,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "奶",
+      "ucs": "05976",
+      "pdfPage": 24,
+      "sourceClip": [
+        304.0,
+        504.04736328125,
+        508.0,
+        548.8348388671875
+      ],
+      "strokeCount": 5,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横折折折钩",
+          "namingReference": "5.25"
+        }
+      ]
+    },
+    {
+      "character": "好",
+      "ucs": "0597D",
+      "pdfPage": 38,
+      "sourceClip": [
+        304.0,
+        459.26007080078125,
+        508.0,
+        504.04736328125
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "孙",
+      "ucs": "05B59",
+      "pdfPage": 38,
+      "sourceClip": [
+        88.0,
+        369.6852722167969,
+        292.0,
+        414.4726867675781
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "孤",
+      "ucs": "05B64",
+      "pdfPage": 113,
+      "sourceClip": [
+        304.0,
+        145.748291015625,
+        508.0,
+        229.0867919921875
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "学",
+      "ucs": "05B66",
+      "pdfPage": 107,
+      "sourceClip": [
+        304.0,
+        312.4253845214844,
+        508.0,
+        395.76397705078125
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        },
+        {
+          "index": 5,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "孩",
+      "ucs": "05B69",
+      "pdfPage": 177,
+      "sourceClip": [
+        304.0,
+        562.441162109375,
+        508.0,
+        645.7796630859375
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "它",
+      "ucs": "05B83",
+      "pdfPage": 23,
+      "sourceClip": [
+        304.0,
+        459.26007080078125,
+        508.0,
+        504.04736328125
+      ],
+      "strokeCount": 5,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "安",
+      "ucs": "05B89",
+      "pdfPage": 36,
+      "sourceClip": [
+        304.0,
+        638.40966796875,
+        508.0,
+        683.1969604492188
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "定",
+      "ucs": "05B9A",
+      "pdfPage": 107,
+      "sourceClip": [
+        304.0,
+        562.441162109375,
+        508.0,
+        645.7796630859375
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "宝",
+      "ucs": "05B9D",
+      "pdfPage": 107,
+      "sourceClip": [
+        304.0,
+        395.76397705078125,
+        508.0,
+        479.1025695800781
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "害",
+      "ucs": "05BB3",
+      "pdfPage": 236,
+      "sourceClip": [
+        88.0,
+        229.0867919921875,
+        292.0,
+        312.4253845214844
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "宽",
+      "ucs": "05BBD",
+      "pdfPage": 236,
+      "sourceClip": [
+        88.0,
+        312.4253845214844,
+        292.0,
+        395.76397705078125
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "寒",
+      "ucs": "05BD2",
+      "pdfPage": 356,
+      "sourceClip": [
+        304.0,
+        562.441162109375,
+        508.0,
+        645.7796630859375
+      ],
+      "strokeCount": 12,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "对",
+      "ucs": "05BF9",
+      "pdfPage": 25,
+      "sourceClip": [
+        88.0,
+        369.6852722167969,
+        292.0,
+        414.4726867675781
+      ],
+      "strokeCount": 5,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "帮",
+      "ucs": "05E2E",
+      "pdfPage": 119,
+      "sourceClip": [
+        88.0,
+        479.1025695800781,
+        292.0,
+        562.441162109375
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横撇弯钩",
+          "namingReference": "5.23"
+        }
+      ]
+    },
+    {
+      "character": "常",
+      "ucs": "05E38",
+      "pdfPage": 263,
+      "sourceClip": [
+        304.0,
+        479.1025695800781,
+        508.0,
+        562.441162109375
+      ],
+      "strokeCount": 11,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "式",
+      "ucs": "05F0F",
+      "pdfPage": 25,
+      "sourceClip": [
+        304.0,
+        414.4726867675781,
+        508.0,
+        459.26007080078125
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        }
+      ]
+    },
+    {
+      "character": "忘",
+      "ucs": "05FD8",
+      "pdfPage": 55,
+      "sourceClip": [
+        304.0,
+        235.322998046875,
+        508.0,
+        280.1103820800781
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "斜钩|卧钩",
+          "name": "卧钩",
+          "namingReference": "common-name:心"
+        }
+      ]
+    },
+    {
+      "character": "念",
+      "ucs": "05FF5",
+      "pdfPage": 95,
+      "sourceClip": [
+        88.0,
+        312.4253845214844,
+        292.0,
+        395.76397705078125
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        },
+        {
+          "index": 5,
+          "from": "斜钩|卧钩",
+          "name": "卧钩",
+          "namingReference": "common-name:心"
+        }
+      ]
+    },
+    {
+      "character": "忽",
+      "ucs": "05FFD",
+      "pdfPage": 97,
+      "sourceClip": [
+        304.0,
+        479.1025695800781,
+        508.0,
+        562.441162109375
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 5,
+          "from": "斜钩|卧钩",
+          "name": "卧钩",
+          "namingReference": "common-name:心"
+        }
+      ]
+    },
+    {
+      "character": "怎",
+      "ucs": "0600E",
+      "pdfPage": 151,
+      "sourceClip": [
+        88.0,
+        479.1025695800781,
+        292.0,
+        562.441162109375
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 6,
+          "from": "斜钩|卧钩",
+          "name": "卧钩",
+          "namingReference": "common-name:心"
+        }
+      ]
+    },
+    {
+      "character": "思",
+      "ucs": "0601D",
+      "pdfPage": 144,
+      "sourceClip": [
+        88.0,
+        479.1025695800781,
+        292.0,
+        562.441162109375
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 6,
+          "from": "斜钩|卧钩",
+          "name": "卧钩",
+          "namingReference": "common-name:心"
+        }
+      ]
+    },
+    {
+      "character": "急",
+      "ucs": "06025",
+      "pdfPage": 161,
+      "sourceClip": [
+        88.0,
+        145.748291015625,
+        292.0,
+        229.0867919921875
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        },
+        {
+          "index": 6,
+          "from": "斜钩|卧钩",
+          "name": "卧钩",
+          "namingReference": "common-name:心"
+        }
+      ]
+    },
+    {
+      "character": "总",
+      "ucs": "0603B",
+      "pdfPage": 166,
+      "sourceClip": [
+        88.0,
+        395.76397705078125,
+        292.0,
+        479.1025695800781
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 6,
+          "from": "斜钩|卧钩",
+          "name": "卧钩",
+          "namingReference": "common-name:心"
+        }
+      ]
+    },
+    {
+      "character": "息",
+      "ucs": "0606F",
+      "pdfPage": 217,
+      "sourceClip": [
+        304.0,
+        312.4253845214844,
+        508.0,
+        395.76397705078125
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 7,
+          "from": "斜钩|卧钩",
+          "name": "卧钩",
+          "namingReference": "common-name:心"
+        }
+      ]
+    },
+    {
+      "character": "您",
+      "ucs": "060A8",
+      "pdfPage": 279,
+      "sourceClip": [
+        88.0,
+        479.1025695800781,
+        292.0,
+        562.441162109375
+      ],
+      "strokeCount": 11,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        },
+        {
+          "index": 8,
+          "from": "斜钩|卧钩",
+          "name": "卧钩",
+          "namingReference": "common-name:心"
+        }
+      ]
+    },
+    {
+      "character": "想",
+      "ucs": "060F3",
+      "pdfPage": 373,
+      "sourceClip": [
+        304.0,
+        229.0867919921875,
+        508.0,
+        312.4253845214844
+      ],
+      "strokeCount": 13,
+      "strokes": [
+        {
+          "index": 10,
+          "from": "斜钩|卧钩",
+          "name": "卧钩",
+          "namingReference": "common-name:心"
+        }
+      ]
+    },
+    {
+      "character": "意",
+      "ucs": "0610F",
+      "pdfPage": 399,
+      "sourceClip": [
+        304.0,
+        479.1025695800781,
+        508.0,
+        562.441162109375
+      ],
+      "strokeCount": 13,
+      "strokes": [
+        {
+          "index": 10,
+          "from": "斜钩|卧钩",
+          "name": "卧钩",
+          "namingReference": "common-name:心"
+        }
+      ]
+    },
+    {
+      "character": "感",
+      "ucs": "0611F",
+      "pdfPage": 376,
+      "sourceClip": [
+        88.0,
+        479.1025695800781,
+        292.0,
+        562.441162109375
+      ],
+      "strokeCount": 13,
+      "strokes": [
+        {
+          "index": 6,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        },
+        {
+          "index": 10,
+          "from": "斜钩|卧钩",
+          "name": "卧钩",
+          "namingReference": "common-name:心"
+        }
+      ]
+    },
+    {
+      "character": "戏",
+      "ucs": "0620F",
+      "pdfPage": 38,
+      "sourceClip": [
+        304.0,
+        593.6222534179688,
+        508.0,
+        638.40966796875
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        },
+        {
+          "index": 3,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        }
+      ]
+    },
+    {
+      "character": "成",
+      "ucs": "06210",
+      "pdfPage": 28,
+      "sourceClip": [
+        304.0,
+        638.40966796875,
+        508.0,
+        683.1969604492188
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        }
+      ]
+    },
+    {
+      "character": "战",
+      "ucs": "06218",
+      "pdfPage": 138,
+      "sourceClip": [
+        304.0,
+        562.441162109375,
+        508.0,
+        645.7796630859375
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 6,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        }
+      ]
+    },
+    {
+      "character": "扔",
+      "ucs": "06254",
+      "pdfPage": 18,
+      "sourceClip": [
+        88.0,
+        459.2599792480469,
+        292.0,
+        504.04736328125
+      ],
+      "strokeCount": 5,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横折折折钩",
+          "namingReference": "5.25"
+        }
+      ]
+    },
+    {
+      "character": "找",
+      "ucs": "0627E",
+      "pdfPage": 41,
+      "sourceClip": [
+        88.0,
+        235.322998046875,
+        292.0,
+        280.1103820800781
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        }
+      ]
+    },
+    {
+      "character": "拔",
+      "ucs": "062D4",
+      "pdfPage": 65,
+      "sourceClip": [
+        304.0,
+        312.4253845214844,
+        508.0,
+        395.76397705078125
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 5,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "拨",
+      "ucs": "062E8",
+      "pdfPage": 69,
+      "sourceClip": [
+        88.0,
+        479.1025695800781,
+        292.0,
+        562.441162109375
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 5,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "支",
+      "ucs": "0652F",
+      "pdfPage": 12,
+      "sourceClip": [
+        304.0,
+        593.6222534179688,
+        508.0,
+        638.40966796875
+      ],
+      "strokeCount": 4,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "教",
+      "ucs": "06559",
+      "pdfPage": 249,
+      "sourceClip": [
+        304.0,
+        312.4253845214844,
+        508.0,
+        395.76397705078125
+      ],
+      "strokeCount": 11,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "敢",
+      "ucs": "06562",
+      "pdfPage": 300,
+      "sourceClip": [
+        304.0,
+        395.76397705078125,
+        508.0,
+        479.1025695800781
+      ],
+      "strokeCount": 11,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "晚",
+      "ucs": "0665A",
+      "pdfPage": 266,
+      "sourceClip": [
+        88.0,
+        312.4253845214844,
+        292.0,
+        395.76397705078125
+      ],
+      "strokeCount": 11,
+      "strokes": [
+        {
+          "index": 5,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "暖",
+      "ucs": "06696",
+      "pdfPage": 381,
+      "sourceClip": [
+        304.0,
+        562.441162109375,
+        508.0,
+        645.7796630859375
+      ],
+      "strokeCount": 13,
+      "strokes": [
+        {
+          "index": 11,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "最",
+      "ucs": "06700",
+      "pdfPage": 325,
+      "sourceClip": [
+        304.0,
+        312.4253845214844,
+        508.0,
+        395.76397705078125
+      ],
+      "strokeCount": 12,
+      "strokes": [
+        {
+          "index": 10,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "朵",
+      "ucs": "06735",
+      "pdfPage": 34,
+      "sourceClip": [
+        88.0,
+        190.53564453125,
+        292.0,
+        235.322998046875
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横折折|横折弯",
+          "name": "横折弯",
+          "namingReference": "5.13"
+        }
+      ]
+    },
+    {
+      "character": "李",
+      "ucs": "0674E",
+      "pdfPage": 45,
+      "sourceClip": [
+        88.0,
+        683.1969604492188,
+        292.0,
+        727.9844970703125
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "条",
+      "ucs": "06761",
+      "pdfPage": 54,
+      "sourceClip": [
+        88.0,
+        190.53564453125,
+        292.0,
+        235.322998046875
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "杨",
+      "ucs": "06768",
+      "pdfPage": 45,
+      "sourceClip": [
+        304.0,
+        145.748291015625,
+        508.0,
+        190.53564453125
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横折折折钩",
+          "namingReference": "5.25"
+        }
+      ]
+    },
+    {
+      "character": "柔",
+      "ucs": "067D4",
+      "pdfPage": 180,
+      "sourceClip": [
+        304.0,
+        479.1025695800781,
+        508.0,
+        562.441162109375
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        },
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "树",
+      "ucs": "06811",
+      "pdfPage": 134,
+      "sourceClip": [
+        88.0,
+        145.748291015625,
+        292.0,
+        229.0867919921875
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "次",
+      "ucs": "06B21",
+      "pdfPage": 35,
+      "sourceClip": [
+        88.0,
+        593.6222534179688,
+        292.0,
+        638.40966796875
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "欢",
+      "ucs": "06B22",
+      "pdfPage": 39,
+      "sourceClip": [
+        88.0,
+        190.53564453125,
+        292.0,
+        235.322998046875
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        },
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "歌",
+      "ucs": "06B4C",
+      "pdfPage": 420,
+      "sourceClip": [
+        88.0,
+        312.4253845214844,
+        292.0,
+        395.76397705078125
+      ],
+      "strokeCount": 14,
+      "strokes": [
+        {
+          "index": 11,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "氏",
+      "ucs": "06C0F",
+      "pdfPage": 15,
+      "sourceClip": [
+        304.0,
+        324.89788818359375,
+        508.0,
+        369.6852722167969
+      ],
+      "strokeCount": 4,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        }
+      ]
+    },
+    {
+      "character": "汤",
+      "ucs": "06C64",
+      "pdfPage": 36,
+      "sourceClip": [
+        304.0,
+        190.53564453125,
+        508.0,
+        235.322998046875
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横折折折钩",
+          "namingReference": "5.25"
+        }
+      ]
+    },
+    {
+      "character": "沉",
+      "ucs": "06C89",
+      "pdfPage": 57,
+      "sourceClip": [
+        304.0,
+        504.04736328125,
+        508.0,
+        548.8348388671875
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "没",
+      "ucs": "06CA1",
+      "pdfPage": 57,
+      "sourceClip": [
+        304.0,
+        145.748291015625,
+        508.0,
+        190.53564453125
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横折折|横折弯",
+          "name": "横折弯",
+          "namingReference": "5.13"
+        },
+        {
+          "index": 5,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "泉",
+      "ucs": "06CC9",
+      "pdfPage": 154,
+      "sourceClip": [
+        304.0,
+        562.441162109375,
+        508.0,
+        645.7796630859375
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 6,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "浮",
+      "ucs": "06D6E",
+      "pdfPage": 233,
+      "sourceClip": [
+        304.0,
+        145.748291015625,
+        508.0,
+        229.0867919921875
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 7,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "然",
+      "ucs": "07136",
+      "pdfPage": 346,
+      "sourceClip": [
+        304.0,
+        395.76397705078125,
+        508.0,
+        479.1025695800781
+      ],
+      "strokeCount": 12,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "熟",
+      "ucs": "0719F",
+      "pdfPage": 474,
+      "sourceClip": [
+        304.0,
+        612.8978881835938,
+        508.0,
+        729.685302734375
+      ],
+      "strokeCount": 15,
+      "strokes": [
+        {
+          "index": 5,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "爱",
+      "ucs": "07231",
+      "pdfPage": 219,
+      "sourceClip": [
+        304.0,
+        229.0867919921875,
+        508.0,
+        312.4253845214844
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 5,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        },
+        {
+          "index": 8,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "牵",
+      "ucs": "07275",
+      "pdfPage": 136,
+      "sourceClip": [
+        304.0,
+        645.7796630859375,
+        508.0,
+        729.1182861328125
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "疑",
+      "ucs": "07591",
+      "pdfPage": 435,
+      "sourceClip": [
+        88.0,
+        229.0867919921875,
+        292.0,
+        312.4253845214844
+      ],
+      "strokeCount": 14,
+      "strokes": [
+        {
+          "index": 7,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        },
+        {
+          "index": 9,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "皮",
+      "ucs": "076AE",
+      "pdfPage": 25,
+      "sourceClip": [
+        88.0,
+        145.748291015625,
+        292.0,
+        190.53564453125
+      ],
+      "strokeCount": 5,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        },
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "福",
+      "ucs": "0798F",
+      "pdfPage": 407,
+      "sourceClip": [
+        304.0,
+        645.7796630859375,
+        508.0,
+        729.1182861328125
+      ],
+      "strokeCount": 13,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "空",
+      "ucs": "07A7A",
+      "pdfPage": 108,
+      "sourceClip": [
+        88.0,
+        562.441162109375,
+        292.0,
+        645.7796630859375
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "穿",
+      "ucs": "07A7F",
+      "pdfPage": 173,
+      "sourceClip": [
+        304.0,
+        479.1025695800781,
+        508.0,
+        562.441162109375
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "窗",
+      "ucs": "07A97",
+      "pdfPage": 357,
+      "sourceClip": [
+        88.0,
+        479.1025695800781,
+        292.0,
+        562.441162109375
+      ],
+      "strokeCount": 12,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        },
+        {
+          "index": 9,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "粽",
+      "ucs": "07CBD",
+      "pdfPage": 438,
+      "sourceClip": [
+        304.0,
+        312.4253845214844,
+        508.0,
+        395.76397705078125
+      ],
+      "strokeCount": 14,
+      "strokes": [
+        {
+          "index": 8,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "纸",
+      "ucs": "07EB8",
+      "pdfPage": 62,
+      "sourceClip": [
+        304.0,
+        548.8348388671875,
+        508.0,
+        593.6222534179688
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 6,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        }
+      ]
+    },
+    {
+      "character": "经",
+      "ucs": "07ECF",
+      "pdfPage": 118,
+      "sourceClip": [
+        88.0,
+        645.7796630859375,
+        292.0,
+        729.1182861328125
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "翅",
+      "ucs": "07FC5",
+      "pdfPage": 197,
+      "sourceClip": [
+        304.0,
+        562.441162109375,
+        508.0,
+        645.7796630859375
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "膀",
+      "ucs": "08180",
+      "pdfPage": 433,
+      "sourceClip": [
+        304.0,
+        395.76397705078125,
+        508.0,
+        479.1025695800781
+      ],
+      "strokeCount": 14,
+      "strokes": [
+        {
+          "index": 9,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "船",
+      "ucs": "08239",
+      "pdfPage": 281,
+      "sourceClip": [
+        88.0,
+        645.7796630859375,
+        292.0,
+        729.1182861328125
+      ],
+      "strokeCount": 11,
+      "strokes": [
+        {
+          "index": 7,
+          "from": "横折折|横折弯",
+          "name": "横折弯",
+          "namingReference": "5.13"
+        }
+      ]
+    },
+    {
+      "character": "色",
+      "ucs": "08272",
+      "pdfPage": 34,
+      "sourceClip": [
+        304.0,
+        548.8348388671875,
+        508.0,
+        593.6222534179688
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "落",
+      "ucs": "0843D",
+      "pdfPage": 317,
+      "sourceClip": [
+        88.0,
+        145.748291015625,
+        292.0,
+        229.0867919921875
+      ],
+      "strokeCount": 12,
+      "strokes": [
+        {
+          "index": 7,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "藏",
+      "ucs": "085CF",
+      "pdfPage": 520,
+      "sourceClip": [
+        304.0,
+        496.1104736328125,
+        508.0,
+        612.8978881835938
+      ],
+      "strokeCount": 17,
+      "strokes": [
+        {
+          "index": 14,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        }
+      ]
+    },
+    {
+      "character": "虎",
+      "ucs": "0864E",
+      "pdfPage": 79,
+      "sourceClip": [
+        88.0,
+        479.1025695800781,
+        292.0,
+        562.441162109375
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "袍",
+      "ucs": "0888D",
+      "pdfPage": 238,
+      "sourceClip": [
+        304.0,
+        229.0867919921875,
+        508.0,
+        312.4253845214844
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "被",
+      "ucs": "088AB",
+      "pdfPage": 238,
+      "sourceClip": [
+        304.0,
+        395.76397705078125,
+        508.0,
+        479.1025695800781
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        },
+        {
+          "index": 5,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        },
+        {
+          "index": 8,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "裤",
+      "ucs": "088E4",
+      "pdfPage": 358,
+      "sourceClip": [
+        88.0,
+        479.1025695800781,
+        292.0,
+        562.441162109375
+      ],
+      "strokeCount": 12,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "视",
+      "ucs": "089C6",
+      "pdfPage": 110,
+      "sourceClip": [
+        88.0,
+        479.1025695800781,
+        292.0,
+        562.441162109375
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "觉",
+      "ucs": "089C9",
+      "pdfPage": 173,
+      "sourceClip": [
+        88.0,
+        312.4253845214844,
+        292.0,
+        395.76397705078125
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "角",
+      "ucs": "089D2",
+      "pdfPage": 53,
+      "sourceClip": [
+        304.0,
+        548.8348388671875,
+        508.0,
+        593.6222534179688
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "试",
+      "ucs": "08BD5",
+      "pdfPage": 109,
+      "sourceClip": [
+        88.0,
+        145.748291015625,
+        292.0,
+        229.0867919921875
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 6,
+          "from": "斜钩|卧钩",
+          "name": "斜钩",
+          "namingReference": "5.11"
+        }
+      ]
+    },
+    {
+      "character": "读",
+      "ucs": "08BFB",
+      "pdfPage": 237,
+      "sourceClip": [
+        304.0,
+        395.76397705078125,
+        508.0,
+        479.1025695800781
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "象",
+      "ucs": "08C61",
+      "pdfPage": 283,
+      "sourceClip": [
+        304.0,
+        479.1025695800781,
+        508.0,
+        562.441162109375
+      ],
+      "strokeCount": 11,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "路",
+      "ucs": "08DEF",
+      "pdfPage": 383,
+      "sourceClip": [
+        304.0,
+        312.4253845214844,
+        508.0,
+        395.76397705078125
+      ],
+      "strokeCount": 13,
+      "strokes": [
+        {
+          "index": 8,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "转",
+      "ucs": "08F6C",
+      "pdfPage": 78,
+      "sourceClip": [
+        88.0,
+        312.4253845214844,
+        292.0,
+        395.76397705078125
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 6,
+          "from": "竖折撇|竖折折",
+          "name": "竖折撇",
+          "namingReference": "5.18"
+        }
+      ]
+    },
+    {
+      "character": "轻",
+      "ucs": "08F7B",
+      "pdfPage": 138,
+      "sourceClip": [
+        88.0,
+        562.441162109375,
+        292.0,
+        645.7796630859375
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "透",
+      "ucs": "0900F",
+      "pdfPage": 213,
+      "sourceClip": [
+        304.0,
+        229.0867919921875,
+        508.0,
+        312.4253845214844
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 5,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横折折折钩",
+          "namingReference": "5.25"
+        }
+      ]
+    },
+    {
+      "character": "通",
+      "ucs": "0901A",
+      "pdfPage": 243,
+      "sourceClip": [
+        88.0,
+        562.441162109375,
+        292.0,
+        645.7796630859375
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "那",
+      "ucs": "090A3",
+      "pdfPage": 37,
+      "sourceClip": [
+        304.0,
+        504.04736328125,
+        508.0,
+        548.8348388671875
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横撇弯钩",
+          "namingReference": "5.23"
+        }
+      ]
+    },
+    {
+      "character": "邻",
+      "ucs": "090BB",
+      "pdfPage": 53,
+      "sourceClip": [
+        88.0,
+        235.322998046875,
+        292.0,
+        280.1103820800781
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        },
+        {
+          "index": 5,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横撇弯钩",
+          "namingReference": "5.23"
+        }
+      ]
+    },
+    {
+      "character": "部",
+      "ucs": "090E8",
+      "pdfPage": 227,
+      "sourceClip": [
+        304.0,
+        229.0867919921875,
+        508.0,
+        312.4253845214844
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 8,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横撇弯钩",
+          "namingReference": "5.23"
+        }
+      ]
+    },
+    {
+      "character": "都",
+      "ucs": "090FD",
+      "pdfPage": 188,
+      "sourceClip": [
+        88.0,
+        479.1025695800781,
+        292.0,
+        562.441162109375
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 8,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横撇弯钩",
+          "namingReference": "5.23"
+        }
+      ]
+    },
+    {
+      "character": "野",
+      "ucs": "091CE",
+      "pdfPage": 265,
+      "sourceClip": [
+        88.0,
+        145.748291015625,
+        292.0,
+        229.0867919921875
+      ],
+      "strokeCount": 11,
+      "strokes": [
+        {
+          "index": 7,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        },
+        {
+          "index": 9,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "铃",
+      "ucs": "094C3",
+      "pdfPage": 210,
+      "sourceClip": [
+        304.0,
+        479.1025695800781,
+        508.0,
+        562.441162109375
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 8,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "铅",
+      "ucs": "094C5",
+      "pdfPage": 210,
+      "sourceClip": [
+        304.0,
+        645.7796630859375,
+        508.0,
+        729.1182861328125
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 6,
+          "from": "横折折|横折弯",
+          "name": "横折弯",
+          "namingReference": "5.13"
+        }
+      ]
+    },
+    {
+      "character": "闷",
+      "ucs": "095F7",
+      "pdfPage": 55,
+      "sourceClip": [
+        304.0,
+        593.6222534179688,
+        508.0,
+        638.40966796875
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 4,
+          "from": "斜钩|卧钩",
+          "name": "卧钩",
+          "namingReference": "common-name:心"
+        }
+      ]
+    },
+    {
+      "character": "阳",
+      "ucs": "09633",
+      "pdfPage": 38,
+      "sourceClip": [
+        88.0,
+        504.04736328125,
+        292.0,
+        548.8348388671875
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横撇弯钩",
+          "namingReference": "5.23"
+        }
+      ]
+    },
+    {
+      "character": "阴",
+      "ucs": "09634",
+      "pdfPage": 38,
+      "sourceClip": [
+        88.0,
+        683.1969604492188,
+        292.0,
+        727.9844970703125
+      ],
+      "strokeCount": 6,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横撇弯钩",
+          "namingReference": "5.23"
+        }
+      ]
+    },
+    {
+      "character": "降",
+      "ucs": "0964D",
+      "pdfPage": 113,
+      "sourceClip": [
+        304.0,
+        645.7796630859375,
+        508.0,
+        729.1182861328125
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横撇弯钩",
+          "namingReference": "5.23"
+        },
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "院",
+      "ucs": "09662",
+      "pdfPage": 178,
+      "sourceClip": [
+        88.0,
+        645.7796630859375,
+        292.0,
+        729.1182861328125
+      ],
+      "strokeCount": 9,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横折折折钩|横撇弯钩",
+          "name": "横撇弯钩",
+          "namingReference": "5.23"
+        },
+        {
+          "index": 4,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "难",
+      "ucs": "096BE",
+      "pdfPage": 243,
+      "sourceClip": [
+        304.0,
+        145.748291015625,
+        508.0,
+        229.0867919921875
+      ],
+      "strokeCount": 10,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "雪",
+      "ucs": "096EA",
+      "pdfPage": 262,
+      "sourceClip": [
+        304.0,
+        645.7796630859375,
+        508.0,
+        729.1182861328125
+      ],
+      "strokeCount": 11,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "霜",
+      "ucs": "0971C",
+      "pdfPage": 523,
+      "sourceClip": [
+        304.0,
+        262.53564453125,
+        508.0,
+        379.3230895996094
+      ],
+      "strokeCount": 17,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "霞",
+      "ucs": "0971E",
+      "pdfPage": 523,
+      "sourceClip": [
+        304.0,
+        379.3230895996094,
+        508.0,
+        496.1104736328125
+      ],
+      "strokeCount": 17,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        },
+        {
+          "index": 15,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "露",
+      "ucs": "09732",
+      "pdfPage": 570,
+      "sourceClip": [
+        304.0,
+        262.53564453125,
+        508.0,
+        379.3230895996094
+      ],
+      "strokeCount": 21,
+      "strokes": [
+        {
+          "index": 2,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        },
+        {
+          "index": 16,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "静",
+      "ucs": "09759",
+      "pdfPage": 412,
+      "sourceClip": [
+        88.0,
+        145.748291015625,
+        292.0,
+        229.0867919921875
+      ],
+      "strokeCount": 14,
+      "strokes": [
+        {
+          "index": 9,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "领",
+      "ucs": "09886",
+      "pdfPage": 282,
+      "sourceClip": [
+        304.0,
+        229.0867919921875,
+        508.0,
+        312.4253845214844
+      ],
+      "strokeCount": 11,
+      "strokes": [
+        {
+          "index": 3,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "饭",
+      "ucs": "0996D",
+      "pdfPage": 54,
+      "sourceClip": [
+        304.0,
+        190.53564453125,
+        508.0,
+        235.322998046875
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        },
+        {
+          "index": 5,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "饱",
+      "ucs": "09971",
+      "pdfPage": 98,
+      "sourceClip": [
+        304.0,
+        312.4253845214844,
+        508.0,
+        395.76397705078125
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横钩",
+          "namingReference": "5.3"
+        }
+      ]
+    },
+    {
+      "character": "鱼",
+      "ucs": "09C7C",
+      "pdfPage": 97,
+      "sourceClip": [
+        88.0,
+        562.441162109375,
+        292.0,
+        645.7796630859375
+      ],
+      "strokeCount": 8,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "鲜",
+      "ucs": "09C9C",
+      "pdfPage": 434,
+      "sourceClip": [
+        304.0,
+        479.1025695800781,
+        508.0,
+        562.441162109375
+      ],
+      "strokeCount": 14,
+      "strokes": [
+        {
+          "index": 1,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    },
+    {
+      "character": "鸡",
+      "ucs": "09E21",
+      "pdfPage": 62,
+      "sourceClip": [
+        88.0,
+        414.4726867675781,
+        292.0,
+        459.26007080078125
+      ],
+      "strokeCount": 7,
+      "strokes": [
+        {
+          "index": 0,
+          "from": "横撇|横钩",
+          "name": "横撇",
+          "namingReference": "5.2"
+        }
+      ]
+    }
+  ]
+}

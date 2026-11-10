@@ -111,6 +111,25 @@ try {
     await wait("document.querySelector('#offlineList').children.length===1");
     checks.push('new batch deduplicates 一地一 to two syllables; both play after cold offline reload, neutral de stays unavailable and attribution is cached');
 
+    await click('#closeMenuBtn');await query('专朵奶阳');await offline();await click('#saveOfflineBtn');await saved();
+    const grade1=(await metadata()).find(item=>item.query==='专朵奶阳');
+    const added=['竖折撇','横折弯','横折折折钩','横撇弯钩'].map(name=>catalog.items.find(item=>item.text===name));
+    assert.ok(added.every(item=>grade1.files.includes(item.url)));
+    const grade1Responses=browser.responses.length;
+    const grade1Server=state.requests.length;
+    state.offline=true;await command('Page.reload');await wait("document.querySelector('#status')?.textContent === '请输入汉字'");
+    await offline();await click('#offlineList .offline-row:first-child .offline-open');
+    await wait("document.querySelector('#currentQuery').textContent==='专朵奶阳' && !document.querySelector('#playBtn').disabled");
+    await menu();await click('#groupMode');await click('#closeMenuBtn');await click('#playBtn');
+    await wait("document.querySelector('#wordPosition').textContent==='4 / 4' && document.querySelector('#playBtn').textContent==='重播'",45000);
+    assert.equal(await evaluate("document.querySelector('#status').textContent"),'播放完成');
+    assert.ok(added.every(item=>browser.responses.slice(grade1Responses).some(response=>response.url.endsWith(item.url)&&response.status===200)));
+    assert.equal(state.requests.slice(grade1Server).some(path=>path.endsWith('.mp3') || /\/characters\/.*\.json$/.test(path)),false);
+    state.offline=false;await menu();await click('#groupMode');await offline();
+    await click('#offlineList .offline-row:first-child .offline-row-actions button:last-child');
+    await wait("document.querySelector('#offlineList').children.length===1");
+    checks.push('专朵奶阳 saves all four newly resolved stroke recordings; a cold offline reload plays the entire group without server audio or glyph requests');
+
     // A real second worker release, with the same application logic but a new build identity.
     const build=JSON.parse(await fs.readFile('dist/offline-build.json','utf8'));
     const newId='b'.repeat(64);
