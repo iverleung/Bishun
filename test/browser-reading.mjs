@@ -4,7 +4,9 @@ import { practiceStroke } from './helpers/practice-input.mjs';
 import readingPlan from '../resources/reading-audio-plan.json' with { type: 'json' };
 import { readingRecording } from '../src/data/reading-audio.js';
 
-const [cdpUrl='http://127.0.0.1:9224',pageUrl='http://127.0.0.1:5189/']=process.argv.slice(2);
+const [cdpUrl='http://127.0.0.1:9224',pageUrl='http://127.0.0.1:5189/',selectedBatch]=process.argv.slice(2);
+const grade1Batches=readingPlan.batches.filter(batch=>batch.id.startsWith('grade1-')&&(!selectedBatch||batch.id===selectedBatch));
+if(!grade1Batches.length)throw new Error('Unknown first-grade reading batch');
 const browser=await openBrowser(cdpUrl,pageUrl);
 const checks=[];
 try {
@@ -137,8 +139,7 @@ try {
     assert.deepEqual([...played].sort(), Object.keys(batch.items).sort());
     for (const reading of played) assert.ok(browser.responses.some(item=>item.url.endsWith(readingRecording(reading).url) && item.status===200));
     checks.push('all 34 new syllables decode/start/end through the real UI; missing neutral de stays text');
-    for(const batchId of ['grade1-1','grade1-2']){
-        const grade1 = readingPlan.batches.find(batch=>batch.id===batchId);
+    for(const grade1 of grade1Batches){
         const grade1Played = new Set();
         for(const group of grade1.sampleQueries){
             await query(group);
@@ -156,7 +157,7 @@ try {
             }
         }
         assert.equal(grade1Played.size,30);
-        checks.push(`${batchId}: all thirty recordings decode/start/end through their sample characters`);
+        checks.push(`${grade1.id}: all thirty recordings decode/start/end through their sample characters`);
     }
     await query('校');
     assert.equal(await evaluate("Array.from(document.querySelectorAll('.reading-button'),button=>button.dataset.reading).join(',')"),'xiào');
@@ -166,7 +167,10 @@ try {
     await query('了');
     assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),0);
     assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"),'le / liǎo');
-    checks.push('nǚ remains distinct from nu; out-of-batch jiào and neutral le remain visible without substitute audio');
+    await query('么');
+    assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"),'me');
+    assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),0);
+    checks.push('nǚ remains distinct from nu; out-of-batch jiào and neutral le/me remain visible without substitute audio');
     assert.deepEqual(browser.exceptions,[]);
     console.log(JSON.stringify({browser:browser.version,checks,exceptions:browser.exceptions},null,2));
 } finally {await browser.close();}

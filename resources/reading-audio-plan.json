@@ -382,6 +382,271 @@
           "reason": "固定版本没有 le 或 le0 的独立轻声音节；不使用 lè 或 liǎo 替代。"
         }
       ]
+    },
+    {
+      "id": "grade1-3",
+      "sampleQueries": [
+        "里见在也才比只多办出",
+        "牛羊爪白春吹飞入什古",
+        "胡双言青晴苗请生红动"
+      ],
+      "scope": "Next thirty missing source readings in first-grade writing-task order, across both semesters; neutral le and me remain unavailable.",
+      "sampleEntries": [
+        {
+          "character": "里",
+          "reading": "lǐ",
+          "bookId": "g1-first",
+          "taskId": "reading-5",
+          "rowId": "row-357"
+        },
+        {
+          "character": "见",
+          "reading": "jiàn",
+          "bookId": "g1-first",
+          "taskId": "reading-5",
+          "rowId": "row-358"
+        },
+        {
+          "character": "在",
+          "reading": "zài",
+          "bookId": "g1-first",
+          "taskId": "reading-6",
+          "rowId": "row-359"
+        },
+        {
+          "character": "也",
+          "reading": "yě",
+          "bookId": "g1-first",
+          "taskId": "reading-7",
+          "rowId": "row-364"
+        },
+        {
+          "character": "才",
+          "reading": "cái",
+          "bookId": "g1-first",
+          "taskId": "reading-7",
+          "rowId": "row-366"
+        },
+        {
+          "character": "比",
+          "reading": "bǐ",
+          "bookId": "g1-first",
+          "taskId": "reading-8",
+          "rowId": "row-369"
+        },
+        {
+          "character": "只",
+          "reading": "zhī",
+          "bookId": "g1-first",
+          "taskId": "reading-9",
+          "rowId": "row-373"
+        },
+        {
+          "character": "多",
+          "reading": "duō",
+          "bookId": "g1-first",
+          "taskId": "reading-9",
+          "rowId": "row-374"
+        },
+        {
+          "character": "办",
+          "reading": "bàn",
+          "bookId": "g1-first",
+          "taskId": "reading-9",
+          "rowId": "row-375"
+        },
+        {
+          "character": "出",
+          "reading": "chū",
+          "bookId": "g1-first",
+          "taskId": "reading-9",
+          "rowId": "row-377"
+        },
+        {
+          "character": "牛",
+          "reading": "niú",
+          "bookId": "g1-first",
+          "taskId": "garden-8",
+          "rowId": "row-382"
+        },
+        {
+          "character": "羊",
+          "reading": "yáng",
+          "bookId": "g1-first",
+          "taskId": "garden-8",
+          "rowId": "row-383"
+        },
+        {
+          "character": "爪",
+          "reading": "zhuǎ",
+          "bookId": "g1-first",
+          "taskId": "garden-8",
+          "rowId": "row-384"
+        },
+        {
+          "character": "白",
+          "reading": "bái",
+          "bookId": "g1-first",
+          "taskId": "garden-8",
+          "rowId": "row-385"
+        },
+        {
+          "character": "春",
+          "reading": "chūn",
+          "bookId": "g1-second",
+          "taskId": "literacy-1",
+          "rowId": "row-421"
+        },
+        {
+          "character": "吹",
+          "reading": "chuī",
+          "bookId": "g1-second",
+          "taskId": "literacy-1",
+          "rowId": "row-423"
+        },
+        {
+          "character": "飞",
+          "reading": "fēi",
+          "bookId": "g1-second",
+          "taskId": "literacy-1",
+          "rowId": "row-425"
+        },
+        {
+          "character": "入",
+          "reading": "rù",
+          "bookId": "g1-second",
+          "taskId": "literacy-1",
+          "rowId": "row-426"
+        },
+        {
+          "character": "什",
+          "reading": "shén",
+          "bookId": "g1-second",
+          "taskId": "literacy-2",
+          "rowId": "row-427"
+        },
+        {
+          "character": "古",
+          "reading": "gǔ",
+          "bookId": "g1-second",
+          "taskId": "literacy-2",
+          "rowId": "row-429"
+        },
+        {
+          "character": "胡",
+          "reading": "hú",
+          "bookId": "g1-second",
+          "taskId": "literacy-2",
+          "rowId": "row-430"
+        },
+        {
+          "character": "双",
+          "reading": "shuāng",
+          "bookId": "g1-second",
+          "taskId": "literacy-2",
+          "rowId": "row-431"
+        },
+        {
+          "character": "言",
+          "reading": "yán",
+          "bookId": "g1-second",
+          "taskId": "literacy-2",
+          "rowId": "row-432"
+        },
+        {
+          "character": "青",
+          "reading": "qīng",
+          "bookId": "g1-second",
+          "taskId": "literacy-3",
+          "rowId": "row-433"
+        },
+        {
+          "character": "晴",
+          "reading": "qíng",
+          "bookId": "g1-second",
+          "taskId": "literacy-3",
+          "rowId": "row-435"
+        },
+        {
+          "character": "苗",
+          "reading": "miáo",
+          "bookId": "g1-second",
+          "taskId": "literacy-3",
+          "rowId": "row-436"
+        },
+        {
+          "character": "请",
+          "reading": "qǐng",
+          "bookId": "g1-second",
+          "taskId": "literacy-3",
+          "rowId": "row-437"
+        },
+        {
+          "character": "生",
+          "reading": "shēng",
+          "bookId": "g1-second",
+          "taskId": "literacy-3",
+          "rowId": "row-438"
+        },
+        {
+          "character": "红",
+          "reading": "hóng",
+          "bookId": "g1-second",
+          "taskId": "literacy-4",
+          "rowId": "row-440"
+        },
+        {
+          "character": "动",
+          "reading": "dòng",
+          "bookId": "g1-second",
+          "taskId": "literacy-4",
+          "rowId": "row-441"
+        }
+      ],
+      "items": {
+        "lǐ": "li3",
+        "jiàn": "jian4",
+        "zài": "zai4",
+        "yě": "ye3",
+        "cái": "cai2",
+        "bǐ": "bi3",
+        "zhī": "zhi1",
+        "duō": "duo1",
+        "bàn": "ban4",
+        "chū": "chu1",
+        "niú": "niu2",
+        "yáng": "yang2",
+        "zhuǎ": "zhua3",
+        "bái": "bai2",
+        "chūn": "chun1",
+        "chuī": "chui1",
+        "fēi": "fei1",
+        "rù": "ru4",
+        "shén": "shen2",
+        "gǔ": "gu3",
+        "hú": "hu2",
+        "shuāng": "shuang1",
+        "yán": "yan2",
+        "qīng": "qing1",
+        "qíng": "qing2",
+        "miáo": "miao2",
+        "qǐng": "qing3",
+        "shēng": "sheng1",
+        "hóng": "hong2",
+        "dòng": "dong4"
+      },
+      "unavailableReadings": [
+        {
+          "reading": "le",
+          "character": "了",
+          "reason": "固定版本没有 le／le0 独立轻声录音。"
+        },
+        {
+          "reading": "me",
+          "character": "么",
+          "reason": "固定版本没有 me／me0 独立轻声录音，不使用其他声调替代。"
+        }
+      ]
     }
   ],
   "synthesized": {

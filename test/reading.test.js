@@ -96,6 +96,7 @@ test('listening confirmations remain bound to exact files while reported and new
     assert.deepEqual(pending.filter(item=>!item.batch.startsWith('grade1-')).map(item => item.reading),['tián','hé']);
     assert.equal(pending.filter(item=>item.batch==='grade1-1').length,0);
     assert.equal(pending.filter(item=>item.batch==='grade1-2').length,0);
+    assert.equal(pending.filter(item=>item.batch==='grade1-3').length,30);
     assert.equal(catalog.listeningReview.batchConfirmations['grade1-2'].date,'2026-11-10');
     assert.equal(catalog.listeningReview.batchConfirmations['grade1-1'].date,'2026-11-10');
     assert.equal(approved.filter(item => item.batch === 'initial').length,13);
@@ -176,4 +177,30 @@ test('second grade-one batch is bound to source writing entries and preserves n�
     assert.notEqual(readingRecording('ér').url,readingRecording('èr').url);
     assert.equal(readingRecording('le'),null);
     assert.deepEqual(characterReadings('了'),['le','liǎo']);
+});
+
+test('third grade-one batch binds both textbook sources and keeps qing tones distinct without neutral me substitution', async () => {
+    const {default:plan}=await import('../resources/reading-audio-plan.json',{with:{type:'json'}});
+    const {default:first}=await import('../resources/textbooks/pilot-v1/g1-first.json',{with:{type:'json'}});
+    const {default:second}=await import('../resources/textbooks/pilot-v1/g1-second.json',{with:{type:'json'}});
+    const {characterReadings}=await import('../src/web/character-info.js');
+    const books=new Map([[first.id,first],[second.id,second]]);
+    const batch=plan.batches.find(item=>item.id==='grade1-3');
+    assert.equal(Object.keys(batch.items).length,30);assert.equal(batch.sampleEntries.length,30);
+    assert.equal(batch.sampleQueries.join(''),batch.sampleEntries.map(entry=>entry.character).join(''));
+    for(const sample of batch.sampleEntries){
+        const task=books.get(sample.bookId).units.flatMap(unit=>unit.tasks).find(task=>task.id===sample.taskId);
+        const entry=task.write.find(entry=>entry.id===sample.rowId);
+        assert.equal(entry.character,sample.character);assert.equal(entry.reading,sample.reading);
+        assert.ok(characterReadings(sample.character).includes(sample.reading));
+        const recording=readingRecording(sample.reading);
+        assert.equal(recording.token,batch.items[sample.reading]);
+        assert.equal(recording.batch,'grade1-3');assert.equal(recording.reviewStatus,'pending-listening');
+    }
+    assert.deepEqual(['qīng','qíng','qǐng'].map(r=>readingRecording(r).token),['qing1','qing2','qing3']);
+    assert.equal(new Set(['qīng','qíng','qǐng'].map(r=>readingRecording(r).sha256)).size,3);
+    assert.equal(readingRecording('zhī').token,'zhi1');
+    assert.equal(readingRecording('zhǐ'),null);
+    assert.deepEqual(characterReadings('么'),['me']);assert.equal(readingRecording('me'),null);
+    assert.equal(readingRecording('le'),null);
 });
