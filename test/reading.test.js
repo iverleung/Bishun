@@ -92,9 +92,10 @@ test('listening confirmations remain bound to exact files while reported and new
     const { default: catalog } = await import('../resources/reading-audio-catalog.json', { with: { type:'json' } });
     const approved = catalog.items.filter(item => item.reviewStatus === 'reviewed');
     const pending = catalog.items.filter(item => item.reviewStatus === 'pending-listening');
-    assert.equal(approved.length,46);
+    assert.equal(approved.length,76);
     assert.deepEqual(pending.filter(item=>item.batch!=='grade1-1').map(item => item.reading),['tián','hé']);
-    assert.equal(pending.filter(item=>item.batch==='grade1-1').length,30);
+    assert.equal(pending.filter(item=>item.batch==='grade1-1').length,0);
+    assert.equal(catalog.listeningReview.batchConfirmations['grade1-1'].date,'2026-11-10');
     assert.equal(approved.filter(item => item.batch === 'initial').length,13);
     assert.equal(approved.filter(item => item.batch === 'basics').length,33);
     assert.ok(approved.every(item => catalog.listeningReview.items[item.id] === item.sha256));
@@ -136,7 +137,7 @@ test('first grade reading batch adds thirty exact syllables while preserving oth
         assert.ok(readings.has(reading),reading+' is missing from sample characters');
         const item=readingRecording(reading);
         assert.equal(item.token,token);assert.equal(item.batch,'grade1-1');
-        assert.equal(item.reviewStatus,'pending-listening');
+        assert.equal(item.reviewStatus,'reviewed');
     }
     assert.equal(readingRecording('mā').token,'ma1');
     assert.equal(readingRecording('mǎ').token,'ma3');
