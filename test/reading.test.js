@@ -15,7 +15,7 @@ function setup() {
 test('sample lookup is NFC normalized, exact and preserves distinct polyphonic assets', () => {
     assert.equal(readingRecording('mu\u0300'), readingRecording('mù'));
     assert.equal(readingRecording('mu'), null);
-    assert.equal(readingRecording('wǒ'), null);
+    assert.equal(readingRecording('yíng'), null);
     assert.notEqual(readingRecording('cháng').url, readingRecording('zhǎng').url);
     const one = readingRecording('mù');
     assert.throws(() => indexReadings({ schemaVersion:1,version:'v1',items:[one,one] }), /无效/);
@@ -93,7 +93,8 @@ test('listening confirmations remain bound to exact files while reported and new
     const approved = catalog.items.filter(item => item.reviewStatus === 'reviewed');
     const pending = catalog.items.filter(item => item.reviewStatus === 'pending-listening');
     assert.equal(approved.length,46);
-    assert.deepEqual(pending.map(item => item.reading),['tián','hé']);
+    assert.deepEqual(pending.filter(item=>item.batch!=='grade1-1').map(item => item.reading),['tián','hé']);
+    assert.equal(pending.filter(item=>item.batch==='grade1-1').length,30);
     assert.equal(approved.filter(item => item.batch === 'initial').length,13);
     assert.equal(approved.filter(item => item.batch === 'basics').length,33);
     assert.ok(approved.every(item => catalog.listeningReview.items[item.id] === item.sha256));
@@ -123,4 +124,27 @@ test('reported tián audio is replaced with a fresh content-bound URL and requir
     assert.equal(item.reviewStatus,'pending-listening');
     assert.notEqual(catalog.listeningReview.items[item.id],item.sha256);
     assert.notEqual(item.sha256,'ec5a7c95487f089a2c6db4436e3ad25ca7c797fb33451a55608129c5fe0998d0');
+});
+
+test('first grade reading batch adds thirty exact syllables while preserving other polyphonic candidates', async () => {
+    const {characterReadings}=await import('../src/web/character-info.js');
+    const {default:plan}=await import('../resources/reading-audio-plan.json',{with:{type:'json'}});
+    const batch=plan.batches.find(item=>item.id==='grade1-1');
+    const readings=new Set(Array.from(batch.sampleQueries.join('')).flatMap(char=>characterReadings(char)));
+    assert.equal(Object.keys(batch.items).length,30);
+    for(const [reading,token] of Object.entries(batch.items)){
+        assert.ok(readings.has(reading),reading+' is missing from sample characters');
+        const item=readingRecording(reading);
+        assert.equal(item.token,token);assert.equal(item.batch,'grade1-1');
+        assert.equal(item.reviewStatus,'pending-listening');
+    }
+    assert.equal(readingRecording('mā').token,'ma1');
+    assert.equal(readingRecording('mǎ').token,'ma3');
+    assert.notEqual(readingRecording('mā').url,readingRecording('mǎ').url);
+    assert.deepEqual(characterReadings('校'),['xiào','jiào']);
+    assert.equal(readingRecording('xiào').token,'xiao4');
+    assert.equal(readingRecording('jiào'),null);
+    assert.deepEqual(characterReadings('雨'),['yù','yǔ']);
+    assert.equal(readingRecording('yǔ').token,'yu3');
+    assert.equal(readingRecording('yù'),null);
 });

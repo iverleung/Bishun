@@ -169,3 +169,14 @@ test('saving 田 offline uses the replacement recording and never the rejected t
     const cached=await f.packs.match(new Request(origin+item.url));
     assert.equal(hash(Buffer.from(await cached.arrayBuffer())),item.sha256);
 });
+
+test('new first-grade 我 reading is saved once for repeated characters and verified in its offline pack',async()=>{
+    const {readingRecording}=await import('../src/data/reading-audio.js');
+    const item=readingRecording('wǒ');
+    const f=await fixture(['我']);const saved=await f.save('我我');
+    assert.equal(saved.query,'我我');
+    assert.equal(f.calls.filter(path=>path===item.url).length,1);
+    assert.ok(saved.files.includes(item.url));
+    const cached=await f.packs.match(new Request(origin+item.url));
+    assert.equal(hash(Buffer.from(await cached.arrayBuffer())),item.sha256);
+});

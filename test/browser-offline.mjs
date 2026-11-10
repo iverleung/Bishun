@@ -111,6 +111,27 @@ try {
     await wait("document.querySelector('#offlineList').children.length===1");
     checks.push('new batch deduplicates 一地一 to two syllables; both play after cold offline reload, neutral de stays unavailable and attribution is cached');
 
+    await click('#closeMenuBtn');await query('妈马妈');await offline();await click('#saveOfflineBtn');await saved();
+    const family=(await metadata()).find(item=>item.query==='妈马妈');
+    assert.equal(family.files.filter(file=>file.startsWith('/audio/readings/')&&file.endsWith('.mp3')).length,2);
+    const familyResponses=browser.responses.length;
+    const familyRequests=state.requests.length;
+    state.offline=true;await command('Page.reload');await wait("document.querySelector('#status')?.textContent === '请输入汉字'");
+    await offline();await click('#offlineList .offline-row:first-child .offline-open');
+    await wait("document.querySelector('#currentQuery').textContent==='妈马妈' && !document.querySelector('#playBtn').disabled");
+    for(const reading of ['mā','mǎ']){
+        if(reading==='mǎ'){await click('#nextCharBtn');await wait("!document.querySelector('#playBtn').disabled");}
+        await click(`[data-reading="${reading}"]`);await wait("Boolean(document.querySelector('.reading-button.is-speaking'))");
+        await wait("!document.querySelector('.reading-button.is-speaking')");
+        assert.equal(await evaluate("document.querySelector('#readingFeedback').textContent"),'');
+    }
+    const readings=JSON.parse(await fs.readFile('resources/reading-audio-catalog.json','utf8'));
+    assert.ok(['mā','mǎ'].every(reading=>browser.responses.slice(familyResponses).some(response=>response.url.endsWith(readings.items.find(item=>item.reading===reading).url)&&response.status===200)));
+    assert.equal(state.requests.slice(familyRequests).some(path=>path.endsWith('.mp3') || /\/characters\/.*\.json$/.test(path)),false);
+    state.offline=false;await offline();await click('#offlineList .offline-row:first-child .offline-row-actions button:last-child');
+    await wait("document.querySelector('#offlineList').children.length===1");
+    checks.push('妈马妈 deduplicates new mā/mǎ recordings, preserves word order and plays both tones after a cold offline reload without server media requests');
+
     await click('#closeMenuBtn');await query('专朵奶阳');await offline();await click('#saveOfflineBtn');await saved();
     const grade1=(await metadata()).find(item=>item.query==='专朵奶阳');
     const added=['竖折撇','横折弯','横折折折钩','横撇弯钩'].map(name=>catalog.items.find(item=>item.text===name));

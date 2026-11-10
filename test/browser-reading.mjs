@@ -24,7 +24,7 @@ try {
     const button=reading=>`[data-reading="${reading}"]`;
     const busy="Boolean(document.querySelector('.reading-button.is-speaking'))";
     const starts=()=>evaluate("audioEvents.filter(type=>type==='start').length");
-    await query('长行我');
+    await query('长行赢');
     assert.equal(await starts(),0);
     assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),2);
     await click(button('cháng'));await wait(busy);await wait("audioEvents.includes('start')");
@@ -56,7 +56,7 @@ try {
     await click(button('háng'));await wait("document.querySelector('#readingFeedback').textContent.includes('重试')");
     assert.equal(await evaluate("document.querySelector('#readingFeedback').classList.contains('sr-only')"),false);
     await evaluate('window.fetch=originalFetch');await click(button('háng'));await wait(busy);await wait(`!(${busy})`);
-    await click('#nextCharBtn');await wait("document.querySelector('#characterReadings').textContent==='wǒ'");
+    await click('#nextCharBtn');await wait("document.querySelector('#characterReadings').textContent==='yíng'");
     assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),0);
     checks.push('failed recording has a Chinese retry state; uncovered syllables remain plain text');
 
@@ -137,6 +137,28 @@ try {
     assert.deepEqual([...played].sort(), Object.keys(batch.items).sort());
     for (const reading of played) assert.ok(browser.responses.some(item=>item.url.endsWith(readingRecording(reading).url) && item.status===200));
     checks.push('all 34 new syllables decode/start/end through the real UI; missing neutral de stays text');
+    const grade1 = readingPlan.batches.find(batch=>batch.id==='grade1-1');
+    const grade1Played = new Set();
+    for(const group of grade1.sampleQueries){
+        await query(group);
+        for(let index=0;index<Array.from(group).length;index++){
+            if(index){await click('#nextCharBtn');await wait("!document.querySelector('#playBtn').disabled");}
+            const readings=await evaluate("Array.from(document.querySelectorAll('.reading-button'),button=>button.dataset.reading)");
+            for(const reading of readings){
+                if(!Object.hasOwn(grade1.items,reading)||grade1Played.has(reading))continue;
+                const count=await starts();await click(button(reading));
+                await wait(`audioEvents.filter(type=>type==='start').length===${count+1}`);await wait(`!(${busy})`);
+                assert.equal(await evaluate("document.querySelector('#readingFeedback').textContent"),'');
+                assert.ok(browser.responses.some(item=>item.url.endsWith(readingRecording(reading).url)&&item.status===200));
+                grade1Played.add(reading);
+            }
+        }
+    }
+    assert.equal(grade1Played.size,30);
+    await query('校');
+    assert.equal(await evaluate("Array.from(document.querySelectorAll('.reading-button'),button=>button.dataset.reading).join(',')"),'xiào');
+    assert.ok((await evaluate("document.querySelector('#characterReadings').textContent")).includes('jiào'));
+    checks.push('all thirty first-grade syllables decode/start/end through the UI, including separate mā/mǎ; out-of-batch jiào remains visible without a playback button');
     assert.deepEqual(browser.exceptions,[]);
     console.log(JSON.stringify({browser:browser.version,checks,exceptions:browser.exceptions},null,2));
 } finally {await browser.close();}

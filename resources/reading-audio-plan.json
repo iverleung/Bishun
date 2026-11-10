@@ -81,6 +81,47 @@
       "items": {
         "hé": "he2"
       }
+    },
+    {
+      "id": "grade1-1",
+      "sampleQueries": [
+        "你我他站坐爸妈马本",
+        "学校老师同学朋友书字",
+        "爱家哥美花鸟鱼草雨云风来"
+      ],
+      "scope": "Thirty high-frequency missing readings for first-grade use; other dictionary candidates remain unchanged and are outside this batch.",
+      "items": {
+        "nǐ": "ni3",
+        "wǒ": "wo3",
+        "tā": "ta1",
+        "zhàn": "zhan4",
+        "zuò": "zuo4",
+        "bà": "ba4",
+        "mā": "ma1",
+        "mǎ": "ma3",
+        "běn": "ben3",
+        "xué": "xue2",
+        "xiào": "xiao4",
+        "lǎo": "lao3",
+        "shī": "shi1",
+        "tóng": "tong2",
+        "péng": "peng2",
+        "yǒu": "you3",
+        "ài": "ai4",
+        "jiā": "jia1",
+        "gē": "ge1",
+        "zì": "zi4",
+        "měi": "mei3",
+        "huā": "hua1",
+        "niǎo": "niao3",
+        "yú": "yu2",
+        "cǎo": "cao3",
+        "yǔ": "yu3",
+        "yún": "yun2",
+        "fēng": "feng1",
+        "lái": "lai2",
+        "shū": "shu1"
+      }
     }
   ],
   "synthesized": {
