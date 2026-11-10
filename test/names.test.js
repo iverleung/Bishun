@@ -74,6 +74,11 @@ test('every character in the two integrated books has matching stroke counts and
     assert.equal(v3.getStrokeNames('感')[6],'斜钩');
     assert.equal(v3.getStrokeNames('感')[10],'卧钩');
     assert.equal(v3.getStrokeNames('宇')[2],null);
-    assert.equal(audio.items.filter(item=>item.reviewStatus==='reviewed').length,26);
-    assert.deepEqual(audio.items.filter(item=>item.reviewStatus==='pending-listening').map(item=>item.text).sort(),['竖折撇','横折弯','横撇弯钩','横折折折钩'].sort());
+    assert.equal(audio.items.filter(item=>item.reviewStatus==='reviewed').length,30);
+    assert.deepEqual(audio.items.filter(item=>item.reviewStatus==='pending-listening'),[]);
+    for(const name of ['竖折撇','横折弯','横撇弯钩','横折折折钩']) {
+        const item=audio.items.find(item=>item.text===name);
+        assert.equal(item.reviewedAt,'2026-11-10');
+        assert.equal(item.reviewMethod,'user-confirmed-grade1-listening-reel');
+    }
 });
