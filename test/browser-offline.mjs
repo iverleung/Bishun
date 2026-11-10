@@ -111,6 +111,28 @@ try {
     await wait("document.querySelector('#offlineList').children.length===1");
     checks.push('new batch deduplicates 一地一 to two syllables; both play after cold offline reload, neutral de stays unavailable and attribution is cached');
 
+    await click('#closeMenuBtn');await query('胡言');await offline();await click('#saveOfflineBtn');await saved();
+    const huYan=(await metadata()).find(item=>item.query==='胡言');
+    const huYanCatalog=JSON.parse(await fs.readFile('resources/reading-audio-catalog.json','utf8'));
+    const huYanFiles=['hú','yán'].map(r=>huYanCatalog.items.find(item=>item.reading===r).url);
+    assert.ok(huYanFiles.every(file=>huYan.files.includes(file)));
+    assert.ok(!huYan.files.some(file=>file.endsWith('/reading-d75d96edcb37.mp3')||file.endsWith('/reading-fb916db93db6.mp3')));
+    const huYanResponses=browser.responses.length;const huYanRequests=state.requests.length;
+    state.offline=true;await command('Page.reload');await wait("document.querySelector('#status')?.textContent === '请输入汉字'");
+    await offline();await click('#offlineList .offline-row:first-child .offline-open');
+    await wait("document.querySelector('#currentQuery').textContent==='胡言' && !document.querySelector('#playBtn').disabled");
+    for(const reading of ['hú','yán']){
+        if(reading==='yán'){await click('#nextCharBtn');await wait("!document.querySelector('#playBtn').disabled");}
+        await click(`[data-reading="${reading}"]`);await wait("Boolean(document.querySelector('.reading-button.is-speaking'))");
+        await wait("!document.querySelector('.reading-button.is-speaking')");
+        assert.equal(await evaluate("document.querySelector('#readingFeedback').textContent"),'');
+    }
+    assert.ok(huYanFiles.every(file=>browser.responses.slice(huYanResponses).some(response=>response.url.endsWith(file)&&response.status===200)));
+    assert.equal(state.requests.slice(huYanRequests).some(path=>path.endsWith('.mp3') || /\/characters\/.*\.json$/.test(path)),false);
+    state.offline=false;await offline();await click('#offlineList .offline-row:first-child .offline-row-actions button:last-child');
+    await wait("document.querySelector('#offlineList').children.length===1");
+    checks.push('胡/言 offline packs contain and cold-play only the replacement URLs, with no rejected audio or server media request');
+
     await click('#closeMenuBtn');await query('青晴请');await offline();await click('#saveOfflineBtn');await saved();
     const qing=(await metadata()).find(item=>item.query==='青晴请');
     assert.equal(qing.files.filter(file=>file.startsWith('/audio/readings/')&&file.endsWith('.mp3')).length,3);

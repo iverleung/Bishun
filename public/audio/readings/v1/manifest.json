@@ -1688,13 +1688,18 @@
     {
       "reading": "hú",
       "token": "hu2",
-      "id": "reading-d75d96edcb37",
-      "url": "/audio/readings/v1/reading-d75d96edcb37.mp3",
-      "durationMs": 936,
-      "bytes": 8412,
-      "sha256": "b4f4e4c7023bfc61799063c634ad07279f3974f0b8a2934c8b53f4953ceb4194",
-      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-hu2.mp3",
-      "originalTitle": "hu2 (cmn)",
+      "id": "reading-b9ba177b2df5",
+      "url": "/audio/readings/v1/reading-b9ba177b2df5.mp3",
+      "durationMs": 1248,
+      "bytes": 7488,
+      "sha256": "940bd747995d74f2d45f7ef7d30bc236340390fa19f0d5ad687867039aaf3beb",
+      "synthesis": {
+        "text": "胡",
+        "voice": "zh-CN-XiaoxiaoNeural",
+        "rate": "-10%",
+        "generator": "edge-tts 7.3.1"
+      },
+      "originalTitle": "胡 hú（预生成）",
       "reviewStatus": "pending-listening",
       "batch": "grade1-3"
     },
@@ -1714,13 +1719,18 @@
     {
       "reading": "yán",
       "token": "yan2",
-      "id": "reading-fb916db93db6",
-      "url": "/audio/readings/v1/reading-fb916db93db6.mp3",
-      "durationMs": 1032,
-      "bytes": 9182,
-      "sha256": "7e496b7cb91832463465aa67088e728b8d5a667fd3279db7e53e2042c09d1200",
-      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-yan2.mp3",
-      "originalTitle": "yan2 (cmn)",
+      "id": "reading-ef565ede1572",
+      "url": "/audio/readings/v1/reading-ef565ede1572.mp3",
+      "durationMs": 1176,
+      "bytes": 7056,
+      "sha256": "39c62bbd56f7f0fc0d60903a741dd83aa1922037db85d122465cfabfabcadd2c",
+      "synthesis": {
+        "text": "言",
+        "voice": "zh-CN-XiaoxiaoNeural",
+        "rate": "-10%",
+        "generator": "edge-tts 7.3.1"
+      },
+      "originalTitle": "言 yán（预生成）",
       "reviewStatus": "pending-listening",
       "batch": "grade1-3"
     },

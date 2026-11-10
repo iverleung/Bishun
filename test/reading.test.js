@@ -204,3 +204,18 @@ test('third grade-one batch binds both textbook sources and keeps qing tones dis
     assert.deepEqual(characterReadings('么'),['me']);assert.equal(readingRecording('me'),null);
     assert.equal(readingRecording('le'),null);
 });
+
+test('reported hú/yán samples use content-bound replacements without stale source attribution or approval', async () => {
+    const {createHash}=await import('node:crypto');
+    const {default:catalog}=await import('../resources/reading-audio-catalog.json',{with:{type:'json'}});
+    const {characterReadings}=await import('../src/web/character-info.js');
+    for(const [character,reading,oldId] of [['胡','hú','reading-d75d96edcb37'],['言','yán','reading-fb916db93db6']]){
+        assert.deepEqual(characterReadings(character),[reading]);
+        const item=readingRecording(reading);
+        assert.notEqual(item.id,oldId);
+        assert.equal(item.id,'reading-'+createHash('sha256').update(reading+':'+item.sha256).digest('hex').slice(0,12));
+        assert.equal(item.synthesis.text,character);assert.equal(item.synthesis.voice,'zh-CN-XiaoxiaoNeural');
+        assert.equal(item.upstream,undefined);assert.equal(item.reviewStatus,'pending-listening');
+        assert.notEqual(catalog.listeningReview.items[item.id],item.sha256);
+    }
+});

@@ -115,6 +115,16 @@ try {
     assert.ok(browser.requests.slice(replacementStart).some(url=>url.endsWith(readingRecording('tián').url)));
     assert.ok(!browser.requests.slice(replacementStart).some(url=>url.endsWith('/reading-16e6e7372e8f.mp3')));
     checks.push('田 plays the replacement file from its new URL even with the rejected URL already cached; annotation stays tián');
+    for(const [character,reading,oldId] of [['胡','hú','reading-d75d96edcb37'],['言','yán','reading-fb916db93db6']]){
+        await evaluate(`fetch('/audio/readings/v1/${oldId}.mp3',{cache:'force-cache'}).then(response=>response.arrayBuffer())`);
+        const requestStart=browser.requests.length;
+        await query(character);const before=await starts();
+        assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"),reading);
+        await click(button(reading));await wait(`audioEvents.filter(type=>type==='start').length===${before+1}`);await wait(`!(${busy})`);
+        assert.ok(browser.requests.slice(requestStart).some(url=>url.endsWith(readingRecording(reading).url)));
+        assert.ok(!browser.requests.slice(requestStart).some(url=>url.endsWith(`/${oldId}.mp3`)));
+    }
+    checks.push('胡/言 keep hú/yán annotations and play their new files even after rejected original URLs have been cached');
     const batch = readingPlan.batches.find(batch => batch.id === 'basics');
     const played = new Set();
     for (const group of batch.sampleQueries) {

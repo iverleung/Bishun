@@ -17,6 +17,7 @@ if (JSON.stringify(catalog) !== JSON.stringify(published)) throw new Error('读�
 if (catalog.source?.commit !== 'f759a0f18f27690742957619e1248ed91e9b3f2c' || catalog.source?.license !== 'CC-BY-SA-3.0' || plan.sourceCommit !== catalog.source.commit || catalog.items.length !== planned.size) throw new Error('读音来源或样本范围变化，需重新核验');
 const entries = indexReadings(catalog);
 const urls = new Set();
+const synthesizedTexts = { 'tián':'田', 'hú':'胡', 'yán':'言' };
 for (const item of entries.values()) {
     const expected = planned.get(item.reading);
     const synthesis = plan.synthesized?.[item.reading];
@@ -27,7 +28,7 @@ for (const item of entries.values()) {
     urls.add(item.url);
     const expectedSource = `https://raw.githubusercontent.com/hugolpz/audio-cmn/${catalog.source.commit}/64k/syllabs/cmn-${item.token}.mp3`;
     if (synthesis) {
-        if (item.upstream || JSON.stringify(item.synthesis) !== JSON.stringify(synthesis) || synthesis.text !== '田' || item.reading !== 'tián' || synthesis.voice !== 'zh-CN-XiaoxiaoNeural' || synthesis.rate !== '-10%' || synthesis.generator !== 'edge-tts 7.3.1') throw new Error('预生成读音与已核对制作范围不一致');
+        if (item.upstream || JSON.stringify(item.synthesis) !== JSON.stringify(synthesis) || !Object.hasOwn(synthesizedTexts,item.reading) || synthesis.text !== synthesizedTexts[item.reading] || synthesis.voice !== 'zh-CN-XiaoxiaoNeural' || synthesis.rate !== '-10%' || synthesis.generator !== 'edge-tts 7.3.1') throw new Error('预生成读音与已核对制作范围不一致');
     } else if (item.synthesis || item.upstream !== expectedSource) throw new Error('读音来源变化，需重新核验');
     if (!['pending-listening', 'reviewed'].includes(item.reviewStatus)) throw new Error('读音试听状态无效');
     const bytes = await fs.readFile('public' + item.url);
@@ -37,4 +38,5 @@ if (catalog.items.some(item => item.reviewStatus === 'reviewed') &&
     (!/^\d{4}-\d{2}-\d{2}$/.test(catalog.listeningReview?.date || '') || catalog.listeningReview?.confirmedBy !== 'user' || !catalog.listeningReview?.evidence)) throw new Error('缺少人工试听确认记录');
 const notice = await fs.readFile('public/audio/readings/v1/SOURCE.html', 'utf8');
 if (!notice.includes(catalog.source.commit) || !notice.includes(catalog.source.licenseUrl) || !notice.includes('王琛') || !notice.includes('田 tián') || !notice.includes('zh-CN-XiaoxiaoNeural')) throw new Error('缺少读音署名或许可');
+if ([...entries.values()].some(item => item.synthesis && !notice.includes(`${item.synthesis.text} ${item.reading}`))) throw new Error('缺少预生成读音来源说明');
 console.log(`${catalog.items.length} reading samples verified: local hashes, pinned provenance and attribution; pending listening: ${catalog.items.filter(item => item.reviewStatus !== 'reviewed').length}.`);
