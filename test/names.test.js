@@ -19,3 +19,9 @@ test('callers cannot mutate cached names', () => {
     names[1] = '点';
     assert.equal(v3.getStrokeNames('水')[1], '横撇');
 });
+
+test('游 resolves the reviewed 子 first stroke while retaining all twelve stroke positions', () => {
+    assert.deepEqual(v3.getStrokeNames('游'),['点','点','提','点','横','横折钩','撇','撇','横','横撇','竖钩','横']);
+    assert.equal(v3.getStrokeName([], '游', 9), '横撇');
+    assert.equal(v3.getStrokeName([], '安', 2), '暂缺');
+});
