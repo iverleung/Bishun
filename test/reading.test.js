@@ -92,10 +92,11 @@ test('listening confirmations remain bound to exact files while reported and new
     const { default: catalog } = await import('../resources/reading-audio-catalog.json', { with: { type:'json' } });
     const approved = catalog.items.filter(item => item.reviewStatus === 'reviewed');
     const pending = catalog.items.filter(item => item.reviewStatus === 'pending-listening');
-    assert.equal(approved.length,76);
+    assert.equal(approved.length,106);
     assert.deepEqual(pending.filter(item=>!item.batch.startsWith('grade1-')).map(item => item.reading),['tián','hé']);
     assert.equal(pending.filter(item=>item.batch==='grade1-1').length,0);
-    assert.equal(pending.filter(item=>item.batch==='grade1-2').length,30);
+    assert.equal(pending.filter(item=>item.batch==='grade1-2').length,0);
+    assert.equal(catalog.listeningReview.batchConfirmations['grade1-2'].date,'2026-11-10');
     assert.equal(catalog.listeningReview.batchConfirmations['grade1-1'].date,'2026-11-10');
     assert.equal(approved.filter(item => item.batch === 'initial').length,13);
     assert.equal(approved.filter(item => item.batch === 'basics').length,33);
@@ -166,7 +167,7 @@ test('second grade-one batch is bound to source writing entries and preserves n�
         assert.ok(characterReadings(sample.character).includes(sample.reading));
         const recording=readingRecording(sample.reading);
         assert.equal(recording.token,batch.items[sample.reading]);
-        assert.equal(recording.batch,'grade1-2');assert.equal(recording.reviewStatus,'pending-listening');
+        assert.equal(recording.batch,'grade1-2');assert.equal(recording.reviewStatus,'reviewed');
     }
     assert.equal(readingRecording('nǚ').token,'nv3');
     assert.equal(readingRecording('nu\u0308\u030c'),readingRecording('nǚ'));
