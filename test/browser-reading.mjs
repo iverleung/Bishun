@@ -137,28 +137,36 @@ try {
     assert.deepEqual([...played].sort(), Object.keys(batch.items).sort());
     for (const reading of played) assert.ok(browser.responses.some(item=>item.url.endsWith(readingRecording(reading).url) && item.status===200));
     checks.push('all 34 new syllables decode/start/end through the real UI; missing neutral de stays text');
-    const grade1 = readingPlan.batches.find(batch=>batch.id==='grade1-1');
-    const grade1Played = new Set();
-    for(const group of grade1.sampleQueries){
-        await query(group);
-        for(let index=0;index<Array.from(group).length;index++){
-            if(index){await click('#nextCharBtn');await wait("!document.querySelector('#playBtn').disabled");}
-            const readings=await evaluate("Array.from(document.querySelectorAll('.reading-button'),button=>button.dataset.reading)");
-            for(const reading of readings){
-                if(!Object.hasOwn(grade1.items,reading)||grade1Played.has(reading))continue;
-                const count=await starts();await click(button(reading));
-                await wait(`audioEvents.filter(type=>type==='start').length===${count+1}`);await wait(`!(${busy})`);
-                assert.equal(await evaluate("document.querySelector('#readingFeedback').textContent"),'');
-                assert.ok(browser.responses.some(item=>item.url.endsWith(readingRecording(reading).url)&&item.status===200));
-                grade1Played.add(reading);
+    for(const batchId of ['grade1-1','grade1-2']){
+        const grade1 = readingPlan.batches.find(batch=>batch.id===batchId);
+        const grade1Played = new Set();
+        for(const group of grade1.sampleQueries){
+            await query(group);
+            for(let index=0;index<Array.from(group).length;index++){
+                if(index){await click('#nextCharBtn');await wait("!document.querySelector('#playBtn').disabled");}
+                const readings=await evaluate("Array.from(document.querySelectorAll('.reading-button'),button=>button.dataset.reading)");
+                for(const reading of readings){
+                    if(!Object.hasOwn(grade1.items,reading)||grade1Played.has(reading))continue;
+                    const count=await starts();await click(button(reading));
+                    await wait(`audioEvents.filter(type=>type==='start').length===${count+1}`);await wait(`!(${busy})`);
+                    assert.equal(await evaluate("document.querySelector('#readingFeedback').textContent"),'');
+                    assert.ok(browser.responses.some(item=>item.url.endsWith(readingRecording(reading).url)&&item.status===200));
+                    grade1Played.add(reading);
+                }
             }
         }
+        assert.equal(grade1Played.size,30);
+        checks.push(`${batchId}: all thirty recordings decode/start/end through their sample characters`);
     }
-    assert.equal(grade1Played.size,30);
     await query('校');
     assert.equal(await evaluate("Array.from(document.querySelectorAll('.reading-button'),button=>button.dataset.reading).join(',')"),'xiào');
     assert.ok((await evaluate("document.querySelector('#characterReadings').textContent")).includes('jiào'));
-    checks.push('all thirty first-grade syllables decode/start/end through the UI, including separate mā/mǎ; out-of-batch jiào remains visible without a playback button');
+    await query('女');
+    assert.equal(await evaluate("document.querySelector('.reading-button').dataset.reading"),'nǚ');
+    await query('了');
+    assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),0);
+    assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"),'le / liǎo');
+    checks.push('nǚ remains distinct from nu; out-of-batch jiào and neutral le remain visible without substitute audio');
     assert.deepEqual(browser.exceptions,[]);
     console.log(JSON.stringify({browser:browser.version,checks,exceptions:browser.exceptions},null,2));
 } finally {await browser.close();}

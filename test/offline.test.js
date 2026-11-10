@@ -180,3 +180,16 @@ test('new first-grade 我 reading is saved once for repeated characters and veri
     const cached=await f.packs.match(new Request(origin+item.url));
     assert.equal(hash(Buffer.from(await cached.arrayBuffer())),item.sha256);
 });
+
+test('子子 saves new zǐ and approved zì as separate offline readings without duplicate downloads',async()=>{
+    const {readingRecording}=await import('../src/data/reading-audio.js');
+    const f=await fixture(['子']);const saved=await f.save('子子');
+    assert.equal(saved.query,'子子');
+    for(const reading of ['zǐ','zì']){
+        const item=readingRecording(reading);
+        assert.equal(f.calls.filter(path=>path===item.url).length,1);
+        assert.ok(saved.files.includes(item.url));
+        const cached=await f.packs.match(new Request(origin+item.url));
+        assert.equal(hash(Buffer.from(await cached.arrayBuffer())),item.sha256);
+    }
+});

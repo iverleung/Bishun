@@ -93,8 +93,9 @@ test('listening confirmations remain bound to exact files while reported and new
     const approved = catalog.items.filter(item => item.reviewStatus === 'reviewed');
     const pending = catalog.items.filter(item => item.reviewStatus === 'pending-listening');
     assert.equal(approved.length,76);
-    assert.deepEqual(pending.filter(item=>item.batch!=='grade1-1').map(item => item.reading),['tián','hé']);
+    assert.deepEqual(pending.filter(item=>!item.batch.startsWith('grade1-')).map(item => item.reading),['tián','hé']);
     assert.equal(pending.filter(item=>item.batch==='grade1-1').length,0);
+    assert.equal(pending.filter(item=>item.batch==='grade1-2').length,30);
     assert.equal(catalog.listeningReview.batchConfirmations['grade1-1'].date,'2026-11-10');
     assert.equal(approved.filter(item => item.batch === 'initial').length,13);
     assert.equal(approved.filter(item => item.batch === 'basics').length,33);
@@ -148,4 +149,30 @@ test('first grade reading batch adds thirty exact syllables while preserving oth
     assert.deepEqual(characterReadings('雨'),['yù','yǔ']);
     assert.equal(readingRecording('yǔ').token,'yu3');
     assert.equal(readingRecording('yù'),null);
+});
+
+test('second grade-one batch is bound to source writing entries and preserves nǚ and neutral-tone boundaries', async () => {
+    const {default:plan}=await import('../resources/reading-audio-plan.json',{with:{type:'json'}});
+    const {default:book}=await import('../resources/textbooks/pilot-v1/g1-first.json',{with:{type:'json'}});
+    const {characterReadings}=await import('../src/web/character-info.js');
+    const batch=plan.batches.find(item=>item.id==='grade1-2');
+    assert.equal(Object.keys(batch.items).length,30);assert.equal(batch.sampleEntries.length,30);
+    assert.equal(batch.sampleQueries.join(''),batch.sampleEntries.map(entry=>entry.character).join(''));
+    for(const sample of batch.sampleEntries){
+        assert.equal(sample.bookId,book.id);
+        const task=book.units.flatMap(unit=>unit.tasks).find(task=>task.id===sample.taskId);
+        const entry=task.write.find(entry=>entry.id===sample.rowId);
+        assert.equal(entry.character,sample.character);assert.equal(entry.reading,sample.reading);
+        assert.ok(characterReadings(sample.character).includes(sample.reading));
+        const recording=readingRecording(sample.reading);
+        assert.equal(recording.token,batch.items[sample.reading]);
+        assert.equal(recording.batch,'grade1-2');assert.equal(recording.reviewStatus,'pending-listening');
+    }
+    assert.equal(readingRecording('nǚ').token,'nv3');
+    assert.equal(readingRecording('nu\u0308\u030c'),readingRecording('nǚ'));
+    assert.equal(readingRecording('nǔ'),null);
+    assert.equal(readingRecording('ér').token,'er2');
+    assert.notEqual(readingRecording('ér').url,readingRecording('èr').url);
+    assert.equal(readingRecording('le'),null);
+    assert.deepEqual(characterReadings('了'),['le','liǎo']);
 });

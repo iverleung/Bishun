@@ -111,6 +111,30 @@ try {
     await wait("document.querySelector('#offlineList').children.length===1");
     checks.push('new batch deduplicates 一地一 to two syllables; both play after cold offline reload, neutral de stays unavailable and attribution is cached');
 
+    await click('#closeMenuBtn');await query('女子了');await offline();await click('#saveOfflineBtn');await saved();
+    const writing=(await metadata()).find(item=>item.query==='女子了');
+    assert.equal(writing.files.filter(file=>file.startsWith('/audio/readings/')&&file.endsWith('.mp3')).length,3);
+    const writingResponses=browser.responses.length;
+    const writingRequests=state.requests.length;
+    state.offline=true;await command('Page.reload');await wait("document.querySelector('#status')?.textContent === '请输入汉字'");
+    await offline();await click('#offlineList .offline-row:first-child .offline-open');
+    await wait("document.querySelector('#currentQuery').textContent==='女子了' && !document.querySelector('#playBtn').disabled");
+    for(const reading of ['nǚ','zǐ','zì']){
+        if(reading==='zǐ'){await click('#nextCharBtn');await wait("!document.querySelector('#playBtn').disabled");}
+        await click(`[data-reading="${reading}"]`);await wait("Boolean(document.querySelector('.reading-button.is-speaking'))");
+        await wait("!document.querySelector('.reading-button.is-speaking')");
+        assert.equal(await evaluate("document.querySelector('#readingFeedback').textContent"),'');
+    }
+    await click('#nextCharBtn');await wait("!document.querySelector('#playBtn').disabled");
+    assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"),'le / liǎo');
+    assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),0);
+    const writingCatalog=JSON.parse(await fs.readFile('resources/reading-audio-catalog.json','utf8'));
+    assert.ok(['nǚ','zǐ','zì'].every(reading=>browser.responses.slice(writingResponses).some(response=>response.url.endsWith(writingCatalog.items.find(item=>item.reading===reading).url)&&response.status===200)));
+    assert.equal(state.requests.slice(writingRequests).some(path=>path.endsWith('.mp3') || /\/characters\/.*\.json$/.test(path)),false);
+    state.offline=false;await offline();await click('#offlineList .offline-row:first-child .offline-row-actions button:last-child');
+    await wait("document.querySelector('#offlineList').children.length===1");
+    checks.push('女子了 saves and cold-offline plays nǚ plus distinct zǐ/zì; neutral le stays text without borrowing another tone');
+
     await click('#closeMenuBtn');await query('妈马妈');await offline();await click('#saveOfflineBtn');await saved();
     const family=(await metadata()).find(item=>item.query==='妈马妈');
     assert.equal(family.files.filter(file=>file.startsWith('/audio/readings/')&&file.endsWith('.mp3')).length,2);
