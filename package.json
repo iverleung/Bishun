@@ -19,6 +19,7 @@
     "resources:check": "node tools/prepare-character-data.mjs --check",
     "audio:catalog": "node tools/create-audio-catalog.mjs",
     "audio:generate": "python3 tools/generate-stroke-audio.py",
+    "audio:ark": "python3 tools/generate-ark-reading-audio.py",
     "audio:check": "node tools/check-audio.mjs",
     "audio:readings:check": "node tools/check-reading-audio.mjs",
     "textbooks:check": "node tools/check-textbooks.mjs",

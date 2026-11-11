@@ -61,6 +61,22 @@ npm run preview
 
 新版运行时只请求同源字形与录音，不依赖浏览器语音合成或公共数据 CDN。教材范围外仍存在缺字／名称缺口，未知名称显示“暂缺”并提示无法播报，继续后面可用笔画；原 30 条录音已由用户确认试听通过，新增“竖折折”待试听，见 [试听清单与生成命令](docs/笔画录音试听清单.md)。离线字单已按用户要求移除，停止注册离线 Service Worker；保留旧缓存和个人数据，不承诺断网刷新。读音来源入口不再显示，资源许可及署名文件仍随站点分发。开发验证、行为约定与待验收项见 [W3 播放重构记录](docs/Web播放重构.md)；原型阶段记录见 [W1 交付记录](docs/Web交互原型.md)。
 
+## Ark 拼音候选音频
+
+`tools/generate-ark-reading-audio.py` 使用 Ark `seed-tts-2.0` 的 HTTP 单向接口，从 [拼音音节合成列表](docs/拼音音节合成列表.json) 生成待试听的 MP3；默认只取前 10 项，输出到 `tts/ark/`，不修改网站现有录音。密钥从进程环境的 `ARK_API_KEY` 或项目 `.env` 读取，工具不会打印密钥。已有文件默认拒绝覆盖，`--overwrite` 需显式指定。
+
+```bash
+npm run audio:ark -- --dry-run                         # 只预览前 10 项，不读取密钥、不联网
+npm run audio:ark -- --start 11 --limit 10            # 生成清单第 11—20 项
+npm run audio:ark -- --reading à --text 'à=啊！'       # 指定读音及发音文本
+npm run audio:ark -- --limit 5 --normalize            # 同时归一化到 -16 LUFS，需要 ffmpeg
+npm run audio:ark -- --all --output-dir tts/ark-all    # 显式生成完整清单
+```
+
+可用 `--speaker`、`--speech-rate`、`--sample-rate` 和 `--timeout` 调整合成参数，完整选项见 `python3 tools/generate-ark-reading-audio.py --help`。未指定 `--text` 时使用对应 `characters` 的第一项，**不代表读音已验证**；多音字和轻声应先人工确定文本并用 dry-run 核对。`--normalize` 可写为目标值，例如 `--normalize -18`。生成成功仍需逐段核听声母、韵母、声调、轻声及尾音。
+
+CLI 单元测试不访问密钥或网络：`python3 -m unittest discover -s test -p 'test_ark_reading_audio.py'`。
+
 ## 测试与检查
 
 ```bash
