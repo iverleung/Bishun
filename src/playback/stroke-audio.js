@@ -68,13 +68,14 @@ export class StrokeAudio {
     }
 
     async prepare(name, { signal } = {}) {
-        if (!name) return null;
+        if (signal?.aborted) throw new DOMException('已取消', 'AbortError');
+        if (!name) throw Object.assign(new Error('当前笔画名称待核验，暂时无法播报'), { code: 'STROKE_NAME_MISSING' });
         if (this.unlocking) await cancellable(this.unlocking, signal);
         if (!this.context || this.context.state !== 'running') throw new Error('声音未启用，请点击语音开关后重试');
         const entries = await cancellable(this.manifest(), signal);
         if (signal?.aborted) throw new DOMException('已取消', 'AbortError');
         const item = entries.get(name);
-        if (!item) return null;
+        if (!item) throw Object.assign(new Error(`笔画“${name}”的录音暂缺`), { code: 'STROKE_RECORDING_MISSING' });
         return this.prepareRecording(item, { signal });
     }
 

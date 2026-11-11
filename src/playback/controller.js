@@ -203,7 +203,10 @@ export class PlaybackController {
                     try { buffer = await this.audio.prepare(this.names[index], { signal: this.audioPreparation.signal }); }
                     catch (error) {
                         if (signal.aborted) return;
-                        if (this.speechEnabled && error.name !== 'AbortError') { this.muted = true; this.audioWarning = error.message; }
+                        if (this.speechEnabled && error.name !== 'AbortError') {
+                            if (!['STROKE_NAME_MISSING','STROKE_RECORDING_MISSING'].includes(error.code)) this.muted = true;
+                            this.audioWarning = `第 ${index + 1} 笔：${error.message}`;
+                        }
                     }
                 }
                 if (signal.aborted) return;

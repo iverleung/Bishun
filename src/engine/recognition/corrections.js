@@ -1,5 +1,6 @@
 // Reviewed against GF 0023-2020 glyph sequences and GF 2001-2001 stroke tables.
 // Keys are zero-based stroke indexes. Evidence is recorded in docs/Web资源与内容核验.md.
+import textbookCorrections from '../../../resources/textbooks/textbook-stroke-corrections.json' with { type: 'json' };
 import grade1Review from '../../../resources/textbooks/grade1-stroke-review.json' with { type: 'json' };
 
 export const corrections = {
@@ -18,5 +19,6 @@ export const corrections = {
     '婆': { 3: '横钩', 6: '横撇' },
     '饼': { 1: '横钩' },
     ...Object.fromEntries(grade1Review.characters.map(entry => [entry.character,
-        Object.fromEntries(entry.strokes.map(stroke => [stroke.index, stroke.name]))]))
+        Object.fromEntries(entry.strokes.map(stroke => [stroke.index, stroke.name]))])),
+    ...textbookCorrections.characters
 };

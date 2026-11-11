@@ -14,8 +14,8 @@ test('missing characters and out-of-range indexes do not become a dot', () => {
 });
 
 test('unreviewed ambiguous alternatives remain unknown', () => {
-    assert.equal(v3.getStrokeNames('宇')[2], null);
-    assert.equal(v3.getStrokeName([], '宇', 2), '暂缺');
+    assert.equal(v3.getStrokeNames('戋')[2], null);
+    assert.equal(v3.getStrokeName([], '戋', 2), '暂缺');
 });
 
 test('callers cannot mutate cached names', () => {
@@ -27,7 +27,7 @@ test('callers cannot mutate cached names', () => {
 test('游 resolves the reviewed 子 first stroke while retaining all twelve stroke positions', () => {
     assert.deepEqual(v3.getStrokeNames('游'),['点','点','提','点','横','横折钩','撇','撇','横','横撇','竖钩','横']);
     assert.equal(v3.getStrokeName([], '游', 9), '横撇');
-    assert.equal(v3.getStrokeName([], '宇', 2), '暂缺');
+    assert.equal(v3.getStrokeName([], '戋', 2), '暂缺');
 });
 
 test('grade-one reviewed corrections remain bound to original alternatives and exact textbook snapshots', async () => {
@@ -73,9 +73,9 @@ test('every character in the two integrated books has matching stroke counts and
     assert.deepEqual(v3.getStrokeNames('学').slice(4,6),['横钩','横撇']);
     assert.equal(v3.getStrokeNames('感')[6],'斜钩');
     assert.equal(v3.getStrokeNames('感')[10],'卧钩');
-    assert.equal(v3.getStrokeNames('宇')[2],null);
+    assert.equal(v3.getStrokeNames('戋')[2],null);
     assert.equal(audio.items.filter(item=>item.reviewStatus==='reviewed').length,30);
-    assert.deepEqual(audio.items.filter(item=>item.reviewStatus==='pending-listening'),[]);
+    assert.deepEqual(audio.items.filter(item=>item.reviewStatus==='pending-listening').map(item=>item.text),['竖折折']);
     for(const name of ['竖折撇','横折弯','横撇弯钩','横折折折钩']) {
         const item=audio.items.find(item=>item.text===name);
         assert.equal(item.reviewedAt,'2026-11-10');
@@ -95,7 +95,7 @@ test('reported 婆 and 饼 resolve all exact stroke positions with existing revi
     assert.equal(cnchar.stroke('婆','order','name')[0][3],'横撇|横钩');
     assert.equal(cnchar.stroke('婆','order','name')[0][6],'横撇|横钩');
     assert.equal(cnchar.stroke('饼','order','name')[0][1],'横撇|横钩');
-    assert.equal(v3.getStrokeNames('宇')[2],null);
+    assert.equal(v3.getStrokeNames('戋')[2],null);
 });
 
 
@@ -106,4 +106,39 @@ test('textbook stroke availability snapshot matches current corrections and audi
     assert.deepEqual(actual,expected);assert.equal(actual.totals.characters,2983);
     assert.equal(actual.totals.missingAudioCharacters,0);assert.equal(actual.totals.countMismatches,0);
     assert.ok(actual.unresolved.every(item=>!['婆','饼'].includes(item.character)));
+});
+
+
+test('all textbook stroke reviews bind source alternatives, glyph hashes and explicit corrected names',async()=>{
+    const review=JSON.parse(await fs.readFile('resources/textbooks/textbook-stroke-review.json','utf8'));
+    assert.equal(review.characters.length,701);assert.equal(review.characters.reduce((n,e)=>n+e.strokes.length,0),819);
+    const textbookCharacters=new Set();
+    for(const book of review.books){
+        const bytes=await fs.readFile(`resources/textbooks/pilot-v1/${book.id}.json`);
+        assert.equal(createHash('sha256').update(bytes).digest('hex'),book.sha256);
+        for(const task of JSON.parse(bytes).units.flatMap(u=>u.tasks)){
+            for(const item of [...task.read,...task.write])textbookCharacters.add(item.character);
+            for(const word of task.words||[])for(const c of word.text)textbookCharacters.add(c);
+        }
+    }
+    const available=new Set(JSON.parse(await fs.readFile('resources/stroke-audio-catalog.json','utf8')).items.map(item=>item.text));
+    for(const entry of review.characters){
+        assert.ok(textbookCharacters.has(entry.character));assert.equal(entry.ucs,entry.character.codePointAt(0).toString(16).toUpperCase().padStart(5,'0'));
+        const bytes=await fs.readFile(`public/characters/2.0.1/${entry.character}.json`);
+        assert.equal(createHash('sha256').update(bytes).digest('hex'),entry.glyphSha256);
+        assert.equal(JSON.parse(bytes).strokes.length,entry.strokeCount);assert.equal(entry.standardCodes.length,entry.strokeCount);
+        assert.ok(entry.pdfPage>0);assert.equal(entry.sourceClip.length,4);
+        assert.equal(new Set(entry.strokes.map(s=>s.index)).size,entry.strokes.length);
+        const original=cnchar.stroke(entry.character,'order','name')[0];
+        for(const stroke of entry.strokes){
+            assert.equal(original[stroke.index],stroke.from);assert.equal(v3.getStrokeNames(entry.character)[stroke.index],stroke.name);
+            assert.ok(available.has(stroke.name));assert.equal(entry.standardCodes[stroke.index],'5');
+            if(!stroke.from.split('|').includes(stroke.name)){
+                assert.equal(entry.character,'互');assert.equal(stroke.index,2);assert.equal(stroke.name,'横折');assert.ok(stroke.reason);
+            }
+        }
+    }
+    assert.equal(textbookCharacters.size,2983);
+    for(const c of textbookCharacters){assert.ok(v3.getStrokeNames(c).every(name=>name&&available.has(name)),c);}
+    assert.equal(v3.getStrokeNames('戋')[2],null);
 });

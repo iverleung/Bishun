@@ -292,6 +292,15 @@
       "reviewMethod": "user-confirmed-listening-reel"
     },
     {
+      "id": "stroke-791ea5d94119",
+      "text": "竖折折",
+      "url": "/audio/strokes/v1/stroke-791ea5d94119.mp3",
+      "durationMs": 1043,
+      "bytes": 6860,
+      "sha256": "42e7e05720ddf24189b767d19f414849d5cd1c736cec46f5f8f1997f366e06d3",
+      "reviewStatus": "pending-listening"
+    },
+    {
       "id": "stroke-141e431009ad",
       "text": "竖折折钩",
       "url": "/audio/strokes/v1/stroke-141e431009ad.mp3",

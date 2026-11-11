@@ -28,3 +28,8 @@ for(const c of [...characters].sort()){
     if(!missing.length&&!absent.length)complete++;
 }
 process.stdout.write(JSON.stringify({schemaVersion:1,scope:'12 supplied textbooks including word characters; name/resource completeness, not full teaching review',audioCatalogSha256:createHash('sha256').update(audioBytes).digest('hex'),books:index.books.map(({id,sha256})=>({id,sha256})),totals:{characters:characters.size,complete,unresolvedCharacters:unresolved.length,unresolvedPositions,missingAudioCharacters:missingAudio.length,countMismatches:countMismatches.length},unresolved,missingAudio,countMismatches},null,2)+'\n');
+
+if (process.argv.includes('--strict') && (unresolved.length || missingAudio.length || countMismatches.length)) {
+    console.error('教材笔画名称或录音不完整，请先核验修复。');
+    process.exitCode=1;
+}

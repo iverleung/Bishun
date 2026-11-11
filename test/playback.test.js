@@ -194,7 +194,7 @@ test('audio failure degrades to silence without blocking animation', async () =>
     assert.equal(player.status, 'complete');
     assert.equal(calls.length, 4);
     assert.equal(attempts, 1);
-    assert.equal(player.audioWarning, 'bad audio');
+    assert.equal(player.audioWarning, '第 1 笔：bad audio');
 });
 
 test('completion waits for both the animation and the matching recording', async () => {
@@ -243,4 +243,15 @@ test('replay after continuous completion restarts the group; explicit current re
     await player.play();calls.length=0;await player.play();
     assert.deepEqual(calls.map(call=>call.char),[...Array(4).fill('木'),...Array(4).fill('水')]);
     calls.length=0;await player.play({restart:true});assert.deepEqual(calls.map(call=>call.char),Array(4).fill('水'));
+});
+
+
+test('missing stroke names or recordings warn without silencing later available strokes',async()=>{
+    for(const code of ['STROKE_NAME_MISSING','STROKE_RECORDING_MISSING']){
+        let prepared=0,played=0;
+        const {player}=setup({audio:{cancel(){},async prepare(){prepared++;if(prepared===2)throw Object.assign(new Error('当前笔画资源待核验'),{code});return {};},async start(){played++;}}});
+        await player.ready;player.speechEnabled=true;await player.play();
+        assert.equal(prepared,4);assert.equal(played,3);assert.equal(player.muted,false);assert.equal(player.status,'complete');
+        assert.match(player.audioWarning,/第 2 笔/);
+    }
 });

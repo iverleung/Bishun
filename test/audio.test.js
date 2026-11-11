@@ -24,8 +24,10 @@ test('audio requests use local assets and decoded buffers are reused', async () 
     assert.equal(one, two);
     assert.equal(calls.length, 2);
     assert.ok(calls.every(url => url.startsWith('/audio/strokes/v1/')));
-    assert.equal(await audio.prepare(null), null);
-    assert.equal(await audio.prepare('未收录'), null);
+    await assert.rejects(audio.prepare(null), {code:'STROKE_NAME_MISSING'});
+    const cancelled = new AbortController(); cancelled.abort();
+    await assert.rejects(audio.prepare(null,{signal:cancelled.signal}),{name:'AbortError'});
+    await assert.rejects(audio.prepare('未收录'), {code:'STROKE_RECORDING_MISSING'});
 });
 
 test('preparation waits for user-triggered asynchronous audio resume and remains cancellable', async () => {
