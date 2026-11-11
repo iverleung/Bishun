@@ -2214,6 +2214,32 @@
       "originalTitle": "jiao4 (cmn)",
       "reviewStatus": "pending-listening",
       "batch": "grade1-4"
+    },
+    {
+      "reading": "pó",
+      "token": "po2",
+      "id": "reading-48603dc6c531",
+      "url": "/audio/readings/v1/reading-48603dc6c531.mp3",
+      "durationMs": 1128,
+      "bytes": 9948,
+      "sha256": "332104b8dca184818c85ab57a2848175c33b296a050bba7ad6ec52571941cba5",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-po2.mp3",
+      "originalTitle": "po2 (cmn)",
+      "reviewStatus": "pending-listening",
+      "batch": "reported-missing-1"
+    },
+    {
+      "reading": "bǐng",
+      "token": "bing3",
+      "id": "reading-1fb3ed86f6a8",
+      "url": "/audio/readings/v1/reading-1fb3ed86f6a8.mp3",
+      "durationMs": 984,
+      "bytes": 8800,
+      "sha256": "9a4ca89b5176e0b38eea24d6a71c1b4c1f3ef03c3a9d800948a914b46be35328",
+      "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-bing3.mp3",
+      "originalTitle": "bing3 (cmn)",
+      "reviewStatus": "pending-listening",
+      "batch": "reported-missing-1"
     }
   ],
   "listeningReview": {

@@ -22,7 +22,8 @@
     "audio:check": "node tools/check-audio.mjs",
     "audio:readings:check": "node tools/check-reading-audio.mjs",
     "textbooks:check": "node tools/check-textbooks.mjs",
-    "textbooks:prepare": "python3 tools/prepare-textbook-pilot.py"
+    "textbooks:prepare": "python3 tools/prepare-textbook-pilot.py",
+    "audio:readings:coverage": "node tools/check-reading-coverage.mjs"
   },
   "keywords": [],
   "author": "",

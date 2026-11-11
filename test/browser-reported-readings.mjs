@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import {openBrowser} from './helpers/cdp.mjs';
+import {readingRecording} from '../src/data/reading-audio.js';
+const [cdp='http://127.0.0.1:9224',url='http://127.0.0.1:5189/']=process.argv.slice(2);
+const browser=await openBrowser(cdp,url);
+try{
+    const {command,evaluate,click,fill,wait}=browser;
+    await command('Page.addScriptToEvaluateOnNewDocument',{source:`window.readingStarts=0;const create=AudioContext.prototype.createBufferSource;AudioContext.prototype.createBufferSource=function(...args){const source=create.apply(this,args);const start=source.start;source.start=function(...args){readingStarts++;return start.apply(this,args);};return source;};`});
+    await command('Network.setCacheDisabled',{cacheDisabled:true});
+    await command('Page.reload');await wait("document.querySelector('#status')?.textContent==='请输入汉字'");
+    await fill('#query','婆饼');await click('#searchForm [type=submit]');await wait("!document.querySelector('#playBtn').disabled");
+    assert.equal(await evaluate("document.querySelector('.reading-button').dataset.reading"),'pó');
+    await click('[data-reading="pó"]');await wait('readingStarts===1');
+    await click('#nextCharBtn');await wait("!document.querySelector('#playBtn').disabled && document.querySelector('[data-reading=\"bǐng\"]')");
+    assert.equal(await evaluate("document.querySelector('.reading-button.is-speaking')"),null);
+    await click('[data-reading="bǐng"]');await wait('readingStarts===2');
+    await wait("!document.querySelector('.reading-button.is-speaking')");
+    assert.equal(await evaluate("document.querySelector('#readingFeedback').textContent"),'');
+    for(const reading of ['pó','bǐng'])assert.ok(browser.responses.some(response=>response.url.endsWith(readingRecording(reading).url)&&response.status===200));
+    await command('Page.reload');await wait("document.querySelector('#status')?.textContent==='请输入汉字'");
+    await command('Network.setBlockedURLs',{urls:['*'+readingRecording('pó').url]});
+    await fill('#query','婆');await click('#searchForm [type=submit]');await wait("!document.querySelector('#playBtn').disabled");
+    await click('[data-reading="pó"]');await wait("document.querySelector('#readingFeedback').textContent.includes('请重试')");
+    assert.equal(await evaluate("document.querySelector('.reading-button.is-speaking')"),null);
+    await command('Network.setBlockedURLs',{urls:[]});await click('[data-reading="pó"]');
+    await wait('readingStarts===1');await wait("!document.querySelector('.reading-button.is-speaking')");
+    assert.equal(await evaluate("document.querySelector('#readingFeedback').textContent"),'');
+    assert.deepEqual(browser.exceptions,[]);
+    console.log('PASS: 婆 pó and 饼 bǐng decode/start/end; switching cancels old reading; resource failure recovers on retry; no runtime exceptions');
+}finally{await browser.close();}

@@ -93,7 +93,7 @@ test('listening confirmations remain bound to exact files while reported and new
     const approved = catalog.items.filter(item => item.reviewStatus === 'reviewed');
     const pending = catalog.items.filter(item => item.reviewStatus === 'pending-listening');
     assert.equal(approved.length,136);
-    assert.deepEqual(pending.filter(item=>!item.batch.startsWith('grade1-')).map(item => item.reading),['tián','hé']);
+    assert.deepEqual(pending.filter(item=>!item.batch.startsWith('grade1-')).map(item => item.reading),['tián','hé','pó','bǐng']);
     assert.equal(pending.filter(item=>item.batch==='grade1-1').length,0);
     assert.equal(pending.filter(item=>item.batch==='grade1-2').length,0);
     assert.equal(pending.filter(item=>item.batch==='grade1-3').length,0);
@@ -247,4 +247,24 @@ test('fourth grade-one batch binds writing sources and reuses jiào across 叫 a
     assert.notEqual(readingRecording('gòng').url,readingRecording('gōng').url);
     assert.equal(readingRecording('zhǔ').token,'zhu3');assert.equal(readingRecording('zhù').token,'zhu4');
     for(const reading of ['le','me','de','men'])assert.equal(readingRecording(reading),null);
+});
+
+
+test('reported 婆 and 饼 have distinct exact-tone assets pending listening',async()=>{
+    const plan=JSON.parse(await (await import('node:fs/promises')).readFile('resources/reading-audio-plan.json','utf8'));
+    assert.deepEqual(plan.batches.find(batch=>batch.id==='reported-missing-1').items,{'pó':'po2','bǐng':'bing3'});
+    for(const [reading,token] of [['pó','po2'],['bǐng','bing3']]){
+        const item=readingRecording(reading);assert.equal(item.token,token);
+        assert.equal(item.batch,'reported-missing-1');assert.equal(item.reviewStatus,'pending-listening');
+    }
+    assert.notEqual(readingRecording('pó').url,readingRecording('bǐng').url);
+});
+test('textbook reading coverage snapshot is reproducible and bound to current resources',async()=>{
+    const fs=await import('node:fs/promises');
+    const {execFileSync}=await import('node:child_process');
+    const snapshot=JSON.parse(await fs.readFile('docs/读音资源覆盖检查-2026-11-11.json','utf8'));
+    const actual=JSON.parse(execFileSync(process.execPath,['tools/check-reading-coverage.mjs'],{encoding:'utf8'}));
+    assert.deepEqual(actual,snapshot);assert.equal(actual.books.length,12);assert.equal(actual.totals.characters,2983);
+    assert.ok(actual.totals.noAudioCount>0);assert.ok(actual.totals.missingReadings>0);
+    assert.ok(actual.missingReadings.every(item=>!['pó','bǐng'].includes(item.reading)));
 });

@@ -922,6 +922,16 @@
           "reason": "固定版本没有对应独立轻声录音，不借其他声调替代。"
         }
       ]
+    },
+    {
+      "id": "reported-missing-1",
+      "sampleQueries": [
+        "婆饼"
+      ],
+      "items": {
+        "pó": "po2",
+        "bǐng": "bing3"
+      }
     }
   ],
   "synthesized": {
