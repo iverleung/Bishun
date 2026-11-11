@@ -278,3 +278,7 @@ body[data-phase="lesson"]:not(.focus-mode):not(.practice-mode) { --canvas-size: 
 
 .textbook-bookline { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
 .textbook-bookline select { min-width: 0; max-width: 100%; min-height: 44px; padding: 8px 12px; color: inherit; font: inherit; background: #fffefa; border: 1px solid var(--border); border-radius: 8px; }
+
+.textbook-characters.is-words { grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); }
+.textbook-word strong { font-size: 24px; line-height: 1.4; overflow-wrap: anywhere; }
+.textbook-footer[hidden] { display: none; }

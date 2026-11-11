@@ -36,7 +36,7 @@ def prepare_book(book_title, book_id):
     numbers = {value: index + 1 for index, value in enumerate('一二三四五六七八')}
     units = [{'id': f'unit-{i}', 'title': f'第{value}单元', 'tasks': []} for value, i in numbers.items()]
     tasks = {}
-    for table, bucket in [('识字表', 'read'), ('写字表', 'write')]:
+    for table, bucket in [('识字表', 'read'), ('写字表', 'write'), ('词语表', 'words')]:
         original = [(number, row) for number, row in enumerate(rows, 1) if row[0] == table]
         source = pilot['tables'].get(table, {}).get('source', [])
         if len(original) != len(source):
@@ -76,7 +76,10 @@ def prepare_book(book_title, book_id):
                 if kind == 'garden' and item['sourceGarden'].strip() != title:
                     tasks[task_id]['sourceLabel'] = item['sourceGarden'].strip()
                 units[unit_number - 1]['tasks'].append(tasks[task_id])
-            tasks[task_id][bucket].append({'id':f'row-{number}', 'character':row[5], 'reading':row[6], 'polyphonic':row[7] == '是', 'sourceRow':number, 'pdfPage':row[8]})
+            if bucket == 'words':
+                tasks[task_id].setdefault('words', []).append({'id':f'row-{number}', 'text':row[5], 'sourceRow':number, 'pdfPage':row[8]})
+            else:
+                tasks[task_id][bucket].append({'id':f'row-{number}', 'character':row[5], 'reading':row[6], 'polyphonic':row[7] == '是', 'sourceRow':number, 'pdfPage':row[8]})
     units = [unit for unit in units if unit['tasks']]
     for unit in units:
         unit['tasks'].sort(key=lambda task:task.pop('order'))

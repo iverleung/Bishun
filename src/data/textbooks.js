@@ -21,7 +21,12 @@ export function validateTextbook(book, expectedId) {
                     records.add(entry.id);
                 }
             }
-            if (!task.read.length && !task.write.length) throw new Error('本课没有字项');
+            if (task.words !== undefined && (!Array.isArray(task.words) || task.words.length > 100)) throw new Error('本课词语表无效');
+            for (const entry of task.words || []) {
+                if (typeof entry.text !== 'string' || !/^\p{Script=Han}{1,20}$/u.test(entry.text) || !Number.isInteger(entry.sourceRow) || entry.sourceRow < 2 || entry.id !== `row-${entry.sourceRow}` || records.has(entry.id) || !Number.isInteger(entry.pdfPage) || entry.pdfPage < 1) throw new Error('教材词项无效');
+                records.add(entry.id);
+            }
+            if (!task.read.length && !task.write.length && !task.words?.length) throw new Error('本课没有字项');
         }
     }
     return book;
@@ -30,7 +35,12 @@ export function validateTextbook(book, expectedId) {
 export function textbookSelection(book, taskId, requestedMode = 'write', index = 0) {
     const unit = book.units.find(unit => unit.tasks.some(task => task.id === taskId));
     const task = unit?.tasks.find(task => task.id === taskId);
-    if (!task || !['read','write'].includes(requestedMode)) throw new Error('请选择课文');
+    if (!task || !['read','write','words'].includes(requestedMode)) throw new Error('请选择课文');
+    if (requestedMode === 'words') {
+        const entry = task.words?.[index];
+        if (!Number.isInteger(index) || index < 0 || !entry) throw new Error('请选择本课中的词语');
+        return { bookId:book.id, unitId:unit.id, taskId, mode:'words', query:entry.text, index:0, name:`${book.title} · ${task.title} · 词语 · ${entry.text}` };
+    }
     const mode = task[requestedMode].length ? requestedMode : requestedMode === 'write' ? 'read' : 'write';
     const entries = task[mode];
     if (!Number.isInteger(index) || index < 0 || index >= entries.length) throw new Error('请选择本课中的字');

@@ -15,6 +15,7 @@ const expectedBooks = {
     'g6-first':{title:'六年级上册',tasks:19,gardens:0,read:0,write:180,applied:0},
     'g6-second':{title:'六年级下册',tasks:12,gardens:0,read:0,write:120,applied:182,units:[1,2,3,4,5]}
 };
+const wordCounts = [0,0,236,240,250,271,220,213,213,142,215,162];
 if (textbookBooks.length !== 12 || new Set(textbookBooks.map(book=>book.id)).size !== 12) throw new Error('教材索引不完整');
 const correctionsBytes = await fs.readFile('resources/textbooks/proofread-corrections.json');
 const correctionHash = createHash('sha256').update(correctionsBytes).digest('hex');
@@ -33,6 +34,7 @@ for (const entry of textbookBooks) {
     if (JSON.stringify(book) !== JSON.stringify(resource)) throw new Error('教材公开资源与源数据不一致');
     if (book.source.correctionsSha256 !== correctionHash) throw new Error('教材校正版本已变更，请重新准备');
     const tasks = book.units.flatMap(unit => unit.tasks);
+    if (tasks.reduce((sum,task)=>sum+(task.words?.length || 0),0) !== wordCounts[textbookBooks.indexOf(entry)]) throw new Error('教材词语数量不一致');
     if (tasks.length !== expected.tasks || tasks.filter(task => task.kind === 'garden').length !== expected.gardens || tasks.reduce((sum,task)=>sum+task.read.length,0)!==expected.read || tasks.reduce((sum,task)=>sum+task.write.length,0)!==expected.write) throw new Error('教材内容不完整');
     if (JSON.stringify(book.units.map(unit=>Number(unit.id.slice(5)))) !== JSON.stringify(expected.units || [1,2,3,4,5,6,7,8])) throw new Error('教材单元编号不一致');
     if (book.source.workbookSha256 !== workbookHash || book.source.pdfSha256 !== sourceHashes[`refs/${expected.title}.pdf`]) throw new Error('教材原件版本不一致');

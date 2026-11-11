@@ -79,7 +79,7 @@ class TextbookProofreadTests(unittest.TestCase):
         self.assertTrue(all(patch['evidence'].get('pdfPage') for patch in correction['patches']))
 
 
-    def test_runtime_books_preserve_all_checked_character_rows_and_course_context(self):
+    def test_runtime_books_preserve_all_checked_rows_and_course_context(self):
         correction=json.loads((ROOT/'resources/textbooks/proofread-corrections.json').read_text())
         index=json.loads((ROOT/'resources/textbooks/pilot-v1/index.json').read_text())
         self.assertEqual(len(index['books']),12)
@@ -96,7 +96,7 @@ class TextbookProofreadTests(unittest.TestCase):
                         self.assertEqual(rows[number-1][column],patch['before'])
                         rows[number-1][column]=patch['after']
                 expected={}
-                for table in ['识字表','写字表']:
+                for table in ['识字表','写字表','词语表']:
                     originals=[(i,row) for i,row in enumerate(rows,1) if row[0]==table]
                     source=self.books[book['title']]['tables'].get(table,{}).get('source',[])
                     self.assertEqual(len(originals),len(source))
@@ -104,13 +104,16 @@ class TextbookProofreadTests(unittest.TestCase):
                 seen=set()
                 for unit in book['units']:
                     for task in unit['tasks']:
-                        for mode in ['read','write']:
-                            self.assertEqual([item['sourceRow'] for item in task[mode]],sorted(item['sourceRow'] for item in task[mode]))
-                            for item in task[mode]:
+                        for mode in ['read','write','words']:
+                            self.assertEqual([item['sourceRow'] for item in task.get(mode,[])],sorted(item['sourceRow'] for item in task.get(mode,[])))
+                            for item in task.get(mode,[]):
                                 self.assertNotIn(item['id'],seen);seen.add(item['id'])
                                 row,src=expected[item['id']]
-                                self.assertEqual(row[0],'识字表' if mode=='read' else '写字表')
-                                self.assertEqual((item['character'],item['reading'],item['polyphonic'],item['pdfPage']),(row[5],row[6],row[7]=='是',row[8]))
+                                self.assertEqual(row[0],{'read':'识字表','write':'写字表','words':'词语表'}[mode])
+                                if mode=='words':
+                                    self.assertEqual((item['text'],item['pdfPage']),(row[5],row[8]))
+                                else:
+                                    self.assertEqual((item['character'],item['reading'],item['polyphonic'],item['pdfPage']),(row[5],row[6],row[7]=='是',row[8]))
                                 self.assertEqual(task['kind'],'garden' if src['sourceType']=='语文园地' else 'lesson')
                                 if task['kind']=='lesson':
                                     course=self.books[book['title']]['toc'][str(src['sourceLesson'])]
@@ -120,7 +123,7 @@ class TextbookProofreadTests(unittest.TestCase):
                 self.assertEqual(seen,set(expected));total+=len(seen)
         finally:
             workbook.close()
-        self.assertEqual(total,5657)
+        self.assertEqual(total,7819)
 
     def test_runtime_numberless_gardens_merge_read_write_without_reusing_last_lesson_id(self):
         book=json.loads((ROOT/'resources/textbooks/pilot-v1/g3-first.json').read_text())

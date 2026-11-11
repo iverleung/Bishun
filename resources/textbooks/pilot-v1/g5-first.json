@@ -111,6 +111,56 @@
               "sourceRow": 219,
               "pdfPage": 123
             }
+          ],
+          "words": [
+            {
+              "id": "row-431",
+              "text": "桂花",
+              "sourceRow": 431,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-432",
+              "text": "故乡",
+              "sourceRow": 432,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-433",
+              "text": "时节",
+              "sourceRow": 433,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-434",
+              "text": "欣赏",
+              "sourceRow": 434,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-435",
+              "text": "糕饼",
+              "sourceRow": 435,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-436",
+              "text": "成熟",
+              "sourceRow": 436,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-437",
+              "text": "完整",
+              "sourceRow": 437,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-438",
+              "text": "茶叶",
+              "sourceRow": 438,
+              "pdfPage": 125
+            }
           ]
         },
         {
@@ -224,6 +274,56 @@
               "polyphonic": false,
               "sourceRow": 228,
               "pdfPage": 123
+            }
+          ],
+          "words": [
+            {
+              "id": "row-439",
+              "text": "播种",
+              "sourceRow": 439,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-440",
+              "text": "收获",
+              "sourceRow": 440,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-441",
+              "text": "食品",
+              "sourceRow": 441,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-442",
+              "text": "吩咐",
+              "sourceRow": 442,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-443",
+              "text": "价钱",
+              "sourceRow": 443,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-444",
+              "text": "可贵",
+              "sourceRow": 444,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-445",
+              "text": "果实",
+              "sourceRow": 445,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-446",
+              "text": "体面",
+              "sourceRow": 446,
+              "pdfPage": 125
             }
           ]
         },
@@ -498,6 +598,116 @@
               "sourceRow": 243,
               "pdfPage": 123
             }
+          ],
+          "words": [
+            {
+              "id": "row-447",
+              "text": "地道",
+              "sourceRow": 447,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-448",
+              "text": "平原",
+              "sourceRow": 448,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-449",
+              "text": "扫荡",
+              "sourceRow": 449,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-450",
+              "text": "封锁",
+              "sourceRow": 450,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-451",
+              "text": "武装",
+              "sourceRow": 451,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-452",
+              "text": "粉碎",
+              "sourceRow": 452,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-453",
+              "text": "简直",
+              "sourceRow": 453,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-454",
+              "text": "广阔",
+              "sourceRow": 454,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-455",
+              "text": "不计其数",
+              "sourceRow": 455,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-456",
+              "text": "游击",
+              "sourceRow": 456,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-457",
+              "text": "战争",
+              "sourceRow": 457,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-458",
+              "text": "妨碍",
+              "sourceRow": 458,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-459",
+              "text": "距离",
+              "sourceRow": 459,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-460",
+              "text": "武器",
+              "sourceRow": 460,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-461",
+              "text": "拐弯",
+              "sourceRow": 461,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-462",
+              "text": "想方设法",
+              "sourceRow": 462,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-463",
+              "text": "转移",
+              "sourceRow": 463,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-464",
+              "text": "无穷无尽",
+              "sourceRow": 464,
+              "pdfPage": 125
+            }
           ]
         },
         {
@@ -732,6 +942,110 @@
               "sourceRow": 257,
               "pdfPage": 123
             }
+          ],
+          "words": [
+            {
+              "id": "row-465",
+              "text": "无价之宝",
+              "sourceRow": 465,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-466",
+              "text": "召集",
+              "sourceRow": 466,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-467",
+              "text": "大臣",
+              "sourceRow": 467,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-468",
+              "text": "商议",
+              "sourceRow": 468,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-469",
+              "text": "理亏",
+              "sourceRow": 469,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-470",
+              "text": "交付",
+              "sourceRow": 470,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-471",
+              "text": "允诺",
+              "sourceRow": 471,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-472",
+              "text": "隆重",
+              "sourceRow": 472,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-473",
+              "text": "典礼",
+              "sourceRow": 473,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-474",
+              "text": "约定",
+              "sourceRow": 474,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-475",
+              "text": "思量",
+              "sourceRow": 475,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-476",
+              "text": "承诺",
+              "sourceRow": 476,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-477",
+              "text": "国君",
+              "sourceRow": 477,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-478",
+              "text": "推辞",
+              "sourceRow": 478,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-479",
+              "text": "记录",
+              "sourceRow": 479,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-480",
+              "text": "拒绝",
+              "sourceRow": 480,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-481",
+              "text": "同心协力",
+              "sourceRow": 481,
+              "pdfPage": 125
+            }
           ]
         },
         {
@@ -829,6 +1143,68 @@
               "polyphonic": false,
               "sourceRow": 263,
               "pdfPage": 123
+            }
+          ],
+          "words": [
+            {
+              "id": "row-482",
+              "text": "速度",
+              "sourceRow": 482,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-483",
+              "text": "赛跑",
+              "sourceRow": 483,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-484",
+              "text": "冠军",
+              "sourceRow": 484,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-485",
+              "text": "陆地",
+              "sourceRow": 485,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-486",
+              "text": "俯冲",
+              "sourceRow": 486,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-487",
+              "text": "超过",
+              "sourceRow": 487,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-488",
+              "text": "高度",
+              "sourceRow": 488,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-489",
+              "text": "火箭",
+              "sourceRow": 489,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-490",
+              "text": "摆脱",
+              "sourceRow": 490,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-491",
+              "text": "赤道",
+              "sourceRow": 491,
+              "pdfPage": 125
             }
           ]
         },
@@ -1072,6 +1448,140 @@
               "sourceRow": 277,
               "pdfPage": 123
             }
+          ],
+          "words": [
+            {
+              "id": "row-492",
+              "text": "照例",
+              "sourceRow": 492,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-493",
+              "text": "航线",
+              "sourceRow": 493,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-494",
+              "text": "弥漫",
+              "sourceRow": 494,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-495",
+              "text": "小心翼翼",
+              "sourceRow": 495,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-496",
+              "text": "海峡",
+              "sourceRow": 496,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-497",
+              "text": "容量",
+              "sourceRow": 497,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-498",
+              "text": "凌晨",
+              "sourceRow": 498,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-499",
+              "text": "隐约",
+              "sourceRow": 499,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-500",
+              "text": "震荡",
+              "sourceRow": 500,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-501",
+              "text": "惊恐万状",
+              "sourceRow": 501,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-502",
+              "text": "混乱",
+              "sourceRow": 502,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-503",
+              "text": "势不可当",
+              "sourceRow": 503,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-504",
+              "text": "威严",
+              "sourceRow": 504,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-505",
+              "text": "违抗",
+              "sourceRow": 505,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-506",
+              "text": "悲壮",
+              "sourceRow": 506,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-507",
+              "text": "岗位",
+              "sourceRow": 507,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-508",
+              "text": "惊慌失措",
+              "sourceRow": 508,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-509",
+              "text": "犹如",
+              "sourceRow": 509,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-510",
+              "text": "纹丝不动",
+              "sourceRow": 510,
+              "pdfPage": 125
+            },
+            {
+              "id": "row-511",
+              "text": "相提并论",
+              "sourceRow": 511,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-512",
+              "text": "忠于职守",
+              "sourceRow": 512,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-513",
+              "text": "壮举",
+              "sourceRow": 513,
+              "pdfPage": 126
+            }
           ]
         }
       ]
@@ -1207,6 +1717,116 @@
               "polyphonic": false,
               "sourceRow": 289,
               "pdfPage": 123
+            }
+          ],
+          "words": [
+            {
+              "id": "row-514",
+              "text": "流传",
+              "sourceRow": 514,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-515",
+              "text": "呼救",
+              "sourceRow": 515,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-516",
+              "text": "酬谢",
+              "sourceRow": 516,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-517",
+              "text": "叮嘱",
+              "sourceRow": 517,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-518",
+              "text": "议论",
+              "sourceRow": 518,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-519",
+              "text": "焦急",
+              "sourceRow": 519,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-520",
+              "text": "催促",
+              "sourceRow": 520,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-521",
+              "text": "千真万确",
+              "sourceRow": 521,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-522",
+              "text": "迟延",
+              "sourceRow": 522,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-523",
+              "text": "灾难",
+              "sourceRow": 523,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-524",
+              "text": "镇定",
+              "sourceRow": 524,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-525",
+              "text": "避难",
+              "sourceRow": 525,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-526",
+              "text": "后悔",
+              "sourceRow": 526,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-527",
+              "text": "密布",
+              "sourceRow": 527,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-528",
+              "text": "怒号",
+              "sourceRow": 528,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-529",
+              "text": "倾盆大雨",
+              "sourceRow": 529,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-530",
+              "text": "震天动地",
+              "sourceRow": 530,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-531",
+              "text": "世世代代",
+              "sourceRow": 531,
+              "pdfPage": 126
             }
           ]
         },
@@ -1441,6 +2061,44 @@
               "polyphonic": false,
               "sourceRow": 303,
               "pdfPage": 123
+            }
+          ],
+          "words": [
+            {
+              "id": "row-532",
+              "text": "眉开眼笑",
+              "sourceRow": 532,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-533",
+              "text": "美中不足",
+              "sourceRow": 533,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-534",
+              "text": "成家立业",
+              "sourceRow": 534,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-535",
+              "text": "稀罕",
+              "sourceRow": 535,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-536",
+              "text": "幸亏",
+              "sourceRow": 536,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-537",
+              "text": "相依为命",
+              "sourceRow": 537,
+              "pdfPage": 126
             }
           ]
         },
@@ -1919,6 +2577,134 @@
               "sourceRow": 331,
               "pdfPage": 123
             }
+          ],
+          "words": [
+            {
+              "id": "row-538",
+              "text": "毁灭",
+              "sourceRow": 538,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-539",
+              "text": "不可估量",
+              "sourceRow": 539,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-540",
+              "text": "举世闻名",
+              "sourceRow": 540,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-541",
+              "text": "众星拱月",
+              "sourceRow": 541,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-542",
+              "text": "环绕",
+              "sourceRow": 542,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-543",
+              "text": "殿堂",
+              "sourceRow": 543,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-544",
+              "text": "亭台楼阁",
+              "sourceRow": 544,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-545",
+              "text": "象征",
+              "sourceRow": 545,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-546",
+              "text": "仿照",
+              "sourceRow": 546,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-547",
+              "text": "诗情画意",
+              "sourceRow": 547,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-548",
+              "text": "漫步",
+              "sourceRow": 548,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-549",
+              "text": "漫游",
+              "sourceRow": 549,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-550",
+              "text": "天南海北",
+              "sourceRow": 550,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-551",
+              "text": "饱览",
+              "sourceRow": 551,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-552",
+              "text": "奇珍异宝",
+              "sourceRow": 552,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-553",
+              "text": "销毁",
+              "sourceRow": 553,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-554",
+              "text": "罪证",
+              "sourceRow": 554,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-555",
+              "text": "侵略",
+              "sourceRow": 555,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-556",
+              "text": "奉命",
+              "sourceRow": 556,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-557",
+              "text": "瑰宝",
+              "sourceRow": 557,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-558",
+              "text": "精华",
+              "sourceRow": 558,
+              "pdfPage": 126
+            }
           ]
         },
         {
@@ -2136,6 +2922,68 @@
               "sourceRow": 344,
               "pdfPage": 123
             }
+          ],
+          "words": [
+            {
+              "id": "row-559",
+              "text": "寸草不生",
+              "sourceRow": 559,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-560",
+              "text": "摄氏度",
+              "sourceRow": 560,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-561",
+              "text": "繁殖",
+              "sourceRow": 561,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-562",
+              "text": "粮食",
+              "sourceRow": 562,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-563",
+              "text": "煤炭",
+              "sourceRow": 563,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-564",
+              "text": "水蒸气",
+              "sourceRow": 564,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-565",
+              "text": "地区",
+              "sourceRow": 565,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-566",
+              "text": "热量",
+              "sourceRow": 566,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-567",
+              "text": "杀菌",
+              "sourceRow": 567,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-568",
+              "text": "治疗",
+              "sourceRow": 568,
+              "pdfPage": 126
+            }
           ]
         },
         {
@@ -2233,6 +3081,32 @@
               "polyphonic": false,
               "sourceRow": 351,
               "pdfPage": 123
+            }
+          ],
+          "words": [
+            {
+              "id": "row-569",
+              "text": "陵墓",
+              "sourceRow": 569,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-570",
+              "text": "堆砌",
+              "sourceRow": 570,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-571",
+              "text": "狭长",
+              "sourceRow": 571,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-572",
+              "text": "叹为观止",
+              "sourceRow": 572,
+              "pdfPage": 126
             }
           ]
         }
@@ -2457,6 +3331,80 @@
               "polyphonic": false,
               "sourceRow": 365,
               "pdfPage": 123
+            }
+          ],
+          "words": [
+            {
+              "id": "row-573",
+              "text": "慈母",
+              "sourceRow": 573,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-574",
+              "text": "长篇",
+              "sourceRow": 574,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-575",
+              "text": "怂恿",
+              "sourceRow": 575,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-576",
+              "text": "压抑",
+              "sourceRow": 576,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-577",
+              "text": "潮湿",
+              "sourceRow": 577,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-578",
+              "text": "忙碌",
+              "sourceRow": 578,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-579",
+              "text": "酷暑",
+              "sourceRow": 579,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-580",
+              "text": "扫视",
+              "sourceRow": 580,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-581",
+              "text": "噪声",
+              "sourceRow": 581,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-582",
+              "text": "忍心",
+              "sourceRow": 582,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-583",
+              "text": "机械",
+              "sourceRow": 583,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-584",
+              "text": "权利",
+              "sourceRow": 584,
+              "pdfPage": 126
             }
           ]
         },
@@ -2683,6 +3631,86 @@
               "polyphonic": false,
               "sourceRow": 378,
               "pdfPage": 124
+            }
+          ],
+          "words": [
+            {
+              "id": "row-585",
+              "text": "节省",
+              "sourceRow": 585,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-586",
+              "text": "旅店",
+              "sourceRow": 586,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-587",
+              "text": "教训",
+              "sourceRow": 587,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-588",
+              "text": "糖果",
+              "sourceRow": 588,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-589",
+              "text": "委屈",
+              "sourceRow": 589,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-590",
+              "text": "抽象",
+              "sourceRow": 590,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-591",
+              "text": "启迪",
+              "sourceRow": 591,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-592",
+              "text": "毕业",
+              "sourceRow": 592,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-593",
+              "text": "品尝",
+              "sourceRow": 593,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-594",
+              "text": "意识",
+              "sourceRow": 594,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-595",
+              "text": "领略",
+              "sourceRow": 595,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-596",
+              "text": "星斗",
+              "sourceRow": 596,
+              "pdfPage": 126
+            },
+            {
+              "id": "row-597",
+              "text": "精致",
+              "sourceRow": 597,
+              "pdfPage": 126
             }
           ]
         },
@@ -2928,7 +3956,57 @@
               "pdfPage": 124
             }
           ],
-          "sourceLabel": "语文园地"
+          "sourceLabel": "语文园地",
+          "words": [
+            {
+              "id": "row-598",
+              "text": "兄友弟恭",
+              "sourceRow": 598,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-599",
+              "text": "父慈子孝",
+              "sourceRow": 599,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-600",
+              "text": "家喻户晓",
+              "sourceRow": 600,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-601",
+              "text": "心浮气躁",
+              "sourceRow": 601,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-602",
+              "text": "如泣如诉",
+              "sourceRow": 602,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-603",
+              "text": "一张一弛",
+              "sourceRow": 603,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-604",
+              "text": "不卑不亢",
+              "sourceRow": 604,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-605",
+              "text": "诗词歌赋",
+              "sourceRow": 605,
+              "pdfPage": 127
+            }
+          ]
         }
       ]
     },
@@ -3138,6 +4216,50 @@
               "sourceRow": 397,
               "pdfPage": 124
             }
+          ],
+          "words": [
+            {
+              "id": "row-606",
+              "text": "侵入",
+              "sourceRow": 606,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-607",
+              "text": "飘落",
+              "sourceRow": 607,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-608",
+              "text": "粉妆玉砌",
+              "sourceRow": 608,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-609",
+              "text": "彩虹",
+              "sourceRow": 609,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-610",
+              "text": "俗话",
+              "sourceRow": 610,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-611",
+              "text": "瑞雪",
+              "sourceRow": 611,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-612",
+              "text": "供应",
+              "sourceRow": 612,
+              "pdfPage": 127
+            }
           ]
         },
         {
@@ -3235,6 +4357,56 @@
               "polyphonic": false,
               "sourceRow": 402,
               "pdfPage": 124
+            }
+          ],
+          "words": [
+            {
+              "id": "row-613",
+              "text": "精巧",
+              "sourceRow": 613,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-614",
+              "text": "身段",
+              "sourceRow": 614,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-615",
+              "text": "适宜",
+              "sourceRow": 615,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-616",
+              "text": "寻常",
+              "sourceRow": 616,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-617",
+              "text": "忘却",
+              "sourceRow": 617,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-618",
+              "text": "安稳",
+              "sourceRow": 618,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-619",
+              "text": "悠然",
+              "sourceRow": 619,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-620",
+              "text": "恩惠",
+              "sourceRow": 620,
+              "pdfPage": 127
             }
           ]
         },
@@ -3407,7 +4579,57 @@
               "pdfPage": 124
             }
           ],
-          "sourceLabel": "语文园地"
+          "sourceLabel": "语文园地",
+          "words": [
+            {
+              "id": "row-621",
+              "text": "湘菜",
+              "sourceRow": 621,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-622",
+              "text": "粤菜",
+              "sourceRow": 622,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-623",
+              "text": "蜀绣",
+              "sourceRow": 623,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-624",
+              "text": "苏绣",
+              "sourceRow": 624,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-625",
+              "text": "沪剧",
+              "sourceRow": 625,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-626",
+              "text": "滇剧",
+              "sourceRow": 626,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-627",
+              "text": "窑洞",
+              "sourceRow": 627,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-628",
+              "text": "民居",
+              "sourceRow": 628,
+              "pdfPage": 127
+            }
+          ]
         }
       ]
     },
@@ -3720,6 +4942,98 @@
               "polyphonic": false,
               "sourceRow": 430,
               "pdfPage": 124
+            }
+          ],
+          "words": [
+            {
+              "id": "row-629",
+              "text": "津津有味",
+              "sourceRow": 629,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-630",
+              "text": "公事",
+              "sourceRow": 630,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-631",
+              "text": "一知半解",
+              "sourceRow": 631,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-632",
+              "text": "兴趣",
+              "sourceRow": 632,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-633",
+              "text": "述说",
+              "sourceRow": 633,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-634",
+              "text": "厌烦",
+              "sourceRow": 634,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-635",
+              "text": "朝代",
+              "sourceRow": 635,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-636",
+              "text": "兴亡盛衰",
+              "sourceRow": 636,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-637",
+              "text": "处世",
+              "sourceRow": 637,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-638",
+              "text": "书刊",
+              "sourceRow": 638,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-639",
+              "text": "精彩",
+              "sourceRow": 639,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-640",
+              "text": "质朴",
+              "sourceRow": 640,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-641",
+              "text": "浅显",
+              "sourceRow": 641,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-642",
+              "text": "国际",
+              "sourceRow": 642,
+              "pdfPage": 127
+            },
+            {
+              "id": "row-643",
+              "text": "刊物",
+              "sourceRow": 643,
+              "pdfPage": 127
             }
           ]
         },

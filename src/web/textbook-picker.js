@@ -16,14 +16,15 @@ export function createTextbookPicker({dom,storage,onOpen,onChoose,store = new Te
         dom.textbookCurrent.textContent = selection?.name || '';
         dom.textbookCurrent.hidden = !selection;
     }
-    function selectTask(id, requestedMode = 'write') {
+    function selectTask(id, requestedMode = mode === 'words' ? 'words' : 'write') {
         task = unit.tasks.find(item => item.id === id) || unit.tasks[0];
-        mode = task[requestedMode].length ? requestedMode : requestedMode === 'write' ? 'read' : 'write';
+        mode = task[requestedMode]?.length ? requestedMode : task.write.length ? 'write' : 'read';
         render();
     }
     function render() {
         dom.textbookBody.hidden = !book;
         dom.openTextbookTaskBtn.disabled = !book || !task;
+        dom.openTextbookTaskBtn.parentElement.hidden = !book || mode === 'words';
         if (!book) return;
         dom.textbookEdition.textContent = book.edition;
         if (dom.textbookUnit.dataset.book !== book.id) {
@@ -44,20 +45,21 @@ export function createTextbookPicker({dom,storage,onOpen,onChoose,store = new Te
         if (focusedTask) selectedButton?.focus({preventScroll:true});
         selectedButton?.scrollIntoView({block:'nearest',inline:'nearest'});
         dom.textbookTaskTitle.textContent = task.title;
-        for (const [button,kind] of [[dom.textbookWriteBtn,'write'],[dom.textbookReadBtn,'read']]) {
-            button.disabled = !task[kind].length;
+        for (const [button,kind] of [[dom.textbookWriteBtn,'write'],[dom.textbookReadBtn,'read'],[dom.textbookWordsBtn,'words']]) {
+            button.disabled = !task[kind]?.length;
             button.setAttribute('aria-pressed',String(mode === kind));
         }
+        dom.textbookCharacters.classList.toggle('is-words',mode === 'words');
         dom.textbookCharacters.replaceChildren(...task[mode].map((entry,index) => {
             const button = document.createElement('button');button.type = 'button';button.dataset.entry = entry.id;
-            button.className = 'textbook-character';button.classList.toggle('is-polyphonic',entry.polyphonic);
-            const character = document.createElement('strong');character.textContent = entry.character;
+            button.className = mode === 'words' ? 'textbook-character textbook-word' : 'textbook-character';button.classList.toggle('is-polyphonic',entry.polyphonic);
+            const character = document.createElement('strong');character.textContent = mode === 'words' ? entry.text : entry.character;
             button.append(character);
             if (entry.reading) {
                 const reading = document.createElement('span');reading.textContent = entry.reading;reading.title = '教材注音';
                 button.append(reading);
             }
-            button.setAttribute('aria-label',`${entry.character}${entry.reading ? '，教材注音 '+entry.reading : ''}，打开第 ${index+1} 个字`);
+            button.setAttribute('aria-label',mode === 'words' ? `打开词语${entry.text}，共 ${Array.from(entry.text).length} 个字` : `${entry.character}${entry.reading ? '，教材注音 '+entry.reading : ''}，打开第 ${index+1} 个字`);
             button.addEventListener('click',()=>choose(index));return button;
         }));
         dom.openTextbookTaskBtn.textContent = `打开本课 · ${task[mode].length} 字`;
@@ -76,7 +78,7 @@ export function createTextbookPicker({dom,storage,onOpen,onChoose,store = new Te
             const preference = current?.bookId === loaded.id ? current : last?.bookId === loaded.id ? last : null;
             unit = book.units.find(item => item.id === preference?.unitId) || book.units[0];
             dom.textbookMessage.textContent = '';
-            selectTask(preference?.taskId,preference?.mode === 'read' ? 'read' : 'write');
+            selectTask(preference?.taskId,['read','words'].includes(preference?.mode) ? preference.mode : 'write');
         } catch (error) {
             if (request !== pending || pending.signal.aborted || !dom.textbookDialog.open) return;
             dom.textbookMessage.textContent = error.message;
@@ -97,6 +99,7 @@ export function createTextbookPicker({dom,storage,onOpen,onChoose,store = new Te
     });
     dom.textbookWriteBtn.addEventListener('click',()=>{mode='write';render();});
     dom.textbookReadBtn.addEventListener('click',()=>{mode='read';render();});
+    dom.textbookWordsBtn.addEventListener('click',()=>{mode='words';render();});
     dom.openTextbookTaskBtn.addEventListener('click',()=>choose());
     dom.retryTextbookBtn.addEventListener('click',()=>void load());
     return { setCurrent, getCurrent:()=>current };

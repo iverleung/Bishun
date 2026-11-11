@@ -22,81 +22,81 @@
       "id": "g2-first",
       "title": "二年级上册",
       "edition": "统编版",
-      "url": "/textbooks/pilot-v1/g2-first-d842e1d6fb39.json",
-      "sha256": "d842e1d6fb39780c1d047f53a735de950d99282ec866edcfb2eaedae29932fa0",
-      "bytes": 171535
+      "url": "/textbooks/pilot-v1/g2-first-1536f932ceda.json",
+      "sha256": "1536f932cedacca545656c2a5b48974e46220abc9648ce48b058c8d29c9dd76a",
+      "bytes": 208528
     },
     {
       "id": "g2-second",
       "title": "二年级下册",
       "edition": "统编版",
-      "url": "/textbooks/pilot-v1/g2-second-fccd3512e6e1.json",
-      "sha256": "fccd3512e6e15db0e3108cad349016e5098cad5de03a354d89f8402ea4263b19",
-      "bytes": 167449
+      "url": "/textbooks/pilot-v1/g2-second-cfe0d0847512.json",
+      "sha256": "cfe0d084751280e33884eae98881245c4708e07595d0ec71f37a0677e974fdc0",
+      "bytes": 205120
     },
     {
       "id": "g3-first",
       "title": "三年级上册",
       "edition": "统编版",
-      "url": "/textbooks/pilot-v1/g3-first-0b16c223feda.json",
-      "sha256": "0b16c223feda0d22688afb4fbf8cb5b51e875f9830dd58ef9172822456b45d31",
-      "bytes": 124425
+      "url": "/textbooks/pilot-v1/g3-first-b4149f927946.json",
+      "sha256": "b4149f9279460a18eade6830ba6abcc10bec6287d1ce1a947140233ad4113c91",
+      "bytes": 163479
     },
     {
       "id": "g3-second",
       "title": "三年级下册",
       "edition": "统编版",
-      "url": "/textbooks/pilot-v1/g3-second-0fddabf6ea0a.json",
-      "sha256": "0fddabf6ea0a535fe78f7179f13f1acbd81c1d3a6775c3812122bb62b1315e28",
-      "bytes": 124161
+      "url": "/textbooks/pilot-v1/g3-second-c76db485f864.json",
+      "sha256": "c76db485f8644a6e7e8c1cae9e840b7f9a4c1bee0de4f049bbb651615d3d903c",
+      "bytes": 166425
     },
     {
       "id": "g4-first",
       "title": "四年级上册",
       "edition": "统编版",
-      "url": "/textbooks/pilot-v1/g4-first-14acb6a40ece.json",
-      "sha256": "14acb6a40ece141fc6145da378a4c26c3d1fd401b6e48eaa9840cfddad4cd3ae",
-      "bytes": 121942
+      "url": "/textbooks/pilot-v1/g4-first-8e24c77e53ee.json",
+      "sha256": "8e24c77e53ee3f41538fc71534a6dc0e5ed979de52acc5145df260d3fb8e3ede",
+      "bytes": 156442
     },
     {
       "id": "g4-second",
       "title": "四年级下册",
       "edition": "统编版",
-      "url": "/textbooks/pilot-v1/g4-second-645e21de7d79.json",
-      "sha256": "645e21de7d798ecebad1e990ece415896588e263a79c02af64e179c65861fa0a",
-      "bytes": 122962
+      "url": "/textbooks/pilot-v1/g4-second-f519b4a56dfb.json",
+      "sha256": "f519b4a56dfbe8f99f248f1282fd12a4bbaf5c3435e77bd3152c626cdf10b548",
+      "bytes": 156193
     },
     {
       "id": "g5-first",
       "title": "五年级上册",
       "edition": "统编版",
-      "url": "/textbooks/pilot-v1/g5-first-b3d2952cc1b5.json",
-      "sha256": "b3d2952cc1b561a0dc19e8c7180927a2a4de2e698d748bfa525a71661519322b",
-      "bytes": 101940
+      "url": "/textbooks/pilot-v1/g5-first-6118e374a961.json",
+      "sha256": "6118e374a961bf184af543ea52d11cd515576174937068f7d47a394e7079857b",
+      "bytes": 135375
     },
     {
       "id": "g5-second",
       "title": "五年级下册",
       "edition": "统编版",
-      "url": "/textbooks/pilot-v1/g5-second-8e94d1b6ed71.json",
-      "sha256": "8e94d1b6ed71f3373de67b99fd95ed20c46bf1f1e76886f1658e734018afca6c",
-      "bytes": 92640
+      "url": "/textbooks/pilot-v1/g5-second-66fa91c5bc7f.json",
+      "sha256": "66fa91c5bc7f0efcd8443cdd944501fe988702cf17c6a2d92a995d36204502ae",
+      "bytes": 114891
     },
     {
       "id": "g6-first",
       "title": "六年级上册",
       "edition": "统编版",
-      "url": "/textbooks/pilot-v1/g6-first-39ba0a401675.json",
-      "sha256": "39ba0a401675b306bfd4ef7d5568075968830fff693f132c5349cfe1104dd70c",
-      "bytes": 44499
+      "url": "/textbooks/pilot-v1/g6-first-b0f2e609c0e2.json",
+      "sha256": "b0f2e609c0e2d6dc97a5073b1597a25b98e5937e23d60e7fa15d7729ecbe0173",
+      "bytes": 78066
     },
     {
       "id": "g6-second",
       "title": "六年级下册",
       "edition": "统编版",
-      "url": "/textbooks/pilot-v1/g6-second-1234cec8f2b2.json",
-      "sha256": "1234cec8f2b24615d49815d34471c5c09c8283da904282126ecf2a0f7bbf6410",
-      "bytes": 29646
+      "url": "/textbooks/pilot-v1/g6-second-77fb35a46b3e.json",
+      "sha256": "77fb35a46b3e860619a0a61c3a12b08080810a6a7017949bd177b2ee9f92e96d",
+      "bytes": 54813
     }
   ]
 }

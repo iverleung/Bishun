@@ -122,3 +122,32 @@ test('every newly available volume loads on demand into its own immutable cache'
     for(const entry of textbookBooks){const book=await store.load(entry.id);assert.equal(book.id,entry.id);assert.equal(await store.load(entry.id),book);assert.ok(Object.isFrozen(book));}
     assert.deepEqual(calls,textbookBooks.map(entry=>entry.id));
 });
+
+
+test('all source words open one complete term and preserve duplicate occurrences without class concatenation',async()=>{
+    let count=0;const terms=new Set();let longClass=false;
+    for(const entry of textbookBooks){
+        const book=validateTextbook(JSON.parse(await fs.readFile(`resources/textbooks/pilot-v1/${entry.id}.json`,'utf8')),entry.id);
+        for(const task of book.units.flatMap(unit=>unit.tasks)){
+            const words=task.words||[];
+            if(words.map(word=>word.text).join('').length>20)longClass=true;
+            for(const [index,word] of words.entries()){
+                const selected=textbookSelection(book,task.id,'words',index);
+                assert.equal(selected.query,word.text);assert.equal(selected.index,0);assert.equal(selected.mode,'words');
+                assert.match(selected.name,/词语/);count++;terms.add(word.text);
+            }
+            assert.throws(()=>textbookSelection(book,task.id,'words',words.length),/请选择/);
+        }
+    }
+    assert.equal(count,2162);assert.equal(terms.size,2108);assert.equal(longClass,true);
+});
+test('optional word records reject malformed terms and duplicate source IDs',()=>{
+    const valid=clone();valid.units[0].tasks[0].words=[{id:'row-9999',text:'天地',sourceRow:9999,pdfPage:100}];
+    validateTextbook(valid,valid.id);
+    for(const text of ['', '天地，', '天'.repeat(21), '<script>']){
+        const data=structuredClone(valid);data.units[0].tasks[0].words[0].text=text;
+        assert.throws(()=>validateTextbook(data,data.id),/无效/);
+    }
+    const data=structuredClone(valid);data.units[0].tasks[0].words=null;assert.throws(()=>validateTextbook(data,data.id),/无效/);
+    valid.units[0].tasks[0].words.push({...valid.units[0].tasks[0].words[0]});assert.throws(()=>validateTextbook(valid,valid.id),/无效/);
+});
