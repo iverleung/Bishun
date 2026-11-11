@@ -52,9 +52,12 @@ export function createTextbookPicker({dom,storage,onOpen,onChoose,store = new Te
             const button = document.createElement('button');button.type = 'button';button.dataset.entry = entry.id;
             button.className = 'textbook-character';button.classList.toggle('is-polyphonic',entry.polyphonic);
             const character = document.createElement('strong');character.textContent = entry.character;
-            const reading = document.createElement('span');reading.textContent = entry.reading;reading.title = '教材注音';
-            button.append(character,reading);
-            button.setAttribute('aria-label',`${entry.character}，教材注音 ${entry.reading}，打开第 ${index+1} 个字`);
+            button.append(character);
+            if (entry.reading) {
+                const reading = document.createElement('span');reading.textContent = entry.reading;reading.title = '教材注音';
+                button.append(reading);
+            }
+            button.setAttribute('aria-label',`${entry.character}${entry.reading ? '，教材注音 '+entry.reading : ''}，打开第 ${index+1} 个字`);
             button.addEventListener('click',()=>choose(index));return button;
         }));
         dom.openTextbookTaskBtn.textContent = `打开本课 · ${task[mode].length} 字`;

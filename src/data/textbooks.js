@@ -2,10 +2,11 @@ import catalog from '../../resources/textbooks/pilot-v1/index.json' with { type:
 
 export const textbookBooks = Object.freeze(catalog.books.map(book => Object.freeze({ ...book })));
 const isHan = value => typeof value === 'string' && Array.from(value).length === 1 && /^\p{Script=Han}$/u.test(value);
+const validReading = value => value === null || (typeof value === 'string' && /^[\p{Script=Latin}\p{M}]+$/u.test(value) && !/[A-Z]/.test(value));
 const label = value => typeof value === 'string' && value.length > 0 && value.length <= 100;
 
 export function validateTextbook(book, expectedId) {
-    if (book?.schemaVersion !== 1 || book.dataset !== 'pilot-v1' || book.id !== expectedId || !label(book.title) || !label(book.edition) || !Array.isArray(book.units) || book.units.length !== 8) throw new Error('教材资料格式无效');
+    if (book?.schemaVersion !== 1 || book.dataset !== 'pilot-v1' || book.id !== expectedId || !label(book.title) || !label(book.edition) || !Array.isArray(book.units) || book.units.length < 1 || book.units.length > 8) throw new Error('教材资料格式无效');
     const tasks = new Set(), records = new Set(), units = new Set();
     for (const unit of book.units) {
         if (!/^unit-[1-8]$/.test(unit.id) || units.has(unit.id) || !label(unit.title) || !Array.isArray(unit.tasks) || !unit.tasks.length) throw new Error('教材单元无效');
@@ -16,7 +17,7 @@ export function validateTextbook(book, expectedId) {
             for (const mode of ['read','write']) {
                 if (!Array.isArray(task[mode]) || task[mode].length > 20) throw new Error('本课字单长度无效');
                 for (const entry of task[mode]) {
-                    if (!isHan(entry.character) || !/^row-[1-9][0-9]*$/.test(entry.id) || records.has(entry.id) || typeof entry.reading !== 'string' || !/^[\p{Script=Latin}\p{M}]+$/u.test(entry.reading) || /[A-Z]/.test(entry.reading) || typeof entry.polyphonic !== 'boolean' || !Number.isInteger(entry.sourceRow) || entry.sourceRow < 2 || entry.id !== `row-${entry.sourceRow}` || !Number.isInteger(entry.pdfPage) || entry.pdfPage < 1) throw new Error('教材字项无效');
+                    if (!isHan(entry.character) || !/^row-[1-9][0-9]*$/.test(entry.id) || records.has(entry.id) || !validReading(entry.reading) || (mode === 'read' && entry.reading === null) || typeof entry.polyphonic !== 'boolean' || !Number.isInteger(entry.sourceRow) || entry.sourceRow < 2 || entry.id !== `row-${entry.sourceRow}` || !Number.isInteger(entry.pdfPage) || entry.pdfPage < 1) throw new Error('教材字项无效');
                     records.add(entry.id);
                 }
             }

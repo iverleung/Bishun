@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Content regressions against the supplied local PDFs; never downloads fixtures."""
 import importlib.util
+import json
+import openpyxl
 import unittest
 from pathlib import Path
 
@@ -75,6 +77,62 @@ class TextbookProofreadTests(unittest.TestCase):
         self.assertEqual(totals['pinyinCorrectionKinds'], {'font-code-decoding':6,'missing-writing-pinyin':550,'visual-path-annotation':1})
         self.assertEqual(totals['changedCells'], 1069)
         self.assertTrue(all(patch['evidence'].get('pdfPage') for patch in correction['patches']))
+
+
+    def test_runtime_books_preserve_all_checked_character_rows_and_course_context(self):
+        correction=json.loads((ROOT/'resources/textbooks/proofread-corrections.json').read_text())
+        index=json.loads((ROOT/'resources/textbooks/pilot-v1/index.json').read_text())
+        self.assertEqual(len(index['books']),12)
+        workbook=openpyxl.load_workbook(ROOT/proof.WORKBOOK,read_only=True,data_only=True)
+        total=0
+        try:
+            for entry in index['books']:
+                book=json.loads((ROOT/f'resources/textbooks/pilot-v1/{entry["id"]}.json').read_text())
+                rows=[list(row) for row in workbook[book['title']].values]
+                for patch in correction['patches']:
+                    if patch['sheet']!=book['title']:continue
+                    column=ord(correction['fieldColumns'][patch['field']])-ord('A')
+                    for number in patch['rows']:
+                        self.assertEqual(rows[number-1][column],patch['before'])
+                        rows[number-1][column]=patch['after']
+                expected={}
+                for table in ['识字表','写字表']:
+                    originals=[(i,row) for i,row in enumerate(rows,1) if row[0]==table]
+                    source=self.books[book['title']]['tables'].get(table,{}).get('source',[])
+                    self.assertEqual(len(originals),len(source))
+                    expected.update({f'row-{i}':(row,src) for (i,row),src in zip(originals,source)})
+                seen=set()
+                for unit in book['units']:
+                    for task in unit['tasks']:
+                        for mode in ['read','write']:
+                            self.assertEqual([item['sourceRow'] for item in task[mode]],sorted(item['sourceRow'] for item in task[mode]))
+                            for item in task[mode]:
+                                self.assertNotIn(item['id'],seen);seen.add(item['id'])
+                                row,src=expected[item['id']]
+                                self.assertEqual(row[0],'识字表' if mode=='read' else '写字表')
+                                self.assertEqual((item['character'],item['reading'],item['polyphonic'],item['pdfPage']),(row[5],row[6],row[7]=='是',row[8]))
+                                self.assertEqual(task['kind'],'garden' if src['sourceType']=='语文园地' else 'lesson')
+                                if task['kind']=='lesson':
+                                    course=self.books[book['title']]['toc'][str(src['sourceLesson'])]
+                                    self.assertEqual(task['title'],course['title']);self.assertEqual(unit['title'],course['unit'])
+                                elif src['sourceGarden']=='语文园地':
+                                    self.assertEqual(unit['title'],row[2]);self.assertEqual(task['sourceLabel'],'语文园地')
+                self.assertEqual(seen,set(expected));total+=len(seen)
+        finally:
+            workbook.close()
+        self.assertEqual(total,5657)
+
+    def test_runtime_numberless_gardens_merge_read_write_without_reusing_last_lesson_id(self):
+        book=json.loads((ROOT/'resources/textbooks/pilot-v1/g3-first.json').read_text())
+        garden=next(task for task in book['units'][2]['tasks'] if task['id']=='garden-3')
+        workbook=openpyxl.load_workbook(ROOT/proof.WORKBOOK,read_only=True,data_only=True)
+        try:
+            rows=list(workbook['三年级上册'].values)
+            read={rows[item['sourceRow']-1][1] for item in garden['read']}
+            write={rows[item['sourceRow']-1][1] for item in garden['write']}
+            self.assertEqual(read,{10});self.assertEqual(write,{8})
+        finally:
+            workbook.close()
 
 
 if __name__ == '__main__':

@@ -1,4 +1,5 @@
 import test from 'node:test';
+import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import secondBook from '../resources/textbooks/pilot-v1/g1-second.json' with { type:'json' };
 import book from '../resources/textbooks/pilot-v1/g1-first.json' with { type:'json' };
@@ -35,7 +36,7 @@ test('textbook fetch is opt-in, local and successful immutable data is reused',a
     assert.deepEqual(calls,[]);const one=await store.load('g1-first');assert.equal(await store.load('g1-first'),one);
     assert.deepEqual(calls,[textbookBooks[0].url]);assert.ok(calls[0].startsWith('/textbooks/pilot-v1/'));
     assert.throws(()=>one.units[0].tasks[0].read.pop(),TypeError);
-    await assert.rejects(store.load('g2-first'),/暂未开放/);
+    await assert.rejects(store.load('g7-first'),/暂未开放/);
 });
 test('cancelling a slow response rejects promptly and never caches its late value',async()=>{
     let resolve;let calls=0;const store=new TextbookStore({fetchImpl:()=>{calls++;return new Promise(done=>{resolve=done;});}});
@@ -76,4 +77,48 @@ test('volume caches and identity validation cannot substitute the same lesson ID
     const swapped=new TextbookStore({fetchImpl:async()=>json(book)});
     await assert.rejects(swapped.load('g1-second'),/无效/);
     assert.equal(swapped.books.size,0);
+});
+
+test('all twelve books preserve every recognition and writing occurrence within the query limit',async()=>{
+    assert.equal(textbookBooks.length,12);
+    assert.deepEqual(textbookBooks.map(book=>book.id),[1,2,3,4,5,6].flatMap(g=>[`g${g}-first`,`g${g}-second`]));
+    let tasks=0,read=0,write=0;
+    for(const entry of textbookBooks){
+        const book=validateTextbook(JSON.parse(await fs.readFile(`resources/textbooks/pilot-v1/${entry.id}.json`,'utf8')),entry.id);
+        for(const task of book.units.flatMap(unit=>unit.tasks)){
+            tasks++;read+=task.read.length;write+=task.write.length;
+            for(const mode of ['read','write'])if(task[mode].length){
+                const last=task[mode].length-1;
+                const selection=textbookSelection(book,task.id,mode,last);
+                assert.equal(selection.query,task[mode].map(entry=>entry.character).join(''));
+                assert.equal(selection.index,last);assert.equal(selection.bookId,book.id);
+            }
+        }
+    }
+    assert.deepEqual({tasks,read,write},{tasks:350,read:3157,write:2500});
+});
+
+test('upper grades retain absent reading tables, real unit numbering and independent unnumbered gardens',async()=>{
+    const load=async id=>JSON.parse(await fs.readFile(`resources/textbooks/pilot-v1/${id}.json`,'utf8'));
+    const third=await load('g3-first');const garden=third.units[2].tasks.find(task=>task.id==='garden-3');
+    assert.equal(garden.sourceLabel,'语文园地');assert.equal(garden.title,'语文园地三');
+    assert.equal(garden.read.length,8);assert.equal(garden.write.length,8);
+    assert.ok(garden.write.every(entry=>entry.reading===null));
+    const fifth=await load('g5-second');assert.deepEqual(fifth.units.map(unit=>unit.id),['unit-1','unit-2','unit-4','unit-5','unit-6','unit-7','unit-8']);
+    const sixth=await load('g6-second');validateTextbook(sixth,sixth.id);
+    assert.equal(sixth.units.length,5);assert.ok(sixth.units.every(unit=>unit.tasks.every(task=>!task.read.length)));
+    const selection=textbookSelection(sixth,'reading-5','read');assert.equal(selection.mode,'write');
+    assert.match(selection.name,/鲁滨逊漂流记/);assert.equal(selection.query,'惧凄寞宴霉籍聊乏控贷剔毙抵袭覆');
+    assert.equal(sixth.units.flatMap(unit=>unit.tasks).find(task=>task.id==='reading-8').title,'匆匆');
+    const invalid=structuredClone(sixth);invalid.units=[];assert.throws(()=>validateTextbook(invalid,invalid.id),/无效/);
+    const missing=clone();missing.units[0].tasks[0].read[0].reading=null;assert.throws(()=>validateTextbook(missing,missing.id),/无效/);
+});
+
+test('every newly available volume loads on demand into its own immutable cache',async()=>{
+    const calls=[];const store=new TextbookStore({fetchImpl:async url=>{
+        const entry=textbookBooks.find(entry=>entry.url===url);calls.push(entry.id);
+        return json(JSON.parse(await fs.readFile(`resources/textbooks/pilot-v1/${entry.id}.json`,'utf8')));
+    }});
+    for(const entry of textbookBooks){const book=await store.load(entry.id);assert.equal(book.id,entry.id);assert.equal(await store.load(entry.id),book);assert.ok(Object.isFrozen(book));}
+    assert.deepEqual(calls,textbookBooks.map(entry=>entry.id));
 });

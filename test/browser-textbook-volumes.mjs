@@ -14,11 +14,11 @@ try {
     async function query(value){await fill('#query',value);await click('#searchForm [type=submit]');await wait("!document.querySelector('#playBtn').disabled");}
     assert.equal(browser.requests.some(value=>value.includes('/textbooks/')),false);
     await query('木水');await open();
-    assert.equal(await evaluate("document.querySelector('#textbookBook').options.length"),2);
+    assert.equal(await evaluate("document.querySelector('#textbookBook').options.length"),12);
     assert.equal(await evaluate("document.querySelector('#textbookBook').value"),'g1-first');
     assert.equal(await evaluate(preview),'天地人你我他');
     assert.equal(browser.requests.some(value=>value.endsWith(textbookBooks[1].url)),false);
-    checks.push('opening textbooks requests only the selected first volume; exactly the two available semester options appear');
+    checks.push('opening textbooks requests only the selected first volume; all twelve available semester options appear');
 
     await evaluate(`window.volumeFetch=window.fetch;window.fetch=(input,options)=>String(input).endsWith(${JSON.stringify(textbookBooks[1].url)})?new Promise(resolve=>{window.releaseVolume=()=>volumeFetch(input).then(resolve);}):volumeFetch(input,options);`);
     await select('#textbookBook','g1-second');await wait("typeof releaseVolume==='function'");

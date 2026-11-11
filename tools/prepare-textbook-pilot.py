@@ -38,7 +38,7 @@ def prepare_book(book_title, book_id):
     tasks = {}
     for table, bucket in [('识字表', 'read'), ('写字表', 'write')]:
         original = [(number, row) for number, row in enumerate(rows, 1) if row[0] == table]
-        source = pilot['tables'][table]['source']
+        source = pilot['tables'].get(table, {}).get('source', [])
         if len(original) != len(source):
             raise ValueError('Pilot rows do not match proofread source')
         for (number, row), item in zip(original, source):
@@ -46,23 +46,38 @@ def prepare_book(book_title, book_id):
                 raise ValueError('Pilot text differs from original')
             if item['sourceType'] == '语文园地':
                 garden = item['sourceGarden'].strip()
-                unit_number = numbers[garden[-1]]
+                if garden[-1] in numbers:
+                    unit_number = numbers[garden[-1]]
+                else:
+                    # Upper-grade appendices print only 语文园地. Their preceding
+                    # lesson and the checked table of contents identify the unit.
+                    course = pilot['toc'][str(row[1])]
+                    if row[2] != course['unit']:
+                        raise ValueError('Garden unit does not match corrected contents')
+                    unit_number = numbers[course['unit'][1:-2]]
+                    garden = '语文园地' + list(numbers)[unit_number - 1]
                 task_id = f'garden-{unit_number}'
                 title, label, order, kind = garden, '', 999, 'garden'
             else:
                 lesson = item['sourceLesson']
-                if row[1] != lesson:
+                if str(row[1]) != str(lesson):
                     raise ValueError('Pilot lesson does not match corrected source')
                 course = pilot['toc'][lesson]
                 unit_number = numbers[course['unit'][1:-2]]
-                section = next(prefix for prefix in ['识字', '汉语拼音', '阅读'] if lesson.startswith(prefix))
-                prefix = {'识字':'literacy', '汉语拼音':'pinyin', '阅读':'reading'}[section]
-                task_id = f'{prefix}-{lesson[len(section):]}'
-                title, label, order, kind = course['title'], lesson, course['printedPage'], 'lesson'
+                if lesson.isdigit():
+                    task_id, label = f'reading-{lesson}', f'第{lesson}课'
+                else:
+                    section = next(prefix for prefix in ['识字', '汉语拼音', '阅读'] if lesson.startswith(prefix))
+                    prefix = {'识字':'literacy', '汉语拼音':'pinyin', '阅读':'reading'}[section]
+                    task_id, label = f'{prefix}-{lesson[len(section):]}', lesson
+                title, order, kind = course['title'], course['printedPage'], 'lesson'
             if task_id not in tasks:
                 tasks[task_id] = {'id':task_id, 'kind':kind, 'label':label, 'title':title, 'order':order, 'read':[], 'write':[]}
+                if kind == 'garden' and item['sourceGarden'].strip() != title:
+                    tasks[task_id]['sourceLabel'] = item['sourceGarden'].strip()
                 units[unit_number - 1]['tasks'].append(tasks[task_id])
             tasks[task_id][bucket].append({'id':f'row-{number}', 'character':row[5], 'reading':row[6], 'polyphonic':row[7] == '是', 'sourceRow':number, 'pdfPage':row[8]})
+    units = [unit for unit in units if unit['tasks']]
     for unit in units:
         unit['tasks'].sort(key=lambda task:task.pop('order'))
     book = {'schemaVersion':1, 'dataset':'pilot-v1', 'id':book_id, 'title':book_title, 'edition':'统编版',
@@ -79,7 +94,9 @@ def prepare_book(book_title, book_id):
     print(f'{book_title}: {len(tasks)} tasks; {applied} corrected cells.')
     return {'id':book['id'],'title':book['title'],'edition':book['edition'],'url':url,'sha256':sha,'bytes':len(text.encode('utf-8'))}
 
-books = [prepare_book(title, book_id) for title, book_id in [('一年级上册','g1-first'),('一年级下册','g1-second')]]
+books = [prepare_book(f'{grade}年级{semester}册', f'g{number}-{suffix}')
+         for number, grade in enumerate('一二三四五六', 1)
+         for semester, suffix in [('上','first'),('下','second')]]
 index = {'schemaVersion':1,'dataset':'pilot-v1','books':books}
 folder = ROOT / 'resources/textbooks/pilot-v1'
 (folder / 'index.json').write_text(json.dumps(index,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
