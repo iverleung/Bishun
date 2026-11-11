@@ -170,8 +170,9 @@ try {
         checks.push(`${grade1.id}: all thirty recordings decode/start/end through their sample characters`);
     }
     await query('校');
-    assert.equal(await evaluate("Array.from(document.querySelectorAll('.reading-button'),button=>button.dataset.reading).join(',')"),'xiào');
+    assert.equal(await evaluate("Array.from(document.querySelectorAll('.reading-button'),button=>button.dataset.reading).join(',')"),'xiào,jiào');
     assert.ok((await evaluate("document.querySelector('#characterReadings').textContent")).includes('jiào'));
+    const beforeJiao=await starts();await click(button('jiào'));await wait(`audioEvents.filter(type=>type==='start').length===${beforeJiao+1}`);await wait(`!(${busy})`);
     await query('女');
     assert.equal(await evaluate("document.querySelector('.reading-button').dataset.reading"),'nǚ');
     await query('了');
@@ -180,7 +181,13 @@ try {
     await query('么');
     assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"),'me');
     assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),0);
-    checks.push('nǚ remains distinct from nu; out-of-batch jiào and neutral le/me remain visible without substitute audio');
+    await query('的');
+    assert.equal(await evaluate("document.querySelector('[data-reading=de]')"),null);
+    assert.ok((await evaluate("document.querySelector('#characterReadings').textContent")).includes('de'));
+    await query('们');
+    assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"),'men');
+    assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),0);
+    checks.push('new jiào becomes playable on 校; nǚ stays distinct from nu and neutral le/me/de/men remain text without borrowed tones');
     assert.deepEqual(browser.exceptions,[]);
     console.log(JSON.stringify({browser:browser.version,checks,exceptions:browser.exceptions},null,2));
 } finally {await browser.close();}

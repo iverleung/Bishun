@@ -111,6 +111,32 @@ try {
     await wait("document.querySelector('#offlineList').children.length===1");
     checks.push('new batch deduplicates 一地一 to two syllables; both play after cold offline reload, neutral de stays unavailable and attribution is cached');
 
+    await click('#closeMenuBtn');await query('叫校的们');await offline();await click('#saveOfflineBtn');await saved();
+    const reuse=(await metadata()).find(item=>item.query==='叫校的们');
+    const reuseCatalog=JSON.parse(await fs.readFile('resources/reading-audio-catalog.json','utf8'));
+    const reuseFiles=['jiào','xiào','dì'].map(r=>reuseCatalog.items.find(item=>item.reading===r).url);
+    assert.equal(reuse.files.filter(file=>file.startsWith('/audio/readings/')&&file.endsWith('.mp3')).length,3);
+    assert.ok(reuseFiles.every(file=>reuse.files.includes(file)));
+    const reuseResponses=browser.responses.length;const reuseRequests=state.requests.length;
+    state.offline=true;await command('Page.reload');await wait("document.querySelector('#status')?.textContent === '请输入汉字'");
+    await offline();await click('#offlineList .offline-row:first-child .offline-open');
+    await wait("document.querySelector('#currentQuery').textContent==='叫校的们' && !document.querySelector('#playBtn').disabled");
+    for(const [reading,advance] of [['jiào',false],['jiào',true],['xiào',false],['dì',true]]){
+        if(advance){await click('#nextCharBtn');await wait("!document.querySelector('#playBtn').disabled");}
+        if(reading==='dì')assert.equal(await evaluate("document.querySelector('[data-reading=de]')"),null);
+        await click(`[data-reading="${reading}"]`);await wait("Boolean(document.querySelector('.reading-button.is-speaking'))");
+        await wait("!document.querySelector('.reading-button.is-speaking')");
+        assert.equal(await evaluate("document.querySelector('#readingFeedback').textContent"),'');
+    }
+    await click('#nextCharBtn');await wait("!document.querySelector('#playBtn').disabled");
+    assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"),'men');
+    assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),0);
+    assert.ok(reuseFiles.every(file=>browser.responses.slice(reuseResponses).some(response=>response.url.endsWith(file)&&response.status===200)));
+    assert.equal(state.requests.slice(reuseRequests).some(path=>path.endsWith('.mp3') || /\/characters\/.*\.json$/.test(path)),false);
+    state.offline=false;await offline();await click('#offlineList .offline-row:first-child .offline-row-actions button:last-child');
+    await wait("document.querySelector('#offlineList').children.length===1");
+    checks.push('叫/校 reuse one jiào offline asset; both 校 readings play after a cold reload while de/men remain without substituted audio');
+
     await click('#closeMenuBtn');await query('胡言');await offline();await click('#saveOfflineBtn');await saved();
     const huYan=(await metadata()).find(item=>item.query==='胡言');
     const huYanCatalog=JSON.parse(await fs.readFile('resources/reading-audio-catalog.json','utf8'));

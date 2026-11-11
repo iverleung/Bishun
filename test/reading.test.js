@@ -97,6 +97,7 @@ test('listening confirmations remain bound to exact files while reported and new
     assert.equal(pending.filter(item=>item.batch==='grade1-1').length,0);
     assert.equal(pending.filter(item=>item.batch==='grade1-2').length,0);
     assert.equal(pending.filter(item=>item.batch==='grade1-3').length,0);
+    assert.equal(pending.filter(item=>item.batch==='grade1-4').length,30);
     assert.equal(catalog.listeningReview.batchConfirmations['grade1-3'].date,'2026-11-11');
     assert.equal(catalog.listeningReview.batchConfirmations['grade1-2'].date,'2026-11-10');
     assert.equal(catalog.listeningReview.batchConfirmations['grade1-1'].date,'2026-11-10');
@@ -148,7 +149,8 @@ test('first grade reading batch adds thirty exact syllables while preserving oth
     assert.notEqual(readingRecording('mā').url,readingRecording('mǎ').url);
     assert.deepEqual(characterReadings('校'),['xiào','jiào']);
     assert.equal(readingRecording('xiào').token,'xiao4');
-    assert.equal(readingRecording('jiào'),null);
+    assert.equal(Object.hasOwn(batch.items,'jiào'),false);
+    assert.equal(readingRecording('jiào').batch,'grade1-4');
     assert.deepEqual(characterReadings('雨'),['yù','yǔ']);
     assert.equal(readingRecording('yǔ').token,'yu3');
     assert.equal(readingRecording('yù'),null);
@@ -220,4 +222,29 @@ test('reported hú/yán samples use content-bound replacements with approval bou
         assert.equal(catalog.listeningReview.items[item.id],item.sha256);
         assert.equal(catalog.listeningReview.batchConfirmations['grade1-3'].items[item.id],item.sha256);
     }
+});
+
+test('fourth grade-one batch binds writing sources and reuses jiào across 叫 and 校 without substituting neutral tones', async () => {
+    const {default:plan}=await import('../resources/reading-audio-plan.json',{with:{type:'json'}});
+    const {default:book}=await import('../resources/textbooks/pilot-v1/g1-second.json',{with:{type:'json'}});
+    const {characterReadings}=await import('../src/web/character-info.js');
+    const batch=plan.batches.find(item=>item.id==='grade1-4');
+    assert.equal(Object.keys(batch.items).length,30);assert.equal(batch.sampleEntries.length,30);
+    assert.equal(batch.sampleQueries.join(''),batch.sampleEntries.map(entry=>entry.character).join(''));
+    for(const sample of batch.sampleEntries){
+        assert.equal(sample.bookId,book.id);
+        const task=book.units.flatMap(unit=>unit.tasks).find(task=>task.id===sample.taskId);
+        const entry=task.write.find(entry=>entry.id===sample.rowId);
+        assert.equal(entry.character,sample.character);assert.equal(entry.reading,sample.reading);
+        assert.ok(characterReadings(sample.character).includes(sample.reading));
+        const item=readingRecording(sample.reading);assert.equal(item.token,batch.items[sample.reading]);
+        assert.equal(item.batch,'grade1-4');assert.equal(item.reviewStatus,'pending-listening');
+    }
+    assert.deepEqual(characterReadings('校'),['xiào','jiào']);
+    assert.equal(readingRecording('jiào').token,'jiao4');
+    assert.notEqual(readingRecording('jiào').url,readingRecording('xiào').url);
+    assert.equal(readingRecording('gòng').token,'gong4');
+    assert.notEqual(readingRecording('gòng').url,readingRecording('gōng').url);
+    assert.equal(readingRecording('zhǔ').token,'zhu3');assert.equal(readingRecording('zhù').token,'zhu4');
+    for(const reading of ['le','me','de','men'])assert.equal(readingRecording(reading),null);
 });
