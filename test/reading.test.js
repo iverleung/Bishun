@@ -92,11 +92,12 @@ test('listening confirmations remain bound to exact files while reported and new
     const { default: catalog } = await import('../resources/reading-audio-catalog.json', { with: { type:'json' } });
     const approved = catalog.items.filter(item => item.reviewStatus === 'reviewed');
     const pending = catalog.items.filter(item => item.reviewStatus === 'pending-listening');
-    assert.equal(approved.length,106);
+    assert.equal(approved.length,136);
     assert.deepEqual(pending.filter(item=>!item.batch.startsWith('grade1-')).map(item => item.reading),['tián','hé']);
     assert.equal(pending.filter(item=>item.batch==='grade1-1').length,0);
     assert.equal(pending.filter(item=>item.batch==='grade1-2').length,0);
-    assert.equal(pending.filter(item=>item.batch==='grade1-3').length,30);
+    assert.equal(pending.filter(item=>item.batch==='grade1-3').length,0);
+    assert.equal(catalog.listeningReview.batchConfirmations['grade1-3'].date,'2026-11-11');
     assert.equal(catalog.listeningReview.batchConfirmations['grade1-2'].date,'2026-11-10');
     assert.equal(catalog.listeningReview.batchConfirmations['grade1-1'].date,'2026-11-10');
     assert.equal(approved.filter(item => item.batch === 'initial').length,13);
@@ -195,7 +196,7 @@ test('third grade-one batch binds both textbook sources and keeps qing tones dis
         assert.ok(characterReadings(sample.character).includes(sample.reading));
         const recording=readingRecording(sample.reading);
         assert.equal(recording.token,batch.items[sample.reading]);
-        assert.equal(recording.batch,'grade1-3');assert.equal(recording.reviewStatus,'pending-listening');
+        assert.equal(recording.batch,'grade1-3');assert.equal(recording.reviewStatus,'reviewed');
     }
     assert.deepEqual(['qīng','qíng','qǐng'].map(r=>readingRecording(r).token),['qing1','qing2','qing3']);
     assert.equal(new Set(['qīng','qíng','qǐng'].map(r=>readingRecording(r).sha256)).size,3);
@@ -205,7 +206,7 @@ test('third grade-one batch binds both textbook sources and keeps qing tones dis
     assert.equal(readingRecording('le'),null);
 });
 
-test('reported hú/yán samples use content-bound replacements without stale source attribution or approval', async () => {
+test('reported hú/yán samples use content-bound replacements with approval bound to the replacement files', async () => {
     const {createHash}=await import('node:crypto');
     const {default:catalog}=await import('../resources/reading-audio-catalog.json',{with:{type:'json'}});
     const {characterReadings}=await import('../src/web/character-info.js');
@@ -215,7 +216,8 @@ test('reported hú/yán samples use content-bound replacements without stale sou
         assert.notEqual(item.id,oldId);
         assert.equal(item.id,'reading-'+createHash('sha256').update(reading+':'+item.sha256).digest('hex').slice(0,12));
         assert.equal(item.synthesis.text,character);assert.equal(item.synthesis.voice,'zh-CN-XiaoxiaoNeural');
-        assert.equal(item.upstream,undefined);assert.equal(item.reviewStatus,'pending-listening');
-        assert.notEqual(catalog.listeningReview.items[item.id],item.sha256);
+        assert.equal(item.upstream,undefined);assert.equal(item.reviewStatus,'reviewed');
+        assert.equal(catalog.listeningReview.items[item.id],item.sha256);
+        assert.equal(catalog.listeningReview.batchConfirmations['grade1-3'].items[item.id],item.sha256);
     }
 });

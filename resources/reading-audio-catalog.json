@@ -1435,7 +1435,7 @@
       "sha256": "d4c9af22af657fe004f0e58903f5b81d985a89a99e27500c0d67d12c0489e92c",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-li3.mp3",
       "originalTitle": "li3 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1448,7 +1448,7 @@
       "sha256": "c27baf1cad08f7d82e58aac03391af85f7592c07d6f0bb72a41278c4ac1f7751",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-jian4.mp3",
       "originalTitle": "jian4 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1461,7 +1461,7 @@
       "sha256": "7affc21255e54b9a0e291161b5667243df563924b11329454a1cc3ba5c2b5682",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-zai4.mp3",
       "originalTitle": "zai4 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1474,7 +1474,7 @@
       "sha256": "e0e345c7531d740391ddb672e4869dbcb41b238fbb00c5a9b7942052a1ff9255",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-ye3.mp3",
       "originalTitle": "ye3 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1487,7 +1487,7 @@
       "sha256": "18b53c2364dafc79a718f1e8d97111f3fdc1e0f5ae0e9873082e9757106c155c",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-cai2.mp3",
       "originalTitle": "cai2 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1500,7 +1500,7 @@
       "sha256": "0a0a33c7578a668435c9be0c859455bf6c18b508e0c046bab33c3da7eea1ec37",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-bi3.mp3",
       "originalTitle": "bi3 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1513,7 +1513,7 @@
       "sha256": "b746bae292f50590906038b916f8c5bfefe33d6d6b95ec7bf7e3133f76a424c1",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-zhi1.mp3",
       "originalTitle": "zhi1 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1526,7 +1526,7 @@
       "sha256": "6bc28fd710ac3877014f8d563800c1a779d1417fa20e7f450b1c6d4a09e0a062",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-duo1.mp3",
       "originalTitle": "duo1 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1539,7 +1539,7 @@
       "sha256": "9cf129e08e86cdb5dce674fa02887b79eaecd6975f564ad869437df2489f9c2e",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-ban4.mp3",
       "originalTitle": "ban4 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1552,7 +1552,7 @@
       "sha256": "b891fbe2421da65ab0095b56de4681e1a39e5f1fd687aaa0e918446052ff283e",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-chu1.mp3",
       "originalTitle": "chu1 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1565,7 +1565,7 @@
       "sha256": "ca6e666dec153055a79912daadec5bf367f218db9329ea649c6d0ef60c4d7049",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-niu2.mp3",
       "originalTitle": "niu2 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1578,7 +1578,7 @@
       "sha256": "54f41c38fdc1836b3b537de16ec121971741125ab2449b076f11c49c73ac9e9b",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-yang2.mp3",
       "originalTitle": "yang2 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1591,7 +1591,7 @@
       "sha256": "ecb9ed10ee1419b1d92e045ea3f558f7ea26f70ee104723b92ee58e8da8e987e",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-zhua3.mp3",
       "originalTitle": "zhua3 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1604,7 +1604,7 @@
       "sha256": "0dc3662fa6ef94628114543ed7cc38faa75bd2a2e52f5fdf97be0b4450385c9e",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-bai2.mp3",
       "originalTitle": "bai2 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1617,7 +1617,7 @@
       "sha256": "f5f47f19df38d320f9ff8e163765a7184455e2bd99f907e3af96f95f7d16339c",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-chun1.mp3",
       "originalTitle": "chun1 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1630,7 +1630,7 @@
       "sha256": "148e082609dfc6dffa6d118f7dde0eaf403a39fa12464e5fd0157963cdf59da9",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-chui1.mp3",
       "originalTitle": "chui1 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1643,7 +1643,7 @@
       "sha256": "d8b649ef715e7b728c5a71b22c47781ec59ce85ad91b4321823414a071980719",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-fei1.mp3",
       "originalTitle": "fei1 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1656,7 +1656,7 @@
       "sha256": "d8748b23b4691ebbe2d87ae73a27474f094dd0f60547ff1f6f7d47aa281a72a7",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-ru4.mp3",
       "originalTitle": "ru4 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1669,7 +1669,7 @@
       "sha256": "6734455231a07a73d6307482ba564ce20f409b042e5f97fa56958e41da9ef9e6",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-shen2.mp3",
       "originalTitle": "shen2 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1682,7 +1682,7 @@
       "sha256": "9e07fa6dfbaa847ced2fc536ef3ea927cb028c4e26ac7f9a14cefad498922bfc",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-gu3.mp3",
       "originalTitle": "gu3 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1700,7 +1700,7 @@
         "generator": "edge-tts 7.3.1"
       },
       "originalTitle": "胡 hú（预生成）",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1713,7 +1713,7 @@
       "sha256": "76d69dbbb31e2973d86582909eac3de1883061bfeb1d9dcfdedbb98a59b86d3c",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-shuang1.mp3",
       "originalTitle": "shuang1 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1731,7 +1731,7 @@
         "generator": "edge-tts 7.3.1"
       },
       "originalTitle": "言 yán（预生成）",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1744,7 +1744,7 @@
       "sha256": "7f7537fdf7d311ed7c9b896637019a258fce273ef389d240da578bc8c797fbc4",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-qing1.mp3",
       "originalTitle": "qing1 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1757,7 +1757,7 @@
       "sha256": "779e2ea43b288618c58e1645f3388b6282b6082a832449df82db8dab793923e9",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-qing2.mp3",
       "originalTitle": "qing2 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1770,7 +1770,7 @@
       "sha256": "56af0507a0d6d9b68eb92e6b9bc6140f47cb7299296bd92c67d1e02e300e115d",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-miao2.mp3",
       "originalTitle": "miao2 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1783,7 +1783,7 @@
       "sha256": "2f51a2108c023523b4e6b27783298e7d61eba80468736c9a2e1431cdeabef970",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-qing3.mp3",
       "originalTitle": "qing3 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1796,7 +1796,7 @@
       "sha256": "d2a01628801a134c187cde7963fd1de76c752bc434dd9e16dbbb2bf26badd625",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-sheng1.mp3",
       "originalTitle": "sheng1 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1809,7 +1809,7 @@
       "sha256": "0922382c6778340535f02edce5f66cd7af7dac9ed39b89d796413d17b1b36c1d",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-hong2.mp3",
       "originalTitle": "hong2 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     },
     {
@@ -1822,14 +1822,14 @@
       "sha256": "d8734da9fceafdffa41cd71d1374a1e56ab49041baf5673fc897b979f764755e",
       "upstream": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs/cmn-dong4.mp3",
       "originalTitle": "dong4 (cmn)",
-      "reviewStatus": "pending-listening",
+      "reviewStatus": "reviewed",
       "batch": "grade1-3"
     }
   ],
   "listeningReview": {
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "confirmedBy": "user",
-    "evidence": "首批 13 段及第二批 34 段分别获用户反馈：验证通过；一年级首批 30 段用户反馈：听过没问题，继续吧；一年级第二批 30 段用户反馈：没问题，继续",
+    "evidence": "首批 13 段及第二批 34 段分别获用户反馈：验证通过；一年级首批 30 段用户反馈：听过没问题，继续吧；一年级第二批 30 段用户反馈：没问题，继续；2026-11-11 用户明确确认第三批整批通过（含胡／言替换版）",
     "scope": "已接入的两批共 47 段读音及交互；不代表全库教学审核或新增设备专项验收",
     "items": {
       "reading-24399f8e2934": "ce16b52e705e0af16716b617ad5319aa14f164d63f48846f1028de89ad319666",
@@ -1938,7 +1938,37 @@
       "reading-2a0a40926e27": "6b3055c320e18077a26ed52772487dfb435c3cb0c2f8e1b665ebfd0483f9f05e",
       "reading-18ad79c4071d": "77da5673dda644b8b22525d0f08cd7bae6c6c5714d871582cc86581d58d00ff7",
       "reading-ecbf50c214b7": "36d14eb9a4587f566b5a6b89db01e27200267b14688ec66c158d88b1c0744bec",
-      "reading-65e33c57ba8d": "d1be4cb8f57956fb12e3e5166b3145c734a051e180e085598d9f4d525adf9509"
+      "reading-65e33c57ba8d": "d1be4cb8f57956fb12e3e5166b3145c734a051e180e085598d9f4d525adf9509",
+      "reading-403cdbaa92cb": "d4c9af22af657fe004f0e58903f5b81d985a89a99e27500c0d67d12c0489e92c",
+      "reading-d59fc77e9e09": "c27baf1cad08f7d82e58aac03391af85f7592c07d6f0bb72a41278c4ac1f7751",
+      "reading-a7d48f859f25": "7affc21255e54b9a0e291161b5667243df563924b11329454a1cc3ba5c2b5682",
+      "reading-7d79418b084f": "e0e345c7531d740391ddb672e4869dbcb41b238fbb00c5a9b7942052a1ff9255",
+      "reading-1e0c315f51c3": "18b53c2364dafc79a718f1e8d97111f3fdc1e0f5ae0e9873082e9757106c155c",
+      "reading-f6dd011a9271": "0a0a33c7578a668435c9be0c859455bf6c18b508e0c046bab33c3da7eea1ec37",
+      "reading-68405f231857": "b746bae292f50590906038b916f8c5bfefe33d6d6b95ec7bf7e3133f76a424c1",
+      "reading-461271f7d753": "6bc28fd710ac3877014f8d563800c1a779d1417fa20e7f450b1c6d4a09e0a062",
+      "reading-45d7da35b3db": "9cf129e08e86cdb5dce674fa02887b79eaecd6975f564ad869437df2489f9c2e",
+      "reading-30184626098e": "b891fbe2421da65ab0095b56de4681e1a39e5f1fd687aaa0e918446052ff283e",
+      "reading-9f508e043972": "ca6e666dec153055a79912daadec5bf367f218db9329ea649c6d0ef60c4d7049",
+      "reading-6211bfdd6962": "54f41c38fdc1836b3b537de16ec121971741125ab2449b076f11c49c73ac9e9b",
+      "reading-b45a56138a75": "ecb9ed10ee1419b1d92e045ea3f558f7ea26f70ee104723b92ee58e8da8e987e",
+      "reading-b6c5d5ae6e37": "0dc3662fa6ef94628114543ed7cc38faa75bd2a2e52f5fdf97be0b4450385c9e",
+      "reading-054c5e4e6504": "f5f47f19df38d320f9ff8e163765a7184455e2bd99f907e3af96f95f7d16339c",
+      "reading-712286f84f08": "148e082609dfc6dffa6d118f7dde0eaf403a39fa12464e5fd0157963cdf59da9",
+      "reading-70d9b61d5c66": "d8b649ef715e7b728c5a71b22c47781ec59ce85ad91b4321823414a071980719",
+      "reading-748242212f7f": "d8748b23b4691ebbe2d87ae73a27474f094dd0f60547ff1f6f7d47aa281a72a7",
+      "reading-3aa1e3ecf203": "6734455231a07a73d6307482ba564ce20f409b042e5f97fa56958e41da9ef9e6",
+      "reading-798d86b36790": "9e07fa6dfbaa847ced2fc536ef3ea927cb028c4e26ac7f9a14cefad498922bfc",
+      "reading-b9ba177b2df5": "940bd747995d74f2d45f7ef7d30bc236340390fa19f0d5ad687867039aaf3beb",
+      "reading-53ee6b87b994": "76d69dbbb31e2973d86582909eac3de1883061bfeb1d9dcfdedbb98a59b86d3c",
+      "reading-ef565ede1572": "39c62bbd56f7f0fc0d60903a741dd83aa1922037db85d122465cfabfabcadd2c",
+      "reading-d0b5ace452df": "7f7537fdf7d311ed7c9b896637019a258fce273ef389d240da578bc8c797fbc4",
+      "reading-b15016b6cc2e": "779e2ea43b288618c58e1645f3388b6282b6082a832449df82db8dab793923e9",
+      "reading-3a2a849f8ae5": "56af0507a0d6d9b68eb92e6b9bc6140f47cb7299296bd92c67d1e02e300e115d",
+      "reading-c7af749aae76": "2f51a2108c023523b4e6b27783298e7d61eba80468736c9a2e1431cdeabef970",
+      "reading-5328dc75341d": "d2a01628801a134c187cde7963fd1de76c752bc434dd9e16dbbb2bf26badd625",
+      "reading-93debfc95326": "0922382c6778340535f02edce5f66cd7af7dac9ed39b89d796413d17b1b36c1d",
+      "reading-5152412096b1": "d8734da9fceafdffa41cd71d1374a1e56ab49041baf5673fc897b979f764755e"
     },
     "batchConfirmations": {
       "grade1-1": {
@@ -2013,6 +2043,43 @@
           "reading-18ad79c4071d": "77da5673dda644b8b22525d0f08cd7bae6c6c5714d871582cc86581d58d00ff7",
           "reading-ecbf50c214b7": "36d14eb9a4587f566b5a6b89db01e27200267b14688ec66c158d88b1c0744bec",
           "reading-65e33c57ba8d": "d1be4cb8f57956fb12e3e5166b3145c734a051e180e085598d9f4d525adf9509"
+        }
+      },
+      "grade1-3": {
+        "date": "2026-11-11",
+        "confirmedBy": "user",
+        "evidence": "第三批整批通过",
+        "items": {
+          "reading-403cdbaa92cb": "d4c9af22af657fe004f0e58903f5b81d985a89a99e27500c0d67d12c0489e92c",
+          "reading-d59fc77e9e09": "c27baf1cad08f7d82e58aac03391af85f7592c07d6f0bb72a41278c4ac1f7751",
+          "reading-a7d48f859f25": "7affc21255e54b9a0e291161b5667243df563924b11329454a1cc3ba5c2b5682",
+          "reading-7d79418b084f": "e0e345c7531d740391ddb672e4869dbcb41b238fbb00c5a9b7942052a1ff9255",
+          "reading-1e0c315f51c3": "18b53c2364dafc79a718f1e8d97111f3fdc1e0f5ae0e9873082e9757106c155c",
+          "reading-f6dd011a9271": "0a0a33c7578a668435c9be0c859455bf6c18b508e0c046bab33c3da7eea1ec37",
+          "reading-68405f231857": "b746bae292f50590906038b916f8c5bfefe33d6d6b95ec7bf7e3133f76a424c1",
+          "reading-461271f7d753": "6bc28fd710ac3877014f8d563800c1a779d1417fa20e7f450b1c6d4a09e0a062",
+          "reading-45d7da35b3db": "9cf129e08e86cdb5dce674fa02887b79eaecd6975f564ad869437df2489f9c2e",
+          "reading-30184626098e": "b891fbe2421da65ab0095b56de4681e1a39e5f1fd687aaa0e918446052ff283e",
+          "reading-9f508e043972": "ca6e666dec153055a79912daadec5bf367f218db9329ea649c6d0ef60c4d7049",
+          "reading-6211bfdd6962": "54f41c38fdc1836b3b537de16ec121971741125ab2449b076f11c49c73ac9e9b",
+          "reading-b45a56138a75": "ecb9ed10ee1419b1d92e045ea3f558f7ea26f70ee104723b92ee58e8da8e987e",
+          "reading-b6c5d5ae6e37": "0dc3662fa6ef94628114543ed7cc38faa75bd2a2e52f5fdf97be0b4450385c9e",
+          "reading-054c5e4e6504": "f5f47f19df38d320f9ff8e163765a7184455e2bd99f907e3af96f95f7d16339c",
+          "reading-712286f84f08": "148e082609dfc6dffa6d118f7dde0eaf403a39fa12464e5fd0157963cdf59da9",
+          "reading-70d9b61d5c66": "d8b649ef715e7b728c5a71b22c47781ec59ce85ad91b4321823414a071980719",
+          "reading-748242212f7f": "d8748b23b4691ebbe2d87ae73a27474f094dd0f60547ff1f6f7d47aa281a72a7",
+          "reading-3aa1e3ecf203": "6734455231a07a73d6307482ba564ce20f409b042e5f97fa56958e41da9ef9e6",
+          "reading-798d86b36790": "9e07fa6dfbaa847ced2fc536ef3ea927cb028c4e26ac7f9a14cefad498922bfc",
+          "reading-b9ba177b2df5": "940bd747995d74f2d45f7ef7d30bc236340390fa19f0d5ad687867039aaf3beb",
+          "reading-53ee6b87b994": "76d69dbbb31e2973d86582909eac3de1883061bfeb1d9dcfdedbb98a59b86d3c",
+          "reading-ef565ede1572": "39c62bbd56f7f0fc0d60903a741dd83aa1922037db85d122465cfabfabcadd2c",
+          "reading-d0b5ace452df": "7f7537fdf7d311ed7c9b896637019a258fce273ef389d240da578bc8c797fbc4",
+          "reading-b15016b6cc2e": "779e2ea43b288618c58e1645f3388b6282b6082a832449df82db8dab793923e9",
+          "reading-3a2a849f8ae5": "56af0507a0d6d9b68eb92e6b9bc6140f47cb7299296bd92c67d1e02e300e115d",
+          "reading-c7af749aae76": "2f51a2108c023523b4e6b27783298e7d61eba80468736c9a2e1431cdeabef970",
+          "reading-5328dc75341d": "d2a01628801a134c187cde7963fd1de76c752bc434dd9e16dbbb2bf26badd625",
+          "reading-93debfc95326": "0922382c6778340535f02edce5f66cd7af7dac9ed39b89d796413d17b1b36c1d",
+          "reading-5152412096b1": "d8734da9fceafdffa41cd71d1374a1e56ab49041baf5673fc897b979f764755e"
         }
       }
     }
