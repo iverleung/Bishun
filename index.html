@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="offline-build" content="__OFFLINE_VERSION__">
     <meta name="theme-color" content="#f6f7f3">
     <title>笔顺 · 汉字笔顺查询</title>
     <link rel="icon" href="/icon.png" type="image/png">
@@ -69,13 +68,11 @@
     <dialog id="settings" class="settings-drawer" aria-labelledby="menuTitle">
         <div class="drawer-header"><h2 id="menuTitle">菜单</h2><button id="closeMenuBtn" type="button" aria-label="关闭菜单">×</button></div>
         <div class="drawer-content">
-            <a class="reading-source" href="/audio/readings/v1/SOURCE.html" target="_blank" rel="noopener">读音来源与许可</a>
             <button id="openTextbookBtn" class="textbook-entry" type="button" aria-haspopup="dialog" aria-controls="textbookDialog" aria-expanded="false">小学教材<small id="textbookCurrent" hidden></small></button>
             <details id="savedQueries" class="saved-queries"><summary>我的生字本 <span id="savedCount"></span></summary>
                 <div class="library-tools"><button id="manageSavedBtn" type="button" aria-pressed="false">管理</button><button id="exportSavedBtn" type="button">导出</button><button id="importSavedBtn" type="button">导入</button><input id="importSavedFile" type="file" accept=".json,application/json" hidden></div>
                 <nav id="savedList" aria-label="生字清单"></nav>
             </details>
-            <details id="offlineSection" class="offline-section"><summary>离线字单 <span id="offlineCount"></span></summary><p id="offlineMessage" role="status" aria-live="polite"></p><div class="offline-actions"><button id="saveOfflineBtn" class="secondary" type="button" disabled>保存这组字</button><button id="cancelOfflineBtn" type="button" hidden>取消</button></div><div id="offlineList"></div><p class="offline-note">最多 10 组、资源约 20 MB。浏览器清理网站数据后需重新保存。</p></details>
             <p id="savedFeedback" class="sr-only" role="status" aria-live="polite"></p>
             <section id="lessonActions" class="drawer-section" aria-label="当前字" hidden><h3 id="lessonActionsHeading">当前字</h3>
 

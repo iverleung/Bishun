@@ -15,7 +15,7 @@ import { bindCanvasSwipe } from './canvas-swipe.js';
 import { PracticeController } from '../practice/controller.js';
 import { HanziPractice } from '../practice/hanzi-practice.js';
 import { createTextbookPicker } from './textbook-picker.js';
-import { setupOffline } from '../offline/client.js';
+import { retireOfflineWorker } from './retire-offline.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
 const svgNamespace = 'http://www.w3.org/2000/svg';
@@ -25,7 +25,6 @@ let informationKey = '';
 let practiceOwner = '';
 let practiceRun = null;
 let composing = false;
-let offline = null;
 let textbooks = null;
 let renderedSelection = '';
 let pendingArrival = null;
@@ -507,7 +506,6 @@ function render(state) {
     dom.status.classList.toggle('sr-only', !showNotice);
     dom.status.textContent = state.audioWarning || statuses[state.status];
     if (practice.visible) renderPractice();
-    offline?.refreshSelection();
 }
 
 function query(value, fromLink = false, textbook = null) {
@@ -704,7 +702,7 @@ textbooks = createTextbookPicker({ dom, storage:historyStorage,
         });
     }
 });
-offline = setupOffline({ dom, getSelection: () => ({ query: player.entries.join(''), name: savedQueries.names.get(player.entries.join('')) || '' }), openQuery: openManagedQuery });
+void retireOfflineWorker(navigator.serviceWorker,location.origin);
 setupSharing({ dom, getSelection: () => ({ character: player.entry, group: player.entries.join('') }) });
 function restoreSharedQuery() {
     const shared = readSharedQuery(location.href);
