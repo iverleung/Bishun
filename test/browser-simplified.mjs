@@ -25,7 +25,8 @@ try{
     assert.equal(await evaluate("document.querySelector('#libraryManagement').hidden"),true);
     await click('#manageSavedBtn');assert.equal(await evaluate("document.querySelector('#libraryManagement').hidden"),false);
     await click('#manageSavedBtn');assert.equal(await evaluate("document.querySelector('#libraryManagement').hidden"),true);
-    await click('#playbackSettings summary');
+    assert.equal(await evaluate("document.querySelector('#playbackSettings').open"),true);
+    assert.equal(await evaluate("document.querySelector('#openTextbookBtn .textbook-entry-arrow').textContent"),'›');
     assert.deepEqual(await evaluate("Array.from(document.querySelector('#speedSlider').options,option=>option.textContent)"),['慢','正常','快']);
     await click('#groupMode');await click('#closeMenuBtn');
     await click('#playBtn');await wait("document.querySelector('#wordPosition').textContent==='2 / 2' && document.querySelector('#playBtn').textContent==='重播'",18000);

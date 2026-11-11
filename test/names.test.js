@@ -82,3 +82,28 @@ test('every character in the two integrated books has matching stroke counts and
         assert.equal(item.reviewMethod,'user-confirmed-grade1-listening-reel');
     }
 });
+
+
+test('reported 婆 and 饼 resolve all exact stroke positions with existing reviewed recordings',async()=>{
+    const recordings=new Set(JSON.parse(await fs.readFile('resources/stroke-audio-catalog.json','utf8')).items.map(item=>item.text));
+    const expected={'婆':['点','点','提','横钩','撇','竖','横撇','捺','撇点','撇','横'],'饼':['撇','横钩','竖提','点','撇','横','横','撇','竖']};
+    for(const [character,names] of Object.entries(expected)){
+        const data=JSON.parse(await fs.readFile(`public/characters/2.0.1/${character}.json`,'utf8'));
+        assert.deepEqual(v3.getStrokeNames(character),names);assert.equal(names.length,data.strokes.length);
+        assert.ok(names.every(name=>recordings.has(name)));
+    }
+    assert.equal(cnchar.stroke('婆','order','name')[0][3],'横撇|横钩');
+    assert.equal(cnchar.stroke('婆','order','name')[0][6],'横撇|横钩');
+    assert.equal(cnchar.stroke('饼','order','name')[0][1],'横撇|横钩');
+    assert.equal(v3.getStrokeNames('宇')[2],null);
+});
+
+
+test('textbook stroke availability snapshot matches current corrections and audio catalog',async()=>{
+    const {execFileSync}=await import('node:child_process');
+    const expected=JSON.parse(await fs.readFile('docs/教材笔画播报覆盖检查-2026-11-11.json','utf8'));
+    const actual=JSON.parse(execFileSync(process.execPath,['tools/check-stroke-coverage.mjs'],{encoding:'utf8'}));
+    assert.deepEqual(actual,expected);assert.equal(actual.totals.characters,2983);
+    assert.equal(actual.totals.missingAudioCharacters,0);assert.equal(actual.totals.countMismatches,0);
+    assert.ok(actual.unresolved.every(item=>!['婆','饼'].includes(item.character)));
+});

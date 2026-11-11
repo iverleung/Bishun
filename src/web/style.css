@@ -220,7 +220,9 @@ body[data-phase="lesson"]:not(.practice-mode) { --canvas-size: max(128px, min(44
 #readingFeedback:not(.sr-only) { margin: 0 auto 12px; text-align: center; font-size: 13px; color: #89541f; }
 .reading-source { font-size: 12px; color: #6e7a70; }
 
-.textbook-entry { display: block; width: 100%; text-align: left; font-weight: 550; margin: 8px 0; }
+.textbook-entry { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 56px; padding: 14px 16px; text-align: left; font-weight: 550; margin: 8px 0 16px; background: #ebefe6; border: 1px solid var(--border); border-radius: 10px; }
+.textbook-entry > span:first-child { min-width: 0; }
+.textbook-entry-arrow { flex: 0 0 auto; color: var(--accent); font-size: 24px; line-height: 1; }
 .textbook-entry small { display: block; font-size: 11px; font-weight: 400; color: var(--muted); margin-top: 6px; overflow-wrap: anywhere; }
 .textbook-dialog { width: min(820px, calc(100vw - 40px)); max-height: calc(100dvh - 40px); border: 1px solid var(--border); border-radius: 16px; padding: 24px; color: inherit; background: #f6f7f3; overflow-y: auto; overscroll-behavior: contain; }
 .textbook-dialog::backdrop { background: #20392c66; }

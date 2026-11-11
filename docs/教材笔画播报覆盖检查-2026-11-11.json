@@ -1,0 +1,6848 @@
+{
+  "schemaVersion": 1,
+  "scope": "12 supplied textbooks including word characters; name/resource completeness, not full teaching review",
+  "audioCatalogSha256": "022dda73917080da284869e02abd293795d9aef723e229e2b0cdb448838556b3",
+  "books": [
+    {
+      "id": "g1-first",
+      "sha256": "09b0989feae434fce496bb47096b2ea925c17cfe065ff4b30136336dccd87531"
+    },
+    {
+      "id": "g1-second",
+      "sha256": "0327c624dc9d500d6fac7448fbe0f542f5014fa993a274dddc6a3a3591546d41"
+    },
+    {
+      "id": "g2-first",
+      "sha256": "1536f932cedacca545656c2a5b48974e46220abc9648ce48b058c8d29c9dd76a"
+    },
+    {
+      "id": "g2-second",
+      "sha256": "cfe0d084751280e33884eae98881245c4708e07595d0ec71f37a0677e974fdc0"
+    },
+    {
+      "id": "g3-first",
+      "sha256": "b4149f9279460a18eade6830ba6abcc10bec6287d1ce1a947140233ad4113c91"
+    },
+    {
+      "id": "g3-second",
+      "sha256": "c76db485f8644a6e7e8c1cae9e840b7f9a4c1bee0de4f049bbb651615d3d903c"
+    },
+    {
+      "id": "g4-first",
+      "sha256": "8e24c77e53ee3f41538fc71534a6dc0e5ed979de52acc5145df260d3fb8e3ede"
+    },
+    {
+      "id": "g4-second",
+      "sha256": "f519b4a56dfbe8f99f248f1282fd12a4bbaf5c3435e77bd3152c626cdf10b548"
+    },
+    {
+      "id": "g5-first",
+      "sha256": "6118e374a961bf184af543ea52d11cd515576174937068f7d47a394e7079857b"
+    },
+    {
+      "id": "g5-second",
+      "sha256": "66fa91c5bc7f0efcd8443cdd944501fe988702cf17c6a2d92a995d36204502ae"
+    },
+    {
+      "id": "g6-first",
+      "sha256": "b0f2e609c0e2d6dc97a5073b1597a25b98e5937e23d60e7fa15d7729ecbe0173"
+    },
+    {
+      "id": "g6-second",
+      "sha256": "77fb35a46b3e860619a0a61c3a12b08080810a6a7017949bd177b2ee9f92e96d"
+    }
+  ],
+  "totals": {
+    "characters": 2983,
+    "complete": 2282,
+    "unresolvedCharacters": 701,
+    "unresolvedPositions": 819,
+    "missingAudioCharacters": 0,
+    "countMismatches": 0
+  },
+  "unresolved": [
+    {
+      "character": "丞",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "乃",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "乏",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "买",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "乳",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "予",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "争",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "互",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "享",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "亭",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "仅",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "仍",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "代",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "传",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "竖折撇|竖折折"
+        }
+      ]
+    },
+    {
+      "character": "伶",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "侈",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "例",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "侵",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "俊",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "俘",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "修",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "假",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "傍",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "傻",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "免",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "冗",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "军",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "农",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "冠",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "冤",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "冷",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "冽",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "净",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "凌",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "凝",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "凤",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "凳",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "划",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "列",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "割",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "劝",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "务",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "努",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "劳",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "勃",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "勉",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "卖",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "危",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "厚",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "厦",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "叉",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "发",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "取",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "受",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "变",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "叹",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "各",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "吟",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "含",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "吱",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "吼",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "咏",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "咛",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "咧",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "咨",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "咯",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "咸",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "哦",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "哮",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "哼",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "唠",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "唤",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "唬",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "啰",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "啼",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "嗓",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "嗽",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "嘎",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "嘟",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "嘴",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "噜",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "嚓",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "囊",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "囱",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "圣",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "坚",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "坠",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "坡",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "域",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "堂",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "塞",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "墩",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "壶",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "备",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "复",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "够",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "奖",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "姿",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "威",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "娜",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "婉",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "婚",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "嫁",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "嫂",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "孔",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "存",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "孝",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "孟",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "季",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "孵",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宁",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宅",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宇",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "守",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宋",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "完",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宏",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宗",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "官",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宙",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宛",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宜",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "实",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "审",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "客",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宣",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "室",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宫",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宰",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宴",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宵",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "容",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宾",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "宿",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "寂",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "寄",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "密",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 5,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "寇",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "富",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "寓",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "寝",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "寞",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "察",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "寨",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "将",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "尔",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "尝",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "尿",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "履",
+      "positions": [
+        {
+          "index": 14,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "岁",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "岭",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "峨",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "峰",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "峻",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "崇",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "嵌",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "帘",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "帚",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "帝",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "带",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "幔",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "序",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "底",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "废",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "度",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "廊",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "弥",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "弩",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "役",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "彼",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "径",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "德",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "必",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "忌",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "忍",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "志",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "忠",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "态",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "怂",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "怒",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "怜",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "怨",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "怪",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "恋",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "恐",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "恩",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "恳",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "恶",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "恿",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 9,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "悉",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "悠",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "患",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "悬",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "悲",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "惑",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "斜钩|卧钩"
+        },
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "惠",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "惩",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "惫",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "惹",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "愁",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "愈",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "愿",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "慈",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "慢",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "慧",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "慰",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "憾",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        },
+        {
+          "index": 14,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "懈",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "懒",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "戎",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "戒",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "或",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "戚",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "截",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "戴",
+      "positions": [
+        {
+          "index": 15,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "扬",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "扳",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "承",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "技",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "投",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "报",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "披",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "抵",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "拧",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "择",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "拭",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "拯",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "拽",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "按",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "挖",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "挠",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "挣",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "挥",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "挪",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "挽",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "捞",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "换",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "掀",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "授",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "掌",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "掐",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "探",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "控",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "掷",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "揉",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "援",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "揿",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "搁",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "搅",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "搔",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "搜",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "搬",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "携",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "摄",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "摊",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "撑",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "擂",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "擦",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "敦",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "敲",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "旁",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "旋",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "昏",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "晓",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "晕",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "晖",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "暝",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "曼",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "服",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "朦",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "权",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "板",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "枕",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "枝",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "栈",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "格",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "栽",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "桅",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "案",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "桑",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "桶",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "梦",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "梭",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "械",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "棕",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "棠",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "椒",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "椭",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "楚",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "榕",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "榜",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "榨",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "橘",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "橙",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "橡",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "檐",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "欠",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "欣",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "欧",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "欲",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "欺",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "款",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "歉",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "武",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "歹",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "死",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "殃",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "殊",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "残",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "殖",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "殴",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "段",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "殷",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "殿",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "毁",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "毅",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 14,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "毙",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "毫",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "民",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "永",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "汉",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "沿",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横折折|横折弯"
+        }
+      ]
+    },
+    {
+      "character": "泛",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "泞",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "波",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "泳",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "泻",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "泼",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "泽",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "洛",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "浅",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "浆",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "浇",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "浑",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "浓",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "浣",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "浸",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "涌",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "涣",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "液",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "深",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "渔",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "渡",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "溅",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "溶",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "滑",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "滨",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "滩",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "演",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "漫",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "漱",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "漾",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "澄",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "灾",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "炊",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "烈",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "烧",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "烫",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "焕",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "焰",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "煞",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "熄",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "熔",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "燃",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "爹",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "版",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "牢",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "犊",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "猕",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "猛",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "猾",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "玲",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "玻",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "琥",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "琴",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "瑟",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "瓷",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "甬",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "畅",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "略",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "疏",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "疗",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "疲",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "疼",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "痛",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "瘦",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "登",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "皖",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "皱",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "盈",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        },
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "盏",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "盗",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "盛",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "眠",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "眨",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "睁",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "督",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "瞎",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "瞑",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "瞪",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "瞬",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 13,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "矛",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "矜",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "砍",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "砖",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "竖折撇|竖折折"
+        }
+      ]
+    },
+    {
+      "character": "破",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "确",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "碗",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "礼",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "社",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "祈",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "祖",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "祝",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "神",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "祥",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "祭",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "祷",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "祸",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "秀",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "秘",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "称",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "移",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "秽",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "稳",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 12,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "稼",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "穗",
+      "positions": [
+        {
+          "index": 15,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "穴",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "究",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "穷",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "突",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "窃",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "窄",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "窈",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "窍",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "窑",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "窕",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "窖",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "窘",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "窜",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "窝",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "窟",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "窥",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "窿",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横折折折钩|横撇弯钩"
+        },
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "竖",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "筝",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "管",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "箩",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "篷",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "簸",
+      "positions": [
+        {
+          "index": 15,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 18,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "籽",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "索",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "紧",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "终",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "绑",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "绒",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "绕",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "络",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "绝",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "绣",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "续",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "综",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "绽",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "缀",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "缓",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "缘",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "缝",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "缤",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "缩",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "罕",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "罗",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "羡",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "翎",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "翘",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "耶",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "耽",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "聚",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "聪",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "肠",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "股",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "肢",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "胳",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "脆",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "脉",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "脖",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "腔",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "腕",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "腮",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "腹",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "腻",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "膛",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "臀",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "舒",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "舞",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "般",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "艘",
+      "positions": [
+        {
+          "index": 14,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "艰",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "芝",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "茂",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "茅",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "茎",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "荐",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "荡",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "荣",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "荧",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "荫",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "莹",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "莺",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "菠",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "菱",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "萝",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "萤",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "营",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "萨",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "葬",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "葱",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "葵",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蒙",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蒸",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蓉",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蓟",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蓬",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蔓",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蔡",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蔬",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蕊",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "斜钩|卧钩"
+        },
+        {
+          "index": 9,
+          "candidates": "斜钩|卧钩"
+        },
+        {
+          "index": 13,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "蕾",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "虑",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "虚",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蛇",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蛋",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蛾",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "蜂",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蜜",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 5,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "蜿",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 11,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "螃",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蟋",
+      "positions": [
+        {
+          "index": 15,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "蟹",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "补",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "衫",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "衬",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "袄",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "袋",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "袖",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "袜",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "袱",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "裁",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "裂",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "裆",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "裕",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "裙",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "裳",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "裸",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "褂",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "褐",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "覆",
+      "positions": [
+        {
+          "index": 17,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "观",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "解",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "触",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "设",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "译",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "诚",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "诫",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "诱",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "诵",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "谊",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "豁",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "豌",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "豪",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "豫",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "负",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "贤",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "贩",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "贪",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "贷",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "贼",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "资",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "赋",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "赏",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "赖",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "赛",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "赣",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "越",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "趣",
+      "positions": [
+        {
+          "index": 14,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "跪",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "践",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "跷",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "踏",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "踪",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蹄",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "蹬",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "躲",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横折折|横折弯"
+        }
+      ]
+    },
+    {
+      "character": "软",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "轰",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "载",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "辉",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "辽",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "返",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "逊",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "逢",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "逸",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "逻",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "遐",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "邓",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 3,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "邦",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "邮",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "邸",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "斜钩|卧钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "郁",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "郊",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "郎",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "郑",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "酱",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "酸",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "释",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "钗",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "钱",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "锈",
+      "positions": [
+        {
+          "index": 11,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "锋",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "锻",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横折折|横折弯"
+        },
+        {
+          "index": 13,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "镌",
+      "positions": [
+        {
+          "index": 14,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "阁",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "队",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "防",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "阵",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "阶",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "阻",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "阿",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "附",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "际",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "陆",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "陈",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "陌",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "陕",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "陡",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "除",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "险",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "陪",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "陵",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        },
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "陶",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "陷",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        },
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "隆",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        },
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "随",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "隐",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        },
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 9,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "隔",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "隙",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "障",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "隧",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横折折折钩|横撇弯钩"
+        }
+      ]
+    },
+    {
+      "character": "雏",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "雯",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "雳",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "零",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "雷",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "雹",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "雾",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "需",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "震",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "霉",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "霎",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "霸",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "霹",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "预",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "颇",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "颈",
+      "positions": [
+        {
+          "index": 1,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "额",
+      "positions": [
+        {
+          "index": 3,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "飕",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "餐",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "饥",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "饮",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "饰",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "饲",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "饶",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 5,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "饺",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "饿",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 8,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "馅",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "馆",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "馋",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "馒",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        },
+        {
+          "index": 13,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "驼",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "骆",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "骏",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "骚",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "骤",
+      "positions": [
+        {
+          "index": 10,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "骨",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "鲁",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "鲤",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "鲨",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "鲫",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "鲸",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "鳄",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "鸳",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "鸵",
+      "positions": [
+        {
+          "index": 8,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "鹅",
+      "positions": [
+        {
+          "index": 5,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "鹉",
+      "positions": [
+        {
+          "index": 7,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "鹤",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "鹭",
+      "positions": [
+        {
+          "index": 9,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "麦",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "黛",
+      "positions": [
+        {
+          "index": 4,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "鼎",
+      "positions": [
+        {
+          "index": 6,
+          "candidates": "竖折撇|竖折折"
+        }
+      ]
+    },
+    {
+      "character": "鼓",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "鼠",
+      "positions": [
+        {
+          "index": 13,
+          "candidates": "斜钩|卧钩"
+        }
+      ]
+    },
+    {
+      "character": "龄",
+      "positions": [
+        {
+          "index": 12,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    },
+    {
+      "character": "龟",
+      "positions": [
+        {
+          "index": 2,
+          "candidates": "横撇|横钩"
+        }
+      ]
+    }
+  ],
+  "missingAudio": [],
+  "countMismatches": []
+}

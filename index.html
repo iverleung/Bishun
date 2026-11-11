@@ -68,7 +68,7 @@
     <dialog id="settings" class="settings-drawer" aria-labelledby="menuTitle">
         <div class="drawer-header"><h2 id="menuTitle">菜单</h2><button id="closeMenuBtn" type="button" aria-label="关闭菜单">×</button></div>
         <div class="drawer-content">
-            <button id="openTextbookBtn" class="textbook-entry" type="button" aria-haspopup="dialog" aria-controls="textbookDialog" aria-expanded="false">小学教材<small id="textbookCurrent" hidden></small></button>
+            <button id="openTextbookBtn" class="textbook-entry" type="button" aria-haspopup="dialog" aria-controls="textbookDialog" aria-expanded="false"><span>小学教材<small id="textbookCurrent" hidden></small></span><span class="textbook-entry-arrow" aria-hidden="true">›</span></button>
             <details id="savedQueries" class="saved-queries"><summary>我的生字本 <span id="savedCount"></span></summary>
                 <div class="library-tools"><button id="manageSavedBtn" type="button" aria-pressed="false">管理</button><div id="libraryManagement" class="library-management" hidden><button id="exportSavedBtn" type="button">导出</button><button id="importSavedBtn" type="button">导入</button></div><input id="importSavedFile" type="file" accept=".json,application/json" hidden></div>
                 <nav id="savedList" aria-label="生字清单"></nav>
@@ -81,7 +81,7 @@
                         <div class="save-actions"><button id="shareBtn" type="button" class="text-button">分享</button><button id="printQueryBtn" type="button" class="text-button">打印练习纸</button></div>
                         <p id="saveActionFeedback" class="sr-only" role="status" aria-live="polite"></p>
             </section>
-            <details class="drawer-section" id="playbackSettings"><summary>播放设置</summary>
+            <details class="drawer-section" id="playbackSettings" open><summary>播放设置</summary>
                 <label class="toggle-setting" for="speechToggle">声音<input id="speechToggle" type="checkbox"></label>
                 <label class="toggle-setting" for="groupMode">连续播放<input id="groupMode" type="checkbox"></label>
                 <label class="speed-setting" for="speedSlider">速度<select id="speedSlider"><option value="2">慢</option><option value="3" selected>正常</option><option value="4">快</option></select></label>

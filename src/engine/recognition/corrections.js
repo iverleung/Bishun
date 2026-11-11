@@ -14,6 +14,9 @@ export const corrections = {
     '心': { 1: '卧钩' },
     '家': { 2: '横钩' },
     '游': { 9: '横撇' },
+    // Reviewed exact positions: docs/婆饼笔画播报修复.md.
+    '婆': { 3: '横钩', 6: '横撇' },
+    '饼': { 1: '横钩' },
     ...Object.fromEntries(grade1Review.characters.map(entry => [entry.character,
         Object.fromEntries(entry.strokes.map(stroke => [stroke.index, stroke.name]))]))
 };
