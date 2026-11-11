@@ -11,7 +11,6 @@
 <body data-phase="search">
     <header class="site-header"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">永</span>笔顺</a><button id="openSearchBtn" class="query-trigger" type="button" aria-label="重新查询" aria-haspopup="dialog" aria-controls="searchDialog" aria-expanded="false" hidden><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span id="currentQuery"></span></button><button id="menuBtn" class="menu-button" type="button" aria-label="打开菜单" title="菜单" aria-haspopup="dialog" aria-controls="settings" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 6H20M4 12H20M4 18H20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button></header>
     <main class="workspace">
-        <button id="exitFocusBtn" class="focus-exit secondary" type="button" hidden>退出专注</button>
         <h1 class="sr-only">汉字笔顺查询</h1>
         <div id="searchHome"><section id="searchPanel" class="search-panel" aria-label="查字">
             <form id="searchForm">
@@ -52,6 +51,7 @@
                 <div class="transport" aria-label="播放控制"><button id="previousStrokeBtn" class="secondary" type="button">上一笔</button><button id="playBtn" class="primary play-button" type="button">播放</button><button id="nextStrokeBtn" class="secondary" type="button">下一笔</button></div>
 
                 </div>
+                <button id="practiceBtn" type="button" class="practice-entry text-button">屏幕练习</button>
                 <section id="practicePanel" class="practice-panel" aria-label="屏幕练习" tabindex="-1" hidden>
                     <div class="practice-options"><label for="practiceMode" class="sr-only">练习方式（切换后重写）</label><select id="practiceMode" aria-describedby="practiceModeHelp"><option value="trace">描红</option><option value="independent">背临</option></select><span id="practiceProgress"></span></div>
                     <p id="practiceModeHelp" class="sr-only">描红：沿淡色字形书写。背临：隐藏范字，凭记忆书写。</p>
@@ -70,29 +70,23 @@
         <div class="drawer-content">
             <button id="openTextbookBtn" class="textbook-entry" type="button" aria-haspopup="dialog" aria-controls="textbookDialog" aria-expanded="false">小学教材<small id="textbookCurrent" hidden></small></button>
             <details id="savedQueries" class="saved-queries"><summary>我的生字本 <span id="savedCount"></span></summary>
-                <div class="library-tools"><button id="manageSavedBtn" type="button" aria-pressed="false">管理</button><button id="exportSavedBtn" type="button">导出</button><button id="importSavedBtn" type="button">导入</button><input id="importSavedFile" type="file" accept=".json,application/json" hidden></div>
+                <div class="library-tools"><button id="manageSavedBtn" type="button" aria-pressed="false">管理</button><div id="libraryManagement" class="library-management" hidden><button id="exportSavedBtn" type="button">导出</button><button id="importSavedBtn" type="button">导入</button></div><input id="importSavedFile" type="file" accept=".json,application/json" hidden></div>
                 <nav id="savedList" aria-label="生字清单"></nav>
             </details>
             <p id="savedFeedback" class="sr-only" role="status" aria-live="polite"></p>
             <section id="lessonActions" class="drawer-section" aria-label="当前字" hidden><h3 id="lessonActionsHeading">当前字</h3>
 
                         <button id="restartBtn" type="button" class="text-button">重播这个字</button>
-                        <div class="save-actions"><button id="saveCharacterBtn" type="button" class="text-button">收藏当前字</button><button id="saveQueryBtn" type="button" class="text-button">收藏这组字</button></div>
-                        <div class="save-actions"><button id="shareBtn" type="button" class="text-button">分享</button><button id="printQueryBtn" type="button" class="text-button">打印练习纸</button><button id="practiceBtn" type="button" class="text-button">屏幕练习</button></div>
+                        <button id="saveBtn" type="button" class="text-button">收藏</button>
+                        <div class="save-actions"><button id="shareBtn" type="button" class="text-button">分享</button><button id="printQueryBtn" type="button" class="text-button">打印练习纸</button></div>
                         <p id="saveActionFeedback" class="sr-only" role="status" aria-live="polite"></p>
             </section>
-            <section class="drawer-section" aria-label="播放与显示"><h3>播放与显示</h3>
-                        <fieldset class="mode-options"><legend>播放节奏</legend><label><input type="radio" name="mode" value="quick" checked>快速看</label><label><input type="radio" name="mode" value="explain">听讲解</label><label><input type="radio" name="mode" value="follow">跟着写</label></fieldset>
-                        <label class="toggle-setting" for="groupMode">整组播放<input id="groupMode" type="checkbox"></label>
-                        <label class="toggle-setting" for="speechToggle">语音<input id="speechToggle" type="checkbox"></label>
-                        <label class="speed-setting" for="speedSlider"><span>速度 <output id="speedValue" for="speedSlider">正常</output></span><input id="speedSlider" type="range" min="1" max="5" value="3"></label>
-                        <label class="toggle-setting" for="gridToggle">米字格<input id="gridToggle" type="checkbox" checked></label>
-                        <label class="toggle-setting" for="outlineToggle">字形轮廓<input id="outlineToggle" type="checkbox" checked></label>
-                        <button id="restartGroupBtn" type="button" class="secondary">整组从头播放</button>
-                        <button id="fullscreenBtn" type="button" class="secondary">专注模式</button>
-                        <button id="resetSettingsBtn" type="button" class="text-button">恢复默认设置</button>
-
-            </section>
+            <details class="drawer-section" id="playbackSettings"><summary>播放设置</summary>
+                <label class="toggle-setting" for="speechToggle">声音<input id="speechToggle" type="checkbox"></label>
+                <label class="toggle-setting" for="groupMode">连续播放<input id="groupMode" type="checkbox"></label>
+                <label class="speed-setting" for="speedSlider">速度<select id="speedSlider"><option value="2">慢</option><option value="3" selected>正常</option><option value="4">快</option></select></label>
+                <button id="resetSettingsBtn" type="button" class="text-button">恢复默认设置</button>
+            </details>
         </div>
     </dialog>
     <dialog id="textbookDialog" class="textbook-dialog" aria-labelledby="textbookTitle">
@@ -105,13 +99,17 @@
         </div>
         <div class="textbook-footer"><button id="openTextbookTaskBtn" class="primary" type="button" disabled>打开本课</button></div>
     </dialog>
+    <dialog id="saveScopeDialog" class="library-dialog" aria-labelledby="saveScopeTitle">
+        <h2 id="saveScopeTitle">收藏</h2>
+        <div class="dialog-actions"><button id="closeSaveScopeBtn" type="button">取消</button><button id="saveCharacterBtn" type="button">当前字</button><button id="saveQueryBtn" type="button" class="primary">这组字</button></div>
+    </dialog>
     <dialog id="shareDialog" class="library-dialog" aria-labelledby="shareTitle">
         <h2 id="shareTitle">分享汉字</h2>
         <fieldset class="mode-options"><legend class="sr-only">分享范围</legend><label><input id="shareCharacter" name="shareScope" type="radio" checked>当前字</label><label id="shareGroupOption"><input id="shareGroup" name="shareScope" type="radio">这组字</label></fieldset>
         <p id="shareContent"></p><label for="shareLink">分享链接</label><input id="shareLink" type="text" readonly>
-        <div id="shareQrPanel" class="share-qr" hidden><img id="shareQrImage" alt="打开当前分享链接的二维码"><a id="saveShareQr" class="secondary" download="汉字笔顺-二维码.png">保存图片</a></div>
+
         <p id="shareFeedback" role="status" aria-live="polite"></p>
-        <div class="dialog-actions"><button id="closeShareBtn" type="button">关闭</button><button id="shareQrBtn" type="button" aria-controls="shareQrPanel" aria-expanded="false">二维码</button><button id="copyShareBtn" type="button" class="secondary">复制链接</button><button id="systemShareBtn" type="button" class="primary" hidden>分享</button></div>
+        <div class="dialog-actions"><button id="closeShareBtn" type="button">关闭</button><button id="copyShareBtn" type="button" class="secondary">复制链接</button><button id="systemShareBtn" type="button" class="primary" hidden>分享</button></div>
     </dialog>
     <dialog id="editSavedDialog" class="library-dialog" aria-labelledby="editSavedTitle">
         <form id="editSavedForm">

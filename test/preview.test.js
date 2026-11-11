@@ -9,8 +9,6 @@ import radicalDictionary from 'cnchar-radical';
 import { readWorksheetTitle } from '../src/web/print-context.js';
 import { worksheetLayout, paginateCharacters } from '../src/web/print-layout.js';
 import { createShareUrl, readSharedQuery } from '../src/web/share.js';
-import { shareQrPixels } from '../src/web/share-qr.js';
-import jsQR from 'jsqr';
 
 test('saved queries preserve order and duplicates within a query, survive reload and stay separate from history', () => {
     const values = new Map();
@@ -56,7 +54,7 @@ test('preferences persist only validated settings and reset without changing his
     const storage = { getItem: key => values.get(key), setItem: (key, value) => values.set(key, value) };
     const history = new QueryHistory(storage);
     history.remember('木水');
-    const settings = { mode: 'follow', speed: 5, group: true, speechEnabled: true, grid: false, outline: false };
+    const settings = { speed: 4, group: true, speechEnabled: true };
     savePreferences(storage, { ...settings, autoplay: true });
     assert.deepEqual(loadPreferences(storage), settings);
     savePreferences(storage, defaultPreferences);
@@ -68,7 +66,7 @@ test('invalid or inaccessible preference storage falls back safely', () => {
     const broken = { getItem: () => '{' };
     assert.deepEqual(loadPreferences(broken), defaultPreferences);
     const invalid = { getItem: () => JSON.stringify({ mode: 'other', speed: '5', speechEnabled: 'yes', group: false, grid: false, outline: null }) };
-    assert.deepEqual(loadPreferences(invalid), { ...defaultPreferences, grid: false });
+    assert.deepEqual(loadPreferences(invalid), { ...defaultPreferences, group: false });
     const blocked = { getItem() { throw new Error(); }, setItem() { throw new Error(); } };
     assert.deepEqual(loadPreferences(blocked), defaultPreferences);
     assert.doesNotThrow(() => savePreferences(blocked, defaultPreferences));
@@ -304,27 +302,6 @@ test('invalid or ambiguous radical results remain unknown instead of guessing a 
 });
 
 
-test('share QR pixels independently decode to exact content-only URLs, including repeats and 20 supplementary Han', () => {
-    for (const query of ['和', '木水木', '𠮷'.repeat(20)]) {
-        const url = createShareUrl('https://example.com/?private=excluded#old', query);
-        const image = shareQrPixels(url);
-        const decoded = jsQR(image.data, image.width, image.height);
-        assert.equal(decoded?.data, url);
-        assert.equal(readSharedQuery(decoded.data).query, query);
-        assert.equal(new URL(decoded.data).search, '');
-        assert.equal(image.width, image.height);
-        // Four whole white modules surround the code; no dark pixels on the border.
-        for (let x = 0; x < image.width; x++) assert.equal(image.data[x * 4], 255);
-    }
-});
-
-test('share QR rejects non-web and oversized links instead of creating a misleading image', () => {
-    for (const value of ['javascript:alert(1)', 'file:///tmp/a', 'not a URL', 'https://example.com/' + 'a'.repeat(2048)]) {
-        assert.throws(() => shareQrPixels(value));
-    }
-});
-
-
 test('worksheet measured pinyin and wrapped titles reserve space without splitting a character block',()=>{
     const characters=Array.from('长木长行和木');
     const extra=[8,8,20,8,14,8];
@@ -344,4 +321,22 @@ test('worksheet optional labels are bounded plain text and never change shared q
     const url='https://example.com/print/index.html#'+new URLSearchParams({q:'一二三上',t:title});
     assert.equal(readWorksheetTitle(url),title);assert.equal(readSharedQuery(url).query,'一二三上');
     for(const hash of ['t=a&t=b','t=%3Cscript%3E','t=%00','t='+ '字'.repeat(101),'q=木'])assert.equal(readWorksheetTitle('https://example.com/#'+hash),'');
+});
+
+
+test('legacy playback preferences migrate to three speeds and ignore retired modes and display toggles',()=>{
+    for(const speed of [1,2,3,4,5]){
+        const storage={getItem:()=>JSON.stringify({mode:'follow',speed,group:true,speechEnabled:true,grid:false,outline:false})};
+        assert.deepEqual(loadPreferences(storage),{speed:Math.max(2,Math.min(4,speed)),group:true,speechEnabled:true});
+    }
+});
+
+
+test('new and reset preferences enable sound and continuous playback while explicit choices persist',()=>{
+    assert.deepEqual(loadPreferences(null),{speed:3,speechEnabled:true,group:true});
+    const data=new Map();const storage={getItem:key=>data.get(key),setItem:(key,value)=>data.set(key,value)};
+    savePreferences(storage,{speed:2,speechEnabled:false,group:false});
+    assert.deepEqual(loadPreferences(storage),{speed:2,speechEnabled:false,group:false});
+    savePreferences(storage,defaultPreferences);
+    assert.deepEqual(loadPreferences(storage),{speed:3,speechEnabled:true,group:true});
 });

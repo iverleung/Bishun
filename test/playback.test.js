@@ -157,20 +157,15 @@ test('pausing while a group loads its next character prevents automatic restart'
     assert.equal(player.status, 'complete');
 });
 
-test('follow mode waits at every stroke and character boundary', async () => {
+test('unified playback continues through strokes and characters without a playback mode', async () => {
     const { player } = setup();
     player.query('一一');
     await player.ready;
-    player.setMode('follow');
     player.group = true;
     await player.play();
-    assert.equal(player.index, 0);
-    assert.equal(player.status, 'paused');
-    await player.play();
     assert.equal(player.index, 1);
-    assert.equal(player.status, 'paused');
-    await player.play();
     assert.equal(player.status, 'complete');
+    assert.equal(player.groupComplete, true);
 });
 
 test('seeking after pausing a group load replaces its saved resume position', async () => {
@@ -240,4 +235,12 @@ test('speed changes apply only to the next stroke', async () => {
     stroke.resolve();
     await run;
     assert.deepEqual(seen, [1, 4, 4, 4]);
+});
+
+
+test('replay after continuous completion restarts the group; explicit current restart stays on the current character',async()=>{
+    const {player,calls}=setup();await player.ready;player.group=true;
+    await player.play();calls.length=0;await player.play();
+    assert.deepEqual(calls.map(call=>call.char),[...Array(4).fill('木'),...Array(4).fill('水')]);
+    calls.length=0;await player.play({restart:true});assert.deepEqual(calls.map(call=>call.char),Array(4).fill('水'));
 });

@@ -1,0 +1,58 @@
+import assert from 'node:assert/strict';
+import {openBrowser} from './helpers/cdp.mjs';
+const [cdp='http://127.0.0.1:9224',url='http://127.0.0.1:5189/']=process.argv.slice(2);
+const browser=await openBrowser(cdp,url);
+try{
+    const {command,evaluate,click,fill,wait}=browser;
+    assert.equal(await evaluate("document.querySelector('#speechToggle').checked"),true);
+    assert.equal(await evaluate("document.querySelector('#groupMode').checked"),true);
+    await evaluate("localStorage.setItem('bishun-web-preferences-v1',JSON.stringify({mode:'follow',speed:5,grid:false,outline:false,group:false,speechEnabled:false}))");
+    await command('Page.reload');await wait("document.querySelector('#status')?.textContent==='请输入汉字'");
+    assert.equal(await evaluate("document.querySelector('#speedSlider').value"),'4');
+    for(const selector of ['#fullscreenBtn','#exitFocusBtn','#gridToggle','#outlineToggle','[name=mode]','#restartGroupBtn','#shareQrBtn','#offlineSection','.reading-source'])assert.equal(await evaluate(`document.querySelector(${JSON.stringify(selector)})`),null);
+    await fill('#query','木');await click('#searchForm [type=submit]');await wait("!document.querySelector('#playBtn').disabled");
+    assert.equal(await evaluate("document.querySelector('#writingGrid').classList.contains('no-outline')"),false);
+    await click('#menuBtn');await click('#saveBtn');
+    assert.equal(await evaluate("document.querySelector('#saveScopeDialog').open"),false);
+    assert.equal(await evaluate("document.querySelector('#savedCount').textContent"),'1');
+    await click('#closeMenuBtn');
+    await fill('#query','木水');await click('#searchForm [type=submit]');await wait("!document.querySelector('#playBtn').disabled");
+    await click('#menuBtn');await click('#saveBtn');await click('#closeSaveScopeBtn');
+    assert.equal(await evaluate("document.querySelector('#savedCount').textContent"),'1');
+    await click('#saveBtn');await click('#saveQueryBtn');
+    assert.equal(await evaluate("document.querySelector('#savedCount').textContent"),'2');
+    await click('#savedQueries summary');
+    assert.equal(await evaluate("document.querySelector('#libraryManagement').hidden"),true);
+    await click('#manageSavedBtn');assert.equal(await evaluate("document.querySelector('#libraryManagement').hidden"),false);
+    await click('#manageSavedBtn');assert.equal(await evaluate("document.querySelector('#libraryManagement').hidden"),true);
+    await click('#playbackSettings summary');
+    assert.deepEqual(await evaluate("Array.from(document.querySelector('#speedSlider').options,option=>option.textContent)"),['慢','正常','快']);
+    await click('#groupMode');await click('#closeMenuBtn');
+    await click('#playBtn');await wait("document.querySelector('#wordPosition').textContent==='2 / 2' && document.querySelector('#playBtn').textContent==='重播'",18000);
+    await click('#practiceBtn');await wait("!document.querySelector('#practicePanel').hidden");
+    assert.equal(await evaluate("document.querySelector('#practiceBtn').hidden"),true);
+    await click('#practiceExitBtn');await wait("!document.querySelector('#practiceBtn').hidden");
+    await click('#menuBtn');await click('#shareBtn');
+    assert.equal(await evaluate("document.querySelector('#shareLink').value"),new URL('/#q='+encodeURIComponent('水'),url).href);
+    assert.equal(await evaluate("document.querySelector('#shareQrPanel')"),null);
+    await click('#closeShareBtn');
+    await click('#resetSettingsBtn');
+    assert.equal(await evaluate("document.querySelector('#speechToggle').checked"),true);
+    assert.equal(await evaluate("document.querySelector('#groupMode').checked"),true);
+    assert.equal(await evaluate("document.querySelector('#speedSlider').value"),'3');
+    assert.deepEqual(await evaluate("Object.keys(JSON.parse(localStorage.getItem('bishun-web-preferences-v1'))).sort()"),['group','speechEnabled','speed']);
+    await click('#closeMenuBtn');
+    for(const [width,height] of [[1280,900],[768,1024],[320,740],[812,375]]){
+        await command('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:true});
+        assert.equal(await evaluate('document.documentElement.scrollWidth<=innerWidth'),true);
+        assert.ok(await evaluate("Math.abs(document.querySelector('#writingGrid').getBoundingClientRect().left+document.querySelector('#writingGrid').getBoundingClientRect().width/2-innerWidth/2)<1"));
+    }
+    await command('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
+    await browser.screenshot('/private/tmp/bishun-simplified-canvas.png');
+    await click('#menuBtn');await browser.screenshot('/private/tmp/bishun-simplified-menu.png');
+    await click('#printQueryBtn');await wait("document.body.dataset.ready==='true'");
+    assert.equal(await evaluate("document.querySelector('#printSettings').open"),false);
+    assert.equal(await evaluate("document.querySelector('#printBtn').disabled"),false);
+    assert.deepEqual(browser.exceptions,[]);
+    console.log('PASS: retired controls absent; legacy settings migrate; single/multi save and cancel; management progressive disclosure; continuous playback; practice return; sharing; four viewport layouts; ready-to-print defaults');
+}finally{await browser.close();}

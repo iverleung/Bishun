@@ -21,7 +21,6 @@ export class PlaybackController {
         this.active = null;
         this.showFull = true;
         this.status = 'empty';
-        this.mode = 'quick';
         this.speed = 3;
         this.group = false;
         this.speechEnabled = false;
@@ -146,15 +145,6 @@ export class PlaybackController {
         this.notify();
     }
 
-    setMode(mode) {
-        if (!['quick', 'explain', 'follow'].includes(mode)) return;
-        this.pause();
-        this.mode = mode;
-        if (mode === 'quick') this.setSpeech(false);
-        else if (mode === 'explain') this.setSpeech(true);
-        this.notify();
-    }
-
     setSpeech(enabled) {
         this.speechEnabled = enabled;
         this.muted = false;
@@ -184,6 +174,7 @@ export class PlaybackController {
     }
 
     async play({ restart = false, oneStroke = false, fromGroupStart = false } = {}) {
+        fromGroupStart ||= this.group && this.groupComplete && !restart && !oneStroke;
         const resumeIndex = !restart && !oneStroke && this.status === 'paused' ? this.resumeIndex : null;
         if (!this.entries.length || (!fromGroupStart && resumeIndex === null && (!this.data || ['loading', 'error'].includes(this.status)))) return;
         const selected = this.active ?? this.completed - 1;
@@ -227,7 +218,7 @@ export class PlaybackController {
                 this.completed++;
                 this.active = null;
                 const finished = this.completed === this.data.strokes.length;
-                if (oneStroke || this.mode === 'follow') {
+                if (oneStroke) {
                     this.status = finished && !(this.group && !oneStroke) ? 'complete' : 'paused';
                     this.notify();
                     return;
@@ -241,7 +232,7 @@ export class PlaybackController {
                         return;
                     }
                     this.status = 'playing';
-                } else await this.wait(this.mode === 'quick' ? 80 : 180, signal);
+                } else await this.wait(120, signal);
             }
         } catch (error) {
             if (signal.aborted) return;

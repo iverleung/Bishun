@@ -119,6 +119,6 @@ try {
     assert.deepEqual(browser.exceptions,[]);
     console.log(JSON.stringify({browser:browser.version,checks,backgroundResumes,exceptions:browser.exceptions},null,2));
 } catch(error) {
-    console.error(await browser.evaluate("({visibility:document.visibilityState,progress:document.querySelector('#practiceProgress').textContent,feedback:document.querySelector('#practiceFeedback').textContent,position:document.querySelector('#wordPosition').textContent})"));
+    console.error(await browser.evaluate("({visibility:document.visibilityState,focus:document.activeElement.id,progress:document.querySelector('#practiceProgress').textContent,feedback:document.querySelector('#practiceFeedback').textContent,position:document.querySelector('#wordPosition').textContent})"));
     throw error;
 } finally { await browser.close(); }

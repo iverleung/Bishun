@@ -68,6 +68,17 @@ export async function openBrowser(cdpUrl, pageUrl, { ready = "document.querySele
             }
         }
         async function click(selector) {
+            // Follow the new visible entry points when exercising existing flows.
+            if (selector === '#practiceBtn' && await evaluate("document.querySelector('#settings')?.open")) {
+                await click('#closeMenuBtn');
+                await wait("!document.querySelector('#settings').open && document.activeElement.id==='menuBtn'");
+            }
+            if (['#saveCharacterBtn','#saveQueryBtn'].includes(selector) && !await evaluate("document.querySelector('#saveScopeDialog').open")) {
+                await click('#saveBtn');
+                if (!await evaluate("document.querySelector('#saveScopeDialog').open")) return;
+            }
+            if (['#speechToggle','#speedSlider'].includes(selector) && !await evaluate("document.querySelector('#playbackSettings').open")) await click('#playbackSettings summary');
+            if (selector === '#showPinyin' && !await evaluate("document.querySelector('#printSettings').open")) await click('#printSettings summary');
             const point = await evaluate(`(() => {
                 const el = document.querySelector(${JSON.stringify(selector)});
                 if (!el || el.disabled) throw new Error('Unavailable control');
@@ -82,7 +93,6 @@ export async function openBrowser(cdpUrl, pageUrl, { ready = "document.querySele
             // Result pages expose search through the compact toolbar. Follow
             // the actual UI instead of reaching into its hidden input.
             if (selector === '#query' && !await evaluate("document.querySelector('#query').getClientRects().length > 0")) {
-                if (await evaluate("document.querySelector('#exitFocusBtn') && !document.querySelector('#exitFocusBtn').hidden")) await click('#exitFocusBtn');
                 await click('#openSearchBtn');
                 await wait("document.querySelector('#searchDialog').open && document.querySelector('#query').getClientRects().length > 0");
             }

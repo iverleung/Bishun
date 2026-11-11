@@ -26,50 +26,11 @@ export function clearSharedQuery() {
 
 export function setupSharing({ dom, getSelection }) {
     let selection;
-    let qrRequest = 0;
-    function clearQr() {
-        qrRequest++;
-        dom.shareQrPanel.hidden = true;
-        dom.shareQrBtn.setAttribute('aria-expanded', 'false');
-        dom.shareQrBtn.textContent = '二维码';
-        dom.shareQrImage.removeAttribute('src');
-        dom.saveShareQr.removeAttribute('href');
-        dom.saveShareQr.hidden = true;
-    }
-    async function showQr() {
-        const request = ++qrRequest;
-        const value = dom.shareLink.value;
-        const current = () => request === qrRequest && dom.shareDialog.open && dom.shareLink.value === value;
-        dom.shareQrPanel.hidden = false;
-        dom.shareQrBtn.setAttribute('aria-expanded', 'true');
-        dom.shareQrBtn.textContent = '收起二维码';
-        dom.shareFeedback.textContent = '正在生成二维码…';
-        let timer;
-        try {
-            const module = await Promise.race([
-                import('./share-qr.js'),
-                new Promise((resolve, reject) => { timer = setTimeout(() => reject(new Error('二维码加载超时')), 3000); })
-            ]);
-            if (!current()) return;
-            const image = module.createShareQrImage(value);
-            dom.shareQrImage.src = image;
-            dom.saveShareQr.href = image;
-            dom.saveShareQr.hidden = false;
-            dom.shareFeedback.textContent = '';
-        } catch {
-            if (!current()) return;
-            clearQr();
-            dom.shareFeedback.textContent = '二维码暂不可用，可复制链接';
-        } finally { clearTimeout(timer); }
-    }
     function updateLink() {
-        const expanded = !dom.shareQrPanel.hidden;
-        clearQr();
         const value = dom.shareGroup.checked ? selection.group : selection.character;
         dom.shareLink.value = createShareUrl(location.href, value);
         dom.shareContent.textContent = `链接包含：${value}`;
         dom.shareFeedback.textContent = '';
-        if (expanded) void showQr();
     }
     dom.shareBtn.addEventListener('click', () => {
         selection = getSelection();
@@ -83,12 +44,8 @@ export function setupSharing({ dom, getSelection }) {
     });
     dom.shareCharacter.addEventListener('change', updateLink);
     dom.shareGroup.addEventListener('change', updateLink);
-    dom.shareQrBtn.addEventListener('click', () => {
-        if (dom.shareQrPanel.hidden) void showQr();
-        else { clearQr(); dom.shareFeedback.textContent = ''; }
-    });
     dom.closeShareBtn.addEventListener('click', () => dom.shareDialog.close());
-    dom.shareDialog.addEventListener('close', () => { clearQr(); dom.shareBtn.focus({ preventScroll: true }); });
+    dom.shareDialog.addEventListener('close', () => { dom.shareBtn.focus({ preventScroll: true }); });
     dom.copyShareBtn.addEventListener('click', async () => {
         const value = dom.shareLink.value;
         dom.copyShareBtn.disabled = true;

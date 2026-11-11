@@ -1,12 +1,11 @@
 const storageKey = 'bishun-web-preferences-v1';
-export const defaultPreferences = Object.freeze({ mode: 'quick', speed: 3, speechEnabled: false, group: false, grid: true, outline: true });
+export const defaultPreferences = Object.freeze({ speed: 3, speechEnabled: true, group: true });
 
 function validate(value) {
     const result = { ...defaultPreferences };
     if (!value || typeof value !== 'object') return result;
-    if (['quick', 'explain', 'follow'].includes(value.mode)) result.mode = value.mode;
-    if (Number.isInteger(value.speed) && value.speed >= 1 && value.speed <= 5) result.speed = value.speed;
-    for (const key of ['speechEnabled', 'group', 'grid', 'outline']) {
+    if (Number.isInteger(value.speed) && value.speed >= 1 && value.speed <= 5) result.speed = Math.max(2,Math.min(4,value.speed));
+    for (const key of ['speechEnabled', 'group']) {
         if (typeof value[key] === 'boolean') result[key] = value[key];
     }
     return result;

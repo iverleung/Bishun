@@ -145,8 +145,8 @@ try {
     await click('#menuBtn');
     if (!await evaluate("document.querySelector('#savedQueries').open")) await click('#savedQueries summary');
     await click('.remove-saved-query');
-    await wait("document.querySelector('#savedCount').textContent === '' && document.activeElement.id === 'importSavedBtn'");
-    checks.push('deleting last list keeps keyboard focus on enabled import action');
+    await wait("document.querySelector('#savedCount').textContent === '' && document.activeElement.id === 'manageSavedBtn'");
+    checks.push('deleting last list keeps keyboard focus on enabled management action');
     assert.deepEqual(browser.exceptions, []);
     console.log(JSON.stringify({ browser:browser.version,checks,exceptions:browser.exceptions },null,2));
 } catch (error) {

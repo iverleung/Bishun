@@ -16,7 +16,7 @@ try {
     await click('#searchForm button[type=submit]');
     await wait(ready('木'));
     await click('#menuBtn');
-    await click('[name="mode"][value="explain"]');
+    if (!await evaluate("document.querySelector('#speechToggle').checked")) await click('#speechToggle');
     await click('#closeMenuBtn');
     await browser.activate();
     await wait("document.visibilityState === 'visible'");

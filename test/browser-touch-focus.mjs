@@ -12,17 +12,10 @@ try {
     await fill('#query','木水心');
     await click('#searchForm [type="submit"]');
     await wait("!document.querySelector('#playBtn').disabled");
-    // Verify the fallback independently of Chrome's native fullscreen support.
-    await evaluate("Object.defineProperty(document,'fullscreenEnabled',{configurable:true,get:()=>false})");
-    await click('#menuBtn');
-    await click('#fullscreenBtn');
-    await wait("document.body.classList.contains('focus-mode') && !document.querySelector('#settings').open");
-    assert.equal(await evaluate('document.fullscreenElement'),null);
-    const layout=await evaluate(`(() => { const r=document.querySelector('#writingGrid').getBoundingClientRect(); const e=document.querySelector('#exitFocusBtn').getBoundingClientRect(); return {gridInside:r.left>=0&&r.right<=innerWidth,exitInside:e.top>=0&&e.bottom<=innerHeight,center:Math.abs((r.left+r.right)/2-innerWidth/2)}; })()`);
-    assert.equal(layout.gridInside,true);
-    assert.equal(layout.exitInside,true);
-    assert.ok(layout.center<1);
-    checks.push('unsupported native fullscreen keeps focus layout, centered grid and visible exit');
+    assert.equal(await evaluate("document.querySelector('#fullscreenBtn')"),null);
+    const layout=await evaluate(`(() => { const r=document.querySelector('#writingGrid').getBoundingClientRect(); return {gridInside:r.left>=0&&r.right<=innerWidth,center:Math.abs((r.left+r.right)/2-innerWidth/2)}; })()`);
+    assert.equal(layout.gridInside,true);assert.ok(layout.center<1);
+    checks.push('default layout keeps the grid centered without a separate focus mode');
 
     async function swipe(dx,{resize=false,cancel=false}={}) {
         await browser.activate();
@@ -46,12 +39,10 @@ try {
     await wait("document.querySelector('#wordPosition').textContent==='3 / 3' && !document.querySelector('#playBtn').disabled");
     await swipe(120);
     await wait("document.querySelector('#wordPosition').textContent==='2 / 3' && !document.querySelector('#playBtn').disabled");
-    checks.push('focus layout navigates both directions through Touch Events even if touch Pointer Events cancel');
+    checks.push('default layout navigates both directions through Touch Events even if touch Pointer Events cancel');
     await swipe(18);
     assert.equal(await evaluate("document.querySelector('#wordPosition').textContent"),'2 / 3');
     checks.push('short touch drag never switches or double-switches');
-    await click('#exitFocusBtn');
-    await wait("!document.body.classList.contains('focus-mode')");
     assert.equal(await evaluate("document.querySelector('#practicePanel').hidden"),true);
     assert.deepEqual(browser.exceptions,[]);
     checks.push('exit restores demonstration without starting handwriting or autoplay');
@@ -75,5 +66,5 @@ try {
     assert.equal(await evaluate("document.querySelector('#practiceFeedback').textContent"),'这一字写完了');
     assert.deepEqual(browser.exceptions,[]);
     checks.push('native touch handwriting still completes two strokes without triggering character navigation');
-    console.log(JSON.stringify({browser:browser.version,checks,scope:'Chrome touch injection; fullscreen capability and resize/pointercancel events deliberately simulated, not Safari device acceptance',exceptions:browser.exceptions},null,2));
+    console.log(JSON.stringify({browser:browser.version,checks,scope:'Chrome touch injection; resize/pointercancel events deliberately simulated, not Safari device acceptance',exceptions:browser.exceptions},null,2));
 } finally {await browser.close();}

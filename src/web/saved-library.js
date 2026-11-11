@@ -28,7 +28,8 @@ export function createSavedLibrary({ dom, savedQueries, openQuery, feedback, cha
 
     function render() {
         dom.savedCount.textContent = savedQueries.items.length || '';
-        dom.manageSavedBtn.disabled = !savedQueries.items.length;
+        dom.manageSavedBtn.disabled = false;
+        dom.libraryManagement.hidden = !managing;
         dom.exportSavedBtn.disabled = !savedQueries.items.length;
         dom.savedList.replaceChildren(...savedQueries.items.map((query, index) => {
             const name = savedQueries.names.get(query) || '';

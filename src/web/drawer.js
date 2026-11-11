@@ -22,8 +22,8 @@ export function createDrawer({ dialog, trigger, closeButton, onOpen = () => {}, 
         return event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
     }
     function close({ restore = true } = {}) {
-        if (!dialog.open) return;
         restoreFocus = restore;
+        if (!dialog.open) return;
         dialog.close();
         unlockScroll();
         trigger.setAttribute('aria-expanded', 'false');
@@ -41,7 +41,12 @@ export function createDrawer({ dialog, trigger, closeButton, onOpen = () => {}, 
     dialog.addEventListener('keydown', event => {
         if (event.key !== 'Tab') return;
         const controls = Array.from(dialog.querySelectorAll('button:not(:disabled),input:not(:disabled),select:not(:disabled),textarea:not(:disabled),summary,a[href],[tabindex="0"]'))
-            .filter(el => el.getClientRects().length && (el.type !== 'radio' || el.checked || !dialog.querySelector(`input[type="radio"][name="${el.name}"]:checked`)));
+            .filter(el => {
+                const closedDetails = el.closest('details:not([open])');
+                return el.getClientRects().length && !el.closest('[hidden]')
+                    && (!closedDetails || (el.tagName === 'SUMMARY' && el.parentElement === closedDetails))
+                    && (el.type !== 'radio' || el.checked || !dialog.querySelector(`input[type="radio"][name="${el.name}"]:checked`));
+            });
         const first = controls[0];
         const last = controls.at(-1);
         if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }

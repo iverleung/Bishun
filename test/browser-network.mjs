@@ -61,7 +61,7 @@ try {
 
     await command('Network.setBlockedURLs', { urls: ['*/audio/strokes/*'] });
     await click('#menuBtn');
-    await click('[name="mode"][value="explain"]');
+    if (!await evaluate("document.querySelector('#speechToggle').checked")) await click('#speechToggle');
     await click('#closeMenuBtn');
     await click('#playBtn');
     await wait("document.querySelector('#playBtn').textContent === '重播'", 20000);

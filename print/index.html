@@ -4,6 +4,9 @@
 <body>
     <header class="print-controls">
         <a href="/" id="backLink">← 返回查字</a><h1>练习纸</h1>
+        <p id="printStatus" role="status" aria-live="polite"></p><ul id="printErrors"></ul>
+        <div><button id="retryPrintBtn" type="button" hidden>重试</button><button id="removePrintErrorsBtn" type="button" hidden>移除问题字</button><button id="printBtn" type="button" disabled>打印／另存 PDF</button></div>
+        <details id="printSettings"><summary>打印设置</summary>
         <form id="printOptions">
             <label>范围 <select id="printScope"><option value="group">这组字</option><option id="printCurrentOption" value="current">当前字</option></select></label>
             <label>格线 <select id="gridStyle"><option value="mi">米字格</option><option value="tian">田字格</option></select></label>
@@ -11,8 +14,7 @@
             <label>每字 <select id="rowCount"><option value="1">1 行</option><option value="2" selected>2 行</option><option value="3">3 行</option></select></label>
             <label class="pinyin-option"><input id="showPinyin" type="checkbox"> 显示拼音</label>
         </form>
-        <p id="printStatus" role="status" aria-live="polite"></p><ul id="printErrors"></ul>
-        <div><button id="retryPrintBtn" type="button" hidden>重试</button><button id="removePrintErrorsBtn" type="button" hidden>移除问题字</button><button id="printBtn" type="button" disabled>打印／另存 PDF</button></div>
+        </details>
         <details><summary>来源与许可</summary><p>拼音显示全部字典候选，不作词语语境选读；没有候选时显示“暂缺”。</p><p>字形来自 Make Me a Hanzi／HanziWriter 数据，随练习纸附完整 Arphic Public License。打印使用 A4 纵向；可在支持的系统打印界面另存 PDF，建议关闭浏览器页眉页脚。</p></details>
     </header>
     <main id="printPages" aria-label="练习纸预览"></main>

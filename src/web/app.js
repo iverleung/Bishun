@@ -46,8 +46,6 @@ const practice = new PracticeController({ adapter: practiceAdapter, onChange: ()
     if (practice.status === 'complete' && practiceRun && !practiceRun.pending) practiceRun.completed.add(player.index);
     renderPractice();
 } });
-let focusMode = false;
-let ownsFullscreen = false;
 let viewportWidth = window.innerWidth;
 const drawer = createDrawer({ dialog: dom.settings, trigger: dom.menuBtn, closeButton: dom.closeMenuBtn, onOpen: () => { canvasSwipe.reset(); player.pause(); readingPlayer.cancel(); pausePractice(); } });
 const canvasSwipe = bindCanvasSwipe(dom.stage, {
@@ -86,41 +84,13 @@ const search = createDrawer({
 
 function applyPreferences(preferences) {
     player.pause();
-    Object.assign(player, { mode: preferences.mode, speed: preferences.speed, group: preferences.group });
+    Object.assign(player, { speed: preferences.speed, group: preferences.group });
     player.setSpeech(preferences.speechEnabled);
-    for (const el of document.querySelectorAll('[name="mode"]')) el.checked = el.value === preferences.mode;
     dom.speedSlider.value = preferences.speed;
-    dom.speedValue.textContent = ['极慢', '较慢', '正常', '较快', '极快'][preferences.speed - 1];
-    dom.gridToggle.checked = preferences.grid;
-    dom.outlineToggle.checked = preferences.outline;
-    dom.writingGrid.classList.toggle('no-grid', !preferences.grid);
-    dom.writingGrid.classList.toggle('no-outline', !preferences.outline);
 }
 
 function rememberPreferences() {
-    savePreferences(historyStorage, {
-        mode: player.mode, speed: player.speed, group: player.group, speechEnabled: player.speechEnabled,
-        grid: dom.gridToggle.checked, outline: dom.outlineToggle.checked
-    });
-}
-
-function setFocusMode(enabled) {
-    if (focusMode === enabled) return;
-    if (enabled) drawer.close({ restore: false });
-    focusMode = enabled;
-    document.body.classList.toggle('focus-mode', enabled);
-    dom.exitFocusBtn.hidden = !enabled;
-    if (enabled) dom.exitFocusBtn.focus({ preventScroll: true });
-    else dom.menuBtn.focus({ preventScroll: true });
-    updateQueueTabStops();
-}
-
-async function exitFocusMode() {
-    setFocusMode(false);
-    if (ownsFullscreen && document.fullscreenElement) {
-        try { await document.exitFullscreen(); } catch { /* The browser may have already exited. */ }
-    }
-    ownsFullscreen = false;
+    savePreferences(historyStorage, { speed: player.speed, group: player.group, speechEnabled: player.speechEnabled });
 }
 
 function unlockAudio() {
@@ -341,6 +311,7 @@ function renderPractice() {
     document.body.classList.toggle('practice-mode', visible);
     if (changed) { canvasSwipe.reset(); updateQueueTabStops(); }
     dom.practiceLayer.hidden = !visible;
+    dom.practiceBtn.hidden = visible;
     dom.practiceBtn.disabled = visible || !player.record;
     dom.demonstrationControls.hidden = visible;
     dom.practicePanel.hidden = !visible;
@@ -478,23 +449,23 @@ function render(state) {
     dom.restartBtn.disabled = !available;
     dom.practiceBtn.disabled = !available || practice.visible;
     dom.lessonActions.hidden = !state.entries.length;
-    dom.fullscreenBtn.disabled = !available;
     dom.shareBtn.disabled = !state.entries.length;
     dom.printQueryBtn.disabled = !state.entries.length;
     dom.previousStrokeBtn.disabled = !available || state.showFull || state.completed === 0;
     dom.nextStrokeBtn.disabled = !available || (!state.showFull && state.completed >= count);
     dom.previousCharBtn.disabled = state.entries.length === 0 || state.index === 0;
     dom.nextCharBtn.disabled = state.entries.length === 0 || state.index >= state.entries.length - 1;
-    dom.restartGroupBtn.disabled = !state.entries.length;
     dom.groupMode.checked = state.group;
     dom.speechToggle.checked = state.speechEnabled;
     const savedCharacter = savedQueries.items.includes(state.entry);
     const savedQuery = savedQueries.items.includes(state.entries.join(''));
     dom.saveCharacterBtn.disabled = !available || savedCharacter;
-    dom.saveCharacterBtn.textContent = savedCharacter ? '当前字已收藏' : '收藏当前字';
-    dom.saveQueryBtn.hidden = state.entries.length < 2;
+    dom.saveCharacterBtn.textContent = savedCharacter ? '当前字已收藏' : '当前字';
     dom.saveQueryBtn.disabled = !state.entries.length || savedQuery;
-    dom.saveQueryBtn.textContent = savedQuery ? '这组字已收藏' : '收藏这组字';
+    dom.saveQueryBtn.textContent = savedQuery ? '这组字已收藏' : '这组字';
+    dom.saveBtn.disabled = !state.entries.length || (state.entries.length === 1 && savedQuery);
+    dom.saveBtn.textContent = state.entries.length === 1 && savedQuery ? '已收藏' : '收藏';
+    dom.practiceBtn.hidden = practice.visible;
     updateQueue(state);
     const statuses = {
         empty: '请输入汉字', ready: `${state.entry}，${count} 笔`,
@@ -524,7 +495,6 @@ function query(value, fromLink = false, textbook = null) {
     renderHistory();
     if (player.entries.length) dom.query.blur();
     if (dom.searchDialog.open) search.close({ restore: false });
-    if (!player.entries.length && focusMode) void exitFocusMode();
 }
 
 dom.query.addEventListener('input', () => {
@@ -561,7 +531,6 @@ dom.clearBtn.addEventListener('click', () => {
         dom.query.focus({ preventScroll: true });
         return;
     }
-    if (focusMode) void exitFocusMode();
     dom.query.value = '';
     query('');
     dom.query.focus();
@@ -581,22 +550,18 @@ dom.previousStrokeBtn.addEventListener('click', () => player.seek(player.complet
 dom.nextStrokeBtn.addEventListener('click', () => player.seek(player.showFull ? 1 : player.completed + 1));
 dom.previousCharBtn.addEventListener('click', () => player.select(player.index - 1));
 dom.nextCharBtn.addEventListener('click', () => player.select(player.index + 1));
-dom.restartGroupBtn.addEventListener('click', () => { drawer.close({ restore: false }); if (player.speechEnabled) unlockAudio(); void player.restartGroup(); dom.playBtn.focus({ preventScroll: true }); });
 dom.groupMode.addEventListener('change', () => { player.group = dom.groupMode.checked; });
-document.querySelectorAll('[name="mode"]').forEach(el => el.addEventListener('change', () => {
-    player.setMode(el.value);
-    if (player.speechEnabled) unlockAudio();
-}));
-dom.speedSlider.addEventListener('input', () => {
-    player.speed = Number(dom.speedSlider.value);
-    dom.speedValue.textContent = ['极慢', '较慢', '正常', '较快', '极快'][player.speed - 1];
-});
+dom.speedSlider.addEventListener('change', () => { player.speed = Number(dom.speedSlider.value); });
 dom.speechToggle.addEventListener('change', () => { player.setSpeech(dom.speechToggle.checked); if (player.speechEnabled) unlockAudio(); });
-dom.gridToggle.addEventListener('change', () => dom.writingGrid.classList.toggle('no-grid', !dom.gridToggle.checked));
-dom.outlineToggle.addEventListener('change', () => dom.writingGrid.classList.toggle('no-outline', !dom.outlineToggle.checked));
 dom.retryBtn.addEventListener('click', () => player.select(player.index));
-dom.saveCharacterBtn.addEventListener('click', () => saveQuery(player.entry));
-dom.saveQueryBtn.addEventListener('click', () => saveQuery(player.entries.join('')));
+dom.saveBtn.addEventListener('click', () => {
+    if (player.entries.length === 1) saveQuery(player.entry);
+    else dom.saveScopeDialog.showModal();
+});
+dom.closeSaveScopeBtn.addEventListener('click', () => dom.saveScopeDialog.close());
+dom.saveScopeDialog.addEventListener('close', () => { if (dom.settings.open && !dom.saveBtn.disabled) dom.saveBtn.focus({preventScroll:true}); });
+dom.saveCharacterBtn.addEventListener('click', () => { dom.saveScopeDialog.close(); saveQuery(player.entry); });
+dom.saveQueryBtn.addEventListener('click', () => { dom.saveScopeDialog.close(); saveQuery(player.entries.join('')); });
 dom.printQueryBtn.addEventListener('click', () => {
     if (!player.entries.length) return;
     player.pause();
@@ -659,25 +624,6 @@ dom.settings.addEventListener('change', event => { if (event.target.closest('.dr
 dom.resetSettingsBtn.addEventListener('click', () => {
     applyPreferences(defaultPreferences);
     rememberPreferences();
-});
-dom.fullscreenBtn.addEventListener('click', async () => {
-    setFocusMode(true);
-    if (!document.fullscreenElement && document.fullscreenEnabled && document.documentElement.requestFullscreen) {
-        try {
-            await document.documentElement.requestFullscreen();
-            ownsFullscreen = true;
-            // Exit may have been requested while the browser was entering fullscreen.
-            if (!focusMode) await exitFocusMode();
-        } catch { /* Keep the same usable focus layout when native fullscreen is unavailable. */ }
-    }
-});
-dom.exitFocusBtn.addEventListener('click', () => void exitFocusMode());
-document.addEventListener('fullscreenchange', () => {
-    if (ownsFullscreen && !document.fullscreenElement) { ownsFullscreen = false; setFocusMode(false); }
-    updateQueueTabStops();
-});
-document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && focusMode && !document.querySelector('dialog[open]')) { event.preventDefault(); void exitFocusMode(); }
 });
 document.addEventListener('visibilitychange', () => { if (document.hidden) { canvasSwipe.reset(); player.pause(); readingPlayer.cancel(); pausePractice(); } });
 window.addEventListener('pagehide', () => { canvasSwipe.reset(); player.pause(); readingPlayer.cancel(); pausePractice(); });
