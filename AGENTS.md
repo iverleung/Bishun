@@ -8,7 +8,8 @@ Instructions for coding agents working in Bishun.
 - Preserve user changes; avoid unrelated refactoring and unnecessary dependencies.
 - Commit each completed, verified change promptly. Stage only files or hunks belonging to that change; leave unrelated user changes untouched. Report the commit and any blocked verification.
 - Publish deployments only when requested or otherwise authorized in the session.
-- Never read `.env` files or their variants (including `.env.*` and `*.env`) in any directory. This applies to all agents and sub-agents: do not open, print, search their contents, or load them through scripts or tools. Exclude these files from broad content searches and never stage or commit them.
+- Agents and sub-agents must not inspect or expose the contents of `.env` files or their variants (including `.env.*` and `*.env`) in any directory. Do not open, print, search, or extract their contents, including indirectly through scripts or tools. Exclude these files from broad content searches and never stage or commit them.
+- Application code, development servers, build tools, and tests may load environment files normally for their intended operation. This restriction protects secrets from agent inspection and disclosure; it does not prohibit code from loading configuration. Do not dump loaded secret values into logs, tool output, or agent context.
 - Never read other credential/secret files (`credentials.env`, `*.pem`, `*.key`, SSH private keys, or cloud credentials). Verify credential state only through a project health/doctor command if one exists, without exposing secret values.
 - Planning does not authorize implementation. Distinguish planned features from shipped behavior and verified results.
 
