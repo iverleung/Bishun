@@ -1,7 +1,9 @@
 import { CharacterStore } from '../data/character-store.js';
 import { characterBase } from '../data/character-data.js';
 import { readSharedQuery, createShareUrl } from './share.js';
-import { paginateCharacters } from './print-layout.js';
+import { characterReadings } from './character-info.js';
+import { readWorksheetTitle } from './print-context.js';
+import { worksheetLayout, paginateCharacters } from './print-layout.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
 const store = new CharacterStore();
@@ -9,6 +11,7 @@ const svgNamespace = 'http://www.w3.org/2000/svg';
 let characters = [];
 let allCharacters = [];
 let selectedIndex = 0;
+let worksheetTitle = '';
 let records = new Map();
 let failures = new Map();
 let license = '';
@@ -37,7 +40,7 @@ function createPage(number, total) {
     const page = document.createElement('section');
     page.className = 'print-page';
     const heading = document.createElement('h2');
-    heading.textContent = '生字练习';
+    heading.textContent = worksheetTitle || '生字练习';
     const content = document.createElement('div');
     content.className = 'page-content';
     const footer = document.createElement('footer');
@@ -49,20 +52,40 @@ function createPage(number, total) {
 function render() {
     const valid = characters.filter(char => records.has(char));
     const options = { size: Number(dom.cellSize.value), rows: Number(dom.rowCount.value), grid: dom.gridStyle.value };
-    const { layout, pages } = paginateCharacters(valid, options);
-    const nodes = pages.map((chars, index) => {
-        const { page, content } = createPage(index + 1, pages.length + 1);
-        for (const char of chars) {
-            const block = document.createElement('div');
-            block.className = 'character-practice';
-            block.setAttribute('aria-label', `${char}，范字、描红及空白练习`);
-            block.style.setProperty('--cell-size', `${layout.size}mm`);
-            block.style.gridTemplateColumns = `repeat(${layout.columns}, ${layout.size}mm)`;
-            for (let cell = 0; cell < layout.columns * layout.rows; cell++) {
-                block.append(createCell(records.get(char), cell === 0 ? 'model' : cell < 3 ? 'trace' : 'blank'));
-            }
-            content.append(block);
+    const layout = worksheetLayout(options);
+    const blocks = valid.map(char => {
+        const block = document.createElement('div');
+        block.className = 'character-practice';
+        block.setAttribute('aria-label', `${char}，范字、描红及空白练习`);
+        block.style.setProperty('--cell-size', `${layout.size}mm`);
+        block.style.gridTemplateColumns = `repeat(${layout.columns}, ${layout.size}mm)`;
+        if (dom.showPinyin.checked) {
+            const reading = document.createElement('div');
+            reading.className = 'practice-pinyin';
+            reading.textContent = characterReadings(char).join(' / ') || '暂缺';
+            reading.setAttribute('aria-label',`${char}，字典读音候选：${reading.textContent}`);
+            block.append(reading);
         }
+        for (let cell = 0; cell < layout.columns * layout.rows; cell++) {
+            block.append(createCell(records.get(char), cell === 0 ? 'model' : cell < 3 ? 'trace' : 'blank'));
+        }
+        return block;
+    });
+    // Measure the actual font wrapping before pagination, including long titles.
+    const measurement = createPage(1,1);
+    measurement.page.classList.add('print-measurement');
+    measurement.content.append(...blocks);
+    document.body.append(measurement.page);
+    let pages;
+    try {
+        const mm = 25.4 / 96;
+        const headingExtra = Math.max(0,measurement.page.querySelector('h2').getBoundingClientRect().height * mm - 6);
+        const extraHeights = blocks.map(block => Math.max(0,block.getBoundingClientRect().height * mm - layout.size * layout.rows));
+        ({ pages } = paginateCharacters(blocks,{...options,availableHeight:247-headingExtra},extraHeights));
+    } finally { measurement.page.remove(); }
+    const nodes = pages.map((pageBlocks, index) => {
+        const { page, content } = createPage(index + 1, pages.length + 1);
+        content.append(...pageBlocks);
         return page;
     });
     if (license && pages.length) {
@@ -75,6 +98,7 @@ function render() {
         const text = document.createElement('div');
         text.className = 'license-text';
         text.textContent = license;
+        if (dom.showPinyin.checked) notice.textContent += ' 拼音：cnchar 3.2.6 字典全部候选，非教材原注音或语境选读。';
         content.append(notice, text);
         nodes.push(page);
     }
@@ -156,6 +180,7 @@ dom.printBtn.addEventListener('click', () => { if (!dom.printBtn.disabled) windo
 window.addEventListener('pagehide', () => { revision++; task?.abort(); });
 function restorePrintQuery() {
     const shared = readSharedQuery(location.href);
+    worksheetTitle = shared.status === 'valid' ? readWorksheetTitle(location.href) : '';
     task?.abort();
     task = null;
     revision++;

@@ -6,6 +6,7 @@ import { SavedQueries } from '../src/web/saved-queries.js';
 import { bindCanvasSwipe } from '../src/web/canvas-swipe.js';
 import { characterReadings, characterRadical } from '../src/web/character-info.js';
 import radicalDictionary from 'cnchar-radical';
+import { readWorksheetTitle } from '../src/web/print-context.js';
 import { worksheetLayout, paginateCharacters } from '../src/web/print-layout.js';
 import { createShareUrl, readSharedQuery } from '../src/web/share.js';
 import { shareQrPixels } from '../src/web/share-qr.js';
@@ -321,4 +322,26 @@ test('share QR rejects non-web and oversized links instead of creating a mislead
     for (const value of ['javascript:alert(1)', 'file:///tmp/a', 'not a URL', 'https://example.com/' + 'a'.repeat(2048)]) {
         assert.throws(() => shareQrPixels(value));
     }
+});
+
+
+test('worksheet measured pinyin and wrapped titles reserve space without splitting a character block',()=>{
+    const characters=Array.from('长木长行和木');
+    const extra=[8,8,20,8,14,8];
+    const {pages}=paginateCharacters(characters,{size:24,rows:3,availableHeight:235},extra);
+    assert.deepEqual(pages.flat(),characters);
+    let offset=0;
+    for(const page of pages){
+        const height=page.reduce((total,_,index)=>total+72+extra[offset+index],0)+8*(page.length-1);
+        assert.ok(height<=235);offset+=page.length;
+    }
+    assert.throws(()=>paginateCharacters(['木'],{},[-1]));
+    assert.throws(()=>paginateCharacters(['木'],{},[500]));
+    assert.throws(()=>worksheetLayout({availableHeight:0}));
+});
+test('worksheet optional labels are bounded plain text and never change shared query parsing',()=>{
+    const title='一年级上册 · 金木水火土 · 会写';
+    const url='https://example.com/print/index.html#'+new URLSearchParams({q:'一二三上',t:title});
+    assert.equal(readWorksheetTitle(url),title);assert.equal(readSharedQuery(url).query,'一二三上');
+    for(const hash of ['t=a&t=b','t=%3Cscript%3E','t=%00','t='+ '字'.repeat(101),'q=木'])assert.equal(readWorksheetTitle('https://example.com/#'+hash),'');
 });

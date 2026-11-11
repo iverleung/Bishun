@@ -604,7 +604,10 @@ dom.printQueryBtn.addEventListener('click', () => {
     player.pause();
     drawer.close({ restore: false });
     const url = new URL('/print/index.html', location.href);
-    url.hash = new URLSearchParams({ q: player.entries.join(''), c: String(player.index) }).toString();
+    const params = new URLSearchParams({ q: player.entries.join(''), c: String(player.index) });
+    const course = textbooks?.getCurrent();
+    if (course?.query === player.entries.join('')) params.set('t',course.name);
+    url.hash = params.toString();
     location.assign(url.href);
 });
 dom.practiceBtn.addEventListener('click', () => {
