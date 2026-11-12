@@ -1,0 +1,1 @@
+git+https://github.com/aliyun/alibabacloud-nls-python-sdk.git@177972b1f02fcb1f2b229e77320a7286d21785f3

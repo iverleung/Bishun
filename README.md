@@ -77,6 +77,23 @@ npm run audio:ark -- --all --output-dir tts/ark-all    # 显式生成完整清�
 
 CLI 单元测试不访问密钥或网络：`python3 -m unittest discover -s test -p 'test_ark_reading_audio.py'`。
 
+## 阿里云拼音候选音频
+
+`tools/generate-aliyun-reading-audio.py` 使用智能语音交互的 `NlsSpeechSynthesizer` 和 [SSML 拼音音素标记](https://help.aliyun.com/zh/isi/developer-reference/ssml-overview)，把清单的调号转换为 `1—4` 声及轻声 `5`，例如 `ǎ → a3`，默认生成前 5 项到 `tts/aliyun/`。例字只作为 SSML 承载文本，读音由 `<phoneme alphabet="py" ph="...">` 显式指定；生成结果仍需试听，不自动替换网站录音。
+
+Python 依赖安装到项目 `.venv`，官方 SDK 固定提交记录在 `tools/aliyun-audio-requirements.txt`：
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r tools/aliyun-audio-requirements.txt
+npm run --silent audio:aliyun -- --dry-run             # 不读取配置、不加载 SDK、不联网
+npm run --silent audio:aliyun                          # 默认 xiaoyun，生成前 5 项
+npm run --silent audio:aliyun -- --reading lǜ          # 指定清单读音
+npm run --silent audio:aliyun -- --start 6 --limit 5   # 生成后续范围
+```
+
+程序从进程环境或项目 `.env` 加载 `ALIYUN_ACCESS_TOKEN`，以及 `ALIYUN_NLS_APP_KEY`（兼容 `NLS_APP_KEY`），不会打印配置内容。可用 `--voice`、`--speech-rate -500..500`、`--sample-rate`、`--timeout` 和 `--overwrite` 控制生成；已有文件默认拒绝覆盖，任一请求失败后停止后续请求。工具只接受单音节条目；清单中 `túnwǎ` 这类一个例字对应多个音节的特殊项需另行处理，不会拼造 SSML。接口用法见[语音合成 Python SDK 文档](https://help.aliyun.com/zh/isi/user-guide/sdk-for-python-1)。单元测试使用模拟 SDK，不访问密钥或网络：`python3 -m unittest discover -s test -p 'test_aliyun_reading_audio.py'`。
+
 ## 测试与检查
 
 ```bash
