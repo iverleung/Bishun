@@ -168,8 +168,9 @@ def synthesize(sample, args, api_key, opener=urllib.request.urlopen):
                 continue
             event = json.loads(raw_line)
             code = event.get('code')
-            if code == 0 and event.get('data'):
-                chunks.append(base64.b64decode(event['data'], validate=True))
+            if code == 0:
+                if event.get('data'):
+                    chunks.append(base64.b64decode(event['data'], validate=True))
             elif code == 20000000:
                 terminal = True
                 break

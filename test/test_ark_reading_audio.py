@@ -55,6 +55,7 @@ class ArkReadingAudioTests(unittest.TestCase):
 
     def test_synthesize_decodes_chunks_and_waits_for_terminal_event(self):
         events = [
+            {'code': 0, 'data': ''},
             {'code': 0, 'data': base64.b64encode(b'first').decode()},
             {'code': 0, 'data': base64.b64encode(b'second').decode()},
             {'code': 20000000},
