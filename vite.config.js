@@ -37,7 +37,8 @@ export default defineConfig(() => {
                     main: path.resolve(__dirname, 'index.html'),
                     print: path.resolve(__dirname, 'print/index.html'),
                     preview: path.resolve(__dirname, 'preview/index.html'),
-                    legacy: path.resolve(__dirname, 'legacy/index.html')
+                    legacy: path.resolve(__dirname, 'legacy/index.html'),
+                    record: path.resolve(__dirname, 'record/index.html')
                 }
             }
         },

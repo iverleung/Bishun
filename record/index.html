@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f6f1">
+  <title>拼音录音</title>
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="stylesheet" href="/src/recorder/style.css">
+</head>
+<body>
+  <main class="recorder-app">
+    <header class="recorder-header">
+      <h1>拼音录音</h1>
+      <span id="progressText">0 / 0</span>
+    </header>
+    <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
+
+    <section class="recording-card" aria-labelledby="reading">
+      <p id="position" class="recording-position"></p>
+      <h2 id="reading">…</h2>
+      <p id="recordHint" class="recording-hint">按住下方按钮，读完后松开</p>
+      <p id="recordState" class="record-state" role="status" aria-live="polite">正在准备…</p>
+      <p id="timer" class="recording-timer" aria-hidden="true"></p>
+    </section>
+
+    <div class="recording-actions">
+      <button id="recordBtn" class="record-action" type="button" disabled><span class="record-dot" aria-hidden="true"></span><span id="recordLabel">按住录音</span></button>
+      <div class="playback-slot"><button id="playBtn" class="secondary-action" type="button" hidden>播放录音</button></div>
+      <p id="message" class="recorder-message" role="alert" hidden></p>
+    </div>
+
+    <nav class="recording-navigation" aria-label="切换拼音">
+      <button id="previousBtn" class="navigation-action" type="button">上一项</button>
+      <button id="nextUnrecordedBtn" class="text-action" type="button">下个未录</button>
+      <button id="nextBtn" class="navigation-action" type="button">下一项</button>
+    </nav>
+
+    <details class="recording-tools">
+      <summary>管理与导出</summary>
+      <div class="recording-tools-content">
+        <label for="readingSelect">跳转到拼音</label>
+        <select id="readingSelect"></select>
+        <button id="exportBtn" class="secondary-action" type="button" disabled>导出全部录音</button>
+        <p>录音仅保存在当前浏览器，清除网站数据会删除录音。请定期导出备份。</p>
+      </div>
+    </details>
+    <audio id="playback" preload="metadata"></audio>
+  </main>
+  <script type="module" src="/src/recorder/main.js"></script>
+</body>
+</html>

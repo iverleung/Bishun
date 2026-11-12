@@ -1,0 +1,82 @@
+* { box-sizing: border-box; }
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #24332d;
+  background: #f7f6f1;
+  font-synthesis: none;
+}
+body { margin: 0; min-width: 280px; }
+button, select { font: inherit; }
+button { touch-action: manipulation; }
+button:focus-visible, select:focus-visible, summary:focus-visible {
+  outline: 3px solid #397c65;
+  outline-offset: 3px;
+}
+button:disabled { cursor: not-allowed; opacity: .45; }
+.recorder-app {
+  width: min(100%, 560px);
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: max(20px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+}
+.recorder-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.recorder-header h1 { margin: 0; font-size: 20px; font-weight: 650; }
+#progressText { color: #63736c; font-size: 14px; font-variant-numeric: tabular-nums; }
+.progress-track { height: 4px; margin-top: 14px; overflow: hidden; border-radius: 4px; background: #e2e6df; }
+.progress-track span { display: block; width: 0; height: 100%; background: #397c65; transition: width .2s; }
+.recording-card { padding: clamp(48px, 10svh, 92px) 0 36px; text-align: center; }
+.recording-position { margin: 0; color: #748079; font-size: 14px; }
+#reading { margin: 12px 0 4px; font-size: clamp(88px, 28vw, 144px); line-height: 1.15; font-weight: 500; letter-spacing: .02em; }
+.recording-hint { margin: 12px 0 0; color: #748079; font-size: 14px; }
+.record-state { min-height: 24px; margin: 24px 0 0; color: #397c65; font-size: 16px; }
+.recording-timer { min-height: 30px; margin: 4px 0 0; font-size: 22px; font-variant-numeric: tabular-nums; }
+.recording-actions { display: grid; gap: 14px; justify-items: stretch; }
+.playback-slot { min-height: 48px; }
+.playback-slot .secondary-action { width: 100%; height: 48px; }
+.record-action {
+  min-height: 64px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  border: 0;
+  border-radius: 18px;
+  background: #2f735d;
+  color: #fff;
+  font-size: 19px;
+  font-weight: 650;
+  box-shadow: 0 5px 16px rgb(47 115 93 / 18%);
+}
+.record-action:active:not(:disabled) { background: #285f4e; transform: scale(.99); }
+.record-dot { display: inline-block; width: 12px; height: 12px; margin-right: 10px; border-radius: 50%; background: currentColor; vertical-align: 1px; }
+.record-action.is-recording { background: #c84c45; }
+.record-action.is-recording .record-dot { border-radius: 2px; animation: recording-pulse 1.2s infinite; }
+@keyframes recording-pulse { 50% { opacity: .45; } }
+.secondary-action, .navigation-action {
+  min-height: 48px;
+  border: 1px solid #cbd4ce;
+  border-radius: 14px;
+  background: #fff;
+  color: #2c4a3e;
+  font-weight: 600;
+}
+.recorder-message { margin: 0; padding: 12px 14px; border-radius: 12px; background: #fff0e8; color: #8b382e; font-size: 14px; line-height: 1.6; }
+.recorder-message.is-success { background: #e7f1eb; color: #285f4e; }
+.recording-navigation { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin-top: 22px; }
+.text-action { min-height: 44px; border: 0; background: transparent; color: #397c65; padding: 0 8px; font-size: 14px; }
+.recording-tools { margin-top: auto; padding-top: 36px; color: #63736c; font-size: 14px; }
+.recording-tools summary { width: fit-content; min-height: 44px; padding: 10px 0; cursor: pointer; color: #52645b; }
+.recording-tools-content { display: grid; gap: 12px; padding: 12px 0 4px; }
+.recording-tools-content select { width: 100%; min-height: 48px; padding: 0 12px; border: 1px solid #cbd4ce; border-radius: 12px; background: #fff; color: #24332d; }
+.recording-tools-content p { margin: 0; line-height: 1.6; }
+#playback { display: none; }
+[hidden] { display: none !important; }
+@media (min-width: 600px) {
+  .recorder-app { padding-inline: 32px; }
+  .recording-card { padding-top: 72px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
