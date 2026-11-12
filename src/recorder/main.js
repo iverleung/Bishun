@@ -27,6 +27,9 @@ let state = 'loading';
 let operation = 0;
 let session = null;
 let playbackUrl = null;
+let microphoneStream = null;
+let microphonePromise = null;
+let microphoneGeneration = 0;
 let holdActive = false;
 let activePointerId = null;
 
@@ -96,6 +99,42 @@ function recordingError(error) {
 
 function stopTracks(stream) {
   stream?.getTracks().forEach(track => track.stop());
+}
+
+async function prepareMicrophone() {
+  if (microphoneStream?.active) return microphoneStream;
+  if (microphonePromise) return microphonePromise;
+  const generation = microphoneGeneration;
+  const pending = (async () => {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+    if (generation !== microphoneGeneration || document.hidden) {
+      stopTracks(stream);
+      throw new DOMException('麦克风准备已取消', 'AbortError');
+    }
+    microphoneStream = stream;
+    return stream;
+  })();
+  microphonePromise = pending;
+  try {
+    return await pending;
+  } finally {
+    if (microphonePromise === pending) microphonePromise = null;
+  }
+}
+
+function releaseMicrophone() {
+  microphoneGeneration++;
+  const stream = microphoneStream;
+  microphoneStream = null;
+  stopTracks(stream);
+}
+
+async function warmMicrophone() {
+  try {
+    await prepareMicrophone();
+  } catch (error) {
+    if (error?.name !== 'AbortError' && !document.hidden) showMessage(recordingError(error));
+  }
 }
 
 function stopPlayback() {
@@ -170,9 +209,8 @@ async function startRecording() {
     if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
       throw new Error(recordingError());
     }
-    stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+    stream = await prepareMicrophone();
     if (id !== operation || !holdActive) {
-      stopTracks(stream);
       if (id === operation) {
         state = 'ready';
         render();
@@ -196,10 +234,7 @@ async function startRecording() {
       session.failure = event.error || new Error('录音设备发生错误');
       void stopActiveRecording();
     };
-    recorder.onstop = () => {
-      stopTracks(stream);
-      resolveDone();
-    };
+    recorder.onstop = resolveDone;
     recorder.start(200);
     session.startedAt = performance.now();
     session.timerId = window.setInterval(() => {
@@ -211,7 +246,6 @@ async function startRecording() {
     elements.timer.textContent = '0.0 秒';
     render();
   } catch (error) {
-    stopTracks(stream);
     if (id !== operation) return;
     session = null;
     state = 'ready';
@@ -255,7 +289,6 @@ async function stopActiveRecording({ discard = false } = {}) {
     preparePlayback();
     render();
   } catch (error) {
-    stopTracks(active.stream);
     if (active.id !== operation) return;
     session = null;
     state = 'ready';
@@ -267,6 +300,7 @@ async function stopActiveRecording({ discard = false } = {}) {
 function cancelForBackground() {
   holdActive = false;
   activePointerId = null;
+  releaseMicrophone();
   if (state === 'starting' || state === 'recording') {
     operation++;
     const active = session;
@@ -390,11 +424,13 @@ elements.playback.addEventListener('error', () => {
 elements.exportBtn.addEventListener('click', () => void exportRecordings());
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) cancelForBackground();
+  else void warmMicrophone();
 });
 window.addEventListener('pagehide', cancelForBackground);
 
 async function initialize() {
   render();
+  void warmMicrophone();
   try {
     store = await openRecordingStore();
     recordedKeys = new Set((await store.keys()).filter(key => readings.some(item => item.reading === key)));
