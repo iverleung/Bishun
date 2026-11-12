@@ -15,7 +15,7 @@ if (!readings.length || new Set(readings.map(item => item.reading)).size !== rea
 
 const elements = Object.fromEntries([
   'progressText', 'progressBar', 'position', 'reading', 'recordHint', 'recordState', 'timer',
-  'playBtn', 'recordBtn', 'recordLabel', 'message', 'previousBtn', 'nextUnrecordedBtn', 'nextBtn',
+  'recordBtn', 'recordLabel', 'message', 'previousBtn', 'nextUnrecordedBtn', 'nextBtn',
   'readingSelect', 'exportBtn', 'playback',
 ].map(id => [id, document.getElementById(id)]));
 
@@ -72,12 +72,13 @@ function render() {
     ready: currentRecording ? `已保存 · ${formatDuration(currentRecording.durationMs)}` : '准备好了',
   };
   elements.recordState.textContent = stateText[state];
-  elements.timer.hidden = !isRecording;
+  elements.timer.hidden = false;
+  elements.timer.style.visibility = isRecording ? 'visible' : 'hidden';
   if (!isRecording) elements.timer.textContent = '';
   elements.recordBtn.disabled = ['loading', 'saving', 'exporting'].includes(state);
   elements.recordBtn.classList.toggle('is-recording', isRecording);
   elements.recordLabel.textContent = isRecording ? '松开停止' : (currentRecording ? '按住重录' : '按住录音');
-  elements.playBtn.hidden = !currentRecording || !isReady;
+  elements.playback.hidden = !currentRecording || !isReady;
   elements.previousBtn.disabled = !isReady || currentIndex === 0;
   elements.nextBtn.disabled = !isReady || currentIndex === readings.length - 1;
   elements.nextUnrecordedBtn.disabled = !isReady || recordedKeys.size === readings.length || !recordedKeys.has(item.reading);
@@ -99,14 +100,18 @@ function stopTracks(stream) {
 
 function stopPlayback() {
   elements.playback.pause();
-  elements.playBtn.textContent = '播放录音';
 }
 
 function preparePlayback() {
   stopPlayback();
   if (playbackUrl) URL.revokeObjectURL(playbackUrl);
   playbackUrl = currentRecording ? URL.createObjectURL(currentRecording.blob) : null;
-  elements.playback.src = playbackUrl || '';
+  if (playbackUrl) {
+    elements.playback.src = playbackUrl;
+    elements.playback.load();
+  } else {
+    elements.playback.removeAttribute('src');
+  }
 }
 
 function savePosition() {
@@ -377,22 +382,11 @@ elements.nextUnrecordedBtn.addEventListener('click', () => {
   }
 });
 elements.readingSelect.addEventListener('change', event => void loadCurrent(Number(event.target.value)));
-elements.playBtn.addEventListener('click', async () => {
-  if (!currentRecording) return;
-  if (!elements.playback.paused) {
-    stopPlayback();
-    return;
-  }
-  showMessage();
-  try {
-    await elements.playback.play();
-    elements.playBtn.textContent = '暂停播放';
-  } catch {
-    showMessage('录音无法播放，请重试或重新录制。');
+elements.playback.addEventListener('error', () => {
+  if (currentRecording && elements.playback.currentSrc) {
+    showMessage('这段录音无法解码播放，请重新录制；原录音仍可导出。');
   }
 });
-elements.playback.addEventListener('ended', () => { elements.playBtn.textContent = '再听一次'; });
-elements.playback.addEventListener('error', () => showMessage('录音无法播放，请重试或重新录制。'));
 elements.exportBtn.addEventListener('click', () => void exportRecordings());
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) cancelForBackground();

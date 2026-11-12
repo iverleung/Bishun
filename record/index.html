@@ -26,7 +26,7 @@
 
     <div class="recording-actions">
       <button id="recordBtn" class="record-action" type="button" disabled><span class="record-dot" aria-hidden="true"></span><span id="recordLabel">按住录音</span></button>
-      <div class="playback-slot"><button id="playBtn" class="secondary-action" type="button" hidden>播放录音</button></div>
+      <div class="playback-slot"><audio id="playback" controls playsinline preload="auto" hidden></audio></div>
       <p id="message" class="recorder-message" role="alert" hidden></p>
     </div>
 
@@ -45,7 +45,6 @@
         <p>录音仅保存在当前浏览器，清除网站数据会删除录音。请定期导出备份。</p>
       </div>
     </details>
-    <audio id="playback" preload="metadata"></audio>
   </main>
   <script type="module" src="/src/recorder/main.js"></script>
 </body>
