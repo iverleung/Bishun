@@ -1,5 +1,6 @@
 const DATABASE_NAME = 'bishun-pinyin-recorder';
 const STORE_NAME = 'recordings';
+const REVIEW_STORE_NAME = 'reviews';
 
 function requestResult(request) {
   return new Promise((resolve, reject) => {
@@ -18,10 +19,13 @@ function transactionDone(transaction) {
 
 export async function openRecordingStore() {
   const database = await new Promise((resolve, reject) => {
-    const request = indexedDB.open(DATABASE_NAME, 1);
+    const request = indexedDB.open(DATABASE_NAME, 2);
     request.onupgradeneeded = () => {
       if (!request.result.objectStoreNames.contains(STORE_NAME)) {
         request.result.createObjectStore(STORE_NAME, { keyPath: 'reading' });
+      }
+      if (!request.result.objectStoreNames.contains(REVIEW_STORE_NAME)) {
+        request.result.createObjectStore(REVIEW_STORE_NAME, { keyPath: 'reading' });
       }
     };
     request.onsuccess = () => resolve(request.result);
@@ -30,20 +34,23 @@ export async function openRecordingStore() {
   });
   database.onversionchange = () => database.close();
 
-  async function transaction(mode, operation) {
-    const tx = database.transaction(STORE_NAME, mode);
+  async function transaction(storeName, mode, operation) {
+    const tx = database.transaction(storeName, mode);
     const [result] = await Promise.all([
-      operation(tx.objectStore(STORE_NAME)),
+      operation(tx.objectStore(storeName)),
       transactionDone(tx),
     ]);
     return result;
   }
 
   return {
-    get: reading => transaction('readonly', store => requestResult(store.get(reading))),
-    keys: () => transaction('readonly', store => requestResult(store.getAllKeys())),
-    all: () => transaction('readonly', store => requestResult(store.getAll())),
-    put: record => transaction('readwrite', store => requestResult(store.put(record))),
+    get: reading => transaction(STORE_NAME, 'readonly', store => requestResult(store.get(reading))),
+    keys: () => transaction(STORE_NAME, 'readonly', store => requestResult(store.getAllKeys())),
+    all: () => transaction(STORE_NAME, 'readonly', store => requestResult(store.getAll())),
+    put: record => transaction(STORE_NAME, 'readwrite', store => requestResult(store.put(record))),
+    review: reading => transaction(REVIEW_STORE_NAME, 'readonly', store => requestResult(store.get(reading))),
+    allReviews: () => transaction(REVIEW_STORE_NAME, 'readonly', store => requestResult(store.getAll())),
+    putReview: review => transaction(REVIEW_STORE_NAME, 'readwrite', store => requestResult(store.put(review))),
     close: () => database.close(),
   };
 }

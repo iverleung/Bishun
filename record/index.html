@@ -21,26 +21,46 @@
       <h2 id="reading">…</h2>
       <p id="recordHint" class="recording-hint">按住下方按钮，读完后松开</p>
       <p id="recordState" class="record-state" role="status" aria-live="polite">正在准备…</p>
+      <p id="qualityText" class="quality-text" role="status"></p>
       <p id="timer" class="recording-timer" aria-hidden="true"></p>
     </section>
 
     <div class="recording-actions">
       <button id="recordBtn" class="record-action" type="button" disabled><span class="record-dot" aria-hidden="true"></span><span id="recordLabel">按住录音</span></button>
-      <div class="playback-slot"><audio id="playback" controls playsinline preload="auto" hidden></audio></div>
+      <div class="playback-slot">
+        <audio id="playback" controls playsinline preload="auto" hidden></audio>
+        <div class="auto-playback-controls">
+          <select id="autoScope" aria-label="自动试听范围">
+            <option value="recorded">全部已录</option>
+            <option value="review">仅待复查</option>
+          </select>
+          <button id="autoPlaybackBtn" class="text-action" type="button" disabled>自动试听</button>
+        </div>
+      </div>
       <p id="message" class="recorder-message" role="alert" hidden></p>
     </div>
 
     <nav class="recording-navigation" aria-label="切换拼音">
       <button id="previousBtn" class="navigation-action" type="button">上一项</button>
-      <button id="nextUnrecordedBtn" class="text-action" type="button">下个未录</button>
       <button id="nextBtn" class="navigation-action" type="button">下一项</button>
+      <button id="nextUnrecordedBtn" class="text-action" type="button">下个未录</button>
+      <button id="nextReviewBtn" class="text-action" type="button">下个待复查</button>
     </nav>
 
     <details class="recording-tools">
       <summary>管理与导出</summary>
       <div class="recording-tools-content">
+        <label for="recordingFilter">筛选拼音</label>
+        <select id="recordingFilter">
+          <option value="all">全部</option>
+          <option value="recorded">已录</option>
+          <option value="unrecorded">未录</option>
+          <option value="review">待复查</option>
+        </select>
         <label for="readingSelect">跳转到拼音</label>
         <select id="readingSelect"></select>
+        <p id="qualityProgress">打开后逐项检查已录音频；技术结果仅供复查。</p>
+        <button id="reviewToggleBtn" class="secondary-action" type="button" disabled>标记重录</button>
         <button id="exportBtn" class="secondary-action" type="button" disabled>导出全部录音</button>
         <p>录音仅保存在当前浏览器，清除网站数据会删除录音。请定期导出备份。</p>
       </div>

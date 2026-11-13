@@ -1,6 +1,7 @@
 import catalog from '../../docs/拼音音节合成列表.json';
 import { createZip, recordingFileName } from './archive.js';
 import { openRecordingStore } from './store.js';
+import { analyzeRecording, QUALITY_FLAGS, recordingIdentity } from './quality.js';
 
 const STORAGE_KEY = 'bishun-pinyin-recorder-current';
 const MAX_RECORDING_MS = 10000;
@@ -16,7 +17,8 @@ if (!readings.length || new Set(readings.map(item => item.reading)).size !== rea
 const elements = Object.fromEntries([
   'progressText', 'progressBar', 'position', 'reading', 'recordHint', 'recordState', 'timer',
   'recordBtn', 'recordLabel', 'message', 'previousBtn', 'nextUnrecordedBtn', 'nextBtn',
-  'readingSelect', 'exportBtn', 'playback',
+  'readingSelect', 'exportBtn', 'playback', 'qualityText', 'qualityProgress',
+  'autoPlaybackBtn', 'autoScope', 'nextReviewBtn', 'recordingFilter', 'reviewToggleBtn',
 ].map(id => [id, document.getElementById(id)]));
 
 let store;
@@ -27,17 +29,33 @@ let state = 'loading';
 let operation = 0;
 let session = null;
 let playbackUrl = null;
+let playbackGeneration = 0;
+let activePlaybackGeneration = 0;
 let microphoneStream = null;
 let microphonePromise = null;
+let microphonePromiseGeneration = 0;
 let microphoneGeneration = 0;
 let holdActive = false;
 let activePointerId = null;
+let reviews = new Map();
+let autoPlayback = false;
+let autoAdvanceTimer = null;
+let qualityContext = null;
+let qualityTimer = null;
+let qualityGeneration = 0;
+let qualityRunning = false;
+const qualityQueue = [];
+const qualityPending = new Set();
+
+const readingOptions = [];
+let renderedOptionKey = '';
 
 for (const item of readings) {
   const option = document.createElement('option');
   option.value = String(item.position - 1);
   option.textContent = `${String(item.position).padStart(4, '0')}  ${item.reading}`;
   elements.readingSelect.append(option);
+  readingOptions.push(option);
 }
 
 function formatDuration(milliseconds) {
@@ -51,6 +69,33 @@ function showMessage(text = '', kind = 'error') {
   elements.message.setAttribute('role', kind === 'error' ? 'alert' : 'status');
 }
 
+function reviewFor(reading) {
+  return reviews.get(reading);
+}
+
+function needsReview(reading) {
+  const review = reviewFor(reading);
+  return Boolean(review?.manual || review?.analysis?.flags?.length);
+}
+
+function matchesFilter(index, filter = elements.recordingFilter.value) {
+  const { reading } = readings[index];
+  if (filter === 'recorded') return recordedKeys.has(reading);
+  if (filter === 'unrecorded') return !recordedKeys.has(reading);
+  if (filter === 'review') return needsReview(reading);
+  return true;
+}
+
+function currentQualityText() {
+  const reading = readings[currentIndex].reading;
+  const review = reviewFor(reading);
+  const labels = [];
+  if (review?.manual) labels.push('人工待重录');
+  for (const flag of review?.analysis?.flags || []) labels.push(QUALITY_FLAGS[flag] || flag);
+  if (!labels.length && qualityPending.has(reading)) return '正在等待技术检查';
+  return labels.join(' · ');
+}
+
 function render() {
   const item = readings[currentIndex];
   const isReady = state === 'ready';
@@ -59,12 +104,28 @@ function render() {
   elements.progressBar.style.width = `${recordedKeys.size / readings.length * 100}%`;
   elements.position.textContent = `第 ${item.position} 项`;
   elements.reading.textContent = item.reading;
-  elements.readingSelect.value = String(currentIndex);
   elements.readingSelect.disabled = !isReady;
-  for (const option of elements.readingSelect.options) {
-    const reading = readings[Number(option.value)].reading;
-    option.textContent = `${String(Number(option.value) + 1).padStart(4, '0')}  ${reading}${recordedKeys.has(reading) ? '  ✓' : ''}`;
+  elements.recordingFilter.disabled = !isReady;
+  const visibleOptions = [];
+  const visibleIndexes = [];
+  for (const option of readingOptions) {
+    const index = Number(option.value);
+    const reading = readings[index].reading;
+    const review = reviewFor(reading);
+    const flags = review?.analysis?.flags?.length ? '  ⚠' : '';
+    const manual = review?.manual ? '  !' : '';
+    option.textContent = `${String(index + 1).padStart(4, '0')}  ${reading}${recordedKeys.has(reading) ? '  ✓' : ''}${manual}${flags}`;
+    if (matchesFilter(index)) {
+      visibleOptions.push(option);
+      visibleIndexes.push(index);
+    }
   }
+  const optionKey = `${elements.recordingFilter.value}:${visibleIndexes.join(',')}`;
+  if (optionKey !== renderedOptionKey) {
+    elements.readingSelect.replaceChildren(...visibleOptions);
+    renderedOptionKey = optionKey;
+  }
+  elements.readingSelect.value = String(currentIndex);
 
   const stateText = {
     loading: '正在准备…',
@@ -85,7 +146,17 @@ function render() {
   elements.previousBtn.disabled = !isReady || currentIndex === 0;
   elements.nextBtn.disabled = !isReady || currentIndex === readings.length - 1;
   elements.nextUnrecordedBtn.disabled = !isReady || recordedKeys.size === readings.length || !recordedKeys.has(item.reading);
+  elements.nextReviewBtn.disabled = !isReady || !readings.some(reading => needsReview(reading.reading));
   elements.exportBtn.disabled = !isReady || recordedKeys.size === 0;
+  elements.reviewToggleBtn.disabled = !isReady || !currentRecording;
+  elements.reviewToggleBtn.textContent = reviewFor(item.reading)?.manual ? '取消待重录' : '标记重录';
+  elements.autoPlaybackBtn.disabled = !isReady || recordedKeys.size === 0;
+  elements.autoPlaybackBtn.textContent = autoPlayback ? '停止试听' : '自动试听';
+  elements.autoScope.disabled = !isReady || autoPlayback;
+  elements.qualityText.textContent = currentQualityText();
+  elements.qualityProgress.textContent = qualityPending.size
+    ? `还需检查 ${qualityPending.size} 段；可随时重录或导出。`
+    : '技术检查已完成；结果仅供复查，不代表发音审核通过。';
 }
 
 function recordingError(error) {
@@ -103,8 +174,9 @@ function stopTracks(stream) {
 
 async function prepareMicrophone() {
   if (microphoneStream?.active) return microphoneStream;
-  if (microphonePromise) return microphonePromise;
+  if (microphonePromise && microphonePromiseGeneration === microphoneGeneration) return microphonePromise;
   const generation = microphoneGeneration;
+  microphonePromiseGeneration = generation;
   const pending = (async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
     if (generation !== microphoneGeneration || document.hidden) {
@@ -142,6 +214,7 @@ function stopPlayback() {
 }
 
 function preparePlayback() {
+  playbackGeneration++;
   stopPlayback();
   if (playbackUrl) URL.revokeObjectURL(playbackUrl);
   playbackUrl = currentRecording ? URL.createObjectURL(currentRecording.blob) : null;
@@ -153,20 +226,161 @@ function preparePlayback() {
   }
 }
 
+function stopAutoPlayback() {
+  autoPlayback = false;
+  clearTimeout(autoAdvanceTimer);
+  autoAdvanceTimer = null;
+}
+
+async function playCurrent() {
+  if (!currentRecording || state !== 'ready') return;
+  activePlaybackGeneration = playbackGeneration;
+  try {
+    await elements.playback.play();
+  } catch (error) {
+    if (activePlaybackGeneration !== playbackGeneration) return;
+    stopAutoPlayback();
+    render();
+    showMessage(`录音无法自动播放：${error.message}。可点击原生播放按钮重试。`);
+  }
+}
+
+function scheduleAutoAdvance(delay = 600) {
+  clearTimeout(autoAdvanceTimer);
+  const generation = playbackGeneration;
+  autoAdvanceTimer = window.setTimeout(() => {
+    if (!autoPlayback || generation !== playbackGeneration || state !== 'ready') return;
+    const reviewOnly = elements.autoScope.value === 'review';
+    let next = -1;
+    for (let index = currentIndex + 1; index < readings.length; index++) {
+      if (recordedKeys.has(readings[index].reading) && (!reviewOnly || needsReview(readings[index].reading))) {
+        next = index;
+        break;
+      }
+    }
+    if (next < 0) {
+      stopAutoPlayback();
+      render();
+      showMessage('自动试听已结束。', 'success');
+      return;
+    }
+    void loadCurrent(next, { automatic: true });
+  }, delay);
+}
+
+function startAutoPlayback() {
+  if (state !== 'ready' || !recordedKeys.size) return;
+  releaseMicrophone();
+  showMessage();
+  autoPlayback = true;
+  render();
+  const matchesScope = currentRecording && (elements.autoScope.value !== 'review' || needsReview(readings[currentIndex].reading));
+  if (matchesScope) void playCurrent();
+  else scheduleAutoAdvance(0);
+}
+
 function savePosition() {
-  try { localStorage.setItem(STORAGE_KEY, String(currentIndex)); } catch { /* Recordings remain safe if position storage is unavailable. */ }
+  try { localStorage.setItem(STORAGE_KEY, readings[currentIndex].reading); } catch { /* Recordings remain safe if position storage is unavailable. */ }
 }
 
 function restorePosition() {
   try {
-    const value = Number.parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
-    return Number.isInteger(value) && value >= 0 && value < readings.length ? value : 0;
+    const saved = localStorage.getItem(STORAGE_KEY) || '0';
+    if (/^\d+$/.test(saved)) {
+      const index = Number(saved);
+      return Number.isInteger(index) && index >= 0 && index < readings.length ? index : 0;
+    }
+    const reading = saved.normalize('NFC');
+    const index = readings.findIndex(item => item.reading === reading);
+    return index >= 0 ? index : 0;
   } catch {
     return 0;
   }
 }
 
-async function loadCurrent(index) {
+function scheduleQualityChecks() {
+  if (qualityTimer || qualityRunning || !qualityQueue.length || document.hidden) return;
+  qualityTimer = window.setTimeout(runNextQualityCheck, 40);
+}
+
+function queueQualityCheck(reading, { priority = false } = {}) {
+  if (!recordedKeys.has(reading)) return;
+  const queued = qualityQueue.indexOf(reading);
+  if (queued >= 0) {
+    if (priority && queued > 0) {
+      qualityQueue.splice(queued, 1);
+      qualityQueue.unshift(reading);
+    }
+    return;
+  }
+  if (qualityPending.has(reading)) return;
+  qualityPending.add(reading);
+  if (priority) qualityQueue.unshift(reading);
+  else qualityQueue.push(reading);
+  scheduleQualityChecks();
+}
+
+function queueAllQualityChecks() {
+  for (const item of readings) queueQualityCheck(item.reading);
+  render();
+}
+
+async function runNextQualityCheck() {
+  qualityTimer = null;
+  if (!qualityQueue.length || document.hidden) {
+    qualityRunning = false;
+    return;
+  }
+  const generation = qualityGeneration;
+  const reading = qualityQueue.shift();
+  qualityRunning = true;
+  try {
+    const record = await store.get(reading);
+    if (generation !== qualityGeneration) return;
+    if (record) {
+      const identity = recordingIdentity(record);
+      const existing = await store.review(reading);
+      if (existing?.identity !== identity || !existing.analysis) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) throw new Error('当前浏览器不支持音频技术检查');
+        qualityContext ||= new AudioContextClass();
+        const analysis = await analyzeRecording(record, qualityContext);
+        if (generation !== qualityGeneration) return;
+        const latest = await store.get(reading);
+        if (!latest || recordingIdentity(latest) !== identity) return;
+        const review = {
+          reading, identity, manual: Boolean(existing?.manual),
+          analysis: { flags: analysis.flags, metrics: analysis.metrics },
+          updatedAt: new Date().toISOString(),
+        };
+        await store.putReview(review);
+        reviews.set(reading, review);
+      }
+    }
+  } catch (error) {
+    if (generation === qualityGeneration) showMessage(`技术检查暂时不可用：${error.message}`);
+  } finally {
+    if (!qualityQueue.includes(reading)) qualityPending.delete(reading);
+    qualityRunning = false;
+    if (generation === qualityGeneration) {
+      render();
+      scheduleQualityChecks();
+    }
+  }
+}
+
+function cancelQualityChecks() {
+  qualityGeneration++;
+  clearTimeout(qualityTimer);
+  qualityTimer = null;
+  qualityQueue.length = 0;
+  qualityPending.clear();
+  qualityContext?.close();
+  qualityContext = null;
+}
+
+async function loadCurrent(index, { automatic = false, replay = false } = {}) {
+  if (!automatic) stopAutoPlayback();
   const id = ++operation;
   currentIndex = Math.max(0, Math.min(readings.length - 1, index));
   savePosition();
@@ -181,7 +395,9 @@ async function loadCurrent(index) {
     currentRecording = record || null;
     state = 'ready';
     preparePlayback();
+    if (record) queueQualityCheck(record.reading, { priority: true });
     render();
+    if (automatic || replay) void playCurrent();
   } catch (error) {
     if (id !== operation) return;
     state = 'ready';
@@ -199,6 +415,7 @@ function selectedMimeType() {
 
 async function startRecording() {
   if (state !== 'ready' || !holdActive) return;
+  stopAutoPlayback();
   const id = ++operation;
   state = 'starting';
   showMessage();
@@ -284,10 +501,21 @@ async function stopActiveRecording({ discard = false } = {}) {
     if (active.id !== operation) return;
     currentRecording = record;
     recordedKeys.add(record.reading);
+    qualityPending.delete(record.reading);
+    const queued = qualityQueue.indexOf(record.reading);
+    if (queued >= 0) qualityQueue.splice(queued, 1);
+    const review = {
+      reading: record.reading, identity: recordingIdentity(record), manual: false, analysis: null,
+      updatedAt: new Date().toISOString(),
+    };
+    reviews.set(record.reading, review);
+    store.putReview(review).catch(error => showMessage(`复查标记保存失败：${error.message}`));
     session = null;
     state = 'ready';
     preparePlayback();
+    queueQualityCheck(record.reading, { priority: true });
     render();
+    void playCurrent();
   } catch (error) {
     if (active.id !== operation) return;
     session = null;
@@ -300,6 +528,8 @@ async function stopActiveRecording({ discard = false } = {}) {
 function cancelForBackground() {
   holdActive = false;
   activePointerId = null;
+  stopAutoPlayback();
+  cancelQualityChecks();
   releaseMicrophone();
   if (state === 'starting' || state === 'recording') {
     operation++;
@@ -316,6 +546,29 @@ function cancelForBackground() {
   }
   stopPlayback();
   render();
+}
+
+async function toggleReview() {
+  if (state !== 'ready' || !currentRecording) return;
+  stopAutoPlayback();
+  const record = currentRecording;
+  const identity = recordingIdentity(record);
+  try {
+    const existing = await store.review(record.reading);
+    if (currentRecording !== record) return;
+    const review = {
+      reading: record.reading,
+      identity,
+      manual: !existing?.manual,
+      analysis: existing?.identity === identity ? existing.analysis : null,
+      updatedAt: new Date().toISOString(),
+    };
+    await store.putReview(review);
+    reviews.set(record.reading, review);
+    render();
+  } catch (error) {
+    showMessage(`复查标记保存失败：${error.message}`);
+  }
 }
 
 async function exportRecordings() {
@@ -415,8 +668,40 @@ elements.nextUnrecordedBtn.addEventListener('click', () => {
     }
   }
 });
+elements.nextReviewBtn.addEventListener('click', () => {
+  for (let step = 1; step <= readings.length; step++) {
+    const index = (currentIndex + step) % readings.length;
+    if (needsReview(readings[index].reading)) {
+      void loadCurrent(index);
+      break;
+    }
+  }
+});
+elements.autoPlaybackBtn.addEventListener('click', () => {
+  if (autoPlayback) {
+    stopAutoPlayback();
+    stopPlayback();
+    render();
+  } else {
+    startAutoPlayback();
+  }
+});
+elements.recordingFilter.addEventListener('change', () => {
+  stopAutoPlayback();
+  stopPlayback();
+  render();
+});
+elements.reviewToggleBtn.addEventListener('click', () => void toggleReview());
+document.querySelector('.recording-tools').addEventListener('toggle', event => {
+  if (event.target.open) queueAllQualityChecks();
+});
 elements.readingSelect.addEventListener('change', event => void loadCurrent(Number(event.target.value)));
+elements.playback.addEventListener('ended', () => {
+  if (autoPlayback && activePlaybackGeneration === playbackGeneration) scheduleAutoAdvance();
+});
 elements.playback.addEventListener('error', () => {
+  stopAutoPlayback();
+  render();
   if (currentRecording && elements.playback.currentSrc) {
     showMessage('这段录音无法解码播放，请重新录制；原录音仍可导出。');
   }
@@ -424,7 +709,10 @@ elements.playback.addEventListener('error', () => {
 elements.exportBtn.addEventListener('click', () => void exportRecordings());
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) cancelForBackground();
-  else void warmMicrophone();
+  else {
+    void warmMicrophone();
+    if (document.querySelector('.recording-tools').open) queueAllQualityChecks();
+  }
 });
 window.addEventListener('pagehide', cancelForBackground);
 
@@ -433,6 +721,7 @@ async function initialize() {
   void warmMicrophone();
   try {
     store = await openRecordingStore();
+    reviews = new Map((await store.allReviews()).map(review => [review.reading, review]));
     recordedKeys = new Set((await store.keys()).filter(key => readings.some(item => item.reading === key)));
     currentIndex = restorePosition();
     await loadCurrent(currentIndex);

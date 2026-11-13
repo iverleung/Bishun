@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { crc32 } from 'node:zlib';
 import { audioExtension, createZip, recordingFileName } from '../src/recorder/archive.js';
+import { analyzePcm, analyzeRecording, recordingIdentity } from '../src/recorder/quality.js';
 
 const viewOf = bytes => new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
 
@@ -38,4 +39,36 @@ test('empty ZIP is valid and oversized entry counts are rejected', async () => {
   assert.equal(archive.length, 22);
   assert.equal(viewOf(archive).getUint32(0, true), 0x06054b50);
   await assert.rejects(createZip(Array.from({ length: 65536 }, () => ({ name: 'a', data: '' }))), /分批导出/);
+});
+
+function tone(seconds, amplitude = 0.5, startSeconds = 0, endSeconds = seconds) {
+  const sampleRate = 1000;
+  const samples = new Float32Array(Math.round(seconds * sampleRate));
+  for (let index = Math.round(startSeconds * sampleRate); index < Math.min(samples.length, Math.round(endSeconds * sampleRate)); index++) {
+    samples[index] = Math.sin(index / sampleRate * Math.PI * 20) * amplitude;
+  }
+  return analyzePcm([samples], sampleRate);
+}
+
+test('PCM analysis accepts ordinary speech and detects empty or short recordings', () => {
+  assert.deepEqual(tone(1, 0.5, 0.2, 0.8).flags, []);
+  assert.ok(tone(1, 0).flags.includes('silent'));
+  assert.ok(tone(0.3).flags.includes('short'));
+  assert.equal(tone(1, 0).metrics.activeRmsDb, null);
+});
+
+test('PCM analysis flags boundary silence, quiet speech and possible clipping', () => {
+  assert.deepEqual(tone(2, 0.5, 0.9, 1.1).flags.sort(), ['leadingSilence', 'trailingSilence']);
+  assert.ok(tone(1, 0.01).flags.includes('quiet'));
+  const loud = analyzePcm([new Float32Array(1000).fill(1)], 1000);
+  assert.ok(loud.flags.includes('loud'));
+  assert.ok(loud.flags.includes('clipping'));
+});
+
+test('analysis failures stay attached to the original recording identity', async () => {
+  const record = { reading: 'ā', createdAt: '2026-11-14T00:00:00.000Z', blob: new Blob(['invalid']) };
+  const result = await analyzeRecording(record, { decodeAudioData: async () => { throw new Error('invalid'); } });
+  assert.equal(result.identity, recordingIdentity(record));
+  assert.deepEqual(result.flags, ['decode']);
+  assert.equal(result.metrics, null);
 });

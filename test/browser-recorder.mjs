@@ -39,7 +39,7 @@ try {
     await wait("!document.querySelector('#playback').paused && document.querySelector('#playback').currentTime > 0");
     await evaluate("document.querySelector('#playback').pause()");
     await command('Page.reload');
-    await wait("document.querySelector('#recordState')?.textContent.startsWith('已保存') && !document.querySelector('#playback').hidden");
+    await wait("document.querySelector('#reading').textContent === 'ā' && document.querySelector('#recordState')?.textContent.startsWith('已保存') && !document.querySelector('#playback').hidden");
     assert.equal(await evaluate("document.querySelector('#reading').textContent"), 'ā');
     await click('#nextBtn');
     await wait("document.querySelector('#reading').textContent === 'á'");
@@ -62,10 +62,60 @@ try {
         document.dispatchEvent(new Event('visibilitychange'));
     })()`);
     await wait('window.__microphoneRequests === 2 && window.__microphoneStreams[1]?.active');
+
+    await click('#previousBtn');
+    await wait("document.querySelector('#reading').textContent === 'ā'");
+    await click('#autoPlaybackBtn');
+    await wait("document.querySelector('#autoPlaybackBtn').textContent === '停止试听' && !document.querySelector('#playback').paused");
+    assert.equal(await evaluate('window.__microphoneStreams[1].getTracks().every(track => track.readyState === "ended")'), true);
+    await evaluate('document.querySelector("#playback").currentTime = Math.max(0, document.querySelector("#playback").duration - 0.05)');
+    await wait("document.querySelector('#reading').textContent === 'á' && !document.querySelector('#playback').paused", 15000);
+    await click('#autoPlaybackBtn');
+    assert.equal(await evaluate("document.querySelector('#reading').textContent"), 'á');
+
+    await click('.recording-tools summary');
+    await wait("document.querySelector('.recording-tools').open");
+    await click('#reviewToggleBtn');
+    await wait("document.querySelector('#reviewToggleBtn').textContent === '取消待重录'");
+    assert.equal(await evaluate("document.querySelector('#qualityText').textContent.includes('人工待重录')"), true);
+    await evaluate("document.querySelector('#recordingFilter').value='unrecorded';document.querySelector('#recordingFilter').dispatchEvent(new Event('change'))");
+    assert.equal(await evaluate("document.querySelector('#readingSelect').options.length"), 1492);
+    assert.equal(await evaluate("Array.from(document.querySelector('#readingSelect').options).every(option => !option.textContent.includes('✓'))"), true);
+    await evaluate("document.querySelector('#recordingFilter').value='all';document.querySelector('#recordingFilter').dispatchEvent(new Event('change'))");
+    await click('.recording-tools summary');
+
+    await click('#autoPlaybackBtn');
+    await wait("!document.querySelector('#playback').paused");
+    const reviewPoint = await evaluate("(()=>{const r=document.querySelector('#recordBtn').getBoundingClientRect();return{x:r.x+r.width/2,y:r.y+r.height/2}})()");
+    await command('Input.dispatchMouseEvent', { type: 'mousePressed', ...reviewPoint, button: 'left', clickCount: 1 });
+    await wait("document.querySelector('#recordState').textContent.includes('录音中')");
+    assert.equal(await evaluate("document.querySelector('#reading').textContent"), 'á');
+    assert.equal(await evaluate("document.querySelector('#autoPlaybackBtn').textContent"), '自动试听');
+    await new Promise(resolve => setTimeout(resolve, 500));
+    await command('Input.dispatchMouseEvent', { type: 'mouseReleased', ...reviewPoint, button: 'left', clickCount: 1 });
+    await wait("document.querySelector('#recordState').textContent.startsWith('已保存') && !document.querySelector('#playback').paused", 15000);
+    assert.equal(await evaluate("document.querySelector('#reading').textContent"), 'á');
+    assert.equal(await evaluate("document.querySelector('#reviewToggleBtn').textContent"), '标记重录');
+    await wait('document.querySelector("#playback").paused', 15000);
+    await new Promise(resolve => setTimeout(resolve, 800));
+    assert.equal(await evaluate("document.querySelector('#reading').textContent"), 'á');
+    assert.equal(await evaluate("localStorage.getItem('bishun-pinyin-recorder-current')"), 'á');
+
+    await command('Page.reload');
+    await wait("document.querySelector('#reading').textContent === 'á' && document.querySelector('#recordState').textContent.startsWith('已保存')");
+    await evaluate("localStorage.setItem('bishun-pinyin-recorder-current', '0')");
+    await command('Page.reload');
+    await wait("document.querySelector('#reading').textContent === 'ā' && document.querySelector('#recordState').textContent.startsWith('已保存')");
+    await evaluate("window.__nativePlay=document.querySelector('#playback').play.bind(document.querySelector('#playback'));document.querySelector('#playback').play=()=>Promise.reject(new DOMException('模拟播放失败','NotAllowedError'))");
+    await click('#autoPlaybackBtn');
+    await wait("document.querySelector('#message').textContent.includes('录音无法自动播放')");
+    assert.equal(await evaluate("document.querySelector('#reading').textContent"), 'ā');
+    assert.equal(await evaluate("document.querySelector('#autoPlaybackBtn').textContent"), '自动试听');
+    await evaluate("document.querySelector('#playback').play=window.__nativePlay");
     assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true);
     assert.deepEqual(exceptions, []);
     await screenshot('/tmp/bishun-recorder-mobile.png');
-    console.log('PASS: microphone prewarms, is reused, and resets after simulated background; hold/release saves; native audio plays; fixed layout; reload restores; next item; mobile width');
+    console.log('PASS: recording, background and reload; auto playback advances and releases microphone; hold-to-record interrupts; review resets after rerecording; reading and legacy index restoration; mobile width');
 } finally {
     await browser.close();
 }
