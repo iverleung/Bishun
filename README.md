@@ -179,7 +179,7 @@ W2 新增 `/characters/2.0.1/` 自托管候选字库：9,574 字，原始约 32.
 
 旧首页字形数据优先从 `public/hanzi-writer-data/` 加载，目前包含一批测试集常用字。未收录的字会依次尝试国内镜像和海外 CDN。新增字形时可在该目录加入兼容 HanziWriter 格式的 JSON，但还应校验路径、笔画数、顺序及名称对应关系。
 
-动画路径由 HanziWriter 数据提供，笔画名称来自 cnchar；两者的对应关系需要核验。新版使用 v3 字典查询，保留的 v1／v2 几何算法不表示已支持用户手写识字。笔画分类参考 [STROKE_REFERENCE.md](STROKE_REFERENCE.md)，仓库也包含 GF0023-2020 规范 PDF；参考文档本身不等于全字库已完成规范审核。
+动画路径由 HanziWriter 数据提供，笔画名称来自 cnchar；两者的对应关系需要核验。新版使用 v3 字典查询，保留的 v1／v2 几何算法不表示已支持用户手写识字。笔画分类参考 [STROKE_REFERENCE.md](STROKE_REFERENCE.md)，GF0023-2020 规范 PDF 仅作为本地参考资料保留，不随 Git 分发；参考文档本身不等于全字库已完成规范审核。
 
 ### 旧版已知限制
 

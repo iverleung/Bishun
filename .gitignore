@@ -34,3 +34,6 @@ public/characters/
 
 pinyin-record/
 tts/
+
+# 本地 PDF 参考资料，不纳入 Git
+*.pdf
