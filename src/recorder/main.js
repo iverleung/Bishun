@@ -8,6 +8,7 @@ const MAX_RECORDING_MS = 10000;
 const MIN_RECORDING_MS = 300;
 const readings = catalog.map((entry, index) => ({
   reading: entry.reading.normalize('NFC'),
+  characters: Array.isArray(entry.characters) ? entry.characters.slice(0, 3) : [],
   position: index + 1,
 }));
 if (!readings.length || new Set(readings.map(item => item.reading)).size !== readings.length) {
@@ -15,7 +16,7 @@ if (!readings.length || new Set(readings.map(item => item.reading)).size !== rea
 }
 
 const elements = Object.fromEntries([
-  'progressText', 'progressBar', 'position', 'reading', 'recordHint', 'recordState', 'timer',
+  'progressText', 'progressBar', 'position', 'reading', 'readingExamples', 'recordHint', 'recordState', 'timer',
   'recordBtn', 'recordLabel', 'message', 'previousBtn', 'nextUnrecordedBtn', 'nextBtn',
   'readingSelect', 'exportBtn', 'playback', 'qualityText', 'qualityProgress',
   'autoPlaybackBtn', 'autoScope', 'nextReviewBtn', 'recordingFilter', 'reviewToggleBtn',
@@ -104,6 +105,7 @@ function render() {
   elements.progressBar.style.width = `${recordedKeys.size / readings.length * 100}%`;
   elements.position.textContent = `第 ${item.position} 项`;
   elements.reading.textContent = item.reading;
+  elements.readingExamples.textContent = item.characters.join('  ');
   elements.readingSelect.disabled = !isReady;
   elements.recordingFilter.disabled = !isReady;
   const visibleOptions = [];

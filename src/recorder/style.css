@@ -29,6 +29,7 @@ button:disabled { cursor: not-allowed; opacity: .45; }
 .recording-card { padding: clamp(48px, 10svh, 92px) 0 36px; text-align: center; }
 .recording-position { margin: 0; color: #748079; font-size: 14px; }
 #reading { margin: 12px 0 4px; font-size: clamp(88px, 28vw, 144px); line-height: 1.15; font-weight: 500; letter-spacing: .02em; }
+.reading-examples { min-height: 32px; margin: 10px 0 0; color: #52645b; font-size: 22px; line-height: 32px; letter-spacing: .12em; }
 .recording-hint { margin: 12px 0 0; color: #748079; font-size: 14px; }
 .record-state { height: 24px; margin: 24px 0 0; overflow: hidden; color: #397c65; font-size: 16px; line-height: 24px; white-space: nowrap; }
 .quality-text { min-height: 20px; margin: 6px 0 0; color: #8b5a2b; font-size: 13px; line-height: 20px; }

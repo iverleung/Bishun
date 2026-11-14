@@ -41,8 +41,12 @@ try {
     await command('Page.reload');
     await wait("document.querySelector('#reading').textContent === 'ā' && document.querySelector('#recordState')?.textContent.startsWith('已保存') && !document.querySelector('#playback').hidden");
     assert.equal(await evaluate("document.querySelector('#reading').textContent"), 'ā');
+    assert.equal(await evaluate("document.querySelector('#readingExamples').textContent"), '阿  啊  呵');
+    assert.equal(await evaluate("document.querySelector('#readingExamples').getBoundingClientRect().height"), 32);
     await click('#nextBtn');
     await wait("document.querySelector('#reading').textContent === 'á'");
+    assert.equal(await evaluate("document.querySelector('#readingExamples').textContent.split('  ').length <= 3"), true);
+    assert.equal(await evaluate("document.querySelector('#readingExamples').getBoundingClientRect().height"), 32);
     assert.equal(await evaluate("document.querySelector('#playback').hidden"), true);
     const nextPoint = await evaluate("(()=>{const r=document.querySelector('#recordBtn').getBoundingClientRect();return{x:r.x+r.width/2,y:r.y+r.height/2}})()");
     await command('Input.dispatchMouseEvent', { type: 'mousePressed', ...nextPoint, button: 'left', clickCount: 1 });
