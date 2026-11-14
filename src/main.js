@@ -223,9 +223,10 @@ class HanziStrokeApp {
         const loadPromise = new Promise((resolve, reject) => {
             const charCode = encodeURIComponent(char);
             const cdns = [
-                `https://cdn.jsdelivr.net/npm/hanzi-writer-data@2.0/${charCode}.json`,
-                `https://jsd.onmicrosoft.cn/npm/hanzi-writer-data@2.0/${charCode}.json`,
+                `/hanzi-writer-data/${charCode}.json`,
                 `https://npm.elemecdn.com/hanzi-writer-data@2/${charCode}.json`,
+                `https://jsd.onmicrosoft.cn/npm/hanzi-writer-data@2.0/${charCode}.json`,
+                `https://cdn.jsdelivr.net/npm/hanzi-writer-data@2.0/${charCode}.json`,
                 `https://cdn.jsdelivr.net/gh/skishore/hanzi-writer-data@master/${charCode}.json`,
                 `https://unpkg.com/hanzi-writer-data@2.0.1/${charCode}.json`
             ];

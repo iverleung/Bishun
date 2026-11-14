@@ -31,3 +31,6 @@ yarn-error.log*
 
 # Generated from the pinned hanzi-writer-data dependency
 public/characters/
+
+pinyin-record/
+tts/
