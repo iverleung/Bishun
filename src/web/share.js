@@ -15,13 +15,19 @@ export function readSharedQuery(url) {
     return queries.length === 1 && isCharacterQuery(queries[0]) ? { status: 'valid', query: queries[0] } : { status: 'invalid' };
 }
 
-export function clearSharedQuery() {
-    const url = new URL(location.href);
-    const params = new URLSearchParams(url.hash.slice(1));
-    if (!params.has('q')) return;
-    params.delete('q');
-    url.hash = params.toString();
-    window.history.replaceState(window.history.state, '', url);
+export function updateSharedQuery(query, { push = false } = {}) {
+    let url;
+    if (query) {
+        url = new URL(createShareUrl(location.href, query));
+    } else {
+        url = new URL(location.href);
+        const params = new URLSearchParams(url.hash.slice(1));
+        if (!params.has('q')) return;
+        params.delete('q');
+        url.hash = params.toString();
+    }
+    if (url.href === location.href) return;
+    window.history[push ? 'pushState' : 'replaceState'](window.history.state, '', url);
 }
 
 export function setupSharing({ dom, getSelection }) {

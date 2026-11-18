@@ -8,7 +8,7 @@ import { QueryHistory } from './history.js';
 import { defaultPreferences, loadPreferences, savePreferences } from './preferences.js';
 import { SavedQueries } from './saved-queries.js';
 import { createSavedLibrary } from './saved-library.js';
-import { setupSharing, readSharedQuery, clearSharedQuery } from './share.js';
+import { setupSharing, readSharedQuery, updateSharedQuery } from './share.js';
 import { characterReadings } from './character-info.js';
 import { createDrawer } from './drawer.js';
 import { bindCanvasSwipe } from './canvas-swipe.js';
@@ -481,10 +481,10 @@ function render(state) {
 
 function query(value, fromLink = false, textbook = null) {
     textbooks?.setCurrent(textbook);
-    if (!fromLink) clearSharedQuery();
     savedFeedback('');
     savedFeedback('', false, dom.saveActionFeedback);
     const result = player.query(value);
+    if (!fromLink) updateSharedQuery(player.entries.join(''), { push: true });
     const notes = [];
     if (result.filtered) notes.push('已忽略非汉字内容。');
     if (result.truncated) notes.push('仅查询前 20 个汉字。');

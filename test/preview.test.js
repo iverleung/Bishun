@@ -8,7 +8,7 @@ import { characterReadings, characterRadical } from '../src/web/character-info.j
 import radicalDictionary from 'cnchar-radical';
 import { readWorksheetTitle } from '../src/web/print-context.js';
 import { worksheetLayout, paginateCharacters } from '../src/web/print-layout.js';
-import { createShareUrl, readSharedQuery } from '../src/web/share.js';
+import { createShareUrl, readSharedQuery, updateSharedQuery } from '../src/web/share.js';
 
 test('saved queries preserve order and duplicates within a query, survive reload and stay separate from history', () => {
     const values = new Map();
@@ -159,6 +159,29 @@ test('share links contain only validated query content and preserve Unicode, ord
     }
     assert.equal(readSharedQuery('https://example.com/?candidate=1#query').status, 'none');
     assert.throws(() => createShareUrl('file:///tmp/index.html', '木'));
+});
+
+test('query URL updates use distinct history entries and preserve empty-state navigation', () => {
+    const locationDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'location');
+    const windowDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'window');
+    const calls = [];
+    globalThis.location = new URL('https://example.com/#q=%E6%97%A7');
+    globalThis.window = { history: {
+        state: null,
+        pushState(state, unused, url) { calls.push('push'); globalThis.location = new URL(url); },
+        replaceState(state, unused, url) { calls.push('replace'); globalThis.location = new URL(url); },
+    } };
+    try {
+        updateSharedQuery('木', { push: true });
+        assert.equal(readSharedQuery(location.href).query, '木');
+        updateSharedQuery('木', { push: true });
+        updateSharedQuery('', { push: true });
+        assert.equal(readSharedQuery(location.href).status, 'none');
+        assert.deepEqual(calls, ['push', 'push']);
+    } finally {
+        if (locationDescriptor) Object.defineProperty(globalThis, 'location', locationDescriptor); else delete globalThis.location;
+        if (windowDescriptor) Object.defineProperty(globalThis, 'window', windowDescriptor); else delete globalThis.window;
+    }
 });
 
 

@@ -39,13 +39,21 @@ try {
 
     await fill('#query', '心');
     await click('#searchForm [type="submit"]');
-    await wait("!document.querySelector('#playBtn').disabled");
-    assert.equal(new URL(await evaluate('location.href')).hash, '');
+    await wait("document.querySelector('#query').value === '心' && !document.querySelector('#playBtn').disabled");
+    assert.equal(new URLSearchParams(new URL(await evaluate('location.href')).hash.slice(1)).get('q'), '心');
+    await fill('#query', '水');
+    await click('#searchForm [type="submit"]');
+    await wait("document.querySelector('#query').value === '水' && !document.querySelector('#playBtn').disabled");
+    assert.equal(new URLSearchParams(new URL(await evaluate('location.href')).hash.slice(1)).get('q'), '水');
+    await evaluate('history.back()');
+    await wait("document.querySelector('#query').value === '心' && !document.querySelector('#playBtn').disabled");
+    assert.equal(new URLSearchParams(new URL(await evaluate('location.href')).hash.slice(1)).get('q'), '心');
+    assert.equal(await evaluate("document.querySelector('#playBtn').textContent"), '播放');
     await command('Page.navigate', { url: new URL('/#q=abc', pageUrl).href });
     await wait("!document.querySelector('#queryNotice').hidden");
     assert.equal(await evaluate("document.querySelector('#lesson').hidden"), true);
     assert.match(await evaluate("document.querySelector('#queryNotice').textContent"), /分享链接无效/);
-    checks.push('manual query clears stale shared URL; invalid links do not silently filter');
+    checks.push('manual queries update shareable URLs; back restores the prior query without autoplay; invalid links do not silently filter');
 
     await command('Page.navigate', { url: link });
     await wait("document.querySelector('#query').value === '木水木' && !document.querySelector('#playBtn').disabled");
