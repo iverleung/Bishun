@@ -17,9 +17,10 @@ function transactionDone(transaction) {
   });
 }
 
-export async function openRecordingStore() {
+export async function openRecordingStore(mode = 'pinyin') {
+  const databaseName = mode === 'strokes' ? 'bishun-stroke-recorder' : DATABASE_NAME;
   const database = await new Promise((resolve, reject) => {
-    const request = indexedDB.open(DATABASE_NAME, 2);
+    const request = indexedDB.open(databaseName, 2);
     request.onupgradeneeded = () => {
       if (!request.result.objectStoreNames.contains(STORE_NAME)) {
         request.result.createObjectStore(STORE_NAME, { keyPath: 'reading' });

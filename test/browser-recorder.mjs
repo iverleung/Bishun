@@ -72,6 +72,7 @@ try {
     await click('#autoPlaybackBtn');
     await wait("document.querySelector('#autoPlaybackBtn').textContent === '停止试听' && !document.querySelector('#playback').paused");
     assert.equal(await evaluate('window.__microphoneStreams[1].getTracks().every(track => track.readyState === "ended")'), true);
+    await wait("document.querySelector('#playback').readyState >= 2 && Number.isFinite(document.querySelector('#playback').duration)");
     await evaluate('document.querySelector("#playback").currentTime = Math.max(0, document.querySelector("#playback").duration - 0.05)');
     await wait("document.querySelector('#reading').textContent === 'á' && !document.querySelector('#playback').paused", 15000);
     await click('#autoPlaybackBtn');
@@ -97,7 +98,7 @@ try {
     assert.equal(await evaluate("document.querySelector('#autoPlaybackBtn').textContent"), '自动试听');
     await new Promise(resolve => setTimeout(resolve, 500));
     await command('Input.dispatchMouseEvent', { type: 'mouseReleased', ...reviewPoint, button: 'left', clickCount: 1 });
-    await wait("document.querySelector('#recordState').textContent.startsWith('已保存') && !document.querySelector('#playback').paused", 15000);
+    await wait("document.querySelector('#recordState').textContent.startsWith('已保存')", 15000);
     assert.equal(await evaluate("document.querySelector('#reading').textContent"), 'á');
     assert.equal(await evaluate("document.querySelector('#reviewToggleBtn').textContent"), '标记重录');
     await wait('document.querySelector("#playback").paused', 15000);
@@ -116,10 +117,34 @@ try {
     assert.equal(await evaluate("document.querySelector('#reading').textContent"), 'ā');
     assert.equal(await evaluate("document.querySelector('#autoPlaybackBtn').textContent"), '自动试听');
     await evaluate("document.querySelector('#playback').play=window.__nativePlay");
+
+    await click('[data-recording-mode="strokes"]');
+    await wait("document.querySelector('#recordingTitle').textContent === '笔画录音' && document.querySelector('#reading').textContent === '卧钩' && document.querySelector('#recordState').textContent === '准备好了'");
+    assert.equal(await evaluate("document.querySelector('#readingExamples').textContent"), '');
+    assert.equal(await evaluate("document.querySelector('#readingExamples').getBoundingClientRect().height"), 32);
+    const strokePoint = await evaluate("(()=>{const r=document.querySelector('#recordBtn').getBoundingClientRect();return{x:r.x+r.width/2,y:r.y+r.height/2}})()");
+    await command('Input.dispatchMouseEvent', { type: 'mousePressed', ...strokePoint, button: 'left', clickCount: 1 });
+    await wait("document.querySelector('#recordState').textContent.includes('录音中')");
+    await new Promise(resolve => setTimeout(resolve, 500));
+    await command('Input.dispatchMouseEvent', { type: 'mouseReleased', ...strokePoint, button: 'left', clickCount: 1 });
+    await wait("document.querySelector('#recordState').textContent.startsWith('已保存')", 15000);
+    assert.equal(await evaluate("localStorage.getItem('bishun-stroke-recorder-current')"), 'stroke-68d536dce75d');
+    await click('[data-recording-mode="pinyin"]');
+    await wait("document.querySelector('#reading').textContent === 'ā' && document.querySelector('#recordState').textContent.startsWith('已保存')");
+    await click('[data-recording-mode="strokes"]');
+    await wait("document.querySelector('#reading').textContent === '卧钩' && document.querySelector('#recordState').textContent.startsWith('已保存')");
+    const databaseCounts = await evaluate(`Promise.all(['bishun-pinyin-recorder','bishun-stroke-recorder'].map(name => new Promise((resolve,reject) => {
+        const request=indexedDB.open(name);
+        request.onsuccess=()=>{const db=request.result;const keys=db.transaction('recordings').objectStore('recordings').getAllKeys();keys.onsuccess=()=>{resolve(keys.result.length);db.close()};keys.onerror=()=>reject(keys.error)};
+        request.onerror=()=>reject(request.error);
+    })))`);
+    assert.deepEqual(databaseCounts, [2, 1]);
+    await click('[data-recording-mode="pinyin"]');
+    await wait("document.querySelector('#reading').textContent === 'ā' && document.querySelector('#recordState').textContent.startsWith('已保存')");
     assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true);
     assert.deepEqual(exceptions, []);
     await screenshot('/tmp/bishun-recorder-mobile.png');
-    console.log('PASS: recording, background and reload; auto playback advances and releases microphone; hold-to-record interrupts; review resets after rerecording; reading and legacy index restoration; mobile width');
+    console.log('PASS: pinyin and stroke recording stay isolated; mode switching restores saved audio; background, auto playback, interruption, review, legacy position and mobile width');
 } finally {
     await browser.close();
 }

@@ -26,7 +26,10 @@ button:disabled { cursor: not-allowed; opacity: .45; }
 #progressText { color: #63736c; font-size: 14px; font-variant-numeric: tabular-nums; }
 .progress-track { height: 4px; margin-top: 14px; overflow: hidden; border-radius: 4px; background: #e2e6df; }
 .progress-track span { display: block; width: 0; height: 100%; background: #397c65; transition: width .2s; }
-.recording-card { padding: clamp(48px, 10svh, 92px) 0 36px; text-align: center; }
+.recording-modes { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; min-height: 44px; margin-top: 14px; padding: 4px; border-radius: 14px; background: #e8ebe5; }
+.mode-option { min-height: 36px; border: 0; border-radius: 10px; background: transparent; color: #52645b; font-weight: 600; }
+.mode-option.is-active { background: #fff; color: #285f4e; box-shadow: 0 1px 4px rgb(36 51 45 / 10%); }
+.recording-card { padding: clamp(28px, 6svh, 56px) 0 36px; text-align: center; }
 .recording-position { margin: 0; color: #748079; font-size: 14px; }
 #reading { margin: 12px 0 4px; font-size: clamp(88px, 28vw, 144px); line-height: 1.15; font-weight: 500; letter-spacing: .02em; }
 .reading-examples { min-height: 32px; margin: 10px 0 0; color: #52645b; font-size: 22px; line-height: 32px; letter-spacing: .12em; }
@@ -78,7 +81,7 @@ button:disabled { cursor: not-allowed; opacity: .45; }
 [hidden] { display: none !important; }
 @media (min-width: 600px) {
   .recorder-app { padding-inline: 32px; }
-  .recording-card { padding-top: 72px; }
+  .recording-card { padding-top: 48px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

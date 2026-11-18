@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { crc32 } from 'node:zlib';
 import { audioExtension, createZip, recordingFileName } from '../src/recorder/archive.js';
 import { analyzePcm, analyzeRecording, recordingIdentity } from '../src/recorder/quality.js';
+import { exportManifestEntry, recordingTasks } from '../src/recorder/tasks.js';
 
 const viewOf = bytes => new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
 
@@ -71,4 +72,26 @@ test('analysis failures stay attached to the original recording identity', async
   assert.equal(result.identity, recordingIdentity(record));
   assert.deepEqual(result.flags, ['decode']);
   assert.equal(result.metrics, null);
+});
+
+test('stroke tasks use canonical IDs without changing pinyin identities', () => {
+  assert.equal(recordingTasks.pinyin.items.length, 1494);
+  assert.equal(recordingTasks.strokes.items.length, 31);
+  assert.equal(recordingTasks.pinyin.items[0].reading, 'ā');
+  assert.equal(recordingTasks.pinyin.items[0].label, 'ā');
+  assert.ok(recordingTasks.strokes.items.every(item => /^stroke-[a-f0-9]{12}$/.test(item.reading)));
+  assert.equal(recordingTasks.strokes.items.find(item => item.label === '横').reading, 'stroke-f8c6e3e86baa');
+});
+
+test('stroke exports bind IDs and names while pinyin export fields stay compatible', () => {
+  const record = { reading: 'stroke-f8c6e3e86baa', mimeType: 'audio/mp4', durationMs: 1200, createdAt: '2026-11-18T00:00:00.000Z' };
+  const stroke = recordingTasks.strokes.items.find(item => item.reading === record.reading);
+  assert.deepEqual(exportManifestEntry('strokes', stroke, record), {
+    id: 'stroke-f8c6e3e86baa', text: '横', file: '0009_stroke-f8c6e3e86baa_横.m4a',
+    durationMs: 1200, mimeType: 'audio/mp4', createdAt: '2026-11-18T00:00:00.000Z',
+  });
+  const pinyin = recordingTasks.pinyin.items[0];
+  assert.deepEqual(exportManifestEntry('pinyin', pinyin, { ...record, reading: 'ā' }), {
+    reading: 'ā', file: '0001_ā.m4a', durationMs: 1200, mimeType: 'audio/mp4', createdAt: '2026-11-18T00:00:00.000Z',
+  });
 });

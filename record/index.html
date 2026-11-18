@@ -11,10 +11,14 @@
 <body>
   <main class="recorder-app">
     <header class="recorder-header">
-      <h1>拼音录音</h1>
+      <h1 id="recordingTitle">拼音录音</h1>
       <span id="progressText">0 / 0</span>
     </header>
     <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
+    <div class="recording-modes" role="group" aria-label="录音类型">
+      <button class="mode-option is-active" type="button" data-recording-mode="pinyin" aria-pressed="true" disabled>拼音</button>
+      <button class="mode-option" type="button" data-recording-mode="strokes" aria-pressed="false" disabled>笔画</button>
+    </div>
 
     <section class="recording-card" aria-labelledby="reading">
       <p id="position" class="recording-position"></p>
@@ -41,7 +45,7 @@
       <p id="message" class="recorder-message" role="alert" hidden></p>
     </div>
 
-    <nav class="recording-navigation" aria-label="切换拼音">
+    <nav id="recordingNavigation" class="recording-navigation" aria-label="切换拼音">
       <button id="previousBtn" class="navigation-action" type="button">上一项</button>
       <button id="nextBtn" class="navigation-action" type="button">下一项</button>
       <button id="nextUnrecordedBtn" class="text-action" type="button">下个未录</button>
@@ -51,14 +55,14 @@
     <details class="recording-tools">
       <summary>管理与导出</summary>
       <div class="recording-tools-content">
-        <label for="recordingFilter">筛选拼音</label>
+        <label id="recordingFilterLabel" for="recordingFilter">筛选拼音</label>
         <select id="recordingFilter">
           <option value="all">全部</option>
           <option value="recorded">已录</option>
           <option value="unrecorded">未录</option>
           <option value="review">待复查</option>
         </select>
-        <label for="readingSelect">跳转到拼音</label>
+        <label id="readingSelectLabel" for="readingSelect">跳转到拼音</label>
         <select id="readingSelect"></select>
         <p id="qualityProgress">打开后逐项检查已录音频；技术结果仅供复查。</p>
         <button id="reviewToggleBtn" class="secondary-action" type="button" disabled>标记重录</button>

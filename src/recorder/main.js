@@ -1,18 +1,17 @@
-import catalog from '../../docs/拼音音节合成列表.json';
-import { createZip, recordingFileName } from './archive.js';
+import { createZip } from './archive.js';
 import { openRecordingStore } from './store.js';
 import { analyzeRecording, QUALITY_FLAGS, recordingIdentity } from './quality.js';
+import { exportManifestEntry, exportRecordingName, recordingTasks } from './tasks.js';
 
-const STORAGE_KEY = 'bishun-pinyin-recorder-current';
 const MAX_RECORDING_MS = 10000;
 const MIN_RECORDING_MS = 300;
-const readings = catalog.map((entry, index) => ({
-  reading: entry.reading.normalize('NFC'),
-  characters: Array.isArray(entry.characters) ? entry.characters.slice(0, 3) : [],
-  position: index + 1,
-}));
-if (!readings.length || new Set(readings.map(item => item.reading)).size !== readings.length) {
-  throw new Error('拼音清单为空或包含重复读音');
+let mode = 'pinyin';
+let readings = recordingTasks[mode].items;
+const stores = new Map();
+for (const task of Object.values(recordingTasks)) {
+  if (!task.items.length || new Set(task.items.map(item => item.reading)).size !== task.items.length) {
+    throw new Error(`${task.noun}清单为空或包含重复标识`);
+  }
 }
 
 const elements = Object.fromEntries([
@@ -20,6 +19,7 @@ const elements = Object.fromEntries([
   'recordBtn', 'recordLabel', 'message', 'previousBtn', 'nextUnrecordedBtn', 'nextBtn',
   'readingSelect', 'exportBtn', 'playback', 'qualityText', 'qualityProgress',
   'autoPlaybackBtn', 'autoScope', 'nextReviewBtn', 'recordingFilter', 'reviewToggleBtn',
+  'recordingTitle', 'recordingFilterLabel', 'readingSelectLabel', 'recordingNavigation',
 ].map(id => [id, document.getElementById(id)]));
 
 let store;
@@ -48,16 +48,21 @@ let qualityRunning = false;
 const qualityQueue = [];
 const qualityPending = new Set();
 
-const readingOptions = [];
+let readingOptions = [];
 let renderedOptionKey = '';
 
-for (const item of readings) {
-  const option = document.createElement('option');
-  option.value = String(item.position - 1);
-  option.textContent = `${String(item.position).padStart(4, '0')}  ${item.reading}`;
-  elements.readingSelect.append(option);
-  readingOptions.push(option);
+function rebuildReadingOptions() {
+  readingOptions = readings.map(item => {
+    const option = document.createElement('option');
+    option.value = String(item.position - 1);
+    option.textContent = `${String(item.position).padStart(4, '0')}  ${item.label}`;
+    return option;
+  });
+  elements.readingSelect.replaceChildren(...readingOptions);
+  renderedOptionKey = '';
 }
+
+rebuildReadingOptions();
 
 function formatDuration(milliseconds) {
   return `${(milliseconds / 1000).toFixed(1)} 秒`;
@@ -99,12 +104,25 @@ function currentQualityText() {
 
 function render() {
   const item = readings[currentIndex];
+  const task = recordingTasks[mode];
   const isReady = state === 'ready';
   const isRecording = state === 'recording';
+  elements.recordingTitle.textContent = task.title;
+  document.title = task.title;
+  elements.recordHint.textContent = `按住下方按钮，读完当前${task.noun}后松开`;
+  elements.recordingFilterLabel.textContent = `筛选${task.noun}`;
+  elements.readingSelectLabel.textContent = `跳转到${task.noun}`;
+  elements.recordingNavigation.setAttribute('aria-label', `切换${task.noun}`);
+  for (const button of document.querySelectorAll('[data-recording-mode]')) {
+    const active = button.dataset.recordingMode === mode;
+    button.disabled = !isReady;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-pressed', String(active));
+  }
   elements.progressText.textContent = `已录 ${recordedKeys.size} / ${readings.length}`;
   elements.progressBar.style.width = `${recordedKeys.size / readings.length * 100}%`;
   elements.position.textContent = `第 ${item.position} 项`;
-  elements.reading.textContent = item.reading;
+  elements.reading.textContent = item.label;
   elements.readingExamples.textContent = item.characters.join('  ');
   elements.readingSelect.disabled = !isReady;
   elements.recordingFilter.disabled = !isReady;
@@ -116,7 +134,7 @@ function render() {
     const review = reviewFor(reading);
     const flags = review?.analysis?.flags?.length ? '  ⚠' : '';
     const manual = review?.manual ? '  !' : '';
-    option.textContent = `${String(index + 1).padStart(4, '0')}  ${reading}${recordedKeys.has(reading) ? '  ✓' : ''}${manual}${flags}`;
+    option.textContent = `${String(index + 1).padStart(4, '0')}  ${readings[index].label}${recordedKeys.has(reading) ? '  ✓' : ''}${manual}${flags}`;
     if (matchesFilter(index)) {
       visibleOptions.push(option);
       visibleIndexes.push(index);
@@ -282,12 +300,12 @@ function startAutoPlayback() {
 }
 
 function savePosition() {
-  try { localStorage.setItem(STORAGE_KEY, readings[currentIndex].reading); } catch { /* Recordings remain safe if position storage is unavailable. */ }
+  try { localStorage.setItem(recordingTasks[mode].storageKey, readings[currentIndex].reading); } catch { /* Recordings remain safe if position storage is unavailable. */ }
 }
 
 function restorePosition() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY) || '0';
+    const saved = localStorage.getItem(recordingTasks[mode].storageKey) || '0';
     if (/^\d+$/.test(saved)) {
       const index = Number(saved);
       return Number.isInteger(index) && index >= 0 && index < readings.length ? index : 0;
@@ -491,7 +509,7 @@ async function stopActiveRecording({ discard = false } = {}) {
     const durationMs = Math.round(performance.now() - active.startedAt);
     const type = active.recorder.mimeType || selectedMimeType() || 'audio/webm';
     const blob = new Blob(active.chunks, { type });
-    if (!blob.size || durationMs < MIN_RECORDING_MS) throw new Error('录音太短，请自然读完拼音后再停止。');
+    if (!blob.size || durationMs < MIN_RECORDING_MS) throw new Error(`录音太短，请自然读完${recordingTasks[mode].noun}后再停止。`);
     const record = {
       reading: readings[currentIndex].reading,
       blob,
@@ -583,17 +601,11 @@ async function exportRecordings() {
     const byReading = new Map(readings.map(item => [item.reading, item]));
     const records = (await store.all()).filter(record => byReading.has(record.reading));
     records.sort((left, right) => byReading.get(left.reading).position - byReading.get(right.reading).position);
-    const manifest = records.map(record => ({
-      reading: record.reading,
-      file: recordingFileName(record.reading, byReading.get(record.reading).position, record.mimeType),
-      durationMs: record.durationMs,
-      mimeType: record.mimeType,
-      createdAt: record.createdAt,
-    }));
+    const manifest = records.map(record => exportManifestEntry(mode, byReading.get(record.reading), record));
     const archive = await createZip([
-      { name: 'manifest.json', data: JSON.stringify({ schemaVersion: 1, recordings: manifest }, null, 2) },
+      { name: 'manifest.json', data: JSON.stringify({ schemaVersion: 1, ...(mode === 'strokes' ? { kind: 'strokes' } : {}), recordings: manifest }, null, 2) },
       ...records.map(record => ({
-        name: recordingFileName(record.reading, byReading.get(record.reading).position, record.mimeType),
+        name: exportRecordingName(mode, byReading.get(record.reading), record),
         data: record.blob,
       })),
     ]);
@@ -601,7 +613,7 @@ async function exportRecordings() {
     const url = URL.createObjectURL(archive);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `bishun-pinyin-${new Date().toISOString().slice(0, 10)}.zip`;
+    link.download = `${recordingTasks[mode].archiveName}-${new Date().toISOString().slice(0, 10)}.zip`;
     document.body.append(link);
     link.click();
     link.remove();
@@ -719,20 +731,47 @@ document.addEventListener('visibilitychange', () => {
 window.addEventListener('pagehide', cancelForBackground);
 
 async function initialize() {
+  const requestedMode = mode;
   render();
   void warmMicrophone();
   try {
-    store = await openRecordingStore();
+    if (!stores.has(requestedMode)) stores.set(requestedMode, await openRecordingStore(recordingTasks[requestedMode].databaseMode));
+    if (requestedMode !== mode) return;
+    store = stores.get(requestedMode);
     reviews = new Map((await store.allReviews()).map(review => [review.reading, review]));
     recordedKeys = new Set((await store.keys()).filter(key => readings.some(item => item.reading === key)));
     currentIndex = restorePosition();
     await loadCurrent(currentIndex);
   } catch (error) {
+    if (requestedMode !== mode) return;
     state = 'loading';
     render();
     elements.recordState.textContent = '无法使用本地录音存储';
     showMessage(`${recordingError(error)} 请确认浏览器允许网站存储，并未使用无痕模式。`);
   }
+}
+
+async function switchMode(nextMode) {
+  if (nextMode === mode || state !== 'ready' || !recordingTasks[nextMode]) return;
+  stopAutoPlayback();
+  cancelQualityChecks();
+  operation++;
+  mode = nextMode;
+  readings = recordingTasks[mode].items;
+  currentRecording = null;
+  recordedKeys = new Set();
+  reviews = new Map();
+  currentIndex = 0;
+  state = 'loading';
+  showMessage();
+  preparePlayback();
+  rebuildReadingOptions();
+  render();
+  await initialize();
+}
+
+for (const button of document.querySelectorAll('[data-recording-mode]')) {
+  button.addEventListener('click', () => void switchMode(button.dataset.recordingMode));
 }
 
 void initialize();
