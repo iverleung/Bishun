@@ -16,8 +16,9 @@ function resourceFailure(error) {
 
 // One audio context, versioned local recordings, no browser speech synthesis.
 export class StrokeAudio {
-    constructor({ fetchImpl = (...args) => globalThis.fetch(...args), createContext = () => new (window.AudioContext || window.webkitAudioContext)(), getAudioSession = () => globalThis.navigator?.audioSession } = {}) {
+    constructor({ fetchImpl = (...args) => globalThis.fetch(...args), createContext = () => new (window.AudioContext || window.webkitAudioContext)(), getAudioSession = () => globalThis.navigator?.audioSession, version = 'v2' } = {}) {
         this.fetch = fetchImpl;
+        this.version = version;
         this.createContext = createContext;
         this.getAudioSession = getAudioSession;
         this.context = null;
@@ -51,13 +52,13 @@ export class StrokeAudio {
 
     manifest() {
         if (!this.catalog) {
-            this.catalog = this.bounded(this.fetch('/audio/strokes/v1/manifest.json').then(async response => {
+            this.catalog = this.bounded(this.fetch(`/audio/strokes/${this.version}/manifest.json`).then(async response => {
                 if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) throw new Error('录音清单不可用');
                 const manifest = await response.json();
-                if (manifest.schemaVersion !== 1 || manifest.version !== 'v1' || !Array.isArray(manifest.items)) throw new Error('录音清单版本不匹配');
+                if (manifest.schemaVersion !== 1 || manifest.version !== this.version || !Array.isArray(manifest.items)) throw new Error('录音清单版本不匹配');
                 const entries = new Map();
                 for (const item of manifest.items) {
-                    if (!/^stroke-[a-f0-9]{12}$/.test(item.id) || item.url !== `/audio/strokes/v1/${item.id}.mp3` ||
+                    if (!/^stroke-[a-f0-9]{12}$/.test(item.id) || item.url !== `/audio/strokes/${this.version}/${item.id}.mp3` ||
                         typeof item.text !== 'string' || !Number.isFinite(item.durationMs) || item.durationMs <= 0) throw new Error('录音清单无效');
                     entries.set(item.text, item);
                 }

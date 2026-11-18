@@ -8,6 +8,7 @@ const [cdpUrl='http://127.0.0.1:9224',pageUrl='http://127.0.0.1:5189/',selectedB
 const grade1Batches=readingPlan.batches.filter(batch=>batch.id.startsWith('grade1-')&&(!selectedBatch||batch.id===selectedBatch));
 if(!grade1Batches.length)throw new Error('Unknown first-grade reading batch');
 const browser=await openBrowser(cdpUrl,pageUrl);
+await browser.command('Emulation.setFocusEmulationEnabled',{enabled:true});
 const checks=[];
 try {
     const {evaluate,command,wait,click,fill}=browser;
@@ -26,7 +27,7 @@ try {
     const button=reading=>`[data-reading="${reading}"]`;
     const busy="Boolean(document.querySelector('.reading-button.is-speaking'))";
     const starts=()=>evaluate("audioEvents.filter(type=>type==='start').length");
-    await query('长行赢');
+    await query('长行镜');
     assert.equal(await starts(),0);
     assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),2);
     await click(button('cháng'));await wait(busy);await wait("audioEvents.includes('start')");
@@ -49,7 +50,7 @@ try {
     await click(button('xíng'));await wait("typeof releaseReading === 'function'");
     await click('#playBtn');await evaluate('releaseReading();window.fetch=originalFetch');
     await new Promise(resolve=>setTimeout(resolve,300));
-    assert.equal(await starts(),before);
+    assert.ok((await starts()) - before <= 1); // Resuming strokes may start one stroke recording; the cancelled reading must not add another.
     assert.equal(await evaluate(busy),false);
     await click('#playBtn');
     checks.push('resuming strokes while a reading loads prevents late voice playback');
@@ -58,7 +59,7 @@ try {
     await click(button('háng'));await wait("document.querySelector('#readingFeedback').textContent.includes('重试')");
     assert.equal(await evaluate("document.querySelector('#readingFeedback').classList.contains('sr-only')"),false);
     await evaluate('window.fetch=originalFetch');await click(button('háng'));await wait(busy);await wait(`!(${busy})`);
-    await click('#nextCharBtn');await wait("document.querySelector('#characterReadings').textContent==='yíng'");
+    await click('#nextCharBtn');await wait("document.querySelector('#characterReadings').textContent==='jìng'");
     assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),0);
     checks.push('failed recording has a Chinese retry state; uncovered syllables remain plain text');
 
@@ -86,7 +87,8 @@ try {
 
     await evaluate(`window.fetch=(input,options)=>String(input).includes('/audio/readings/')?new Promise(resolve=>{window.releaseReading=()=>originalFetch(input,options).then(resolve);}):originalFetch(input,options);window.releaseReading=null;`);
     const beforeBackground=await starts();
-    await click(button('héng'));await wait("typeof releaseReading==='function'");
+    await click(button('hàng'));await wait("typeof releaseReading==='function'");
+    await command('Emulation.setFocusEmulationEnabled',{enabled:false});
     const {targetInfo}=await command('Target.getTargetInfo');
     const {targetId}=await command('Target.createTarget',{url:'about:blank',browserContextId:targetInfo.browserContextId});
     await command('Target.activateTarget',{targetId});
@@ -95,7 +97,7 @@ try {
         await evaluate('releaseReading();window.fetch=originalFetch');
         await new Promise(resolve=>setTimeout(resolve,200));
         assert.equal(await starts(),beforeBackground);
-    } finally {await command('Target.closeTarget',{targetId});await browser.activate();}
+    } finally {await command('Target.closeTarget',{targetId});await browser.activate();await command('Emulation.setFocusEmulationEnabled',{enabled:true});}
     assert.equal(await evaluate(busy),false);
     checks.push('a real background tab cancels pending voice and returning does not resume it');
     await query('禾');
@@ -142,13 +144,15 @@ try {
             }
             if (Array.from(group)[index] === '地') {
                 assert.equal(await evaluate('document.querySelector("#characterReadings").textContent'),'dì / de');
-                assert.equal(await evaluate('document.querySelector("[data-reading=de]")'),null);
+                const beforeNeutral=await starts();
+                await click(button('de'));await wait(`audioEvents.filter(type=>type==='start').length===${beforeNeutral+1}`);await wait(`!(${busy})`);
+                assert.ok(browser.responses.some(item=>item.url.endsWith(readingRecording('de').url) && item.status===200));
             }
         }
     }
     assert.deepEqual([...played].sort(), Object.keys(batch.items).sort());
     for (const reading of played) assert.ok(browser.responses.some(item=>item.url.endsWith(readingRecording(reading).url) && item.status===200));
-    checks.push('all 34 new syllables decode/start/end through the real UI; missing neutral de stays text');
+    checks.push('all 34 new syllables and user-recorded neutral de decode/start/end through the real UI');
     for(const grade1 of grade1Batches){
         const grade1Played = new Set();
         for(const group of grade1.sampleQueries){
@@ -176,18 +180,18 @@ try {
     await query('女');
     assert.equal(await evaluate("document.querySelector('.reading-button').dataset.reading"),'nǚ');
     await query('了');
-    assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),0);
+    assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),2);
     assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"),'le / liǎo');
     await query('么');
     assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"),'me');
-    assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),0);
+    assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),1);
     await query('的');
-    assert.equal(await evaluate("document.querySelector('[data-reading=de]')"),null);
+    assert.equal(await evaluate("document.querySelector('[data-reading=de]').dataset.reading"),'de');
     assert.ok((await evaluate("document.querySelector('#characterReadings').textContent")).includes('de'));
     await query('们');
     assert.equal(await evaluate("document.querySelector('#characterReadings').textContent"),'men');
-    assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),0);
-    checks.push('new jiào becomes playable on 校; nǚ stays distinct from nu and neutral le/me/de/men remain text without borrowed tones');
+    assert.equal(await evaluate("document.querySelectorAll('.reading-button').length"),1);
+    checks.push('new jiào and neutral le/me/de/men are playable from their own user recordings; nǚ stays distinct from nu');
     assert.deepEqual(browser.exceptions,[]);
     console.log(JSON.stringify({browser:browser.version,checks,exceptions:browser.exceptions},null,2));
 } finally {await browser.close();}

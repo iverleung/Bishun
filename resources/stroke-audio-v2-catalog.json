@@ -1,0 +1,478 @@
+{
+  "schemaVersion": 1,
+  "version": "v2",
+  "source": {
+    "type": "user-recording",
+    "export": "pinyin-record/bishun-strokes-2026-11-18",
+    "exportManifestSha256": "444b50a16fbb32390f36a7dc2d73b2a4ff10d363e598bf593cc92af4fba10ebc",
+    "processing": "ffmpeg: trim leading/trailing silence below -55 dB; EBU R128 loudnorm I=-16 TP=-1.5 LRA=11; MP3 48 kbps, 24000 Hz, mono",
+    "technicalReview": "decode, duration and whole-file mean/peak levels; pronunciation and listening approval remain pending"
+  },
+  "items": [
+    {
+      "id": "stroke-68d536dce75d",
+      "url": "/audio/strokes/v2/stroke-68d536dce75d.mp3",
+      "durationMs": 770,
+      "bytes": 5383,
+      "sha256": "999a71b1a75174d710af18821cc47fcdd58716fa5a872b924f6837e7bdc8f2d8",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0001_stroke-68d536dce75d_卧钩.m4a",
+      "sourceSha256": "e0c17fdb8631fd934eada6229386f67fb6b046d32406ae3f6972b50a0f4587b6",
+      "sourceQuality": {
+        "meanDb": -19.8,
+        "peakDb": -4.1
+      },
+      "text": "卧钩"
+    },
+    {
+      "id": "stroke-35a9db278ad3",
+      "url": "/audio/strokes/v2/stroke-35a9db278ad3.mp3",
+      "durationMs": 858,
+      "bytes": 5815,
+      "sha256": "fb372f33ff795950348464b4d852029f8a66f0701c44471e51fdc6fa18d13d48",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0002_stroke-35a9db278ad3_弯钩.m4a",
+      "sourceSha256": "b574aa401399742faf48868fa9e33e2f92b353a52aa396f869078d812e5c7169",
+      "sourceQuality": {
+        "meanDb": -21.3,
+        "peakDb": -5
+      },
+      "text": "弯钩"
+    },
+    {
+      "id": "stroke-e44c1d0bddc1",
+      "url": "/audio/strokes/v2/stroke-e44c1d0bddc1.mp3",
+      "durationMs": 631,
+      "bytes": 4519,
+      "sha256": "f469ba44c83dcd76c82b0f43725575a42a82486320c21676db46c80a9a468d4b",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0003_stroke-e44c1d0bddc1_捺.m4a",
+      "sourceSha256": "19bbb90e4406a97e65d121ef96ee2fad30b1e27ffcc789b353d968fa78b595b8",
+      "sourceQuality": {
+        "meanDb": -21.4,
+        "peakDb": -4.8
+      },
+      "text": "捺"
+    },
+    {
+      "id": "stroke-bfc4aff8a00d",
+      "url": "/audio/strokes/v2/stroke-bfc4aff8a00d.mp3",
+      "durationMs": 787,
+      "bytes": 5383,
+      "sha256": "42994f448d2d9412826b347b511e9d4825bc79a8a8bf63614157b2f5d8d09619",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0004_stroke-bfc4aff8a00d_提.m4a",
+      "sourceSha256": "e0f0bf88d61b0b3caa1cf571e4f9bb3913625ab67337b92f8f9a20f04c116973",
+      "sourceQuality": {
+        "meanDb": -31.3,
+        "peakDb": -18.3
+      },
+      "text": "提"
+    },
+    {
+      "id": "stroke-8fddd7cdb49f",
+      "url": "/audio/strokes/v2/stroke-8fddd7cdb49f.mp3",
+      "durationMs": 944,
+      "bytes": 6391,
+      "sha256": "0a0a7be32e5851d30e7b78b1a52ed4c13a916e8c72744c9181a4dc5765b75a39",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0005_stroke-8fddd7cdb49f_撇.m4a",
+      "sourceSha256": "966bd36cce5c78ab296d0a6a12116f9d7181e306af1b90bb7d5cb57c959f5298",
+      "sourceQuality": {
+        "meanDb": -27.2,
+        "peakDb": -10.2
+      },
+      "text": "撇"
+    },
+    {
+      "id": "stroke-2d7a6a8d82fd",
+      "url": "/audio/strokes/v2/stroke-2d7a6a8d82fd.mp3",
+      "durationMs": 936,
+      "bytes": 6247,
+      "sha256": "89d5452806daa6f11d982e6beb9ec36d91cb9fd62294e211a9a482053bef4949",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0006_stroke-2d7a6a8d82fd_撇折.m4a",
+      "sourceSha256": "9ebe99e6001604b5ef70f352b3270f4cf4863e8f594ff0b7bd66027f75579e9e",
+      "sourceQuality": {
+        "meanDb": -23.2,
+        "peakDb": -7.8
+      },
+      "text": "撇折"
+    },
+    {
+      "id": "stroke-15ddeafbfd5c",
+      "url": "/audio/strokes/v2/stroke-15ddeafbfd5c.mp3",
+      "durationMs": 944,
+      "bytes": 6391,
+      "sha256": "61d5ede81ae99ca3dd278dd56d11a259408c8a9afb514122be628b0463bfb515",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0007_stroke-15ddeafbfd5c_撇点.m4a",
+      "sourceSha256": "217c429947556bc18b77cd6e64211928c08e90edd51b2113379e3f5c8f06a222",
+      "sourceQuality": {
+        "meanDb": -24.2,
+        "peakDb": -7.6
+      },
+      "text": "撇点"
+    },
+    {
+      "id": "stroke-8d9f7a9d2c62",
+      "url": "/audio/strokes/v2/stroke-8d9f7a9d2c62.mp3",
+      "durationMs": 943,
+      "bytes": 6391,
+      "sha256": "c22ab6c35c50187fc7a7147a5ea66838fcbde9f18fe8a714991965689a27790e",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0008_stroke-8d9f7a9d2c62_斜钩.m4a",
+      "sourceSha256": "6acc33bd185f4daa0ec4cd2cf085b43f2919a70f6a8c404b076318b2321a257c",
+      "sourceQuality": {
+        "meanDb": -23.2,
+        "peakDb": -6.2
+      },
+      "text": "斜钩"
+    },
+    {
+      "id": "stroke-f8c6e3e86baa",
+      "url": "/audio/strokes/v2/stroke-f8c6e3e86baa.mp3",
+      "durationMs": 871,
+      "bytes": 5959,
+      "sha256": "0d82511e338cbd78c92a01210618ae6d468ce82bb9f0facc4cd5ec82181f0b0e",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0009_stroke-f8c6e3e86baa_横.m4a",
+      "sourceSha256": "5249273575da9dc4d29b26b7f645396a1752e72278f823b6d32fb69cd47601ef",
+      "sourceQuality": {
+        "meanDb": -28.4,
+        "peakDb": -11.5
+      },
+      "text": "横"
+    },
+    {
+      "id": "stroke-999eeceff4ed",
+      "url": "/audio/strokes/v2/stroke-999eeceff4ed.mp3",
+      "durationMs": 970,
+      "bytes": 6535,
+      "sha256": "52389d054aabc520b8af37eb922741c1a247865c3c8cb1e164a336cbb6d77179",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0010_stroke-999eeceff4ed_横折.m4a",
+      "sourceSha256": "cc73e48ecf9359bc900c994a27f8acc0ff5e51902cd44a44aa6e794de306e99f",
+      "sourceQuality": {
+        "meanDb": -24.4,
+        "peakDb": -11.8
+      },
+      "text": "横折"
+    },
+    {
+      "id": "stroke-b2f21037fc0c",
+      "url": "/audio/strokes/v2/stroke-b2f21037fc0c.mp3",
+      "durationMs": 1083,
+      "bytes": 7255,
+      "sha256": "7a3571e1ddecdf3993fe157ec04252f7c31ad83da4b624eb5cac095c2ebd4a5a",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0011_stroke-b2f21037fc0c_横折弯.m4a",
+      "sourceSha256": "ae25d00ae21f0f878760b9dc32a26cce90daba49a7002b139380e8619c39a2c4",
+      "sourceQuality": {
+        "meanDb": -22.4,
+        "peakDb": -4.2
+      },
+      "text": "横折弯"
+    },
+    {
+      "id": "stroke-7918e80a097a",
+      "url": "/audio/strokes/v2/stroke-7918e80a097a.mp3",
+      "durationMs": 1313,
+      "bytes": 8551,
+      "sha256": "12437f98f67b09112407cbd8aba6dc09f21ade42c4bbf872f5c596f16879853b",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0012_stroke-7918e80a097a_横折弯钩.m4a",
+      "sourceSha256": "eb434c76e83560b8ac4518cc3e395b9e5b38ab0c421a330e56fa50874e73976e",
+      "sourceQuality": {
+        "meanDb": -21.7,
+        "peakDb": -6.6
+      },
+      "text": "横折弯钩"
+    },
+    {
+      "id": "stroke-46af3459c747",
+      "url": "/audio/strokes/v2/stroke-46af3459c747.mp3",
+      "durationMs": 1524,
+      "bytes": 9847,
+      "sha256": "99c6c5926228edb2744a44543f653db89ca2a23d823063dda62baddb6106beed",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0013_stroke-46af3459c747_横折折折.m4a",
+      "sourceSha256": "280f88a4cfbd10e6558a42df36d26fabdf1c49119b8af063ec6943aafaef21cb",
+      "sourceQuality": {
+        "meanDb": -23.7,
+        "peakDb": -11.1
+      },
+      "text": "横折折折"
+    },
+    {
+      "id": "stroke-0b1113b39394",
+      "url": "/audio/strokes/v2/stroke-0b1113b39394.mp3",
+      "durationMs": 1898,
+      "bytes": 12151,
+      "sha256": "2ac2e684c3d0e2e20965ca88662dbc9a32be3217e9522b5e50a34aab5f7a0224",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0014_stroke-0b1113b39394_横折折折钩.m4a",
+      "sourceSha256": "b5d4413070cb51290aa44265cc06aec9cb53b0cdacd180a14ad3cd8fa1d95ad4",
+      "sourceQuality": {
+        "meanDb": -24.3,
+        "peakDb": -10.8
+      },
+      "text": "横折折折钩"
+    },
+    {
+      "id": "stroke-b9bdb52db5d1",
+      "url": "/audio/strokes/v2/stroke-b9bdb52db5d1.mp3",
+      "durationMs": 1346,
+      "bytes": 8839,
+      "sha256": "d2917beaa235695fd1ad51c3be1bc0b1277863ca6cdcf37500cb8c31a29a0336",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0015_stroke-b9bdb52db5d1_横折折撇.m4a",
+      "sourceSha256": "680f7edd7b94235b44a079cc801424e3559b51ebcb0e1de5b1def79c62d82c3e",
+      "sourceQuality": {
+        "meanDb": -26,
+        "peakDb": -11.9
+      },
+      "text": "横折折撇"
+    },
+    {
+      "id": "stroke-90318bd11d95",
+      "url": "/audio/strokes/v2/stroke-90318bd11d95.mp3",
+      "durationMs": 1166,
+      "bytes": 7687,
+      "sha256": "85ec8bdf529ee8212d159dc2aaecf3682ed9c52414b7b142be54f6616b6b3fb2",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0016_stroke-90318bd11d95_横折提.m4a",
+      "sourceSha256": "8805dd35dc3d0016bb0d37cf0b0ce501824d3b59111b583df33125ac9188965e",
+      "sourceQuality": {
+        "meanDb": -26.7,
+        "peakDb": -11
+      },
+      "text": "横折提"
+    },
+    {
+      "id": "stroke-dc4a29407aee",
+      "url": "/audio/strokes/v2/stroke-dc4a29407aee.mp3",
+      "durationMs": 1071,
+      "bytes": 7111,
+      "sha256": "f526251443dd3d0aea0c1c2f08049bb71e90b5096d57761245b34ff3f0fe5aeb",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0017_stroke-dc4a29407aee_横折钩.m4a",
+      "sourceSha256": "e20b0bf14f8afeeb7d4b11b2f2db6a96174864644ff4ff3fc44cf50b95b07228",
+      "sourceQuality": {
+        "meanDb": -22.7,
+        "peakDb": -6.8
+      },
+      "text": "横折钩"
+    },
+    {
+      "id": "stroke-59965e2093f7",
+      "url": "/audio/strokes/v2/stroke-59965e2093f7.mp3",
+      "durationMs": 783,
+      "bytes": 5383,
+      "sha256": "3f2b695f2c356de833d9cfb7e09b6dcd0b6f9602128c1f52f3780d8723563b4a",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0018_stroke-59965e2093f7_横撇.m4a",
+      "sourceSha256": "c6f3c7cb48bf5c5157e85c92fab0b7fde86671729f4d5beca6849e8e4852dad2",
+      "sourceQuality": {
+        "meanDb": -31.7,
+        "peakDb": -15.5
+      },
+      "text": "横撇"
+    },
+    {
+      "id": "stroke-ea794306136b",
+      "url": "/audio/strokes/v2/stroke-ea794306136b.mp3",
+      "durationMs": 1446,
+      "bytes": 9415,
+      "sha256": "949990f33e53be4aa4e0a571435c0b4abde5469f1d5e723e6c764f263bc74145",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0019_stroke-ea794306136b_横撇弯钩.m4a",
+      "sourceSha256": "75d4c19c4f1353786eaf6ad3ab5125171cb8f9c4b074ba25ada32b489550d518",
+      "sourceQuality": {
+        "meanDb": -23.5,
+        "peakDb": -5.7
+      },
+      "text": "横撇弯钩"
+    },
+    {
+      "id": "stroke-d521db950c15",
+      "url": "/audio/strokes/v2/stroke-d521db950c15.mp3",
+      "durationMs": 1114,
+      "bytes": 7399,
+      "sha256": "fd27c7222007d3c8098f781a3205a89959777abcc3ed28c48b9ecb7153968750",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0020_stroke-d521db950c15_横斜钩.m4a",
+      "sourceSha256": "b624573bbc0a26224c54516a94140a62b8fa01419903ca452a9b31ecd42f744c",
+      "sourceQuality": {
+        "meanDb": -26.2,
+        "peakDb": -6.8
+      },
+      "text": "横斜钩"
+    },
+    {
+      "id": "stroke-2abbef3287b3",
+      "url": "/audio/strokes/v2/stroke-2abbef3287b3.mp3",
+      "durationMs": 906,
+      "bytes": 6103,
+      "sha256": "42d6acbda187e856547db3c0ac38927f6ef46cd8d8eb09babf8e929b8c2393e0",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0021_stroke-2abbef3287b3_横钩.m4a",
+      "sourceSha256": "93b6a9e9b51cbf57853ea2468565382e267ad9da54b9415737b992ca548c1c09",
+      "sourceQuality": {
+        "meanDb": -24.1,
+        "peakDb": -8.9
+      },
+      "text": "横钩"
+    },
+    {
+      "id": "stroke-08dddeac1319",
+      "url": "/audio/strokes/v2/stroke-08dddeac1319.mp3",
+      "durationMs": 800,
+      "bytes": 5527,
+      "sha256": "b96e8f10e3dbc285ba1219bb3caf1507feadce14befef349c4e9f673b0ece79f",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0022_stroke-08dddeac1319_点.m4a",
+      "sourceSha256": "7badddd3b392cb2fa0af91cdd4f1134191fa45bdccfbd36462f296fa64d17c5a",
+      "sourceQuality": {
+        "meanDb": -28.4,
+        "peakDb": -12.3
+      },
+      "text": "点"
+    },
+    {
+      "id": "stroke-b86568089d7c",
+      "url": "/audio/strokes/v2/stroke-b86568089d7c.mp3",
+      "durationMs": 818,
+      "bytes": 5671,
+      "sha256": "d0b3c2f25b4d9e4b6eac5c930fae9bcfda929980231cde7fecbb7c1104a97413",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0023_stroke-b86568089d7c_竖.m4a",
+      "sourceSha256": "f34478d5aa186986e5dbd341c48260224209ac25cf1231f0fa6b5f72c9dc2d8e",
+      "sourceQuality": {
+        "meanDb": -25,
+        "peakDb": -11.3
+      },
+      "text": "竖"
+    },
+    {
+      "id": "stroke-3a75e5ce265a",
+      "url": "/audio/strokes/v2/stroke-3a75e5ce265a.mp3",
+      "durationMs": 827,
+      "bytes": 5671,
+      "sha256": "45321b380bcdde3b10c2fa56aa6f776d2e8bbb66dd0a12f83846de26f0838d50",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0024_stroke-3a75e5ce265a_竖弯.m4a",
+      "sourceSha256": "5eeb5f2538caf2000f481249e6f7802b8d76a604f240a38ec8fc84ed617c10ed",
+      "sourceQuality": {
+        "meanDb": -22.9,
+        "peakDb": -5.6
+      },
+      "text": "竖弯"
+    },
+    {
+      "id": "stroke-1691d4b364c1",
+      "url": "/audio/strokes/v2/stroke-1691d4b364c1.mp3",
+      "durationMs": 1224,
+      "bytes": 7975,
+      "sha256": "f9f267ea7e03dd275ed41de28c9c3859bdce2044a697ca2d022a51a6b415e730",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0025_stroke-1691d4b364c1_竖弯钩.m4a",
+      "sourceSha256": "ce34e7fd8147e23f23a9bdad6fa56196f699772cd87e65bde9f3e3eecf34416f",
+      "sourceQuality": {
+        "meanDb": -20.5,
+        "peakDb": -6.5
+      },
+      "text": "竖弯钩"
+    },
+    {
+      "id": "stroke-fc60cfd821df",
+      "url": "/audio/strokes/v2/stroke-fc60cfd821df.mp3",
+      "durationMs": 1004,
+      "bytes": 6679,
+      "sha256": "16d5f5bbb50f56bc404469af0443bacb8577de0d23c35ff5b3a5fe566f2d7791",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0026_stroke-fc60cfd821df_竖折.m4a",
+      "sourceSha256": "e18a2136398f057cfd1c6eb843fc7c327adcbcffcb11818c73a94ff9dcba9f90",
+      "sourceQuality": {
+        "meanDb": -23.2,
+        "peakDb": -7.7
+      },
+      "text": "竖折"
+    },
+    {
+      "id": "stroke-791ea5d94119",
+      "url": "/audio/strokes/v2/stroke-791ea5d94119.mp3",
+      "durationMs": 1244,
+      "bytes": 8119,
+      "sha256": "5384b1e4f1b81e4db8fa32888bacaee519203bd7538948697961dfe44250313d",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0027_stroke-791ea5d94119_竖折折.m4a",
+      "sourceSha256": "96b6cbfebfabb7e0d1010a394ac751a335d7dcef46d8b7fa865fdcd58a3ef6fc",
+      "sourceQuality": {
+        "meanDb": -22.6,
+        "peakDb": -8.1
+      },
+      "text": "竖折折"
+    },
+    {
+      "id": "stroke-141e431009ad",
+      "url": "/audio/strokes/v2/stroke-141e431009ad.mp3",
+      "durationMs": 1476,
+      "bytes": 9559,
+      "sha256": "d13f43861d85b4c722f87bf284a962a9741e2fc55cdde2273c50f630c46d6576",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0028_stroke-141e431009ad_竖折折钩.m4a",
+      "sourceSha256": "38549a7f8507b97f05d8fc06a937395918fd106c29a5f8c2f0ae0b4981abfce9",
+      "sourceQuality": {
+        "meanDb": -20,
+        "peakDb": -7.3
+      },
+      "text": "竖折折钩"
+    },
+    {
+      "id": "stroke-861b15f51d59",
+      "url": "/audio/strokes/v2/stroke-861b15f51d59.mp3",
+      "durationMs": 1188,
+      "bytes": 7831,
+      "sha256": "2beb7e4d84122ac192645cb0f68a84d1508649192c49acd8a97a57c1515ab377",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0029_stroke-861b15f51d59_竖折撇.m4a",
+      "sourceSha256": "017190db768478aee26251a92a2a35259f792218c76e9cc657d741e984ae9e11",
+      "sourceQuality": {
+        "meanDb": -23.6,
+        "peakDb": -7.9
+      },
+      "text": "竖折撇"
+    },
+    {
+      "id": "stroke-91326dfb2a71",
+      "url": "/audio/strokes/v2/stroke-91326dfb2a71.mp3",
+      "durationMs": 1024,
+      "bytes": 6823,
+      "sha256": "90ab529402e61a86ffcff1e40a39a3e2356221fb61bf20cc13cb2cce31fc1806",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0030_stroke-91326dfb2a71_竖提.m4a",
+      "sourceSha256": "ee7cb754bab16d380e2bdd2228bc73f4104d7a4b588a8f5187cbebd0e01bb787",
+      "sourceQuality": {
+        "meanDb": -25.1,
+        "peakDb": -9.1
+      },
+      "text": "竖提"
+    },
+    {
+      "id": "stroke-7eba1915dccd",
+      "url": "/audio/strokes/v2/stroke-7eba1915dccd.mp3",
+      "durationMs": 907,
+      "bytes": 6103,
+      "sha256": "de38665dfd20a0ec4810586d5c0de6a04f8673edf8238c31c4230683efdadffe",
+      "reviewStatus": "pending-listening",
+      "sourceFile": "0031_stroke-7eba1915dccd_竖钩.m4a",
+      "sourceSha256": "debf421fe42dfa4cb83a5fba28c7da62ac3b60e1c23760e1933e975547d07e35",
+      "sourceQuality": {
+        "meanDb": -18.6,
+        "peakDb": -4.4
+      },
+      "text": "竖钩"
+    }
+  ]
+}

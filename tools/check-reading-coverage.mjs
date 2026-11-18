@@ -4,7 +4,7 @@ import {characterReadings} from '../src/web/character-info.js';
 import {readingRecording} from '../src/data/reading-audio.js';
 
 // Resource availability only: dictionary candidates are not contextual teaching review.
-const catalogBytes=await fs.readFile('resources/reading-audio-catalog.json');
+const catalogBytes=await fs.readFile('resources/reading-audio-v2-catalog.json');
 const index=JSON.parse(await fs.readFile('resources/textbooks/pilot-v1/index.json','utf8'));
 const all=new Set(),books=[],candidates=new Map();
 const readingsFor=char=>{

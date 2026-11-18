@@ -15,7 +15,7 @@ function setup() {
 test('sample lookup is NFC normalized, exact and preserves distinct polyphonic assets', () => {
     assert.equal(readingRecording('mu\u0300'), readingRecording('mù'));
     assert.equal(readingRecording('mu'), null);
-    assert.equal(readingRecording('yíng'), null);
+    assert.equal(readingRecording('huang'), null);
     assert.notEqual(readingRecording('cháng').url, readingRecording('zhǎng').url);
     const one = readingRecording('mù');
     assert.throws(() => indexReadings({ schemaVersion:1,version:'v1',items:[one,one] }), /无效/);
@@ -68,24 +68,22 @@ test('audio errors are actionable, cleared on navigation and retry succeeds', as
     audio.unlock = async () => {}; await player.play('mù'); assert.deepEqual(starts,['mù']);
 });
 
-test('expanded basic-character readings are covered without borrowing a tone for missing neutral de', async () => {
+test('expanded basic-character readings include the user-recorded neutral de', async () => {
     const { characterReadings } = await import('../src/web/character-info.js');
     const { default: plan } = await import('../resources/reading-audio-plan.json', { with: { type:'json' } });
     const batch = plan.batches.find(batch => batch.id === 'basics');
-    const missing = new Set(batch.unavailableReadings.map(item => item.reading));
     const covered = new Set();
     for (const char of batch.sampleQueries.join('')) {
         for (const reading of characterReadings(char)) {
-            if (missing.has(reading)) { assert.equal(readingRecording(reading), null); continue; }
             const item = readingRecording(reading);
             assert.ok(item, `${char}: ${reading}`);
             covered.add(reading);
         }
     }
     assert.equal(Object.keys(batch.items).length,34);
-    assert.equal(covered.size,37); // Includes previously available mù, yuè and zhòng.
+    assert.equal(covered.size,38); // Includes previously available mù, yuè, zhòng and new neutral de.
     assert.equal(readingRecording('dì').token,'di4');
-    assert.equal(readingRecording('de'),null);
+    assert.equal(readingRecording('de').reviewStatus,'pending-listening');
 });
 
 test('listening confirmations remain bound to exact files while reported and new recordings await review', async () => {
@@ -117,18 +115,18 @@ test('textbook 禾 has its own he2 recording without borrowing heng or another t
     assert.equal(readingRecording('tián').token,'tian2');
 });
 
-test('reported tián audio is replaced with a fresh content-bound URL and requires new listening', async () => {
+test('tián uses a content-bound user recording and requires new listening', async () => {
     const {createHash}=await import('node:crypto');
     const {default:catalog}=await import('../resources/reading-audio-catalog.json',{with:{type:'json'}});
     const item=readingRecording('tián');
     const oldId='reading-16e6e7372e8f';
     assert.notEqual(item.id,oldId);
     assert.equal(item.id,'reading-'+createHash('sha256').update('tián:'+item.sha256).digest('hex').slice(0,12));
-    assert.equal(item.synthesis.text,'田');
-    assert.equal(item.synthesis.voice,'zh-CN-XiaoxiaoNeural');
+    assert.match(item.sourceSha256,/^[a-f0-9]{64}$/);
+    assert.equal(item.synthesis,undefined);
     assert.equal(item.upstream,undefined);
     assert.equal(item.reviewStatus,'pending-listening');
-    assert.notEqual(catalog.listeningReview.items[item.id],item.sha256);
+    assert.notEqual(catalog.listeningReview?.items?.[item.id],item.sha256);
     assert.notEqual(item.sha256,'ec5a7c95487f089a2c6db4436e3ad25ca7c797fb33451a55608129c5fe0998d0');
 });
 
@@ -142,7 +140,7 @@ test('first grade reading batch adds thirty exact syllables while preserving oth
         assert.ok(readings.has(reading),reading+' is missing from sample characters');
         const item=readingRecording(reading);
         assert.equal(item.token,token);assert.equal(item.batch,'grade1-1');
-        assert.equal(item.reviewStatus,'reviewed');
+        assert.equal(item.reviewStatus,'pending-listening');
     }
     assert.equal(readingRecording('mā').token,'ma1');
     assert.equal(readingRecording('mǎ').token,'ma3');
@@ -153,7 +151,7 @@ test('first grade reading batch adds thirty exact syllables while preserving oth
     assert.equal(readingRecording('jiào').batch,'grade1-4');
     assert.deepEqual(characterReadings('雨'),['yù','yǔ']);
     assert.equal(readingRecording('yǔ').token,'yu3');
-    assert.equal(readingRecording('yù'),null);
+    assert.equal(readingRecording('yù').reviewStatus,'pending-listening');
 });
 
 test('second grade-one batch is bound to source writing entries and preserves nǚ and neutral-tone boundaries', async () => {
@@ -171,14 +169,14 @@ test('second grade-one batch is bound to source writing entries and preserves n�
         assert.ok(characterReadings(sample.character).includes(sample.reading));
         const recording=readingRecording(sample.reading);
         assert.equal(recording.token,batch.items[sample.reading]);
-        assert.equal(recording.batch,'grade1-2');assert.equal(recording.reviewStatus,'reviewed');
+        assert.equal(recording.batch,'grade1-2');assert.equal(recording.reviewStatus,'pending-listening');
     }
     assert.equal(readingRecording('nǚ').token,'nv3');
     assert.equal(readingRecording('nu\u0308\u030c'),readingRecording('nǚ'));
-    assert.equal(readingRecording('nǔ'),null);
+    assert.equal(readingRecording('nǔ').reviewStatus,'pending-listening');
     assert.equal(readingRecording('ér').token,'er2');
     assert.notEqual(readingRecording('ér').url,readingRecording('èr').url);
-    assert.equal(readingRecording('le'),null);
+    assert.equal(readingRecording('le').reviewStatus,'pending-listening');
     assert.deepEqual(characterReadings('了'),['le','liǎo']);
 });
 
@@ -198,29 +196,26 @@ test('third grade-one batch binds both textbook sources and keeps qing tones dis
         assert.ok(characterReadings(sample.character).includes(sample.reading));
         const recording=readingRecording(sample.reading);
         assert.equal(recording.token,batch.items[sample.reading]);
-        assert.equal(recording.batch,'grade1-3');assert.equal(recording.reviewStatus,'reviewed');
+        assert.equal(recording.batch,'grade1-3');assert.equal(recording.reviewStatus,'pending-listening');
     }
     assert.deepEqual(['qīng','qíng','qǐng'].map(r=>readingRecording(r).token),['qing1','qing2','qing3']);
     assert.equal(new Set(['qīng','qíng','qǐng'].map(r=>readingRecording(r).sha256)).size,3);
     assert.equal(readingRecording('zhī').token,'zhi1');
-    assert.equal(readingRecording('zhǐ'),null);
-    assert.deepEqual(characterReadings('么'),['me']);assert.equal(readingRecording('me'),null);
-    assert.equal(readingRecording('le'),null);
+    assert.equal(readingRecording('zhǐ').reviewStatus,'pending-listening');
+    assert.deepEqual(characterReadings('么'),['me']);assert.equal(readingRecording('me').reviewStatus,'pending-listening');
+    assert.equal(readingRecording('le').reviewStatus,'pending-listening');
 });
 
-test('reported hú/yán samples use content-bound replacements with approval bound to the replacement files', async () => {
+test('hú/yán use content-bound user recordings that require fresh listening review', async () => {
     const {createHash}=await import('node:crypto');
-    const {default:catalog}=await import('../resources/reading-audio-catalog.json',{with:{type:'json'}});
     const {characterReadings}=await import('../src/web/character-info.js');
     for(const [character,reading,oldId] of [['胡','hú','reading-d75d96edcb37'],['言','yán','reading-fb916db93db6']]){
         assert.deepEqual(characterReadings(character),[reading]);
         const item=readingRecording(reading);
         assert.notEqual(item.id,oldId);
         assert.equal(item.id,'reading-'+createHash('sha256').update(reading+':'+item.sha256).digest('hex').slice(0,12));
-        assert.equal(item.synthesis.text,character);assert.equal(item.synthesis.voice,'zh-CN-XiaoxiaoNeural');
-        assert.equal(item.upstream,undefined);assert.equal(item.reviewStatus,'reviewed');
-        assert.equal(catalog.listeningReview.items[item.id],item.sha256);
-        assert.equal(catalog.listeningReview.batchConfirmations['grade1-3'].items[item.id],item.sha256);
+        assert.match(item.sourceSha256,/^[a-f0-9]{64}$/);
+        assert.equal(item.upstream,undefined);assert.equal(item.reviewStatus,'pending-listening');
     }
 });
 
@@ -246,7 +241,7 @@ test('fourth grade-one batch binds writing sources and reuses jiào across 叫 a
     assert.equal(readingRecording('gòng').token,'gong4');
     assert.notEqual(readingRecording('gòng').url,readingRecording('gōng').url);
     assert.equal(readingRecording('zhǔ').token,'zhu3');assert.equal(readingRecording('zhù').token,'zhu4');
-    for(const reading of ['le','me','de','men'])assert.equal(readingRecording(reading),null);
+    for(const reading of ['le','me','de','men'])assert.equal(readingRecording(reading).reviewStatus,'pending-listening');
 });
 
 

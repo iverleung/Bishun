@@ -13,7 +13,7 @@ function setup() {
         createBufferSource() { const source = { connect() {}, disconnect() {}, start() {}, stop() {} }; sources.push(source); return source; }
     };
     const calls = [];
-    const audio = new StrokeAudio({ createContext: () => context, fetchImpl: async url => { calls.push(url); return url.endsWith('.json') ? json(manifest) : new Response(new Uint8Array([1, 2])); } });
+    const audio = new StrokeAudio({ version: 'v1', createContext: () => context, fetchImpl: async url => { calls.push(url); return url.endsWith('.json') ? json(manifest) : new Response(new Uint8Array([1, 2])); } });
     return { audio, context, calls, sources };
 }
 

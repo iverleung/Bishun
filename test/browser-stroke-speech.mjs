@@ -4,8 +4,9 @@ import {openBrowser} from './helpers/cdp.mjs';
 import {v3} from '../src/engine/recognition/v3.js';
 
 const [cdp='http://127.0.0.1:9224',url='http://127.0.0.1:5189/']=process.argv.slice(2);
-const manifest=JSON.parse(await fs.readFile('public/audio/strokes/v1/manifest.json','utf8'));
+const manifest=JSON.parse(await fs.readFile('public/audio/strokes/v2/manifest.json','utf8'));
 const browser=await openBrowser(cdp,url);
+await browser.command('Emulation.setFocusEmulationEnabled',{enabled:true});
 try {
     // Observe real decoded buffers and starts; do not replace audio fetching or playback.
     await browser.command('Page.addScriptToEvaluateOnNewDocument',{source:`
@@ -30,7 +31,9 @@ try {
     for(const character of ['口','游','学','感','专','朵','奶','阳']) {
         await browser.fill('#query',character);await browser.click('#searchForm [type=submit]');
         await browser.wait("!document.querySelector('#playBtn').disabled");
-        await browser.click('#menuBtn');await browser.click('[name=mode][value=explain]');await browser.click('#closeMenuBtn');
+        await browser.click('#menuBtn');
+        if (!await browser.evaluate("document.querySelector('#groupMode').checked")) await browser.click('#groupMode');
+        await browser.click('#closeMenuBtn');
         await browser.evaluate('strokeAudioEvents=[]');await browser.click('#playBtn');
         await browser.wait("document.querySelector('#playBtn').textContent==='重播'",30000);
         const names=v3.getStrokeNames(character);
