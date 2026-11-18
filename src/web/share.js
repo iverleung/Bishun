@@ -1,8 +1,9 @@
 import { isCharacterQuery } from './history.js';
+import { resourceUrl } from '../data/resource-url.js';
 
-export function createShareUrl(baseUrl, query) {
+export function createShareUrl(baseUrl, query, basePath) {
     if (!isCharacterQuery(query)) throw new Error('只能分享 1—20 个汉字');
-    const url = new URL('/', baseUrl);
+    const url = new URL(resourceUrl('', basePath), baseUrl);
     if (!['http:', 'https:'].includes(url.protocol)) throw new Error('请通过网站地址打开后分享');
     url.hash = new URLSearchParams({ q: query }).toString();
     return url.href;

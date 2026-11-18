@@ -3,6 +3,7 @@ import './style.css';
 import { v2 } from './engine/recognition/v2.js';
 import { v3 } from './engine/recognition/v3.js';
 import { SpeechEngine } from './engine/speech.js';
+import { resourceUrl } from './data/resource-url.js';
 
 class HanziStrokeApp {
     constructor() {
@@ -223,7 +224,7 @@ class HanziStrokeApp {
         const loadPromise = new Promise((resolve, reject) => {
             const charCode = encodeURIComponent(char);
             const cdns = [
-                `/hanzi-writer-data/${charCode}.json`,
+                resourceUrl(`/hanzi-writer-data/${charCode}.json`),
                 `https://npm.elemecdn.com/hanzi-writer-data@2/${charCode}.json`,
                 `https://jsd.onmicrosoft.cn/npm/hanzi-writer-data@2.0/${charCode}.json`,
                 `https://cdn.jsdelivr.net/npm/hanzi-writer-data@2.0/${charCode}.json`,

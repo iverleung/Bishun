@@ -1,4 +1,5 @@
 import catalog from '../../resources/textbooks/pilot-v1/index.json' with { type: 'json' };
+import { resourceUrl } from './resource-url.js';
 
 export const textbookBooks = Object.freeze(catalog.books.map(book => Object.freeze({ ...book })));
 const isHan = value => typeof value === 'string' && Array.from(value).length === 1 && /^\p{Script=Han}$/u.test(value);
@@ -53,8 +54,9 @@ function freeze(value) {
 }
 
 export class TextbookStore {
-    constructor({ fetchImpl = (...args) => globalThis.fetch(...args), timeoutMs = 5000 } = {}) {
+    constructor({ fetchImpl = (...args) => globalThis.fetch(...args), timeoutMs = 5000, basePath } = {}) {
         this.fetch = fetchImpl;
+        this.basePath = basePath;
         this.timeoutMs = timeoutMs;
         this.books = new Map();
     }
@@ -71,7 +73,7 @@ export class TextbookStore {
         timer = setTimeout(abort,this.timeoutMs);
         try {
             const work = (async () => {
-                const response = await this.fetch(entry.url,{signal:controller.signal,cache:'force-cache'});
+                const response = await this.fetch(resourceUrl(entry.url, this.basePath),{signal:controller.signal,cache:'force-cache'});
                 if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) throw new Error('教材资料暂不可用，请重试');
                 const text = await response.text();
                 if (text.length > 250_000) throw new Error('教材资料大小无效');

@@ -4,6 +4,7 @@ import { readSharedQuery, createShareUrl } from './share.js';
 import { characterReadings } from './character-info.js';
 import { readWorksheetTitle } from './print-context.js';
 import { worksheetLayout, paginateCharacters } from './print-layout.js';
+import { resourceUrl } from '../data/resource-url.js';
 
 const dom = Object.fromEntries(Array.from(document.querySelectorAll('[id]'), el => [el.id, el]));
 const store = new CharacterStore();
@@ -94,7 +95,7 @@ function render() {
         page.querySelector('h2').textContent = '字形来源与许可';
         const notice = document.createElement('p');
         notice.className = 'source-notice';
-        notice.textContent = `来源：hanzi-writer-data@2.0.1 / Make Me a Hanzi。生成日期：${new Date().toISOString().slice(0, 10)}。字形转换为 SVG 范字与描红排版，原笔画路径未修改；许可及源数据：${new URL(characterBase + '/', location.href).href}`;
+        notice.textContent = `来源：hanzi-writer-data@2.0.1 / Make Me a Hanzi。生成日期：${new Date().toISOString().slice(0, 10)}。字形转换为 SVG 范字与描红排版，原笔画路径未修改；许可及源数据：${new URL(resourceUrl(characterBase + '/'), location.href).href}`;
         const text = document.createElement('div');
         text.className = 'license-text';
         text.textContent = license;
@@ -120,7 +121,7 @@ async function load() {
     dom.removePrintErrorsBtn.hidden = true;
     render();
     try {
-        const response = await fetch(`${characterBase}/ARPHICPL.TXT`, { signal: AbortSignal.any([controller.signal, AbortSignal.timeout(5000)]) });
+        const response = await fetch(resourceUrl(`${characterBase}/ARPHICPL.TXT`), { signal: AbortSignal.any([controller.signal, AbortSignal.timeout(5000)]) });
         if (!response.ok) throw new Error();
         license = await response.text();
         if (!license.startsWith('ARPHIC PUBLIC LICENSE') || license.includes('<html')) throw new Error();
@@ -200,7 +201,7 @@ function restorePrintQuery() {
         dom.backLink.href = createShareUrl(location.href, shared.query);
         void load();
     } else {
-        dom.backLink.href = '/';
+        dom.backLink.href = resourceUrl('');
         dom.printStatus.textContent = '请从查字页面选择要打印的汉字';
         render();
     }

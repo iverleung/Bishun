@@ -1,3 +1,5 @@
+import { resourceUrl } from '../data/resource-url.js';
+
 function cancellable(promise, signal) {
     if (!signal) return promise;
     if (signal.aborted) return Promise.reject(new DOMException('已取消', 'AbortError'));
@@ -16,9 +18,10 @@ function resourceFailure(error) {
 
 // One audio context, versioned local recordings, no browser speech synthesis.
 export class StrokeAudio {
-    constructor({ fetchImpl = (...args) => globalThis.fetch(...args), createContext = () => new (window.AudioContext || window.webkitAudioContext)(), getAudioSession = () => globalThis.navigator?.audioSession, version = 'v2' } = {}) {
+    constructor({ fetchImpl = (...args) => globalThis.fetch(...args), createContext = () => new (window.AudioContext || window.webkitAudioContext)(), getAudioSession = () => globalThis.navigator?.audioSession, version = 'v2', basePath } = {}) {
         this.fetch = fetchImpl;
         this.version = version;
+        this.basePath = basePath;
         this.createContext = createContext;
         this.getAudioSession = getAudioSession;
         this.context = null;
@@ -52,7 +55,7 @@ export class StrokeAudio {
 
     manifest() {
         if (!this.catalog) {
-            this.catalog = this.bounded(this.fetch(`/audio/strokes/${this.version}/manifest.json`).then(async response => {
+            this.catalog = this.bounded(this.fetch(resourceUrl(`/audio/strokes/${this.version}/manifest.json`, this.basePath)).then(async response => {
                 if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) throw new Error('录音清单不可用');
                 const manifest = await response.json();
                 if (manifest.schemaVersion !== 1 || manifest.version !== this.version || !Array.isArray(manifest.items)) throw new Error('录音清单版本不匹配');
@@ -84,10 +87,10 @@ export class StrokeAudio {
         if (this.unlocking) await cancellable(this.unlocking, signal);
         if (signal?.aborted) throw new DOMException('已取消', 'AbortError');
         if (!this.context || this.context.state !== 'running') throw new Error('声音未启用，请点击后重试');
-        const key = item.url;
+        const key = resourceUrl(item.url, this.basePath);
         if (!this.buffers.has(key)) {
             const context = this.context;
-            this.buffers.set(key, this.bounded(this.fetch(item.url, { cache: 'force-cache' }).then(async response => {
+            this.buffers.set(key, this.bounded(this.fetch(key, { cache: 'force-cache' }).then(async response => {
                 if (!response.ok) throw new Error('录音加载失败，可静音继续');
                 const bytes = await response.arrayBuffer();
                 try { return await context.decodeAudioData(bytes); }

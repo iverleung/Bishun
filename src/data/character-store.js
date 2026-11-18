@@ -1,5 +1,6 @@
 import { characterBase, validateCharacterData, validateCharacterManifest } from './character-data.js';
 import { v3 } from '../engine/recognition/v3.js';
+import { resourceUrl } from './resource-url.js';
 
 export class ResourceError extends Error {
     constructor(code, message) { super(message); this.code = code; }
@@ -16,8 +17,9 @@ function withSignal(promise, signal) {
 }
 
 export class CharacterStore {
-    constructor({ fetchImpl = (...args) => globalThis.fetch(...args), timeoutMs = 3000, getNames = char => v3.getStrokeNames(char) } = {}) {
+    constructor({ fetchImpl = (...args) => globalThis.fetch(...args), timeoutMs = 3000, getNames = char => v3.getStrokeNames(char), basePath } = {}) {
         this.fetch = fetchImpl;
+        this.basePath = basePath;
         this.timeoutMs = timeoutMs;
         this.getNames = getNames;
         this.manifestPromise = null;
@@ -55,7 +57,7 @@ export class CharacterStore {
 
     manifest() {
         if (!this.manifestPromise) {
-            this.manifestPromise = this.requestJson(`${characterBase}/manifest.json`).then(manifest => ({ manifest, counts: validateCharacterManifest(manifest) }))
+            this.manifestPromise = this.requestJson(resourceUrl(`${characterBase}/manifest.json`, this.basePath)).then(manifest => ({ manifest, counts: validateCharacterManifest(manifest) }))
                 .catch(error => { this.manifestPromise = null; throw error; });
         }
         return this.manifestPromise;
@@ -68,7 +70,7 @@ export class CharacterStore {
         if (!counts.has(char)) throw new ResourceError('UNSUPPORTED', '本站字库暂未收录此字');
         if (this.cache.has(char)) return withSignal(Promise.resolve(this.cache.get(char)), signal);
         if (!this.pending.has(char)) {
-            const request = this.requestJson(`${characterBase}/${encodeURIComponent(char)}.json`, true).then(data => {
+            const request = this.requestJson(resourceUrl(`${characterBase}/${encodeURIComponent(char)}.json`, this.basePath), true).then(data => {
                 validateCharacterData(data, counts.get(char));
                 const names = this.getNames(char);
                 if (names.length && names.length !== data.strokes.length) throw new ResourceError('NAME_COUNT', '笔画名称与字形数量不一致');

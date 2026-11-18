@@ -28,6 +28,8 @@ npm run build
 npm run preview
 ```
 
+子路径部署使用同一构建入口，例如 `node tools/build.mjs /bishun/`（首次或资源变化时先运行 `npm run prebuild`）。运行时字库、单字 JSON、音频、教材和打印许可通过 `import.meta.env.BASE_URL` 加部署前缀；Node 单元测试回退到 `/`。清单中的 canonical URL、文件内容和哈希不变，不需要父项目把根路径重写到本产物。
+
 `predev`／`prebuild` 会从锁定的 `hanzi-writer-data@2.0.1` 开发依赖生成全量候选字形，需安装开发依赖后启动或构建。构建输出为 `dist/`，可部署到静态托管服务；不再构建离线资源包；`offline-sw.js` 仅为旧安装的退出兼容端点，不提供缓存服务。`public/` 中的字形资源会复制到构建输出。构建脚本先清理生成目录 `dist/`，对暂时性目录占用最多重试 3 次，失败会中止构建。预览命令需要先构建；未构建的源代码依赖 Vite 解析 npm 导入，不能直接用普通静态文件服务器运行。目前根目录没有 `deploy.sh`。
 
 ## 手机拼音录音

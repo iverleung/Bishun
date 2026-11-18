@@ -9,6 +9,7 @@ import { defaultPreferences, loadPreferences, savePreferences } from './preferen
 import { SavedQueries } from './saved-queries.js';
 import { createSavedLibrary } from './saved-library.js';
 import { setupSharing, readSharedQuery, updateSharedQuery } from './share.js';
+import { resourceUrl } from '../data/resource-url.js';
 import { characterReadings } from './character-info.js';
 import { createDrawer } from './drawer.js';
 import { bindCanvasSwipe } from './canvas-swipe.js';
@@ -566,7 +567,7 @@ dom.printQueryBtn.addEventListener('click', () => {
     if (!player.entries.length) return;
     player.pause();
     drawer.close({ restore: false });
-    const url = new URL('/print/index.html', location.href);
+    const url = new URL(resourceUrl('print/index.html'), location.href);
     const params = new URLSearchParams({ q: player.entries.join(''), c: String(player.index) });
     const course = textbooks?.getCurrent();
     if (course?.query === player.entries.join('')) params.set('t',course.name);
